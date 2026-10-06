@@ -314,6 +314,40 @@ body{padding-bottom:var(--led-h)}
 .sbar-row{display:grid;grid-template-columns:52px 1fr;gap:8px;align-items:center;margin-bottom:8px;font-size:11.5px;color:var(--ink-2)}
 .sbar-row .sbar{height:18px}
 .sbar-row .sbar i{display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;color:#fff;overflow:hidden;white-space:nowrap}
+
+/* ---------- AI 해설 패널 ---------- */
+.ai-btn{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:var(--on-navy);font-weight:700;font-size:12.5px;cursor:pointer;letter-spacing:.02em}
+.ai-btn:hover{background:rgba(255,255,255,.12)}
+.ai-btn .sw{width:26px;height:15px;border-radius:999px;background:rgba(255,255,255,.25);position:relative;transition:background .15s}
+.ai-btn .sw::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:#fff;transition:transform .15s}
+.ai-btn[aria-pressed="true"]{border-color:transparent;background:linear-gradient(135deg,#3987e5,#8b5cf6)}
+.ai-btn[aria-pressed="true"] .sw{background:rgba(255,255,255,.45)}
+.ai-btn[aria-pressed="true"] .sw::after{transform:translateX(11px)}
+.ai-panel{position:fixed;left:0;top:56px;bottom:var(--led-h);width:min(400px,100vw);z-index:75;background:var(--surface);border-right:1px solid var(--border);box-shadow:10px 0 40px rgba(0,0,0,.16);transform:translateX(-105%);transition:transform .22s ease;display:flex;flex-direction:column}
+.ai-panel.on{transform:none}
+.ai-h{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border)}
+.ai-orb{width:30px;height:30px;border-radius:50%;background:conic-gradient(from 0deg,#3987e5,#8b5cf6,#1baf7a,#3987e5);display:grid;place-items:center;color:#fff;font-size:15px;flex:none}
+.ai-panel.busy .ai-orb{animation:ai-spin 1s linear infinite}
+@keyframes ai-spin{to{transform:rotate(360deg)}}
+.ai-h b{font-size:14px}.ai-h small{display:block;font-size:11px;color:var(--muted)}
+.ai-h button{margin-left:auto;border:0;background:var(--surface-2);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:17px}
+.ai-b{overflow:auto;padding:14px 16px 20px;display:grid;gap:14px;align-content:start}
+.ai-sec h5{margin:0 0 6px;font-size:11px;letter-spacing:.12em;color:var(--accent-ink);font-weight:800}
+.ai-sec p,.ai-sec li{font-size:13px;line-height:1.6;margin:0;color:var(--ink)}
+.ai-sec ul{margin:0;padding-left:0;list-style:none;display:grid;gap:7px}
+.ai-sec li{display:grid;grid-template-columns:18px 1fr;gap:4px}
+.ai-sec li::before{content:attr(data-i);font-size:11px;font-weight:800;color:var(--accent-ink);padding-top:2px}
+.ai-sec.warn h5{color:var(--warn-ink)}
+.ai-sec.act h5{color:var(--up)}
+.ai-sec b{font-variant-numeric:tabular-nums}
+.ai-reveal{opacity:0;transform:translateY(4px);animation:ai-in .32s ease forwards}
+@keyframes ai-in{to{opacity:1;transform:none}}
+.ai-typing{display:inline-flex;gap:4px;padding:6px 0}
+.ai-typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:ai-dot 1s infinite}
+.ai-typing i:nth-child(2){animation-delay:.15s}.ai-typing i:nth-child(3){animation-delay:.3s}
+@keyframes ai-dot{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.ai-foot{font-size:10.5px;color:var(--muted);padding:10px 16px;border-top:1px solid var(--border)}
+@media (prefers-reduced-motion:reduce){.ai-reveal{animation:none;opacity:1;transform:none}.ai-panel.busy .ai-orb{animation:none}}
 @media (max-width:1180px){
   .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
   .map-card,.trend-card{grid-column:1/-1}
@@ -327,6 +361,8 @@ body{padding-bottom:var(--led-h)}
   .fx-grid,.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:720px){
+  .ai-btn .lbl{display:none}
+  .ai-panel{top:0;z-index:90}
   .led-tag span{display:none}
   .led .it{font-size:14px}
   .top{padding:0 16px;gap:10px;height:auto;flex-wrap:wrap;padding-top:8px;padding-bottom:6px}
@@ -362,6 +398,7 @@ body{padding-bottom:var(--led-h)}
   <div class="top-right">
     <span class="badge-sim" title="거래전표는 시뮬레이션 데이터입니다">SIMULATED DATA</span>
     <span class="author">목56 AI 데이터 자동화 · 202101308 민승환</span>
+    <button class="ai-btn" id="aiBtn" aria-pressed="false" aria-controls="aiPanel" title="현재 화면 AI 해설 켜기/끄기">✦ <span class="lbl">AI 해설</span><span class="sw" aria-hidden="true"></span></button>
     <button class="theme-btn" id="themeBtn" title="라이트/다크 전환" aria-label="라이트/다크 전환"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg></button>
   </div>
 </header>
@@ -467,6 +504,11 @@ body{padding-bottom:var(--led-h)}
   <div class="led-tag"><b>BRIDGEON ▸ BOARD</b><span id="ledDate"></span></div>
   <div class="led-view"><div class="led-track" id="ledTrack"></div></div>
 </footer>
+<aside class="ai-panel" id="aiPanel" aria-hidden="true" aria-label="AI 해설" aria-live="polite">
+  <div class="ai-h"><span class="ai-orb">✦</span><div><b id="aiTitle">AI 해설</b><small id="aiCtx"></small></div><button id="aiClose" aria-label="AI 해설 닫기">×</button></div>
+  <div class="ai-b" id="aiBody"></div>
+  <div class="ai-foot">현재 화면·필터·드릴다운 단계의 데이터로 페이지 안에서 자동 생성한 해설입니다 (외부 AI 호출 없음).</div>
+</aside>
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script>
@@ -867,8 +909,8 @@ function renderInsight(rows) {
 }
 
 // ---------- DRILL-DOWN ----------
-function openDrill(path) { state.path = path; renderDrawer(); $("#drawer").classList.add("on"); $("#scrim").classList.add("on"); $("#drawer").setAttribute("aria-hidden", "false"); }
-function closeDrill() { $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); $("#drawer").setAttribute("aria-hidden", "true"); hideTip(); }
+function openDrill(path) { state.path = path; $("#drawer").classList.add("on"); $("#scrim").classList.add("on"); $("#drawer").setAttribute("aria-hidden", "false"); renderDrawer(); }
+function closeDrill() { $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); $("#drawer").setAttribute("aria-hidden", "true"); hideTip(); if (AI.on) renderAI(); }
 function pushDrill(step) { state.path = [...state.path, step]; renderDrawer(); $("#drBody").scrollTop = 0; }
 function sliceRows() { const dims = state.path.filter(p => p.dim); return rowsNow().filter(s => dims.every(p => s[p.dim] === p.value)); }
 function renderCrumbs() {
@@ -888,7 +930,8 @@ function renderCrumbs() {
     c.appendChild(b);
   });
 }
-function renderDrawer() {
+function renderDrawer() { renderDrawerView(); if (AI.on) renderAI(); }
+function renderDrawerView() {
   renderCrumbs();
   const last = state.path[state.path.length - 1];
   if (last?.raw) return renderRawView(last.raw);
@@ -1210,6 +1253,190 @@ function renderBasis() {
     <div class="eqs" style="margin-top:10px">${fb("Total_Revenue", "총 수익")}<div class="eqo">÷</div>${fb("KRW_Amount", "원화 거래액")}<div class="eqo">=</div>${fb("Revenue_Rate", "수익률", 1)}</div>`;
 }
 
+// ---------- AI 해설: 현재 화면의 데이터를 읽어 설명·인사이트·주의점·제안을 만든다 ----------
+const AI = { on: false, key: "", timer: null };
+const B = v => `<b>${v}</b>`;
+// 조사: 받침이 있으면 이/은, 없으면 가/는 (한글이 아니면 받침 없음으로 처리)
+function josa(word, pair) {
+  const w = String(word).replace(/<[^>]+>/g, "").trim(), c = w.charCodeAt(w.length - 1);
+  const has = c >= 0xac00 && c <= 0xd7a3 && (c - 0xac00) % 28 !== 0;
+  return w + (pair === "은는" ? (has ? "은" : "는") : (has ? "이" : "가"));
+}
+const BJ = (v, pair) => `<b>${josa(v, pair)}</b>`.replace(/(<b>.*?)([이가은는])<\/b>$/, "$1</b>$2");
+const bp = v => `${(v * 10000).toFixed(0)}bp`;
+function topBy(rows, key, val = "KRW_Amount") {
+  return [...group(rows, key)].map(([k, r]) => ({k, v: sum(r, val), n: r.length})).sort((a, b) => b.v - a.v);
+}
+function aiHome() {
+  const rows = rowsNow(), base = baseRows(), a = agg(rows), out = {about: [], ins: [], warn: [], act: []};
+  const per = PERIODS.find(p => p[0] === state.f.period)[1];
+  out.about.push(`글로벌 금융서비스 거래 ${B(a.cnt + "건")}을 한 화면에 모은 관제 화면입니다. 위에서부터 핵심 지표(KPI), 국가별 거래 지도, 월별 추이, 서비스·고객·채널 구성, 인사이트 줄, 하단 환율 전광판 순서로 읽으면 됩니다.`);
+  out.about.push(`지금은 ${B(per)} 기준이며, 지도·차트를 누르면 국가 → 서비스 → 거래 → 원본 전표까지 내려갈 수 있습니다.`);
+  if (!rows.length) { out.ins.push("선택한 조건에 해당하는 거래가 없습니다."); return out; }
+  out.ins.push(`거래액 ${B(won(a.krw))}, 수익 ${B(won(a.rev))}으로 수익률은 ${B(pct(a.rate, 3))}입니다.`);
+  const ct = topBy(rows, "Country");
+  out.ins.push(`거래액 1위는 ${flagHtml(ct[0].k)}${B(CTRY[ct[0].k].ko)} (${share(ct[0].v / a.krw)})${ct[1] ? `, 2위는 ${CTRY[ct[1].k].ko} (${share(ct[1].v / a.krw)})` : ""}입니다. 상위 2개국이 전체의 ${B(share((ct[0].v + (ct[1]?.v || 0)) / a.krw))}를 차지합니다.`);
+  const ms = periodMonths(), li = MONTHS.indexOf(ms[ms.length - 1]);
+  if (li > 0) {
+    const c = agg(base.filter(s => s.Month === MONTHS[li])), p = agg(base.filter(s => s.Month === MONTHS[li - 1]));
+    const gk = p.krw ? c.krw / p.krw - 1 : NaN, gr = p.rev ? c.rev / p.rev - 1 : NaN;
+    if (isFinite(gk) && isFinite(gr)) {
+      const m1 = +MONTHS[li].slice(5), m0 = +MONTHS[li - 1].slice(5);
+      if (gk > 0 && gr < 0) out.ins.push(`${m1}월 거래액은 전월보다 ${B("▲" + pct(gk, 1))} 늘었지만 수익은 ${B("▼" + pct(-gr, 1))} 줄었습니다. 수익률이 ${pct(p.rate, 2)} → ${B(pct(c.rate, 2))}로 낮아져, 마진이 낮은 거래 비중이 커진 달입니다.`);
+      else out.ins.push(`${m1}월은 ${m0}월 대비 거래액 ${B((gk >= 0 ? "▲" : "▼") + pct(Math.abs(gk), 1))}, 수익 ${B((gr >= 0 ? "▲" : "▼") + pct(Math.abs(gr), 1))}입니다.`);
+    }
+  }
+  const sv = topBy(rows, "Service", "Total_Revenue");
+  const svCnt = rows.filter(r => r.Service === sv[0].k).length;
+  out.ins.push(`수익의 ${B(share(sv[0].v / a.rev))}가 ${B(SVC_KO[sv[0].k])}에서 나옵니다. 건수 비중은 ${share(svCnt / a.cnt)}뿐이라, 건당 금액이 큰 거래가 수익을 좌우합니다.`);
+  const corp = rows.filter(r => r.Customer_Type === "Corporate");
+  if (corp.length && corp.length < rows.length) out.ins.push(`기업 고객은 건수 ${B(share(corp.length / a.cnt))}로 거래액 ${B(share(sum(corp, "KRW_Amount") / a.krw))}를 만듭니다. 개인·외국인 건당 평균은 ${won(sum(rows.filter(r => r.Customer_Type !== "Corporate"), "KRW_Amount") / (a.cnt - corp.length))}에 그칩니다.`);
+  const ccy = topBy(rows, "Currency");
+  out.ins.push(`통화는 ${B(ccy[0].k)}가 거래액의 ${B(share(ccy[0].v / a.krw))}로 가장 많습니다${ccy[0].k === "USD" ? ". 브라질·UAE·베트남 기업 거래도 달러로 결제되는 경우가 많기 때문입니다" : ""}.`);
+  const retail = base.filter(r => r.Customer_Type !== "Corporate");
+  const msh = mm => { const r = retail.filter(x => mm.includes(x.Month)); return r.length ? r.filter(x => x.Channel === "Mobile").length / r.length : NaN; };
+  const q1 = msh(MONTHS.slice(0, 3)), q3 = msh(MONTHS.slice(6, 9));
+  if (isFinite(q1) && isFinite(q3)) out.ins.push(`개인·외국인 거래의 모바일 비중이 1분기 ${pct(q1, 0)}에서 3분기 ${B(pct(q3, 0))}로 ${q3 > q1 ? "늘었습니다. 비대면 전환이 진행 중입니다" : "줄었습니다"}.`);
+  const jp = c => base.filter(s => s.Country === "Japan" && c.includes(s.Month)).length;
+  if (jp(MONTHS.slice(6, 8)) / 2 > jp(MONTHS.slice(0, 6)) / 6 * 1.5) out.ins.push(`${flagHtml("Japan")}일본 거래는 7~8월 월평균 ${B((jp(MONTHS.slice(6, 8)) / 2).toFixed(1) + "건")}으로 1~6월 월평균 ${(jp(MONTHS.slice(0, 6)) / 6).toFixed(1)}건보다 크게 늘었습니다(여름 성수기 송금·환전 수요).`);
+  if (sv[0].v / a.rev > 0.6) out.warn.push(`수익이 ${SVC_KO[sv[0].k]} 한 서비스에 ${share(sv[0].v / a.rev)} 몰려 있습니다. 큰 거래 몇 건이 빠지면 월 수익이 크게 흔들립니다.`);
+  out.warn.push(`월별 거래가 10건 안팎이라 전월 대비 변화율이 크게 튈 수 있습니다. 분기 단위로 함께 보세요.`);
+  out.warn.push(`거래전표는 시뮬레이션 데이터${DATA.fx_meta.source === "SIMULATED" ? "이고, 환율도 ECOS 연결 전 시뮬레이션 값" : ""}입니다.`);
+  if (sv[0].k === "Trade Finance") out.act.push("해외송금·환전처럼 건수가 많은 서비스의 모바일 수수료 수익을 키워 수익원을 분산하는 방안을 검토할 만합니다.");
+  if (isFinite(q3) && q3 > 0.5) out.act.push("모바일 비중이 절반을 넘었으므로 모바일 환율우대·송금 프로모션의 효과 측정 지표를 따로 두는 것이 좋습니다.");
+  out.act.push(`${CTRY[ct[0].k].ko} 거래를 지도에서 눌러 어떤 서비스·고객이 거래액을 만드는지 확인해 보세요.`);
+  return out;
+}
+function aiLedger() {
+  const rows = rowsNow(), a = agg(rows), out = {about: [], ins: [], warn: [], act: []};
+  out.about.push(`정제가 끝난 표준 거래 ${B(a.cnt + "건")}을 한 줄씩 보여 주는 원장입니다. 열 제목을 누르면 정렬되고, 검색창으로 거래번호·국가·통화·원본 파일을 찾을 수 있습니다. 행을 누르면 그 거래의 원본 전표까지 이어집니다.`);
+  if (!rows.length) return out;
+  const sorted = [...rows].sort((x, y) => y.KRW_Amount - x.KRW_Amount);
+  const top3 = sorted.slice(0, 3);
+  out.ins.push(`거래액 상위 3건: ${top3.map(t => `${B(t.Transaction_ID)} ${flagHtml(t.Country)}${won(t.KRW_Amount)}`).join(", ")}`);
+  const t10 = sum(sorted.slice(0, 10), "KRW_Amount");
+  out.ins.push(`상위 10건이 거래액의 ${B(share(t10 / a.krw))}를 차지합니다. 금액 분포가 소수의 대형 거래에 쏠려 있습니다.`);
+  const med = sorted[Math.floor(sorted.length / 2)].KRW_Amount;
+  out.ins.push(`중앙값은 ${B(won(med))}으로, 평균 ${won(a.avg)}과 큰 차이가 납니다. 평균 거래액은 대형 거래에 끌려 올라간 값입니다.`);
+  const hi = [...rows].sort((x, y) => y.Revenue_Rate - x.Revenue_Rate)[0];
+  out.ins.push(`수익률이 가장 높은 거래는 ${B(hi.Transaction_ID)} (${SVC_KO[hi.Service]}, ${CHAN_KO[hi.Channel]}) ${B(hi.Revenue_Rate.toFixed(2) + "%")}입니다. 소액 거래는 고정 수수료 때문에 수익률이 높게 나옵니다.`);
+  out.warn.push("수익률(%)은 소액 거래일수록 커 보이므로, 수익 금액과 함께 비교하세요.");
+  out.act.push("‘수익’ 열을 내림차순으로 정렬하면 수익 기여가 큰 거래부터 확인할 수 있습니다.");
+  return out;
+}
+function aiPipeline() {
+  const P = DATA.summary.pipeline, V = DATA.validation, out = {about: [], ins: [], warn: [], act: []};
+  out.about.push(`형식이 서로 다른 원본 전표가 어떻게 하나의 표준 데이터로 바뀌는지 보여 주는 화면입니다. 흐름도는 수집 → 중복 제거 → 표준화 → 환율 결합 → 수익 계산 순서이고, 아래에 시스템별 원본 형식, 규칙별 변경 건수, 검증 결과, 표준 사전, 변환 이력이 있습니다.`);
+  out.ins.push(`원본 파일 ${B(P.collected + "개")} 중 재전송 중복 ${B(P.duplicates.length + "개")}를 걸러 ${B(P.standardized + "건")}이 남았습니다.`);
+  const byField = topBy(DATA.log.map(l => ({...l, one: 1})), "field", "one");
+  out.ins.push(`값이 실제로 바뀐 기록은 ${B(P.changes_logged + "건")}이며, 가장 많이 바뀐 항목은 ${byField.slice(0, 3).map(f => `${B(f.k)} ${f.v}건`).join(", ")}입니다.`);
+  const typos = DATA.log.filter(l => l.rule === "R08_TYPO");
+  if (typos.length) out.ins.push(`오탈자 ${B(typos.length + "건")}을 편집거리로 자동 교정했습니다 (${[...new Set(typos.map(t => `${String(t.raw).trim()}→${t.clean}`))].slice(0, 3).join(", ")}).`);
+  const perSys = ["BRANCH", "DIGITAL", "CORP"].map(sys => { const n = S.filter(x => x.Source_System === sys).length; return [sys, DATA.log.filter(l => l.system === sys && l.Transaction_ID).length / (n || 1)]; }).sort((x, y) => y[1] - x[1]);
+  out.ins.push(`전표 1건당 수정이 가장 많은 원천은 ${B(SYS_KO[perSys[0][0]])} (평균 ${perSys[0][1].toFixed(1)}개 항목)입니다.`);
+  const prior = S.filter(x => x.FX_Rate_Date !== x.Date).length;
+  out.ins.push(`주말·휴일 거래 ${B(prior + "건")}은 거래일 환율이 없어 직전 고시일 환율을 붙였습니다.`);
+  out.ins.push(`검증 결과 ${V.passed ? B("통과") : B("실패")}: 정답 대조 ${V.truth_rows - V.truth_mismatches.length}/${V.truth_rows}, 해석 실패 ${V.parse_issues.length}건, 원화 환산·수익 항등식 모두 ${V.krw_identity_ok && V.revenue_identity_ok ? "일치" : "불일치"}.`);
+  out.warn.push("오탈자 자동 교정은 사전 별칭과 1~2글자만 다른 경우에만 적용됩니다. 처음 보는 표기는 사전에 별칭을 추가해야 합니다.");
+  out.act.push("새 원천 시스템을 붙일 때는 항목명 대응(FIELD_MAP)과 사전 별칭만 추가하면 같은 흐름을 그대로 쓸 수 있습니다.");
+  return out;
+}
+function aiBasis() {
+  const fx = DATA.fx_meta, out = {about: [], ins: [], warn: [], act: []};
+  out.about.push("분석에 쓰인 기준을 모아 둔 화면입니다. 데이터 성격 배지, 통화별 환율 추이, 서비스별 수수료·스프레드 정책, 데이터 구성, 핵심 계산식을 보여 줍니다.");
+  const mv = Object.keys(DICT.currency).map(c => { const f = DATA.fx_monthly[MONTHS[0]]?.[c], l = DATA.fx_monthly[MONTHS[8]]?.[c]; return [c, f && l ? l / f - 1 : 0]; }).sort((x, y) => y[1] - x[1]);
+  out.ins.push(`1월 대비 9월 평균 환율은 ${B(mv[0][0])}가 ${B("▲" + pct(mv[0][1], 1))}로 가장 많이 올랐고, ${B(mv[mv.length - 1][0])}가 ${B("▼" + pct(-mv[mv.length - 1][1], 1))}로 가장 많이 내렸습니다.`);
+  const sp = Object.entries(DATA.policy.services["Retail FX"].cash_spread).sort((x, y) => y[1] - x[1]);
+  out.ins.push(`환전 스프레드는 ${B(sp[0][0])} ${pct(sp[0][1], 2)}가 가장 높고 ${B(sp[sp.length - 1][0])} ${pct(sp[sp.length - 1][1], 2)}가 가장 낮습니다. 유통량이 적은 통화일수록 스프레드가 큽니다.`);
+  out.ins.push(`해외송금은 전자금융 수수료가 영업점의 ${B("절반")}이고 우대율도 높아, 같은 금액이라도 모바일 거래의 건당 수익이 작습니다.`);
+  out.ins.push(`무역금융 수익은 거래액 × 연 ${pct(DATA.policy.services["Trade Finance"].annual_margin, 1)} × 여신일수로 계산되어, 금액과 기간이 클수록 수익이 빠르게 커집니다.`);
+  out.warn.push(`환율은 ${fx.source === "SIMULATED" ? B("시뮬레이션 값") + "입니다. ECOS 실제 환율로 교체하면 원화 거래액과 수익이 함께 바뀝니다" : "한국은행 ECOS 고시 값입니다"}.`);
+  out.warn.push("수수료 정책은 공개 수수료 구조를 참고한 가상 정책으로, 특정 은행의 실제 요율이 아닙니다.");
+  return out;
+}
+function aiDrill(path) {
+  const last = path[path.length - 1], out = {about: [], ins: [], warn: [], act: []};
+  if (last.raw) {
+    const raw = RAW_BY_FILE[last.raw], s = BY_ID[raw.transaction_id], logs = LOG_BY_FILE[last.raw] || [];
+    out.about.push(`드릴다운의 마지막 단계로, ${B(SYS_KO[raw.system])} 시스템이 만든 ${raw.format} 원본 파일을 수정 없이 보여 줍니다. 아래에서 각 항목이 어떤 규칙으로 표준값이 되었고 금액이 어떻게 계산되었는지 확인할 수 있습니다.`);
+    if (!s) return out;
+    const rules = [...new Set(logs.map(l => RULE_KO[l.rule]).filter(Boolean))];
+    out.ins.push(`원본 ${rawFields(s).length}개 항목 중 ${B(logs.filter(l => l.field !== "FX_Rate_Date").length + "개")}의 값이 바뀌었습니다 (${rules.join(", ")}).`);
+    const typo = logs.find(l => l.rule === "R08_TYPO");
+    if (typo) out.ins.push(`오탈자 ${B(`"${String(typo.raw).trim()}" → ${typo.clean}`)}을 자동 교정했습니다.`);
+    if (s.FX_Rate_Date !== s.Date) out.ins.push(`거래일 ${s.Date}은 환율 고시가 없는 날이라 ${B(s.FX_Rate_Date)} 환율을 적용했습니다.`);
+    const parts = [["수수료", s.Fee], ["외환 수익", s.FX_Revenue], ["금융 수익", s.Finance_Revenue]].sort((x, y) => y[1] - x[1]);
+    out.ins.push(`수익 ${B("₩" + n0(s.Total_Revenue))} 중 ${BJ(parts[0][0])} ${share(parts[0][1] / (s.Total_Revenue || 1))}를 차지합니다.`);
+    if (DATA.summary.pipeline.duplicates.some(d => d.duplicate_of === last.raw)) out.warn.push("이 파일은 디지털 시스템이 한 번 더 보낸 재전송 파일이 있어, 중복 1건을 제거했습니다.");
+    return out;
+  }
+  if (last.txn) {
+    const s = BY_ID[last.txn], same = S.filter(x => x.Service === s.Service), avgRate = sum(same, "Total_Revenue") / sum(same, "KRW_Amount");
+    const rank = [...S].sort((x, y) => y.KRW_Amount - x.KRW_Amount).findIndex(x => x.Transaction_ID === s.Transaction_ID) + 1;
+    out.about.push(`거래 1건의 결과값과, 원본 표기가 표준값으로 어떻게 바뀌었는지를 나란히 보여 줍니다. ‘원본 전표’를 누르면 원본 파일과 계산 과정이 나옵니다.`);
+    out.ins.push(`${flagHtml(s.Country)}${CTRY[s.Country].ko} ${SVC_KO[s.Service]} 거래로, 원화 ${B(won(s.KRW_Amount))}이며 전체 100건 중 거래액 ${B(rank + "위")}입니다.`);
+    out.ins.push(`수익률 ${B(s.Revenue_Rate.toFixed(3) + "%")}는 같은 서비스 평균 ${pct(avgRate, 3)}보다 ${s.Revenue_Rate / 100 >= avgRate ? "높습니다" : "낮습니다"} (${CHAN_KO[s.Channel]} 채널).`);
+    out.ins.push(`${SYS_KO[s.Source_System]} 시스템의 ${s.Source_Format} 원본에서 왔습니다.`);
+    return out;
+  }
+  const dims = path.filter(p => p.dim), rows = sliceRows(), all = agg(rowsNow()), a = agg(rows);
+  const name = dims.map(p => DIM[p.dim].label(p.value)).join(" · ");
+  out.about.push(`${B(name)}만 떼어 본 화면입니다. 위 숫자는 이 범위의 합계이고, 아래 막대를 누르면 한 단계 더 내려갑니다. 거래 목록에서 개별 거래로 이동할 수 있습니다.`);
+  if (!rows.length) return out;
+  out.ins.push(`전체 거래액의 ${B(share(a.krw / (all.krw || 1)))}, 수익의 ${B(share(a.rev / (all.rev || 1)))}를 차지합니다 (${a.cnt}건).`);
+  const diff = a.rate - all.rate;
+  out.ins.push(`수익률 ${B(pct(a.rate, 3))}로 전체 평균보다 ${B(bp(Math.abs(diff)))} ${diff >= 0 ? "높습니다" : "낮습니다"}.`);
+  for (const d of ["Service", "Country", "Channel", "Customer_Type"].filter(d => !dims.some(p => p.dim === d)).slice(0, 2)) {
+    const t = topBy(rows, d);
+    if (t.length) out.ins.push(`${DIM[d].ko} 기준으로는 ${d === "Country" ? flagHtml(t[0].k) : ""}${BJ(DIM[d].label(t[0].k))} 거래액의 ${share(t[0].v / a.krw)}입니다.`);
+  }
+  if (!dims.some(p => p.dim === "Month")) { const m = topBy(rows, "Month")[0]; out.ins.push(`거래액이 가장 큰 달은 ${B(+m.k.slice(5) + "월")} (${won(m.v)})입니다.`); }
+  const big = [...rows].sort((x, y) => y.KRW_Amount - x.KRW_Amount)[0];
+  out.ins.push(`가장 큰 거래는 ${B(big.Transaction_ID)} ${won(big.KRW_Amount)}으로, 이 범위 거래액의 ${share(big.KRW_Amount / a.krw)}입니다.`);
+  if (big.KRW_Amount / a.krw > 0.4) out.warn.push("한 건이 이 범위 거래액의 40% 이상이라, 그 거래 하나에 따라 결과가 크게 달라집니다.");
+  if (a.cnt < 5) out.warn.push(`거래가 ${a.cnt}건뿐이라 비율 해석에 주의가 필요합니다.`);
+  return out;
+}
+function aiContext() {
+  const open = $("#drawer").classList.contains("on") && state.path.length;
+  if (open) {
+    const last = state.path[state.path.length - 1];
+    const ctx = last.raw ? "드릴다운 · 원본 전표" : last.txn ? "드릴다운 · 거래" : `드릴다운 · ${state.path.filter(p => p.dim).map(p => DIM[p.dim].ko).join(" › ")}`;
+    return {title: last.raw ? "원본 전표 해설" : last.txn ? "거래 해설" : "드릴다운 해설", ctx, data: aiDrill(state.path)};
+  }
+  const T = {home: ["홈 대시보드 해설", aiHome], ledger: ["거래 원장 해설", aiLedger], pipeline: ["정제 자동화 해설", aiPipeline], basis: ["데이터 기준 해설", aiBasis]}[state.tab];
+  return {title: T[0], ctx: state.tab === "home" || state.tab === "ledger" ? `${PERIODS.find(p => p[0] === state.f.period)[1]}${["Customer_Type", "Service", "Channel"].some(k => state.f[k] !== "all") ? " · 필터 적용" : ""}` : "전체 데이터", data: T[1]()};
+}
+function renderAI() {
+  const {title, ctx, data} = aiContext();
+  const html = [["이 화면은", data.about, ""], ["핵심 인사이트", data.ins, ""], ["주의할 점", data.warn, "warn"], ["제안", data.act, "act"]]
+    .filter(([, items]) => items.length)
+    .map(([h, items, cls]) => `<section class="ai-sec ${cls}"><h5>${h}</h5>${h === "이 화면은" ? items.map(t => `<p>${t}</p>`).join("") : `<ul>${items.map((t, i) => `<li data-i="${i + 1}">${t}</li>`).join("")}</ul>`}</section>`).join("");
+  const key = title + ctx + html;
+  $("#aiTitle").textContent = title; $("#aiCtx").textContent = ctx;
+  if (key === AI.key) return;
+  AI.key = key;
+  const body = $("#aiBody"), panel = $("#aiPanel");
+  clearTimeout(AI.timer);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) { body.innerHTML = html; return; }
+  // 생성 중 표시 후 문단을 차례로 보여 준다
+  panel.classList.add("busy");
+  body.innerHTML = `<div class="ai-typing"><i></i><i></i><i></i></div>`;
+  AI.timer = setTimeout(() => {
+    panel.classList.remove("busy");
+    body.innerHTML = html;
+    [...body.querySelectorAll("p, li, h5")].forEach((el, i) => { el.classList.add("ai-reveal"); el.style.animationDelay = `${i * 70}ms`; });
+  }, 450);
+}
+function setAI(on) {
+  AI.on = on; AI.key = "";
+  $("#aiBtn").setAttribute("aria-pressed", on);
+  $("#aiPanel").classList.toggle("on", on);
+  $("#aiPanel").setAttribute("aria-hidden", !on);
+  if (on) renderAI();
+}
+
 // ---------- render ----------
 // ---------- LED 전광판: 상승 ▲ 빨강 / 하락 ▼ 파랑 (국내 증권 관례) ----------
 function ledMove(cur, prev, fmt, dec = 1) {
@@ -1268,6 +1495,7 @@ function render() {
   if (state.tab === "home") { renderKpis(rows); renderMap(rows); renderTrend(); renderService(rows); renderCustomer(rows); renderChannel(rows); renderInsight(rows); }
   if (state.tab === "ledger") renderLedger();
   renderTicker();
+  if (AI.on) renderAI();
   if ($("#drawer").classList.contains("on")) renderDrawer();
 }
 document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => {
@@ -1284,6 +1512,8 @@ $("#ledgerQ").addEventListener("input", e => { state.ledgerQ = e.target.value; r
 $("#logQ").addEventListener("input", e => { state.logQ = e.target.value; state.logPage = 0; renderLog(); });
 $("#logRule").addEventListener("change", e => { state.logRule = e.target.value; state.logPage = 0; renderLog(); });
 $("#drClose").addEventListener("click", closeDrill);
+$("#aiBtn").addEventListener("click", () => setAI(!AI.on));
+$("#aiClose").addEventListener("click", () => setAI(false));
 $("#scrim").addEventListener("click", closeDrill);
 addEventListener("keydown", e => { if (e.key === "Escape") closeDrill(); });
 $("#themeBtn").addEventListener("click", () => {
