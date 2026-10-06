@@ -119,7 +119,7 @@ main{padding:12px 24px 24px}
 /* map */
 .map-body{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:12px;align-items:start}
 .map-wrap{position:relative}
-.map-svg{width:100%;height:auto;max-height:300px;display:block;background:var(--chart);border-radius:8px}
+.map-svg{width:100%;height:auto;max-height:250px;display:block;background:var(--chart);border-radius:8px}
 .map-svg .land{fill:var(--land);stroke:var(--chart);stroke-width:.5}
 .map-svg .land.active{fill:var(--land-active);cursor:pointer}
 .map-svg .land.active:hover,.map-svg .land.hot{fill:var(--land-hover)}
@@ -131,7 +131,8 @@ main{padding:12px 24px 24px}
 .map-svg .lbl tspan.v{font-weight:600;fill:var(--ink-2)}
 .map-svg .hq{fill:var(--navy);stroke:var(--chart);stroke-width:2}
 .map-legend{display:flex;gap:16px;align-items:center;font-size:11px;color:var(--muted);margin-top:8px;flex-wrap:wrap}
-.rank{display:grid;grid-template-columns:1fr;gap:2px}
+.rank{display:grid;grid-template-columns:1fr;gap:0}
+.rank button{padding:3px 6px}
 .rank button{display:flex;gap:8px;align-items:center;border:0;background:none;padding:4px 6px;border-radius:6px;cursor:pointer;text-align:left;min-width:0}
 .rank button:hover{background:var(--surface-2)}
 .rank .n{color:var(--muted);font-size:11px;width:12px}
@@ -238,6 +239,29 @@ tbody tr.click:hover{background:var(--accent-soft)}
 .kv dt{color:var(--muted)} .kv dd{margin:0}
 h4{margin:0 0 8px;font-size:13px}
 
+
+/* ---------- LED ticker (은행·증권사 전광판) ---------- */
+:root{--led-h:46px}
+body{padding-bottom:var(--led-h)}
+.led{position:fixed;left:0;right:0;bottom:0;height:var(--led-h);z-index:25;display:flex;align-items:stretch;background:#050505;border-top:2px solid #1c1c1c;box-shadow:0 -4px 18px rgba(0,0,0,.25);font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Pretendard BO",monospace;font-weight:700;letter-spacing:.06em;color:#ffb21e;user-select:none}
+.led::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle at center,transparent 0 .9px,rgba(0,0,0,.55) 1.5px);background-size:3px 3px}
+.led-tag{flex:none;display:flex;flex-direction:column;justify-content:center;padding:0 14px;border-right:2px solid #222;background:#0b0b0b;line-height:1.15;white-space:nowrap}
+.led-tag b{font-size:14px;color:#ffb21e;text-shadow:0 0 6px rgba(255,178,30,.75)}
+.led-tag span{font-size:10.5px;color:#9a8a5c;letter-spacing:.08em}
+.led-view{position:relative;flex:1;overflow:hidden;display:flex;align-items:center;mask-image:linear-gradient(90deg,transparent 0,#000 24px,#000 calc(100% - 24px),transparent)}
+.led-track{display:inline-flex;align-items:center;white-space:nowrap;will-change:transform;animation:led-scroll var(--led-dur,60s) linear infinite}
+.led:hover .led-track{animation-play-state:paused}
+@keyframes led-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.led .it{display:inline-flex;align-items:center;gap:8px;font-size:16px;padding:0 4px}
+.led .nm{color:#ffb21e;text-shadow:0 0 6px rgba(255,178,30,.7)}
+.led .px{color:#f4f1e6;text-shadow:0 0 6px rgba(255,255,240,.55)}
+.led .up{color:#ff3b30;text-shadow:0 0 7px rgba(255,59,48,.85)}
+.led .dn{color:#2f9bff;text-shadow:0 0 7px rgba(47,155,255,.85)}
+.led .eq{color:#bdb59c}
+.led .sec{color:#050505;background:#ffb21e;padding:1px 7px;font-size:12px;letter-spacing:.1em;box-shadow:0 0 8px rgba(255,178,30,.6);margin:0 6px 0 18px}
+.led .sep{color:#5a4a1e;margin:0 16px;font-size:12px}
+.led .flag{width:20px;height:15px;margin:0;box-shadow:none;filter:saturate(1.2) brightness(1.1)}
+@media (prefers-reduced-motion:reduce){.led-track{animation:none}.led-view{overflow-x:auto;mask-image:none}}
 @media (max-width:1180px){
   .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
   .map-card,.trend-card{grid-column:1/-1}
@@ -250,6 +274,8 @@ h4{margin:0 0 8px;font-size:13px}
   .fmt3{grid-template-columns:1fr}
 }
 @media (max-width:720px){
+  .led-tag span{display:none}
+  .led .it{font-size:14px}
   .top{padding:0 16px;gap:10px;height:auto;flex-wrap:wrap;padding-top:8px;padding-bottom:6px}
   .brand span,.author{display:none}
   .tabs{order:3;width:100%;margin:0}
@@ -382,6 +408,10 @@ h4{margin:0 0 8px;font-size:13px}
   </div>
   <div class="dr-b" id="drBody"></div>
 </aside>
+<footer class="led" id="led" aria-label="환율·거래 전광판">
+  <div class="led-tag"><b>BRIDGEON ▸ BOARD</b><span id="ledDate"></span></div>
+  <div class="led-view"><div class="led-track" id="ledTrack"></div></div>
+</footer>
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script>
@@ -587,7 +617,7 @@ function renderTrend() {
   const host = $("#trend"), W = Math.max(300, host.clientWidth || 480);
   const base = baseRows(), sel = new Set(periodMonths());
   const byM = MONTHS.map(m => agg(base.filter(s => s.Month === m)));
-  const H1 = 100, gap = 22, padL = 46, padR = 12, padT = 18, padB = 22;
+  const H1 = 92, gap = 22, padL = 46, padR = 12, padT = 18, padB = 22;
   const H = padT + H1 + gap + H1 + padB;
   const el = svg("svg", {class: "chart-svg", viewBox: `0 0 ${W} ${H}`, height: H, role: "img", "aria-label": "월별 거래액과 수익 추이"});
   const x = i => padL + (W - padL - padR) * (i / (MONTHS.length - 1));
@@ -658,13 +688,13 @@ function renderService(rows) {
   hbars($("#svc"), SVC.map(s => { const a = agg(g.get(s) || []); return {
     label: SVC_KO[s], value: a.rev, color: SVC_COLOR[s], valueLabel: won(a.rev), sub: `${share(a.rev/total)} · 수익률 ${pct(a.rate, 2)} · ${a.cnt}건`,
     tipTitle: `${SVC_KO[s]} · ${s}`, tip: tipRows(g.get(s) || []), onClick: a.cnt ? () => openDrill([{dim: "Service", value: s}]) : null }; }),
-    {aria: "서비스별 수익", padL: 86, rowH: 40});
+    {aria: "서비스별 수익", padL: 86, rowH: 36});
 }
 
 function renderCustomer(rows) {
   const host = $("#cust"), W = Math.max(260, host.clientWidth || 320);
   const g = group(rows, "Customer_Type"), tc = rows.length || 1, tk = sum(rows, "KRW_Amount") || 1;
-  const rowH = 44, padL = 56, padR = 44, H = CUST.length * rowH + 6;
+  const rowH = 40, padL = 56, padR = 44, H = CUST.length * rowH + 6;
   const el = svg("svg", {class: "chart-svg", viewBox: `0 0 ${W} ${H}`, height: H, role: "img", "aria-label": "고객유형별 건수 비중과 거래액 비중"});
   CUST.forEach((c, i) => {
     const r = g.get(c) || [], sc = r.length / tc, sk = sum(r, "KRW_Amount") / tk, y = i * rowH + 6;
@@ -687,7 +717,7 @@ function renderCustomer(rows) {
 function renderChannel(rows) {
   const host = $("#chan"), W = Math.max(260, host.clientWidth || 320);
   const Q = [["1분기", MONTHS.slice(0,3)], ["2분기", MONTHS.slice(3,6)], ["3분기", MONTHS.slice(6,9)]];
-  const padL = 46, padR = 6, padT = 6, padB = 22, H = 158;
+  const padL = 46, padR = 6, padT = 6, padB = 22, H = 140;
   const el = svg("svg", {class: "chart-svg", viewBox: `0 0 ${W} ${H}`, height: H, role: "img", "aria-label": "분기별 채널 거래건수 비중"});
   const colW = Math.min(76, (W - padL - padR) / Q.length - 22), ch = H - padT - padB;
   [0, .5, 1].forEach(v => { const yy = padT + ch * (1 - v); svg("line", {class: v === 0 ? "axis" : "gridline", x1: padL, x2: W - padR, y1: yy, y2: yy}, el); const t = svg("text", {class: "tick num", x: padL - 6, y: yy + 4, "text-anchor": "end"}, el); t.textContent = `${v*100}%`; });
@@ -1034,12 +1064,63 @@ function renderBasis() {
 }
 
 // ---------- render ----------
+// ---------- LED 전광판: 상승 ▲ 빨강 / 하락 ▼ 파랑 (국내 증권 관례) ----------
+function ledMove(cur, prev, fmt, dec = 1) {
+  if (!isFinite(prev) || prev === 0) return `<span class="eq">NEW</span>`;
+  const d = cur - prev, r = d / prev;
+  if (Math.abs(r) < 0.00005) return `<span class="eq">━ ${(0).toFixed(dec)}%</span>`;
+  const cls = d > 0 ? "up" : "dn", ar = d > 0 ? "▲" : "▼";
+  // 작은 기준값에서 생기는 수천 % 대신 배수로 표시 (4배 이상)
+  const rel = r >= 3 ? `${(1 + r).toFixed(1)}배` : `${d > 0 ? "+" : "−"}${Math.abs(r * 100).toFixed(dec)}%`;
+  return `<span class="${cls}">${ar} ${fmt ? fmt(Math.abs(d)) + " " : ""}${rel}</span>`;
+}
+function renderTicker() {
+  const L = DATA.fx_latest, units = DATA.fx_meta.quote_units, parts = [];
+  const sep = `<span class="sep">◆</span>`;
+  // 1) 환율: 고시 단위 그대로, 직전 고시일 대비
+  parts.push(`<span class="sec">FX ${DATA.fx_meta.source === "SIMULATED" ? "SIM" : "ECOS"}</span>`);
+  parts.push(Object.keys(DICT.currency).filter(c => L.rates[c] != null).map(c => {
+    const q = L.rates[c], pv = L.prev[c], u = units[c] || 1;
+    const f = v => v.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    return `<span class="it"><span class="nm">${c}${u !== 1 ? `(${u})` : ""}/KRW</span><span class="px">${f(q)}</span>${ledMove(q, pv, f, 2)}</span>`;
+  }).join(sep));
+  // 2) 국가·서비스: 월 하나를 고르면 전월 대비, 그 외에는 마지막 분기 vs 직전 분기
+  //    (월별 표본이 적어 ±100% 같은 잡음이 크므로 기본은 분기 비교)
+  const ms = periodMonths(), li = MONTHS.indexOf(ms[ms.length - 1]), base = baseRows();
+  let curM, preM, lab;
+  if (ms.length === 1) { curM = [MONTHS[li]]; preM = li > 0 ? [MONTHS[li - 1]] : []; lab = `${li + 1}M vs ${li}M`; }
+  else { const q = Math.floor(li / 3); curM = MONTHS.slice(q * 3, q * 3 + 3); preM = q > 0 ? MONTHS.slice(q * 3 - 3, q * 3) : []; lab = `${q + 1}Q vs ${q}Q`; }
+  if (preM.length) {
+    const cur = base.filter(s => curM.includes(s.Month)), pre = base.filter(s => preM.includes(s.Month));
+    const item = (icon, name, a, b) => `<span class="it">${icon}<span class="nm">${name}</span><span class="px">${won(a)}</span>${!a && b ? `<span class="eq">거래 없음</span>` : ledMove(a, b)}</span>`;
+    parts.push(`<span class="sec">COUNTRY ${lab}</span>`);
+    parts.push(CTRY_LIST.map(c => {
+      const a = sum(cur.filter(s => s.Country === c), "KRW_Amount"), b = sum(pre.filter(s => s.Country === c), "KRW_Amount");
+      return a || b ? item(flagHtml(c), esc(CTRY[c].ko), a, b) : "";
+    }).filter(Boolean).join(sep));
+    parts.push(`<span class="sec">REVENUE ${lab}</span>`);
+    parts.push(SVC.map(v => {
+      const a = sum(cur.filter(s => s.Service === v), "Total_Revenue"), b = sum(pre.filter(s => s.Service === v), "Total_Revenue");
+      return a || b ? item("", SVC_KO[v], a, b) : "";
+    }).filter(Boolean).join(sep));
+    const A = agg(cur), B = agg(pre);
+    parts.push(`<span class="sec">TOTAL ${lab}</span>`);
+    parts.push([item("", "거래액", A.krw, B.krw), item("", "수익", A.rev, B.rev), `<span class="it"><span class="nm">건수</span><span class="px">${A.cnt}건</span>${ledMove(A.cnt, B.cnt)}</span>`].join(sep));
+  }
+  const one = parts.join(" ") + `<span class="sep">◆</span>`;
+  const track = $("#ledTrack");
+  track.innerHTML = one + one; // 두 번 이어 붙여 끊김 없이 순환
+  $("#ledDate").textContent = `FX ${L.date.replace(/-/g, ".")} · ${DATA.fx_meta.source === "SIMULATED" ? "SIMULATED" : "ECOS"}`;
+  requestAnimationFrame(() => { track.style.setProperty("--led-dur", Math.max(30, track.scrollWidth / 2 / 70) + "s"); });
+}
+
 function render() {
   const rows = rowsNow();
   const fl = [state.f.Customer_Type, state.f.Service, state.f.Channel].filter(v => v !== "all").length;
   $("#fMeta").textContent = `${rows.length}건`;
   if (state.tab === "home") { renderKpis(rows); renderMap(rows); renderTrend(); renderService(rows); renderCustomer(rows); renderChannel(rows); renderInsight(rows); }
   if (state.tab === "ledger") renderLedger();
+  renderTicker();
   if ($("#drawer").classList.contains("on")) renderDrawer();
 }
 document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => {

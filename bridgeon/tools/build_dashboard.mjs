@@ -41,6 +41,12 @@ const data = {
   flags: load("flags.json").flags,
   fx_meta: fx.meta,
   fx_monthly: fxMonthly,
+  // LED 전광판용: 마지막 고시일과 직전 고시일 환율 (고시 단위 그대로)
+  fx_latest: (() => {
+    const days = Object.keys(fx.rates).sort();
+    const [prev, last] = days.slice(-2);
+    return { date: last, prev_date: prev, rates: fx.rates[last], prev: fx.rates[prev] };
+  })(),
 };
 
 const template = fs.readFileSync(path.join(ROOT, "tools", "dashboard_template.html"), "utf8");
