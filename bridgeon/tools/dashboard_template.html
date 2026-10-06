@@ -117,7 +117,7 @@ main{padding:12px 24px 24px}
 .insight .it b{color:#fff}
 
 /* map */
-.map-body{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:12px;align-items:start}
+.map-body{display:grid;grid-template-columns:minmax(0,1fr) 172px;gap:12px;align-items:start}
 .map-wrap{position:relative}
 .map-svg{width:100%;height:auto;max-height:212px;display:block;background:var(--chart);border-radius:8px}
 .map-svg .land{fill:var(--land);stroke:var(--chart);stroke-width:.5}
@@ -419,7 +419,7 @@ body{padding-bottom:var(--led-h)}
 body{background:var(--page)}
 /* 헤더: 흰 바탕 · 가운데 알약 탭 · 프로필 칩 */
 .top{background:var(--surface);color:var(--ink);height:var(--top-h);border-bottom:1px solid var(--border);gap:16px;padding:0 28px}
-.brand-mark{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#7b61ff,#b49bff)}
+.brand-mark{width:34px;height:34px;border-radius:50%;background:var(--accent)}
 .brand b{font-size:16px;letter-spacing:-.01em;font-weight:800}
 .brand span{color:var(--muted);font-size:11.5px;letter-spacing:.02em;font-weight:600;display:block;margin-top:-1px}
 .tabs{margin:0 auto;gap:8px}
@@ -506,6 +506,51 @@ tbody tr.click:hover{background:var(--accent-soft)}
   .tab{padding:6px 12px;font-size:12.5px}
   main{padding:10px 16px 20px}
 }
+
+/* ===== 스킨: blue(기본) · lavender · navy — 라이트/다크 ===== */
+:root{--surface:#ffffff;--chart:#ffffff;--border:rgba(25,31,40,.06);--border-strong:rgba(25,31,40,.12);--shadow:0 1px 2px rgba(25,31,40,.04),0 6px 20px rgba(25,31,40,.05);--page:#f2f4f6;--surface-2:#f6f7f9;--track:#eef0f3;--ink:#191f28;--ink-2:#4e5968;--muted:#6b7684;--grid:#eef0f3;--axis:#d1d6db;--accent:#3182f6;--accent-soft:#e8f3ff;--accent-ink:#1b64da;--accent-2:#14b8a6;--land:#e5e8eb;--land-active:#cfe3ff;--land-hover:#90c2ff;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#d99a00;--c1:#e87ba4;--c2:#008300;--c3:#4a3aa7;--c4:#e34948;--hero:linear-gradient(115deg,#1b64da 0%,#3182f6 55%,#5ca3ff 100%);--hero-shadow:0 10px 28px rgba(49,130,246,.25);}
+:root[data-skin="lavender"]{--surface:#ffffff;--chart:#ffffff;--border:rgba(25,31,40,.06);--border-strong:rgba(25,31,40,.12);--shadow:0 1px 2px rgba(25,31,40,.04),0 6px 20px rgba(25,31,40,.05);--page:#f3f2f8;--surface-2:#f6f5fb;--track:#efeef6;--ink:#1d1b2e;--ink-2:#4f4c66;--muted:#706d86;--grid:#efeef5;--axis:#dddbe8;--accent:#7b61ff;--accent-soft:#efebff;--accent-ink:#5a3ee6;--accent-2:#2ec4b6;--land:#e9e8f1;--land-active:#ddd6ff;--land-hover:#b9a9ff;--s1:#7b61ff;--s2:#f08a4b;--s3:#1fb5a6;--s4:#d99a00;--c1:#e26ca6;--c2:#3fa9f5;--c3:#3f37c9;--c4:#f0616d;--hero:linear-gradient(115deg,#5b3fe6 0%,#7b61ff 45%,#a48dff 100%);--hero-shadow:0 10px 28px rgba(123,97,255,.25);}
+:root[data-skin="navy"]{--surface:#ffffff;--chart:#ffffff;--border:rgba(25,31,40,.06);--border-strong:rgba(25,31,40,.12);--shadow:0 1px 2px rgba(25,31,40,.04),0 6px 20px rgba(25,31,40,.05);--page:#eef1f5;--surface-2:#f5f7fa;--track:#edf0f4;--ink:#0f1b2d;--ink-2:#46546a;--muted:#66748a;--grid:#edf0f4;--axis:#cfd6df;--accent:#1f4f99;--accent-soft:#e7eef9;--accent-ink:#1a4383;--accent-2:#c28a1e;--land:#e3e8ef;--land-active:#c9d8ef;--land-hover:#8fb0de;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#d99a00;--c1:#e87ba4;--c2:#008300;--c3:#4a3aa7;--c4:#e34948;--hero:linear-gradient(115deg,#0b1f3a 0%,#143a6b 60%,#1f4f99 100%);--hero-shadow:0 10px 28px rgba(11,31,58,.28);}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--page:#0f1115;--surface:#1a1d23;--surface-2:#22262d;--chart:#1a1d23;--track:#2a2f37;--ink:#f2f4f6;--ink-2:#c4cad3;--muted:#98a1ad;--grid:#2a2f37;--axis:#3a404a;--border:rgba(255,255,255,.06);--border-strong:rgba(255,255,255,.13);--land:#2a2f37;--shadow:none;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--c1:#d55181;--c2:#0ca30c;--c3:#9085e9;--c4:#e66767;--accent-2:#2ec4b6;--accent:#4c97ff;--accent-soft:#1a2b45;--accent-ink:#8cbcff;--land-active:#203a5e;--land-hover:#3171c9;}}
+:root[data-theme="dark"]{--page:#0f1115;--surface:#1a1d23;--surface-2:#22262d;--chart:#1a1d23;--track:#2a2f37;--ink:#f2f4f6;--ink-2:#c4cad3;--muted:#98a1ad;--grid:#2a2f37;--axis:#3a404a;--border:rgba(255,255,255,.06);--border-strong:rgba(255,255,255,.13);--land:#2a2f37;--shadow:none;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--c1:#d55181;--c2:#0ca30c;--c3:#9085e9;--c4:#e66767;--accent-2:#2ec4b6;--accent:#4c97ff;--accent-soft:#1a2b45;--accent-ink:#8cbcff;--land-active:#203a5e;--land-hover:#3171c9;}
+@media (prefers-color-scheme:dark){:root[data-skin="lavender"]:not([data-theme="light"]){--accent:#9b87ff;--accent-soft:#2a2445;--accent-ink:#c2b6ff;--land-active:#3b3266;--land-hover:#6d5bd6;--page:#0f0e17;--surface:#1b1a26;--surface-2:#242333;--chart:#1b1a26;--track:#2a2938;--grid:#2a2938;--land:#2a2938;--s1:#7d63f5;--s2:#d9692e;--s3:#1a9e90;--s4:#c98500;--c1:#d55181;--c2:#2f8fd8;--c3:#5a4ccc;--c4:#e05a5a;}}
+:root[data-skin="lavender"][data-theme="dark"]{--accent:#9b87ff;--accent-soft:#2a2445;--accent-ink:#c2b6ff;--land-active:#3b3266;--land-hover:#6d5bd6;--page:#0f0e17;--surface:#1b1a26;--surface-2:#242333;--chart:#1b1a26;--track:#2a2938;--grid:#2a2938;--land:#2a2938;--s1:#7d63f5;--s2:#d9692e;--s3:#1a9e90;--s4:#c98500;--c1:#d55181;--c2:#2f8fd8;--c3:#5a4ccc;--c4:#e05a5a;}
+@media (prefers-color-scheme:dark){:root[data-skin="navy"]:not([data-theme="light"]){--accent:#6f9bea;--accent-soft:#1a2840;--accent-ink:#a9c4f5;--accent-2:#e0a63a;--land-active:#22385a;--land-hover:#3e6db5;}}
+:root[data-skin="navy"][data-theme="dark"]{--accent:#6f9bea;--accent-soft:#1a2840;--accent-ink:#a9c4f5;--accent-2:#e0a63a;--land-active:#22385a;--land-hover:#3e6db5;}
+
+/* 가독성: 글자 크기·대비 */
+body{font-size:14.5px}
+.card-h h2{font-size:15px}
+.chart-svg .tick{font-size:12px;fill:var(--muted)}
+.chart-svg .val{font-size:12.5px}
+.chart-svg .val2{font-size:12px;fill:var(--ink-2)}
+.chart-svg .ttl{font-size:12px;fill:var(--ink-2)}
+.legend{font-size:12.5px;color:var(--ink-2)}
+.kpi .k{font-size:13px;color:var(--ink-2)}
+.kpi .v{font-size:25px}
+.rank .nm{font-size:13px}.rank .vv{font-size:12.5px;font-weight:700;color:var(--ink)}
+.insight{background:var(--hero);box-shadow:var(--hero-shadow)}
+.map-svg .lbl{font-size:19px}
+td{font-size:13px}
+/* 막대 목록 (한 줄: 이름 · 막대 · 값) */
+.blist{display:grid;gap:4px}
+.brow{display:grid;grid-template-columns:var(--lw,96px) minmax(0,1fr) auto;align-items:center;gap:12px;padding:6px 8px;border-radius:10px}
+.brow.click{cursor:pointer}
+.brow.click:hover{background:var(--surface-2)}
+.brow .bl{font-size:13px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.brow .bl .flag{margin:0}
+.bt{height:10px;border-radius:999px;background:var(--track);overflow:hidden;display:grid;gap:3px}
+.bt i{display:block;height:100%;border-radius:999px;min-width:3px}
+.bt.two{height:auto;background:none;gap:4px}
+.bt.two span{display:block;height:8px;border-radius:999px;background:var(--track);overflow:hidden}
+.bt.two span i{height:8px}
+.brow .bv{text-align:right;font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
+.brow .bv small{font-size:12px;font-weight:600;color:var(--muted);margin-left:6px}
+/* 스킨 선택 */
+.skins{display:flex;gap:6px;align-items:center;padding:0 4px}
+.skins button{width:18px;height:18px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--border-strong);cursor:pointer;padding:0}
+.skins button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
+@media (max-width:720px){.skins{display:none}}
 </style>
 </head>
 <body>
@@ -515,13 +560,18 @@ tbody tr.click:hover{background:var(--accent-soft)}
     <div><b>BridgeOn</b><span>Global Revenue Intelligence</span></div>
   </div>
   <nav class="tabs" role="tablist">
-    <button class="tab" role="tab" data-tab="home" aria-selected="true">Overview</button>
-    <button class="tab" role="tab" data-tab="ledger" aria-selected="false">Transactions</button>
-    <button class="tab" role="tab" data-tab="pipeline" aria-selected="false">Automation</button>
-    <button class="tab" role="tab" data-tab="basis" aria-selected="false">Data Basis</button>
+    <button class="tab" role="tab" data-tab="home" aria-selected="true">대시보드</button>
+    <button class="tab" role="tab" data-tab="ledger" aria-selected="false">거래 원장</button>
+    <button class="tab" role="tab" data-tab="pipeline" aria-selected="false">정제 자동화</button>
+    <button class="tab" role="tab" data-tab="basis" aria-selected="false">데이터 기준</button>
   </nav>
   <div class="top-right">
     <span class="badge-sim" title="거래전표는 시뮬레이션 데이터입니다">SIMULATED DATA</span>
+    <div class="skins" role="group" aria-label="색 테마">
+      <button data-skin="blue" aria-pressed="true" title="블루" aria-label="블루 테마" style="background:#3182f6"></button>
+      <button data-skin="lavender" aria-pressed="false" title="라벤더" aria-label="라벤더 테마" style="background:#7b61ff"></button>
+      <button data-skin="navy" aria-pressed="false" title="네이비" aria-label="네이비 테마" style="background:#143a6b"></button>
+    </div>
     <button class="ai-btn" id="aiBtn" aria-pressed="false" aria-controls="aiPanel" title="현재 화면 AI 해설 켜기/끄기">✦ <span class="lbl">AI 해설</span><span class="sw" aria-hidden="true"></span></button>
     <button class="theme-btn" id="themeBtn" title="라이트/다크 전환" aria-label="라이트/다크 전환"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg></button>
     <div class="profile" title="목56 AI 데이터 자동화"><span class="av">민</span><span><b>민승환</b><small>202101308</small></span></div>
@@ -529,7 +579,7 @@ tbody tr.click:hover{background:var(--accent-soft)}
 </header>
 
 <section class="filters" aria-label="필터">
-  <h1 class="ptitle" id="pageTitle">Dashboard</h1>
+  <h1 class="ptitle" id="pageTitle">글로벌 수익 대시보드</h1>
   <div class="fctrl">
   <span class="meta" id="fMeta"></span>
   <div class="f"><label for="fPeriod">기간</label><select id="fPeriod"></select></div>
@@ -547,7 +597,7 @@ tbody tr.click:hover{background:var(--accent-soft)}
       <div class="kpis" id="kpis"></div>
 
       <div class="card map-card">
-        <div class="card-h"><h2>Global transaction map</h2>
+        <div class="card-h"><h2>국가별 거래</h2>
           <div class="right"><div class="seg" id="mapMetric"><button data-m="krw" aria-pressed="true">거래액</button><button data-m="rev" aria-pressed="false">수익</button><button data-m="cnt" aria-pressed="false">건수</button></div></div>
         </div>
         <div class="map-body"><div class="map-wrap"><svg class="map-svg" id="map" role="img" aria-label="국가별 거래 지도"></svg></div>
@@ -555,20 +605,20 @@ tbody tr.click:hover{background:var(--accent-soft)}
       </div>
 
       <div class="card trend-card">
-        <div class="card-h"><h2>Monthly trend</h2></div>
+        <div class="card-h"><h2>월별 추이</h2></div>
         <div id="trend"></div>
       </div>
 
       <div class="card svc-card">
-        <div class="card-h"><h2>Service revenue</h2></div>
+        <div class="card-h"><h2>서비스별 수익</h2></div>
         <div id="svc"></div>
       </div>
       <div class="card cust-card">
-        <div class="card-h"><h2>Customer</h2></div>
+        <div class="card-h"><h2>고객 유형</h2></div>
         <div id="cust"></div>
       </div>
       <div class="card chan-card">
-        <div class="card-h"><h2>Channel mix</h2></div>
+        <div class="card-h"><h2>채널 비중</h2></div>
         <div id="chan"></div>
       </div>
 
@@ -579,7 +629,7 @@ tbody tr.click:hover{background:var(--accent-soft)}
   <!-- LEDGER -->
   <section class="view" id="view-ledger">
     <div class="card">
-      <div class="card-h"><h2>Transaction ledger</h2><span class="sub" id="ledgerSub"></span>
+      <div class="card-h"><h2>거래 원장</h2><span class="sub" id="ledgerSub"></span>
         <div class="right"><input class="search" id="ledgerQ" placeholder="거래번호·국가·통화·원본 파일 검색" aria-label="거래 검색"></div>
       </div>
       <div class="tbl-wrap" style="max-height:calc(100vh - 230px)"><table id="ledger"></table></div>
@@ -589,15 +639,15 @@ tbody tr.click:hover{background:var(--accent-soft)}
   <!-- PIPELINE -->
   <section class="view" id="view-pipeline">
     <div class="stack">
-      <div class="card"><div class="card-h"><h2>Automation flow</h2></div><div id="flow"></div></div>
-      <div class="card"><div class="card-h"><h2>Source formats</h2></div><div class="fmt3" id="fmt3"></div></div>
+      <div class="card"><div class="card-h"><h2>처리 흐름</h2></div><div id="flow"></div></div>
+      <div class="card"><div class="card-h"><h2>원본 형식</h2></div><div class="fmt3" id="fmt3"></div></div>
       <div class="grid2">
-        <div class="card"><div class="card-h"><h2>Rules</h2></div><div id="rules"></div></div>
-        <div class="card"><div class="card-h"><h2>Validation</h2></div><div id="valid"></div></div>
+        <div class="card"><div class="card-h"><h2>정제 규칙</h2></div><div id="rules"></div></div>
+        <div class="card"><div class="card-h"><h2>검증</h2></div><div id="valid"></div></div>
       </div>
-      <div class="card"><div class="card-h"><h2>Dictionary</h2><div class="right"><div class="seg" id="dictSeg"></div></div></div><div class="tbl-wrap" style="max-height:360px"><table id="dict"></table></div></div>
+      <div class="card"><div class="card-h"><h2>표준 사전</h2><div class="right"><div class="seg" id="dictSeg"></div></div></div><div class="tbl-wrap" style="max-height:360px"><table id="dict"></table></div></div>
       <div class="card">
-        <div class="card-h"><h2>Cleaning log</h2><span class="sub" id="logSub"></span>
+        <div class="card-h"><h2>변환 이력</h2><span class="sub" id="logSub"></span>
           <div class="right"><div class="f"><select id="logRule" aria-label="규칙 선택"></select></div><input class="search" id="logQ" placeholder="검색" aria-label="변환 이력 검색"></div>
         </div>
         <div class="tbl-wrap" style="max-height:480px"><table id="log"></table></div>
@@ -610,11 +660,11 @@ tbody tr.click:hover{background:var(--accent-soft)}
   <section class="view" id="view-basis">
     <div class="stack">
       <div class="badges" id="basisBadges"></div>
-      <div class="card"><div class="card-h"><h2>FX rates</h2><span class="sub" id="fxSrcLabel"></span></div><div class="fx-grid" id="fxGrid"></div></div>
+      <div class="card"><div class="card-h"><h2>환율</h2><span class="sub" id="fxSrcLabel"></span></div><div class="fx-grid" id="fxGrid"></div></div>
       <div class="grid4" id="policy"></div>
       <div class="grid2">
-        <div class="card"><div class="card-h"><h2>Data</h2></div><div id="dataComp"></div></div>
-        <div class="card"><div class="card-h"><h2>Formula</h2></div><div id="fields"></div></div>
+        <div class="card"><div class="card-h"><h2>데이터 구성</h2></div><div id="dataComp"></div></div>
+        <div class="card"><div class="card-h"><h2>계산식</h2></div><div id="fields"></div></div>
       </div>
     </div>
   </section>
@@ -807,12 +857,12 @@ function renderKpis(rows) {
   const momMax = Math.max(cur.krw, pv ? pv.krw : 0, 1);
   const momViz = pv ? `<div class="mom-bars"><span>${+prev.slice(5)}월</span><i style="width:${pv.krw / momMax * 100}%;background:var(--axis)"></i><span>${+last.slice(5)}월</span><i style="width:${cur.krw / momMax * 100}%;background:var(--accent)"></i></div>` : "";
   const tiles = [
-    ["Total transaction", `${kv}<small>${ku}</small>`, sparkSvg(byM.map(x => x.krw), "var(--accent)", sel), ""],
-    ["Revenue", `${rv}<small>${ru}</small>`, sparkSvg(byM.map(x => x.rev), "var(--accent-2)", sel), pct(a.rate, 2)],
-    ["Orders", `${a.cnt}<small>건</small>`, sparkSvg(byM.map(x => x.cnt), "var(--accent)", sel, "bar"), ""],
-    ["Avg. value", `${av}<small>${au}</small>`, sparkSvg(byM.map(x => x.avg), "var(--c3)", sel), ""],
-    ["MoM", d(gK, true), momViz, pv ? `수익 ${d(gR)}` : ""],
-    ["Active countries", `${activeSet.size}<small>/ 8</small>`, `<div class="flags-row">${CTRY_LIST.map(c => flagHtml(c, activeSet.has(c) ? "" : "off").replace("<img", `<img title="${esc(CTRY[c].ko)}"`)).join("")}</div>`, ""],
+    ["총 거래액", `${kv}<small>${ku}</small>`, sparkSvg(byM.map(x => x.krw), "var(--accent)", sel), ""],
+    ["총 수익", `${rv}<small>${ru}</small>`, sparkSvg(byM.map(x => x.rev), "var(--accent-2)", sel), pct(a.rate, 2)],
+    ["거래 건수", `${a.cnt}<small>건</small>`, sparkSvg(byM.map(x => x.cnt), "var(--accent)", sel, "bar"), ""],
+    ["평균 거래액", `${av}<small>${au}</small>`, sparkSvg(byM.map(x => x.avg), "var(--c3)", sel), ""],
+    ["전월 대비", d(gK, true), momViz, pv ? `수익 ${d(gR)}` : ""],
+    ["거래 국가", `${activeSet.size}<small>/ 8</small>`, `<div class="flags-row">${CTRY_LIST.map(c => flagHtml(c, activeSet.has(c) ? "" : "off").replace("<img", `<img title="${esc(CTRY[c].ko)}"`)).join("")}</div>`, ""],
   ];
   $("#kpis").innerHTML = tiles.map(([k, v, viz, tag]) => `<div class="card kpi"><div class="k">${k}</div>${tag ? `<span class="kpi-tag">${tag}</span>` : ""}<div class="v num">${v}</div>${viz}</div>`).join("");
 }
@@ -855,14 +905,13 @@ function renderMap(rows) {
     hit.addEventListener("pointerenter", over); hit.addEventListener("pointerleave", out);
     bindTip(hit, [c, `${CTRY[c].ko} · ${c}`], () => tipRows(byC.get(c)), () => openDrill([{dim: "Country", value: c}]));
     const [dx, dy, anchor] = LABEL_POS[code];
-    const ax = x + dx*(r+5), ay = y + dy*(r+6) + 5, fw = 20, gapF = 5;
+    const ax = x + dx*(r+5), ay = y + dy*(r+8) + 6, fw = 24, gapF = 5;
     const t = svg("text", {class: "lbl", x: 0, y: ay}, gB);
-    t.textContent = CTRY[c].ko + " ";
-    const ts = svg("tspan", {class: "v"}, t); ts.textContent = fmt(v);
+    t.textContent = CTRY[c].ko;
     const tw = t.getComputedTextLength ? t.getComputedTextLength() : 0, total = fw + gapF + tw;
     const x0 = anchor === "start" ? ax : anchor === "end" ? ax - total : ax - total/2;
     t.setAttribute("x", x0 + fw + gapF);
-    svgFlag(gB, c, x0, ay - 12, fw);
+    svgFlag(gB, c, x0, ay - 15, fw);
   }
   const gHq = svg("g", {"pointer-events": "none"}, el);
   svg("circle", {class: "hq", cx: hq[0], cy: hq[1], r: 4.5}, gHq);
@@ -931,26 +980,19 @@ function niceMax(v) { const p = Math.pow(10, Math.floor(Math.log10(v))); for (co
 function shortWon(v) { if (v >= 1e8) return (v/1e8 >= 10 ? Math.round(v/1e8) : +(v/1e8).toFixed(1)) + "억"; if (v >= 1e4) return Math.round(v/1e4).toLocaleString() + "만"; return String(Math.round(v)); }
 
 // ---------- horizontal bars ----------
-function hbars(host, items, opts) {
-  // items: [{key,label,value,color,sub,onClick,tip}]
-  const W = Math.max(260, host.clientWidth || 320), rowH = opts.rowH || 44, padL = opts.padL || 92, padR = 8;
-  const H = items.length * rowH + 4;
-  const el = svg("svg", {class: "chart-svg", viewBox: `0 0 ${W} ${H}`, height: H, role: "img", "aria-label": opts.aria || ""});
-  const max = Math.max(...items.map(i => i.value), 1);
-  items.forEach((it, i) => {
-    const y = i * rowH + 4;
-    if (it.flag) svgFlag(el, it.flag, 0, y + 4, 16);
-    const l = svg("text", {class: "val2", x: it.flag ? 21 : 0, y: y + 14}, el); l.textContent = it.label;
-    const bw = Math.max(it.value > 0 ? 3 : 0, (W - padL - padR) * (it.value / max));
-    svg("rect", {x: padL, y: y + 4, width: W - padL - padR, height: 14, rx: 7, fill: "var(--surface-2)"}, el);
-    const r = svg("rect", {class: "bar", x: padL, y: y + 4, width: bw, height: 14, rx: 7, fill: it.color || "var(--accent)"}, el);
-    const v = svg("text", {class: "val num", x: padL, y: y + 34}, el); v.textContent = it.valueLabel;
-    if (it.sub) { const s = svg("tspan", {class: "val2", dx: 8}, v); s.textContent = it.sub; }
-    const hit = svg("rect", {class: "hit", x: 0, y, width: W, height: rowH}, el);
-    hit.setAttribute("aria-label", `${it.label} ${it.valueLabel}`);
-    bindTip(hit, it.tipTitle || it.label, it.tip || [[opts.metric || "값", it.valueLabel]], it.onClick);
-  });
-  host.replaceChildren(el);
+function hbars(host, items, opts = {}) {
+  // items: [{label, value, valueLabel, sub, color, flag, onClick, tip, tipTitle}] — 이름 · 막대 · 값을 한 줄에
+  const max = Math.max(...items.map(x => x.value), 1);
+  const wrap = document.createElement("div"); wrap.className = "blist";
+  if (opts.lw) wrap.style.setProperty("--lw", opts.lw + "px");
+  for (const it of items) {
+    const row = document.createElement("div"); row.className = "brow" + (it.onClick ? " click" : "");
+    row.innerHTML = `<span class="bl">${it.flag ? flagHtml(it.flag) : ""}${esc(it.label)}</span><span class="bt"><i style="width:${it.value > 0 ? Math.max(1.5, it.value / max * 100) : 0}%;background:${it.color || "var(--accent)"}"></i></span><span class="bv">${esc(it.valueLabel)}${it.sub ? `<small>${esc(it.sub)}</small>` : ""}</span>`;
+    row.setAttribute("aria-label", `${it.label} ${it.valueLabel}`);
+    bindTip(row, it.tipTitle || it.label, it.tip || [[opts.metric || "값", it.valueLabel]], it.onClick);
+    wrap.appendChild(row);
+  }
+  host.replaceChildren(wrap);
 }
 
 function renderService(rows) {
@@ -958,30 +1000,22 @@ function renderService(rows) {
   hbars($("#svc"), SVC.map(s => { const a = agg(g.get(s) || []); return {
     label: SVC_KO[s], value: a.rev, color: SVC_COLOR[s], valueLabel: won(a.rev), sub: share(a.rev/total),
     tipTitle: `${SVC_KO[s]} · ${s}`, tip: tipRows(g.get(s) || []), onClick: a.cnt ? () => openDrill([{dim: "Service", value: s}]) : null }; }),
-    {aria: "서비스별 수익", padL: 86, rowH: 33});
+    {lw: 96});
 }
 
 function renderCustomer(rows) {
-  const host = $("#cust"), W = Math.max(260, host.clientWidth || 320);
-  const g = group(rows, "Customer_Type"), tc = rows.length || 1, tk = sum(rows, "KRW_Amount") || 1;
-  const rowH = 37, padL = 56, padR = 44, H = CUST.length * rowH + 6;
-  const el = svg("svg", {class: "chart-svg", viewBox: `0 0 ${W} ${H}`, height: H, role: "img", "aria-label": "고객유형별 건수 비중과 거래액 비중"});
-  CUST.forEach((c, i) => {
-    const r = g.get(c) || [], sc = r.length / tc, sk = sum(r, "KRW_Amount") / tk, y = i * rowH + 6;
-    const l = svg("text", {class: "val", x: 0, y: y + 20}, el); l.textContent = CUST_KO[c];
-    const bw = W - padL - padR;
-    [[sc, "var(--muted)", "건수"], [sk, "var(--accent)", "거래액"]].forEach(([v, col], j) => {
-      const yy = y + 6 + j * 16;
-      svg("rect", {x: padL, y: yy, width: bw, height: 11, rx: 3, fill: "var(--surface-2)"}, el);
-      svg("rect", {class: "bar", x: padL, y: yy, width: Math.max(v > 0 ? 3 : 0, bw * v), height: 11, rx: 3, fill: col}, el);
-      const t = svg("text", {class: "val2 num", x: W - padR + 6, y: yy + 10}, el); t.textContent = share(v);
-    });
-    const hit = svg("rect", {class: "hit", x: 0, y, width: W, height: rowH}, el);
-    bindTip(hit, `${CUST_KO[c]} 고객`, () => [["건수 비중", `${pct(sc, 1)} (${r.length}건)`, "var(--muted)"], ["거래액 비중", `${pct(sk, 1)} (${won(sum(r, "KRW_Amount"))})`, "var(--accent)"], ["건당 평균", won(r.length ? sum(r, "KRW_Amount")/r.length : 0)]], r.length ? () => openDrill([{dim: "Customer_Type", value: c}]) : null);
-  });
-  const lg = document.createElement("div"); lg.className = "legend";
-  lg.innerHTML = `<span><i style="background:var(--muted)"></i>건수 비중</span><span><i style="background:var(--accent)"></i>거래액 비중</span>`;
-  host.replaceChildren(el, lg);
+  const host = $("#cust"), g = group(rows, "Customer_Type"), tc = rows.length || 1, tk = sum(rows, "KRW_Amount") || 1;
+  const wrap = document.createElement("div"); wrap.className = "blist"; wrap.style.setProperty("--lw", "64px");
+  for (const c of CUST) {
+    const r = g.get(c) || [], sc = r.length / tc, sk = sum(r, "KRW_Amount") / tk;
+    const row = document.createElement("div"); row.className = "brow" + (r.length ? " click" : "");
+    row.innerHTML = `<span class="bl">${CUST_KO[c]}</span><span class="bt two"><span><i style="width:${sc * 100}%;background:var(--axis)"></i></span><span><i style="width:${sk * 100}%;background:var(--accent)"></i></span></span><span class="bv">${share(sk)}<small>${share(sc)}</small></span>`;
+    bindTip(row, `${CUST_KO[c]} 고객`, () => [["건수 비중", `${pct(sc, 1)} (${r.length}건)`, "var(--axis)"], ["거래액 비중", `${pct(sk, 1)} (${won(sum(r, "KRW_Amount"))})`, "var(--accent)"], ["건당 평균", won(r.length ? sum(r, "KRW_Amount")/r.length : 0)]], r.length ? () => openDrill([{dim: "Customer_Type", value: c}]) : null);
+    wrap.appendChild(row);
+  }
+  const lg = document.createElement("div"); lg.className = "legend"; lg.style.marginTop = "8px";
+  lg.innerHTML = `<span><i style="background:var(--accent)"></i>거래액 비중</span><span><i style="background:var(--axis)"></i>건수 비중</span>`;
+  host.replaceChildren(wrap, lg);
 }
 
 function renderChannel(rows) {
@@ -1101,24 +1135,24 @@ function renderDrawerView() {
   const grid = document.createElement("div"); grid.className = "grid2";
   for (const d of bd.slice(0, 4)) {
     const card = document.createElement("div"); card.className = "card";
-    card.innerHTML = `<div class="card-h"><h2>By ${DIM[d].tag.toLowerCase()}</h2></div>`;
+    card.innerHTML = `<div class="card-h"><h2>${DIM[d].ko}별</h2></div>`;
     const host = document.createElement("div"); card.appendChild(host); grid.appendChild(card);
     const g = group(rows, d);
     const items = DIM[d].order.filter(v => g.has(v)).map(v => { const aa = agg(g.get(v)); return {label: DIM[d].label(v), value: aa.krw, valueLabel: won(aa.krw), sub: `${aa.cnt}건 · 수익 ${won(aa.rev)}`,
       color: d === "Service" ? SVC_COLOR[v] : d === "Channel" ? CHAN_COLOR[v] : "var(--accent)", flag: d === "Country" ? v : null, tipTitle: d === "Country" ? [v, DIM[d].label(v)] : DIM[d].label(v), tip: tipRows(g.get(v)), onClick: () => pushDrill({dim: d, value: v})}; }).sort((x, y) => y.value - x.value);
-    requestAnimationFrame(() => hbars(host, items, {padL: 84, rowH: 42}));
+    hbars(host, items, {lw: 92});
   }
   body.appendChild(grid);
   // monthly
   if (!used.has("Month")) {
     const card = document.createElement("div"); card.className = "card";
-    card.innerHTML = `<div class="card-h"><h2>By month</h2></div>`;
+    card.innerHTML = `<div class="card-h"><h2>월별</h2></div>`;
     const host = document.createElement("div"); card.appendChild(host); body.appendChild(card);
     requestAnimationFrame(() => monthBars(host, rows));
   }
   // transactions
   const card = document.createElement("div"); card.className = "card";
-  card.innerHTML = `<div class="card-h"><h2>Transactions</h2><span class="sub">${rows.length}건</span></div>`;
+  card.innerHTML = `<div class="card-h"><h2>거래 목록</h2><span class="sub">${rows.length}건</span></div>`;
   card.appendChild(txnTable(rows, true)); body.appendChild(card);
 }
 function monthBars(host, rows) {
@@ -1173,7 +1207,7 @@ function renderTxnView(s) {
   const cmp = document.createElement("div"); cmp.className = "card";
   const rows = rawFields(s).map(([rk, sk, ko]) =>
     `<div class="o"><span class="fld">${esc(ko)}</span>${esc(String(s.Raw[rk]))}</div><div class="ar">→</div><div class="s2">${esc(stdValue(s, sk))}</div>`).join("");
-  cmp.innerHTML = `<div class="card-h"><h2>Original ↔ Standardized</h2><div class="right"><button class="btn primary" id="toRaw">원본 전표 →</button></div></div>
+  cmp.innerHTML = `<div class="card-h"><h2>원본 ↔ 표준값</h2><div class="right"><button class="btn primary" id="toRaw">원본 전표 →</button></div></div>
     <div class="cmp"><div class="hd">ORIGINAL</div><div></div><div class="hd">STANDARDIZED</div>${rows}</div>`;
   body.appendChild(cmp);
   $("#toRaw", cmp).addEventListener("click", () => pushDrill({raw: s.Source_File}));
@@ -1190,7 +1224,7 @@ function renderRawView(file) {
   const ruleDesc = Object.fromEntries(DATA.rules.map(r => [r.id, r.rule]));
 
   const card = document.createElement("div"); card.className = "card";
-  card.innerHTML = `<div class="card-h"><h2>Raw slip</h2><div class="right"><a class="btn" style="display:inline-flex;align-items:center;text-decoration:none" href="${esc(file)}" target="_blank" rel="noopener">파일 열기</a></div></div>`;
+  card.innerHTML = `<div class="card-h"><h2>원본 전표</h2><div class="right"><a class="btn" style="display:inline-flex;align-items:center;text-decoration:none" href="${esc(file)}" target="_blank" rel="noopener">파일 열기</a></div></div>`;
   const pre = document.createElement("pre"); pre.className = "raw-pre"; pre.textContent = raw.text; card.appendChild(pre);
   const meta = document.createElement("div"); meta.className = "chips"; meta.style.marginTop = "10px";
   meta.innerHTML = `<span class="chip mono">${esc(s ? s.Source_Ref : "-")}</span><span class="same">→</span><span class="chip std mono">${esc(raw.transaction_id || "-")}</span>` +
@@ -1202,7 +1236,7 @@ function renderRawView(file) {
   // 원문 → 표준값 (규칙 태그에 마우스를 올리면 규칙 설명)
   const logs = LOG_BY_FILE[file] || [];
   const cl = document.createElement("div"); cl.className = "card";
-  cl.innerHTML = `<div class="card-h"><h2>Cleaned</h2></div><div class="map-rows">${rawFields(s).map(([rk, sk, ko]) => {
+  cl.innerHTML = `<div class="card-h"><h2>정제 과정</h2></div><div class="map-rows">${rawFields(s).map(([rk, sk, ko]) => {
     const l = logs.find(x => x.field === sk);
     const tip = l ? (l.rule === "R01_DATE" ? `${l.note} → YYYY-MM-DD` : (l.note || ruleDesc[l.rule] || "")) : "";
     const std = sk === "Country" ? flagHtml(s.Country) + esc(s.Country) : sk === "Service" ? `<span class="dot" style="background:${SVC_COLOR[s.Service]}"></span>${esc(s.Service)}` : esc(stdValue(s, sk));
@@ -1214,7 +1248,7 @@ function renderRawView(file) {
   const fxDate = s.FX_Rate_Date.slice(5).replace("-", "/") + (s.FX_Rate_Date !== s.Date ? " ↶" : "");
   const parts = [[s.Fee, "var(--s2)", "수수료"], [s.FX_Revenue, "var(--s1)", "외환"], [s.Finance_Revenue, "var(--s4)", "금융"]];
   const calc = document.createElement("div"); calc.className = "card";
-  calc.innerHTML = `<div class="card-h"><h2>Calculated</h2><div class="right">${DATA.fx_meta.source === "SIMULATED" ? '<span class="chip tag">SIM 환율</span>' : '<span class="chip tag">ECOS</span>'}<span class="chip tag" title="${esc(DATA.policy.basis)}">가상 정책</span></div></div>
+  calc.innerHTML = `<div class="card-h"><h2>계산 과정</h2><div class="right">${DATA.fx_meta.source === "SIMULATED" ? '<span class="chip tag">SIM 환율</span>' : '<span class="chip tag">ECOS</span>'}<span class="chip tag" title="${esc(DATA.policy.basis)}">가상 정책</span></div></div>
     <div class="eqs">
       <div class="eqb"><b>${esc(s.Foreign_Amount.toLocaleString("en-US"))}</b><small>${esc(s.Currency)}</small></div><div class="eqo">×</div>
       <div class="eqb" title="${s.FX_Quote_Unit !== 1 ? esc(`${s.FX_Quote.toLocaleString()}원 / ${s.FX_Quote_Unit} ${s.Currency}`) : ""}${s.FX_Rate_Date !== s.Date ? esc(` · 직전 고시일 ${s.FX_Rate_Date}`) : ""}"><b>${s.FX_Rate.toLocaleString(undefined, {maximumFractionDigits: 4})}</b><small>₩ · ${esc(fxDate)}</small></div><div class="eqo">=</div>
@@ -1651,7 +1685,7 @@ document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () =>
   document.querySelectorAll(".tab").forEach(x => x.setAttribute("aria-selected", x === b));
   document.querySelectorAll(".view").forEach(v => v.classList.toggle("on", v.id === "view-" + state.tab));
   document.querySelector(".fctrl").style.display = state.tab === "pipeline" || state.tab === "basis" ? "none" : "";
-  $("#pageTitle").textContent = {home: "Dashboard", ledger: "Transactions", pipeline: "Automation", basis: "Data Basis"}[state.tab];
+  $("#pageTitle").textContent = {home: "글로벌 수익 대시보드", ledger: "거래 원장", pipeline: "정제 자동화", basis: "데이터 기준"}[state.tab];
   if (state.tab === "pipeline") renderPipeline();
   if (state.tab === "basis") renderBasis();
   render();
@@ -1671,6 +1705,13 @@ $("#themeBtn").addEventListener("click", () => {
   try { localStorage.setItem("bo-theme", root.dataset.theme); } catch (e) {}
 });
 try { const t = localStorage.getItem("bo-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+function setSkin(k) {
+  if (k === "blue") delete document.documentElement.dataset.skin; else document.documentElement.dataset.skin = k;
+  document.querySelectorAll(".skins button").forEach(b => b.setAttribute("aria-pressed", b.dataset.skin === k));
+  try { localStorage.setItem("bo-skin", k); } catch (e) {}
+}
+document.querySelectorAll(".skins button").forEach(b => b.addEventListener("click", () => { setSkin(b.dataset.skin); render(); }));
+try { const k = localStorage.getItem("bo-skin"); if (k) setSkin(k); } catch (e) {}
 let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(render, 120); });
 initFilters();
 render();
