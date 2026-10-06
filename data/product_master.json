@@ -1,0 +1,222 @@
+[
+  {
+    "product_id": "P001",
+    "product_name": "아이스 아메리카노",
+    "category": "커피",
+    "unit_price": 4500,
+    "aliases": [
+      "아이스 아메리카노",
+      "ICE AMERICANO",
+      "아이스아메리카노"
+    ]
+  },
+  {
+    "product_id": "P002",
+    "product_name": "따뜻한 아메리카노",
+    "category": "커피",
+    "unit_price": 4500,
+    "aliases": [
+      "따뜻한 아메리카노",
+      "HOT AMERICANO",
+      "핫 아메리카노"
+    ]
+  },
+  {
+    "product_id": "P003",
+    "product_name": "카페라떼",
+    "category": "커피",
+    "unit_price": 5000,
+    "aliases": [
+      "카페라떼",
+      "CAFE LATTE",
+      "카페 라떼"
+    ]
+  },
+  {
+    "product_id": "P004",
+    "product_name": "바닐라라떼",
+    "category": "커피",
+    "unit_price": 5500,
+    "aliases": [
+      "바닐라라떼",
+      "VANILLA LATTE",
+      "바닐라 라떼"
+    ]
+  },
+  {
+    "product_id": "P005",
+    "product_name": "카푸치노",
+    "category": "커피",
+    "unit_price": 5000,
+    "aliases": [
+      "카푸치노",
+      "CAPPUCCINO",
+      "카푸 치노"
+    ]
+  },
+  {
+    "product_id": "P006",
+    "product_name": "콜드브루",
+    "category": "커피",
+    "unit_price": 5500,
+    "aliases": [
+      "콜드브루",
+      "COLD BREW",
+      "콜드 브루"
+    ]
+  },
+  {
+    "product_id": "P007",
+    "product_name": "레몬에이드",
+    "category": "음료",
+    "unit_price": 6000,
+    "aliases": [
+      "레몬에이드",
+      "LEMON ADE",
+      "레몬 에이드"
+    ]
+  },
+  {
+    "product_id": "P008",
+    "product_name": "자몽에이드",
+    "category": "음료",
+    "unit_price": 6000,
+    "aliases": [
+      "자몽에이드",
+      "GRAPEFRUIT ADE",
+      "자몽 에이드"
+    ]
+  },
+  {
+    "product_id": "P009",
+    "product_name": "말차라떼",
+    "category": "음료",
+    "unit_price": 5800,
+    "aliases": [
+      "말차라떼",
+      "MATCHA LATTE",
+      "말차 라떼"
+    ]
+  },
+  {
+    "product_id": "P010",
+    "product_name": "초콜릿라떼",
+    "category": "음료",
+    "unit_price": 5500,
+    "aliases": [
+      "초콜릿라떼",
+      "CHOCOLATE LATTE",
+      "초콜릿 라떼"
+    ]
+  },
+  {
+    "product_id": "P011",
+    "product_name": "얼그레이티",
+    "category": "차",
+    "unit_price": 4500,
+    "aliases": [
+      "얼그레이티",
+      "EARL GREY TEA",
+      "얼그레이 티"
+    ]
+  },
+  {
+    "product_id": "P012",
+    "product_name": "캐모마일티",
+    "category": "차",
+    "unit_price": 4500,
+    "aliases": [
+      "캐모마일티",
+      "CHAMOMILE TEA",
+      "캐모마일 티"
+    ]
+  },
+  {
+    "product_id": "P013",
+    "product_name": "크루아상",
+    "category": "베이커리",
+    "unit_price": 4000,
+    "aliases": [
+      "크루아상",
+      "CROISSANT",
+      "버터 크루아상"
+    ]
+  },
+  {
+    "product_id": "P014",
+    "product_name": "소금빵",
+    "category": "베이커리",
+    "unit_price": 3500,
+    "aliases": [
+      "소금빵",
+      "SALT BREAD",
+      "소금 빵"
+    ]
+  },
+  {
+    "product_id": "P015",
+    "product_name": "블루베리머핀",
+    "category": "베이커리",
+    "unit_price": 4200,
+    "aliases": [
+      "블루베리머핀",
+      "BLUEBERRY MUFFIN",
+      "블루베리 머핀"
+    ]
+  },
+  {
+    "product_id": "P016",
+    "product_name": "치즈케이크",
+    "category": "디저트",
+    "unit_price": 6500,
+    "aliases": [
+      "치즈케이크",
+      "CHEESECAKE",
+      "치즈 케이크"
+    ]
+  },
+  {
+    "product_id": "P017",
+    "product_name": "초콜릿브라우니",
+    "category": "디저트",
+    "unit_price": 4800,
+    "aliases": [
+      "초콜릿브라우니",
+      "CHOCOLATE BROWNIE",
+      "초콜릿 브라우니"
+    ]
+  },
+  {
+    "product_id": "P018",
+    "product_name": "마카롱",
+    "category": "디저트",
+    "unit_price": 2800,
+    "aliases": [
+      "마카롱",
+      "MACARON",
+      "수제 마카롱"
+    ]
+  },
+  {
+    "product_id": "P019",
+    "product_name": "햄치즈샌드위치",
+    "category": "식사",
+    "unit_price": 7500,
+    "aliases": [
+      "햄치즈샌드위치",
+      "HAM CHEESE SANDWICH",
+      "햄치즈 샌드위치"
+    ]
+  },
+  {
+    "product_id": "P020",
+    "product_name": "치킨샌드위치",
+    "category": "식사",
+    "unit_price": 8000,
+    "aliases": [
+      "치킨샌드위치",
+      "CHICKEN SANDWICH",
+      "치킨 샌드위치"
+    ]
+  }
+]

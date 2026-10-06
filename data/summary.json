@@ -1,0 +1,65 @@
+{
+  "data_type": "교육용 가상 데이터",
+  "author": "민승환",
+  "student_id": null,
+  "period_start": "2026-09-01",
+  "period_end": "2026-09-30",
+  "timezone": "Asia/Seoul",
+  "currency": "KRW",
+  "receipts": 100,
+  "lines": 220,
+  "products": 20,
+  "gross_amount": 1367500,
+  "discount": 18900,
+  "revenue": 1348600,
+  "quantity": 271,
+  "missing_time": 5,
+  "missing_payment": 3,
+  "changes_by_rule": {
+    "MISSING_PAYMENT": {
+      "changed_fields": 3,
+      "affected_receipts": 3
+    },
+    "MISSING_TIME": {
+      "changed_fields": 5,
+      "affected_receipts": 5
+    },
+    "CATEGORY_FILL": {
+      "changed_fields": 12,
+      "affected_receipts": 12
+    },
+    "PRODUCT": {
+      "changed_fields": 149,
+      "affected_receipts": 95
+    },
+    "CATEGORY": {
+      "changed_fields": 145,
+      "affected_receipts": 94
+    },
+    "DATE": {
+      "changed_fields": 80,
+      "affected_receipts": 80
+    },
+    "TIME": {
+      "changed_fields": 76,
+      "affected_receipts": 76
+    },
+    "STORE": {
+      "changed_fields": 66,
+      "affected_receipts": 66
+    },
+    "PAYMENT": {
+      "changed_fields": 75,
+      "affected_receipts": 75
+    },
+    "MONEY": {
+      "changed_fields": 564,
+      "affected_receipts": 80
+    },
+    "QUANTITY": {
+      "changed_fields": 41,
+      "affected_receipts": 20
+    }
+  },
+  "average_ticket": 13486
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "profile_id": "POS_A",
+    "fields": {
+      "receipt_id": "전표번호",
+      "date": "거래일",
+      "time": "거래시간",
+      "store": "매장명",
+      "payment": "결제수단",
+      "total": "결제금액",
+      "items": "상품목록",
+      "product": "상품명",
+      "category": "카테고리",
+      "quantity": "수량",
+      "unit_price": "단가",
+      "discount": "할인액",
+      "amount": "상품결제액"
+    },
+    "date_format": "YYYY-MM-DD",
+    "time_format": "HH:mm",
+    "currency": "KRW",
+    "timezone": "Asia/Seoul"
+  },
+  {
+    "profile_id": "POS_B",
+    "fields": {
+      "receipt_id": "Receipt No",
+      "date": "Date",
+      "time": "Time",
+      "store": "Store",
+      "payment": "Payment",
+      "total": "Total",
+      "items": "Items",
+      "product": "Item",
+      "category": "Category",
+      "quantity": "Qty",
+      "unit_price": "Price",
+      "discount": "Discount",
+      "amount": "Amount"
+    },
+    "date_format": "MM/DD/YYYY",
+    "time_format": "hh:mm AM/PM",
+    "currency": "KRW",
+    "timezone": "Asia/Seoul"
+  },
+  {
+    "profile_id": "POS_C",
+    "fields": {
+      "receipt_id": "거래번호",
+      "date": "판매일자",
+      "time": "판매시각",
+      "store": "점포",
+      "payment": "지불방식",
+      "total": "최종금액",
+      "items": "품목내역",
+      "product": "품목",
+      "category": "분류",
+      "quantity": "개수",
+      "unit_price": "판매단가",
+      "discount": "품목할인",
+      "amount": "실결제액"
+    },
+    "date_format": "YYYY.MM.DD",
+    "time_format": "HH시 mm분",
+    "currency": "KRW",
+    "timezone": "Asia/Seoul"
+  },
+  {
+    "profile_id": "POS_D",
+    "fields": {
+      "receipt_id": "전표ID",
+      "date": "일자",
+      "time": "시각",
+      "store": "매장",
+      "payment": "결제유형",
+      "total": "합계",
+      "items": "내역",
+      "product": "제품명",
+      "category": "상품군",
+      "quantity": "구매수량",
+      "unit_price": "개당금액",
+      "discount": "할인금액",
+      "amount": "품목금액"
+    },
+    "date_format": "YYYY년 M월 D일",
+    "time_format": "HHmm",
+    "currency": "KRW",
+    "timezone": "Asia/Seoul"
+  },
+  {
+    "profile_id": "POS_E",
+    "fields": {
+      "receipt_id": "Order ID",
+      "date": "Sale Date",
+      "time": "Sale Time",
+      "store": "Branch",
+      "payment": "Tender",
+      "total": "Paid",
+      "items": "Products",
+      "product": "Product",
+      "category": "Group",
+      "quantity": "Count",
+      "unit_price": "Unit Price",
+      "discount": "Rebate",
+      "amount": "Net"
+    },
+    "date_format": "D Sep YYYY",
+    "time_format": "HH:mm:ss",
+    "currency": "KRW",
+    "timezone": "Asia/Seoul"
+  }
+]

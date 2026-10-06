@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "receipt_count": 100,
+  "line_count": 220,
+  "pdf_count": 100,
+  "pdf_source_values_checked": 100,
+  "unique_receipt_ids": 100,
+  "unique_line_ids": 220,
+  "total_receipt_amount": 1348600,
+  "total_line_amount": 1348600,
+  "amount_difference": 0,
+  "missing_time": 5,
+  "missing_payment": 3,
+  "receipts_with_missing_info": 7,
+  "line_count_distribution": {
+    "1": 20,
+    "2": 45,
+    "3": 30,
+    "4": 5
+  },
+  "workbooks": {
+    "매출전표_정제.xlsx": {
+      "sheets": 4,
+      "formulas": 1047,
+      "formula_errors": 0
+    },
+    "매출전표_원본.xlsx": {
+      "sheets": 3,
+      "formulas": 0,
+      "formula_errors": 0
+    },
+    "정제규칙.xlsx": {
+      "sheets": 3,
+      "formulas": 0,
+      "formula_errors": 0
+    }
+  },
+  "note": "가상 원본 → 정제 결과 → PDF 원문과 금액을 검증. 엑셀은 Artifact Tool 재계산 및 내보낸 XML 오류 검사; Microsoft Excel 앱 실행 검증은 아님."
+}

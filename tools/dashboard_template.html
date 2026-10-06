@@ -1,0 +1,981 @@
+<title>카페 온담 매출전표 대시보드</title>
+<meta name="description" content="카페 온담 2026년 9월 가상 매출전표 100건의 정제·분석 대시보드 (작성자 민승환)">
+<style>
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  src: url(data:font/woff2;base64,/*__FONT__*/) format("woff2");
+}
+/* Layout: 1600×900 고정 16:9 무대를 화면에 맞춰 축소·확대. 12열 그리드, 간격 16 / 패널 안쪽 여백 16·20으로 통일.
+   좁은 화면(900px 미만)에서는 무대를 풀고 한 열로 쌓는다. */
+:root {
+  --bg: #eceeed;
+  --surface: #ffffff;
+  --surface-2: #f5f6f5;
+  --ink: #15191c;
+  --ink-2: #4b5258;
+  --muted: #80878c;
+  --line: #e0e3e1;
+  --line-2: #c7ccc9;
+  --accent: #2a78d6;
+  --accent-strong: #1c5cab;
+  --accent-soft: #e2edfa;
+  --mark-dim: #c9d4e0;
+  --s-card: #2a78d6;
+  --s-easy: #eb6834;
+  --s-cash: #1baf7a;
+  --s-unknown: #a3a8ab;
+  --warn: #fab219;
+  --warn-ink: #8a5a00;
+  --warn-soft: #fdf3dc;
+  --good-ink: #0b6b2e;
+  --good-soft: #e3f3e7;
+  --radius: 4px;
+  --gap: 16px;
+  --font: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+  /* 글씨 크기 위계 (무대 기준 px) */
+  --t-display: 26px;
+  --t-kpi: 34px;
+  --t-title: 16px;
+  --t-body: 13px;
+  --t-caption: 12px;
+  --t-micro: 11px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1011; --surface: #181b1d; --surface-2: #202427; --ink: #f1f3f2; --ink-2: #bcc2c0; --muted: #848b8f;
+    --line: #2a2f32; --line-2: #3b4246; --accent: #3987e5; --accent-strong: #86b6ef; --accent-soft: #1a2c42; --mark-dim: #34465c;
+    --s-card: #3987e5; --s-easy: #d95926; --s-cash: #199e70; --s-unknown: #6a7175;
+    --warn: #fab219; --warn-ink: #f0c060; --warn-soft: #34290f; --good-ink: #5fcf7f; --good-soft: #15291b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1011; --surface: #181b1d; --surface-2: #202427; --ink: #f1f3f2; --ink-2: #bcc2c0; --muted: #848b8f;
+  --line: #2a2f32; --line-2: #3b4246; --accent: #3987e5; --accent-strong: #86b6ef; --accent-soft: #1a2c42; --mark-dim: #34465c;
+  --s-card: #3987e5; --s-easy: #d95926; --s-cash: #199e70; --s-unknown: #6a7175;
+  --warn: #fab219; --warn-ink: #f0c060; --warn-soft: #34290f; --good-ink: #5fcf7f; --good-soft: #15291b;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--t-body);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select { font: inherit; color: inherit; }
+b, strong { font-weight: 700; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- 16:9 무대 ---------- */
+#viewport { position: relative; margin: 0 auto; overflow: hidden; }
+#stage {
+  position: absolute; left: 0; top: 0;
+  width: 1600px; height: 900px;
+  transform-origin: 0 0;
+  padding: 24px;
+  display: grid;
+  grid-template-rows: 60px 44px 1fr;
+  gap: var(--gap);
+  background: var(--bg);
+}
+.page-wrap { min-height: 100%; display: grid; place-items: center; }
+
+/* ---------- 헤더 ---------- */
+.top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--gap); }
+.tabs { display: inline-flex; border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--surface); justify-self: start; }
+.tab { border: 0; background: none; padding: 8px 16px; font-size: var(--t-body); font-weight: 600; color: var(--ink-2); cursor: pointer; }
+.tab + .tab { border-left: 1px solid var(--line-2); }
+.tab[aria-selected="true"] { background: var(--ink); color: var(--surface); }
+.tab:focus-visible, .btn:focus-visible, select:focus-visible, input:focus-visible, .row-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.title { text-align: center; }
+.title h1 { margin: 0; font-size: var(--t-display); font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
+.title p { margin: 2px 0 0; font-size: var(--t-caption); color: var(--muted); }
+.who { justify-self: end; display: flex; align-items: center; gap: 12px; font-size: var(--t-caption); color: var(--ink-2); }
+.who .name { font-weight: 700; color: var(--ink); font-size: var(--t-body); }
+.who label { display: flex; align-items: center; gap: 6px; }
+.who input { width: 120px; padding: 5px 8px; border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--surface); font-size: var(--t-caption); }
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 2px; font-size: var(--t-micro); font-weight: 700; letter-spacing: 0.02em; white-space: nowrap; }
+.badge.warn { background: var(--warn-soft); color: var(--warn-ink); }
+.badge.good { background: var(--good-soft); color: var(--good-ink); }
+.badge.plain { background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--line); }
+.badge.warn::before { content: ""; width: 6px; height: 6px; background: var(--warn); border-radius: 1px; }
+.badge.good::before { content: ""; width: 6px; height: 6px; background: var(--good-ink); border-radius: 1px; }
+
+/* ---------- 필터 ---------- */
+.filters { display: flex; align-items: center; gap: 12px; padding: 0 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.filters .f { display: flex; align-items: center; gap: 6px; font-size: var(--t-caption); color: var(--muted); font-weight: 600; }
+.filters select, .filters input[type="date"] { padding: 5px 8px; border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--surface); font-size: var(--t-caption); color: var(--ink); font-weight: 500; }
+.filters select { min-width: 110px; }
+.btn { padding: 5px 12px; border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--surface); font-size: var(--t-caption); font-weight: 600; cursor: pointer; color: var(--ink-2); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+.btn:hover { background: var(--surface-2); }
+.btn.primary { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.filters .spacer { flex: 1; }
+.filters .basis { font-size: var(--t-micro); color: var(--muted); text-align: right; line-height: 1.35; }
+.filters .basis b { color: var(--ink-2); }
+.filters.inactive .f, .filters.inactive .btn { opacity: 0.4; pointer-events: none; }
+.sep { width: 1px; height: 20px; background: var(--line); }
+
+/* ---------- 공통 패널 ---------- */
+.view { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); min-height: 0; }
+.view[hidden] { display: none !important; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; display: flex; flex-direction: column; min-height: 0; min-width: 0; }
+.ph { text-align: center; margin-bottom: 12px; }
+.ph h2 { margin: 0; font-size: var(--t-title); font-weight: 700; letter-spacing: -0.01em; }
+.ph p { margin: 2px 0 0; font-size: var(--t-micro); color: var(--muted); }
+.pb { flex: 1; min-height: 0; position: relative; }
+.note { font-size: var(--t-micro); color: var(--muted); text-align: center; margin-top: 8px; }
+.note b { color: var(--ink-2); }
+.empty { height: 100%; display: grid; place-items: center; color: var(--muted); font-size: var(--t-caption); text-align: center; }
+
+/* KPI */
+.kpis { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--gap); }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; text-align: center; display: flex; flex-direction: column; justify-content: center; gap: 2px; min-width: 0; }
+.kpi .k-label { font-size: var(--t-caption); font-weight: 600; color: var(--ink-2); }
+.kpi .k-value { font-size: var(--t-kpi); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; white-space: nowrap; }
+.kpi .k-value small { font-size: 16px; font-weight: 600; color: var(--ink-2); margin-left: 2px; }
+.kpi .k-sub { font-size: var(--t-micro); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi.is-warn .k-value { color: var(--warn-ink); }
+.kpi.is-hero { border-color: var(--ink); }
+
+/* 분석 탭 그리드 */
+#v-sales { grid-template-rows: 108px minmax(0, 1fr) minmax(0, 1fr); }
+.c-daily { grid-column: span 8; }
+.c-ins { grid-column: span 4; }
+.c-top, .c-cat, .c-pay, .c-hour { grid-column: span 3; }
+
+/* 가로 막대 목록 */
+.hbars { display: flex; flex-direction: column; justify-content: space-around; height: 100%; gap: 6px; }
+.hbar { display: grid; grid-template-columns: 22px minmax(0, 1fr) 92px; align-items: center; gap: 10px; cursor: default; }
+.hbar.cat { grid-template-columns: 52px minmax(0, 1fr) 64px 42px; }
+.hbar .rk { font-size: var(--t-caption); font-weight: 700; color: var(--muted); text-align: center; }
+.hbar .nm { font-size: var(--t-body); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hbar .track { height: 10px; background: var(--surface-2); border-radius: 1px; margin-top: 5px; overflow: hidden; }
+.hbar .fill { height: 100%; background: var(--accent); border-radius: 0 2px 2px 0; }
+.hbar.dim .fill { background: var(--mark-dim); }
+.hbar .val { text-align: right; font-size: var(--t-body); font-weight: 700; }
+.hbar .val span { display: block; font-size: var(--t-micro); color: var(--muted); font-weight: 500; }
+.hbar.cat .nm { font-size: var(--t-caption); text-align: right; }
+.hbar.cat .pc { font-size: var(--t-micro); color: var(--muted); text-align: right; }
+.hbar.cat .track { margin-top: 0; height: 12px; }
+.hbar:hover .fill { background: var(--accent-strong); }
+.hbar.dim:hover .fill { background: var(--line-2); }
+
+/* 결제수단 */
+.stack { display: flex; gap: 2px; height: 28px; margin: 4px 0 14px; }
+.stack div { height: 100%; min-width: 2px; }
+.stack div:first-child { border-radius: 2px 0 0 2px; }
+.stack div:last-child { border-radius: 0 2px 2px 0; }
+.stack .dim { opacity: 0.28; }
+.legend { display: flex; flex-direction: column; gap: 8px; }
+.lg { display: grid; grid-template-columns: 12px 1fr auto 56px; gap: 8px; align-items: center; font-size: var(--t-caption); }
+.lg i { width: 12px; height: 12px; border-radius: 2px; display: block; }
+.lg .c { color: var(--muted); text-align: right; }
+.lg .p { font-weight: 700; text-align: right; }
+.lg.dim { opacity: 0.45; }
+.hatch { background-image: repeating-linear-gradient(45deg, var(--s-unknown) 0 2px, transparent 2px 5px); background-color: var(--surface-2); }
+
+/* 분석 문장 */
+.ins { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: var(--t-caption); color: var(--ink-2); line-height: 1.55; overflow: auto; height: 100%; }
+.ins li { padding-left: 12px; position: relative; }
+.ins li::before { content: ""; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; background: var(--accent); }
+.ins b { color: var(--ink); }
+
+/* SVG 차트 */
+svg.chart { display: block; width: 100%; height: 100%; overflow: visible; }
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .base { stroke: var(--line-2); stroke-width: 1; }
+svg .tick { fill: var(--muted); font-size: 11px; font-family: var(--font); }
+svg .tick.strong { fill: var(--ink-2); font-weight: 700; }
+svg .lbl { fill: var(--ink); font-size: 12px; font-weight: 700; font-family: var(--font); }
+svg .bar { fill: var(--accent); }
+svg .bar.dim { fill: var(--mark-dim); }
+svg .hit { fill: transparent; cursor: default; }
+svg .hit:hover + .bar, svg g.col:hover .bar { fill: var(--accent-strong); }
+svg .avg { stroke: var(--ink-2); stroke-width: 1; }
+svg .avg-l { fill: var(--ink-2); font-size: 11px; font-family: var(--font); font-weight: 600; }
+
+/* 툴팁 */
+#tip { position: fixed; z-index: 10; pointer-events: none; background: var(--ink); color: var(--surface); font-family: var(--font); font-size: 12px; line-height: 1.5; padding: 8px 10px; border-radius: var(--radius); box-shadow: 0 4px 14px rgba(0,0,0,.18); max-width: 260px; }
+#tip b { font-weight: 700; }
+
+/* 표 */
+.tbl-wrap { overflow: auto; height: 100%; border: 1px solid var(--line); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; font-size: var(--t-caption); }
+th { position: sticky; top: 0; z-index: 1; background: var(--surface-2); color: var(--ink-2); font-weight: 700; text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 6px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+tr:last-child td { border-bottom: 0; }
+td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
+td.c, th.c { text-align: center; }
+td.mono { font-variant-numeric: tabular-nums; }
+tbody tr.clickable { cursor: pointer; }
+tbody tr.clickable:hover td { background: var(--surface-2); }
+tbody tr.clickable.sel td { background: var(--accent-soft); }
+td .raw { color: var(--ink-2); }
+.blank { color: var(--muted); font-style: normal; }
+.chg { background: var(--accent-soft); font-weight: 700; }
+.miss { background: var(--warn-soft); color: var(--warn-ink); font-weight: 700; }
+
+/* 정제 탭 */
+#v-clean { grid-template-rows: 108px minmax(0, 1fr); }
+.c-rules { grid-column: span 4; }
+.c-mid { grid-column: span 4; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: var(--gap); min-height: 0; }
+.c-log { grid-column: span 4; }
+.rule { display: grid; grid-template-columns: minmax(0, 1fr) 112px; gap: 4px 12px; padding: 7px 8px; border-radius: 2px; cursor: pointer; border: 0; background: none; text-align: left; width: 100%; }
+.rule:hover { background: var(--surface-2); }
+.rule.on { background: var(--accent-soft); }
+.rule .rn { font-size: var(--t-caption); font-weight: 700; }
+.rule .rn span { color: var(--muted); font-weight: 500; font-size: var(--t-micro); margin-left: 4px; }
+.rule .rv { text-align: right; font-size: var(--t-caption); font-weight: 700; font-variant-numeric: tabular-nums; }
+.rule .rv span { color: var(--muted); font-weight: 500; }
+.rule .rt { grid-column: 1 / -1; height: 6px; background: var(--surface-2); border-radius: 1px; overflow: hidden; }
+.rule .rt div { height: 100%; background: var(--accent); }
+.rule.missing .rt div { background: var(--warn); }
+.rules { display: flex; flex-direction: column; gap: 2px; overflow: auto; height: 100%; }
+.meters { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 6px; }
+.meter { display: grid; grid-template-columns: 64px minmax(0, 1fr) 72px; gap: 10px; align-items: center; }
+.meter .mn { font-size: var(--t-caption); font-weight: 700; text-align: right; }
+.meter .mt { display: flex; gap: 2px; height: 12px; }
+.meter .mt .ok { background: var(--accent); border-radius: 1px; }
+.meter .mt .fill { background: var(--s-cash); border-radius: 1px; }
+.meter .mt .no { background: var(--warn); border-radius: 1px; }
+.meter .mv { font-size: var(--t-caption); font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.meter { row-gap: 2px; }
+.meter .md { grid-column: 2 / -1; font-size: var(--t-micro); color: var(--muted); }
+.mini-legend { display: flex; justify-content: center; gap: 14px; font-size: var(--t-micro); color: var(--muted); margin-top: 10px; }
+#profiles td, #profiles th { padding: 5px 10px; }
+.mini-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.mini-legend i { width: 10px; height: 10px; display: block; border-radius: 1px; }
+.log-ctrl { display: flex; gap: 8px; margin-bottom: 10px; align-items: center; }
+.log-ctrl select, .log-ctrl input { padding: 5px 8px; border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--surface); font-size: var(--t-caption); min-width: 0; }
+.log-ctrl input { flex: 1; }
+.log-ctrl .cnt { font-size: var(--t-micro); color: var(--muted); white-space: nowrap; }
+
+/* 전표 탭 */
+#v-recs { grid-template-rows: minmax(0, 1fr); }
+.c-list { grid-column: span 5; }
+.c-detail { grid-column: span 7; }
+.list-ctrl { display: flex; justify-content: center; gap: 8px; margin-bottom: 10px; align-items: center; font-size: var(--t-caption); color: var(--ink-2); }
+.seg { display: inline-flex; border: 1px solid var(--line-2); border-radius: var(--radius); }
+.seg button { border: 0; background: var(--surface); padding: 4px 12px; font-size: var(--t-caption); font-weight: 600; color: var(--ink-2); cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line-2); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+.detail { display: grid; grid-template-columns: minmax(0, 1fr) 272px; gap: var(--gap); height: 100%; min-height: 0; }
+.d-main { display: flex; flex-direction: column; gap: 12px; min-height: 0; min-width: 0; overflow: auto; }
+.d-head { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.d-head .rid { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+.d-head .meta { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.d-head .amt { font-size: var(--t-caption); color: var(--ink-2); }
+.d-head .amt b { font-size: var(--t-title); color: var(--ink); }
+.sub-h { font-size: var(--t-caption); font-weight: 700; color: var(--ink-2); margin: 0 0 6px; }
+.d-prev { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.d-prev .img { flex: 1; min-height: 0; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; display: grid; place-items: center; overflow: hidden; }
+.d-prev img { max-width: 100%; max-height: 100%; display: block; }
+.d-prev .btn { justify-content: center; }
+.d-prev .cap { font-size: var(--t-micro); color: var(--muted); text-align: center; }
+.tbl-plain { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.tbl-plain td.sub { color: var(--muted); font-size: var(--t-micro); }
+tr.raw-row td { color: var(--ink-2); background: var(--surface-2); }
+tr.raw-row td:first-child, tr.cl-row td:first-child { font-weight: 700; color: var(--ink); }
+.foot { grid-column: 1 / -1; }
+
+/* ---------- 좁은 화면: 한 열로 ---------- */
+html.fluid #viewport { width: auto !important; height: auto !important; overflow: visible; }
+html.fluid #stage { position: static; transform: none !important; width: auto; height: auto; padding: 16px; grid-template-rows: auto; }
+html.fluid .top { grid-template-columns: 1fr; justify-items: center; }
+html.fluid .tabs, html.fluid .who { justify-self: center; }
+html.fluid .who { flex-wrap: wrap; justify-content: center; }
+html.fluid .filters { flex-wrap: wrap; padding: 12px; }
+html.fluid .filters .spacer { display: none; }
+html.fluid .filters .basis { text-align: left; width: 100%; }
+html.fluid .view { grid-template-columns: 1fr; grid-template-rows: none !important; }
+html.fluid .view > * { grid-column: 1 / -1 !important; }
+html.fluid .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+html.fluid .kpi .k-value { font-size: 26px; }
+html.fluid .c-daily .pb, html.fluid .c-hour .pb { height: 220px; flex: none; }
+html.fluid .tbl-wrap { max-height: 420px; }
+html.fluid .c-mid { grid-template-rows: auto; }
+html.fluid .detail { grid-template-columns: 1fr; }
+html.fluid .d-prev .img { height: 420px; flex: none; }
+html.fluid .rules { max-height: 460px; }
+@media (prefers-reduced-motion: no-preference) {
+  .fill, .rule .rt div, .stack div { transition: width .25s ease; }
+}
+</style>
+
+<div class="page-wrap">
+<div id="viewport">
+<div id="stage">
+  <header class="top">
+    <div class="tabs" role="tablist" aria-label="화면 전환">
+      <button class="tab" role="tab" id="tab-sales" aria-selected="true" data-view="sales">매출 분석</button>
+      <button class="tab" role="tab" id="tab-clean" aria-selected="false" data-view="clean">정제 현황</button>
+      <button class="tab" role="tab" id="tab-recs" aria-selected="false" data-view="recs">전표·원본 비교</button>
+    </div>
+    <div class="title">
+      <h1>카페 온담 9월 매출전표 대시보드</h1>
+      <p>2026.09.01 – 09.30 · 한국시간 · 전표 100건 · <span class="badge warn">과제용 가상 데이터 · 실제 매출 아님</span></p>
+    </div>
+    <div class="who">
+      <span>작성자 <span class="name">민승환</span></span>
+      <label for="sid">학번 <input id="sid" type="text" inputmode="numeric" placeholder="학번 입력" autocomplete="off"></label>
+    </div>
+  </header>
+
+  <div class="filters" id="filters">
+    <div class="f"><label for="f-period">기간</label>
+      <select id="f-period">
+        <option value="all">최근 30일 · 전체 (09.01–09.30)</option>
+        <option value="last14">최근 14일 (09.17–09.30)</option>
+        <option value="last7">최근 7일 (09.24–09.30)</option>
+        <option value="custom">직접 지정</option>
+      </select>
+    </div>
+    <div class="f" id="f-custom" hidden>
+      <input id="f-start" type="date" aria-label="시작일"> <span>–</span> <input id="f-end" type="date" aria-label="종료일">
+    </div>
+    <div class="sep"></div>
+    <div class="f"><label for="f-cat">카테고리</label><select id="f-cat"></select></div>
+    <div class="f"><label for="f-prod">상품</label><select id="f-prod"></select></div>
+    <div class="f"><label for="f-pay">결제수단</label><select id="f-pay"></select></div>
+    <button class="btn" id="f-reset" type="button">필터 초기화</button>
+    <div class="spacer"></div>
+    <div class="basis" id="basis"></div>
+  </div>
+
+  <main style="min-height:0; display:grid;">
+    <!-- 매출 분석 -->
+    <section class="view" id="v-sales" role="tabpanel" aria-labelledby="tab-sales">
+      <div class="kpis" id="kpi-sales"></div>
+      <div class="panel c-daily">
+        <div class="ph"><h2>일자별 매출 추이</h2><p id="daily-cap"></p></div>
+        <div class="pb" id="ch-daily"></div>
+      </div>
+      <div class="panel c-ins">
+        <div class="ph"><h2>현재 필터 분석</h2><p>아래 문장은 선택한 조건의 계산 결과로 생성됩니다</p></div>
+        <div class="pb"><ul class="ins" id="insights"></ul></div>
+      </div>
+      <div class="panel c-top">
+        <div class="ph"><h2>상품 매출 TOP 5</h2><p id="top-cap"></p></div>
+        <div class="pb" id="ch-top"></div>
+      </div>
+      <div class="panel c-cat">
+        <div class="ph"><h2>카테고리별 매출</h2><p id="cat-cap"></p></div>
+        <div class="pb" id="ch-cat"></div>
+      </div>
+      <div class="panel c-pay">
+        <div class="ph"><h2>결제수단 사용률</h2><p id="pay-cap"></p></div>
+        <div class="pb" id="ch-pay"></div>
+      </div>
+      <div class="panel c-hour">
+        <div class="ph"><h2>시간대별 매출</h2><p id="hour-cap"></p></div>
+        <div class="pb" id="ch-hour"></div>
+      </div>
+    </section>
+
+    <!-- 정제 현황 -->
+    <section class="view" id="v-clean" role="tabpanel" aria-labelledby="tab-clean" hidden>
+      <div class="kpis" id="kpi-clean"></div>
+      <div class="panel c-rules">
+        <div class="ph"><h2>규칙별 변환 기록</h2><p>값이 실제로 바뀐 칸 수 · 영향 전표 수 / 규칙을 누르면 오른쪽 이력이 걸러집니다</p></div>
+        <div class="pb"><div class="rules" id="rules"></div></div>
+        <div class="note">한 전표에 여러 규칙이 겹치므로 규칙별 건수를 <b>더해서 전표 수로 쓰지 않습니다</b>.</div>
+      </div>
+      <div class="c-mid">
+        <div class="panel">
+          <div class="ph"><h2>원본 형식 5종</h2><p>같은 의미의 항목을 형식마다 다른 이름으로 기록</p></div>
+          <div class="tbl-plain" id="profiles"></div>
+        </div>
+        <div class="panel">
+          <div class="ph"><h2>항목별 완전성</h2><p>정제 완료와 정보 완전은 다릅니다 · 결측은 추정하지 않고 보존</p></div>
+          <div class="pb"><div class="meters" id="meters"></div></div>
+          <div class="mini-legend"><span><i style="background:var(--accent)"></i>원본 기재</span><span><i style="background:var(--s-cash)"></i>근거 있는 보완</span><span><i style="background:var(--warn)"></i>미기재·미확인</span></div>
+        </div>
+      </div>
+      <div class="panel c-log">
+        <div class="ph"><h2>변환 이력</h2><p>cleaning_log 원문 → 정제 값 · 행을 누르면 해당 전표로 이동</p></div>
+        <div class="log-ctrl">
+          <select id="log-rule" aria-label="규칙 선택"></select>
+          <input id="log-q" type="search" placeholder="전표번호·값 검색" aria-label="이력 검색">
+          <span class="cnt num" id="log-cnt"></span>
+        </div>
+        <div class="pb"><div class="tbl-wrap" id="log"></div></div>
+      </div>
+    </section>
+
+    <!-- 전표·원본 비교 -->
+    <section class="view" id="v-recs" role="tabpanel" aria-labelledby="tab-recs" hidden>
+      <div class="panel c-list">
+        <div class="ph"><h2>전표 목록</h2><p id="list-cap"></p></div>
+        <div class="list-ctrl">
+          <span>표시</span>
+          <div class="seg" role="group" aria-label="전표 상태">
+            <button type="button" id="ls-all" aria-pressed="true">전체</button>
+            <button type="button" id="ls-issue" aria-pressed="false">미확인 정보 있음</button>
+          </div>
+        </div>
+        <div class="pb"><div class="tbl-wrap" id="list"></div></div>
+      </div>
+      <div class="panel c-detail">
+        <div class="detail" id="detail"></div>
+      </div>
+    </section>
+  </main>
+</div>
+</div>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+const D = /*__DATA__*/;
+
+/* ---------- 기본 도구 ---------- */
+const $ = s => document.querySelector(s);
+const fmt = n => Math.round(n).toLocaleString('ko-KR');
+const won = n => fmt(n) + '원';
+const pct = (a, b) => b ? (a / b * 100) : 0;
+const pct1 = (a, b) => pct(a, b).toFixed(1) + '%';
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const sum = (arr, f) => arr.reduce((s, x) => s + f(x), 0);
+const WD = ['일', '월', '화', '수', '목', '금', '토'];
+const wd = d => WD[new Date(d + 'T00:00:00Z').getUTCDay()];
+const md = d => `${+d.slice(5, 7)}월 ${+d.slice(8, 10)}일`;
+const mdShort = d => `${d.slice(5, 7)}.${d.slice(8, 10)}`;
+function addDays(d, n) { const t = new Date(d + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); }
+function daysBetween(a, b) { const out = []; for (let d = a; d <= b; d = addDays(d, 1)) out.push(d); return out; }
+function niceMax(v, ticks = 4) {
+  if (v <= 0) return { max: 1, step: 1 };
+  const raw = v / ticks, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => s >= raw);
+  return { max: step * Math.ceil(v / step), step };
+}
+const manwon = v => v === 0 ? '0' : (v >= 10000 ? (v / 10000).toLocaleString('ko-KR', { maximumFractionDigits: 1 }) + '만' : fmt(v));
+
+/* ---------- 데이터 연결 ---------- */
+const receipts = D.receipts, lines = D.lines;
+const recById = new Map(receipts.map(r => [r.receipt_id, r]));
+const linesByRec = new Map();
+lines.forEach(l => { if (!linesByRec.has(l.receipt_id)) linesByRec.set(l.receipt_id, []); linesByRec.get(l.receipt_id).push(l); });
+const profById = new Map(D.profiles.map(p => [p.profile_id, p]));
+const rawById = new Map(D.raw.map(x => [x.data[profById.get(x.profile_id).fields.receipt_id], x]));
+const logByRec = new Map();
+D.log.forEach(e => { if (!logByRec.has(e.receipt_id)) logByRec.set(e.receipt_id, []); logByRec.get(e.receipt_id).push(e); });
+const prodById = new Map(D.products.map(p => [p.product_id, p]));
+const CATS = ['커피', '음료', '차', '베이커리', '디저트', '식사'];
+const PAYS = ['카드', '간편결제', '현금', '미확인'];
+const PAY_COLOR = { '카드': 'var(--s-card)', '간편결제': 'var(--s-easy)', '현금': 'var(--s-cash)', '미확인': 'var(--s-unknown)' };
+const FIRST = receipts.reduce((m, r) => r.date < m ? r.date : m, receipts[0].date);
+const LAST = receipts.reduce((m, r) => r.date > m ? r.date : m, receipts[0].date);
+const HOURS = (() => { const hs = receipts.filter(r => r.time).map(r => +r.time.slice(0, 2)); const out = []; for (let h = Math.min(...hs); h <= Math.max(...hs); h++) out.push(h); return out; })();
+const RULE = Object.fromEntries(D.rules.map(r => [r.rule_id, r]));
+const RULE_KO = { DATE: '날짜 형식 통일', TIME: '시간 24시간제', STORE: '매장명 별칭', PRODUCT: '상품명 표준화', CATEGORY: '카테고리 표준화', CATEGORY_FILL: '카테고리 빈칸 보완', PAYMENT: '결제수단 별칭', MONEY: '금액 표기 정리', QUANTITY: '수량 표기 정리', MISSING_TIME: '시간 미기재 보존', MISSING_PAYMENT: '결제수단 미확인' };
+const FIELD_KO = { receipt_id: '전표번호', date: '거래일', time: '거래시간', store: '매장', payment_method: '결제수단', receipt_amount: '결제금액', product_name: '상품명', category: '카테고리', quantity: '수량', unit_price: '단가', discount: '할인', line_amount: '상품금액' };
+const hasIssue = r => !!r.issue_codes;
+
+/* 초기 검증 (인계 문서 기준값) */
+(function verify() {
+  const a = sum(receipts, r => r.receipt_amount), b = sum(lines, l => l.line_amount);
+  const ok = receipts.length === 100 && lines.length === 220 && a === 1348600 && b === 1348600 && Math.round(a / receipts.length) === 13486;
+  if (!ok) console.warn('검증 기준값과 다릅니다', { receipts: receipts.length, lines: lines.length, a, b });
+})();
+
+/* ---------- 상태 ---------- */
+const st = { view: 'sales', period: 'all', start: FIRST, end: LAST, cat: '', prod: '', pay: '', sel: null, issuesOnly: false, logRule: '', logQ: '' };
+
+function range() {
+  if (st.period === 'last7') return [addDays(LAST, -6), LAST];
+  if (st.period === 'last14') return [addDays(LAST, -13), LAST];
+  if (st.period === 'custom') { let a = st.start || FIRST, b = st.end || LAST; if (a > b) [a, b] = [b, a]; return [a, b]; }
+  return [FIRST, LAST];
+}
+
+/* 필터 계산. ignore에 넣은 차원은 무시(해당 차트가 자기 차원을 강조 표시로 보여줄 때 사용) */
+function compute(ignore = {}) {
+  const [s, e] = range();
+  const pay = ignore.pay ? '' : st.pay, cat = ignore.cat ? '' : st.cat, prod = ignore.prod ? '' : st.prod;
+  const rs0 = receipts.filter(r => r.date >= s && r.date <= e && (!pay || r.payment_method === pay));
+  const itemFilter = !!(cat || prod);
+  const rset = new Set(rs0.map(r => r.receipt_id));
+  const ls = lines.filter(l => rset.has(l.receipt_id) && (!cat || l.category === cat) && (!prod || l.product_id === prod));
+  const amt = new Map();
+  if (itemFilter) ls.forEach(l => amt.set(l.receipt_id, (amt.get(l.receipt_id) || 0) + l.line_amount));
+  else rs0.forEach(r => amt.set(r.receipt_id, r.receipt_amount));
+  const rs = itemFilter ? rs0.filter(r => amt.has(r.receipt_id)) : rs0;
+  const revenue = itemFilter ? sum(ls, l => l.line_amount) : sum(rs, r => r.receipt_amount);
+  return { s, e, rs, ls, amt, itemFilter, revenue, tx: rs.length };
+}
+
+/* ---------- 필터 UI ---------- */
+function fillSelect(el, opts, val) { el.innerHTML = opts.map(([v, t]) => `<option value="${esc(v)}"${v === val ? ' selected' : ''}>${esc(t)}</option>`).join(''); }
+function syncFilters() {
+  fillSelect($('#f-cat'), [['', '전체 카테고리'], ...CATS.map(c => [c, c])], st.cat);
+  const prods = D.products.filter(p => !st.cat || p.category === st.cat);
+  if (st.prod && !prods.some(p => p.product_id === st.prod)) st.prod = '';
+  fillSelect($('#f-prod'), [['', st.cat ? `${st.cat} 전체` : '전체 상품'], ...prods.map(p => [p.product_id, p.product_name])], st.prod);
+  fillSelect($('#f-pay'), [['', '전체 결제수단'], ...PAYS.map(p => [p, p])], st.pay);
+  $('#f-period').value = st.period;
+  $('#f-custom').hidden = st.period !== 'custom';
+  $('#f-start').value = st.start; $('#f-end').value = st.end;
+  [$('#f-start'), $('#f-end')].forEach(i => { i.min = FIRST; i.max = LAST; });
+}
+$('#f-period').addEventListener('change', e => { st.period = e.target.value; update(); });
+$('#f-start').addEventListener('change', e => { st.start = e.target.value || FIRST; update(); });
+$('#f-end').addEventListener('change', e => { st.end = e.target.value || LAST; update(); });
+$('#f-cat').addEventListener('change', e => { st.cat = e.target.value; update(); });
+$('#f-prod').addEventListener('change', e => { st.prod = e.target.value; if (st.prod) st.cat = prodById.get(st.prod).category; update(); });
+$('#f-pay').addEventListener('change', e => { st.pay = e.target.value; update(); });
+$('#f-reset').addEventListener('click', () => { Object.assign(st, { period: 'all', start: FIRST, end: LAST, cat: '', prod: '', pay: '' }); update(); });
+
+/* 학번 (이 브라우저에만 저장) */
+(function () {
+  const el = $('#sid');
+  try { el.value = localStorage.getItem('ondam-sid') || ''; } catch (e) {}
+  el.addEventListener('input', () => { try { localStorage.setItem('ondam-sid', el.value); } catch (e) {} });
+})();
+
+/* 탭 */
+document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+function setView(v) {
+  st.view = v;
+  document.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === v)));
+  $('#v-sales').hidden = v !== 'sales'; $('#v-clean').hidden = v !== 'clean'; $('#v-recs').hidden = v !== 'recs';
+  $('#filters').classList.toggle('inactive', v === 'clean');
+  try { history.replaceState(null, '', '#' + v); } catch (e) {}
+  render();
+}
+
+/* ---------- 툴팁 ---------- */
+const tip = $('#tip');
+function showTip(ev, html) { tip.innerHTML = html; tip.hidden = false; moveTip(ev); }
+function moveTip(ev) {
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = ev.clientX + 14, y = ev.clientY + 14;
+  if (x + w > innerWidth - 8) x = ev.clientX - w - 14;
+  if (y + h > innerHeight - 8) y = ev.clientY - h - 14;
+  tip.style.left = x + 'px'; tip.style.top = y + 'px';
+}
+function hideTip() { tip.hidden = true; }
+function bindTips(root) {
+  root.querySelectorAll('[data-tip]').forEach(el => {
+    el.addEventListener('mouseenter', ev => showTip(ev, el.dataset.tip));
+    el.addEventListener('mousemove', moveTip);
+    el.addEventListener('mouseleave', hideTip);
+  });
+}
+
+/* ---------- 매출 분석 ---------- */
+function scopeLabel(c) {
+  const parts = [];
+  if (st.prod) parts.push(prodById.get(st.prod).product_name);
+  else if (st.cat) parts.push(st.cat);
+  if (st.pay) parts.push(st.pay + ' 결제');
+  return parts.join(' · ');
+}
+function rangeLabel(c) { return c.s === c.e ? md(c.s) : `${md(c.s)}–${md(c.e)}`; }
+
+function renderBasis(c) {
+  const daysTxt = st.period === 'custom' ? '직접 지정' : st.period === 'all' ? '최근 30일' : st.period === 'last7' ? '최근 7일' : '최근 14일';
+  $('#basis').innerHTML = st.view === 'clean'
+    ? '정제 현황은 <b>필터와 무관하게 전체 100건</b> 기준'
+    : `기준일 <b>${LAST}</b> (데이터 마지막 날짜) · ${daysTxt} <b>${mdShort(c.s)}–${mdShort(c.e)}</b><br>조건에 맞는 전표 <b>${c.tx}건</b> / 100건`;
+}
+
+function kpiHtml(k) {
+  return `<div class="kpi${k.cls ? ' ' + k.cls : ''}"><div class="k-label">${k.label}</div><div class="k-value num">${k.value}</div><div class="k-sub" title="${esc(k.subTitle || '')}">${k.sub}</div></div>`;
+}
+
+function renderSales() {
+  const c = compute();
+  renderBasis(c);
+  const gross = sum(c.ls, l => l.gross_amount), disc = sum(c.ls, l => l.discount), qty = sum(c.ls, l => l.quantity);
+  const issue = c.rs.filter(hasIssue).length;
+  const mt = c.rs.filter(r => !r.time).length, mp = c.rs.filter(r => r.payment_method === '미확인').length;
+  const both = c.rs.filter(r => !r.time && r.payment_method === '미확인').length;
+  const avgLabel = c.itemFilter ? '선택 상품 기준 거래당 매출' : '평균 객단가';
+  const nProd = new Set(c.ls.map(l => l.product_id)).size;
+  $('#kpi-sales').innerHTML = [
+    { label: c.itemFilter ? `선택 상품 매출 · ${esc(scopeLabel(c))}` : '총매출', value: `${fmt(c.revenue)}<small>원</small>`, sub: `할인 전 ${won(gross)} · 품목 할인 ${won(disc)}`, cls: 'is-hero' },
+    { label: '거래 수', value: `${fmt(c.tx)}<small>건</small>`, sub: c.itemFilter ? '선택 상품이 담긴 고유 전표 수' : '고유 전표 기준 (상품 행 수 아님)' },
+    { label: avgLabel, value: c.tx ? `${fmt(c.revenue / c.tx)}<small>원</small>` : '<span style="font-size:20px;color:var(--muted)">결과 없음</span>', sub: c.itemFilter ? '선택 상품 매출 ÷ 해당 전표 수 · 장바구니 전체 아님' : '총매출 ÷ 거래 수' },
+    { label: '판매 수량', value: `${fmt(qty)}<small>개</small>`, sub: `상품 ${nProd}종 · 상품 행 ${c.ls.length}개` },
+    { label: '정보 완전 전표', value: `${c.tx - issue}<small>/ ${c.tx}건</small>`, sub: issue ? `시간 미기재 ${mt} · 결제 미확인 ${mp}${both ? ` (${both}건 중복)` : ''}` : '미확인 정보 없음', cls: issue ? 'is-warn' : '' },
+  ].map(kpiHtml).join('');
+
+  drawDaily(c);
+  drawTop();
+  drawCat();
+  drawPay();
+  drawHour(c);
+  writeInsights(c);
+}
+
+function drawDaily(c) {
+  const box = $('#ch-daily');
+  const days = daysBetween(c.s, c.e);
+  const byDay = new Map(days.map(d => [d, { v: 0, n: 0 }]));
+  c.rs.forEach(r => { const o = byDay.get(r.date); if (o) { o.v += c.amt.get(r.receipt_id); o.n++; } });
+  const vals = days.map(d => byDay.get(d));
+  const active = vals.filter(o => o.n);
+  const avg = active.length ? sum(active, o => o.v) / active.length : 0;
+  $('#daily-cap').textContent = `${c.itemFilter ? '선택 상품 매출' : '전표 결제금액 합계'} · 거래가 있던 날 ${active.length}일 / ${days.length}일 · 가로선은 거래일 평균`;
+  if (!c.tx) { box.innerHTML = '<div class="empty">선택한 조건에 해당하는 거래가 없습니다.</div>'; return; }
+  const W = box.clientWidth, H = box.clientHeight;
+  const m = { l: 44, r: 64, t: 22, b: 24 };
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const max = Math.max(...vals.map(o => o.v));
+  const { max: ymax, step } = niceMax(max);
+  const y = v => m.t + ih - v / ymax * ih;
+  const band = iw / days.length, bw = Math.max(3, Math.min(28, band * 0.62));
+  const bestIdx = vals.findIndex(o => o.v === max);
+  let g = '';
+  for (let t = 0; t <= ymax + 1e-9; t += step) {
+    g += `<line class="${t === 0 ? 'base' : 'grid'}" x1="${m.l}" x2="${m.l + iw}" y1="${y(t)}" y2="${y(t)}"/>`;
+    g += `<text class="tick" x="${m.l - 8}" y="${y(t) + 4}" text-anchor="end">${manwon(t)}</text>`;
+  }
+  const every = band >= 26 ? 1 : band >= 13 ? 2 : 5;
+  days.forEach((d, i) => {
+    const o = vals[i], x = m.l + band * i + band / 2;
+    const h = ih * o.v / ymax;
+    const tipHtml = `<b>${md(d)} (${wd(d)})</b><br>${c.itemFilter ? '선택 상품 매출' : '매출'} ${won(o.v)}<br>거래 ${o.n}건`;
+    g += `<g class="col" data-tip="${esc(tipHtml)}"><rect class="hit" x="${m.l + band * i}" y="${m.t}" width="${band}" height="${ih}"/>`;
+    if (o.v > 0) g += `<rect class="bar" x="${x - bw / 2}" y="${y(o.v)}" width="${bw}" height="${h}" rx="1"/>`;
+    g += `</g>`;
+    if (i % every === 0 || i === bestIdx) g += `<text class="tick${i === bestIdx ? ' strong' : ''}" x="${x}" y="${m.t + ih + 16}" text-anchor="middle">${+d.slice(8)}${days.length <= 14 ? `<tspan dx="1">${wd(d)}</tspan>` : ''}</text>`;
+  });
+  const bx = m.l + band * bestIdx + band / 2;
+  g += `<text class="lbl" x="${bx}" y="${y(max) - 7}" text-anchor="middle">${won(max)}</text>`;
+  if (avg > 0) {
+    g += `<line class="avg" x1="${m.l}" x2="${m.l + iw}" y1="${y(avg)}" y2="${y(avg)}"/>`;
+    g += `<text class="avg-l" x="${m.l + iw + 6}" y="${y(avg) - 2}">평균</text><text class="avg-l num" x="${m.l + iw + 6}" y="${y(avg) + 11}">${manwon(Math.round(avg))}원</text>`;
+  }
+  box.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="일자별 매출 막대 차트">${g}</svg>`;
+  bindTips(box);
+}
+
+function hbarsHtml(rows, opt) {
+  const max = Math.max(...rows.map(r => r.v), 1);
+  return `<div class="hbars">${rows.map((r, i) => `
+    <div class="hbar${opt.cat ? ' cat' : ''}${r.dim ? ' dim' : ''}" data-tip="${esc(r.tip)}">
+      ${opt.cat ? `<div class="nm">${esc(r.name)}</div>` : `<div class="rk">${i + 1}</div>`}
+      <div style="min-width:0">${opt.cat ? '' : `<div class="nm">${esc(r.name)}</div>`}<div class="track"><div class="fill" style="width:${(r.v / max * 100).toFixed(2)}%"></div></div></div>
+      ${opt.cat ? `<div class="val num">${fmt(r.v)}</div><div class="pc num">${r.sub}</div>` : `<div class="val num">${won(r.v)}${r.sub ? `<span>${r.sub}</span>` : ''}</div>`}
+    </div>`).join('')}</div>`;
+}
+
+function drawTop() {
+  const c = compute({ prod: 1 });
+  const by = new Map();
+  c.ls.forEach(l => { const o = by.get(l.product_id) || { v: 0, q: 0, rec: new Set() }; o.v += l.line_amount; o.q += l.quantity; o.rec.add(l.receipt_id); by.set(l.product_id, o); });
+  let rows = [...by.entries()].map(([id, o]) => ({ id, name: prodById.get(id).product_name, v: o.v, q: o.q, n: o.rec.size }))
+    .sort((a, b) => b.v - a.v || b.q - a.q || a.id.localeCompare(b.id));
+  const total = sum(rows, r => r.v);
+  const rankSel = st.prod ? rows.findIndex(r => r.id === st.prod) : -1;
+  let top = rows.slice(0, 5);
+  $('#top-cap').textContent = `${st.cat ? st.cat + ' 안에서 ' : ''}상품금액(할인 후) 합계 순 · 막대는 매출, 아래는 수량`;
+  if (!top.length) { $('#ch-top').innerHTML = '<div class="empty">선택한 조건에 해당하는 상품이 없습니다.</div>'; return; }
+  const tipOf = r => `<b>${esc(r.name)}</b><br>매출 ${won(r.v)} (${pct1(r.v, total)})<br>수량 ${r.q}개 · 전표 ${r.n}건`;
+  $('#ch-top').innerHTML = hbarsHtml(top.map(r => ({ name: r.name, v: r.v, sub: `${r.q}개 · ${pct1(r.v, total)}`, dim: st.prod && r.id !== st.prod, tip: tipOf(r) })), {});
+  if (st.prod && rankSel >= 5) $('#top-cap').textContent = `선택 상품 ${prodById.get(st.prod).product_name}: ${rankSel + 1}위 (${won(rows[rankSel].v)})`;
+  bindTips($('#ch-top'));
+}
+
+function drawCat() {
+  const c = compute({ cat: 1, prod: 1 });
+  const selCat = st.cat;
+  const rows = CATS.map(cat => { const ls = c.ls.filter(l => l.category === cat); return { name: cat, v: sum(ls, l => l.line_amount), q: sum(ls, l => l.quantity) }; });
+  const total = sum(rows, r => r.v);
+  rows.sort((a, b) => b.v - a.v);
+  $('#cat-cap').textContent = `단위 원 · 선택한 카테고리는 진하게 표시`;
+  if (!total) { $('#ch-cat').innerHTML = '<div class="empty">해당 거래가 없습니다.</div>'; return; }
+  $('#ch-cat').innerHTML = hbarsHtml(rows.map(r => ({ name: r.name, v: r.v, sub: pct1(r.v, total), dim: selCat && r.name !== selCat, tip: `<b>${r.name}</b><br>매출 ${won(r.v)} (${pct1(r.v, total)})<br>수량 ${r.q}개` })), { cat: true });
+  bindTips($('#ch-cat'));
+}
+
+function drawPay() {
+  const c = compute({ pay: 1 });
+  const n = c.tx;
+  const rows = PAYS.map(p => ({ p, n: c.rs.filter(r => r.payment_method === p).length, v: sum(c.rs.filter(r => r.payment_method === p), r => c.amt.get(r.receipt_id)) }));
+  $('#pay-cap').textContent = `전표 수 기준 · 분모 ${n}건 (미확인 포함)`;
+  if (!n) { $('#ch-pay').innerHTML = '<div class="empty">해당 거래가 없습니다.</div>'; return; }
+  const seg = rows.filter(r => r.n).map(r => `<div class="${r.p === '미확인' ? 'hatch' : ''}${st.pay && st.pay !== r.p ? ' dim' : ''}" style="width:${pct(r.n, n)}%;${r.p === '미확인' ? '' : `background:${PAY_COLOR[r.p]}`}" data-tip="${esc(`<b>${r.p}</b><br>${r.n}건 · ${pct1(r.n, n)}<br>금액 ${won(r.v)}`)}"></div>`).join('');
+  const lg = rows.map(r => `<div class="lg${st.pay && st.pay !== r.p ? ' dim' : ''}" data-tip="${esc(`<b>${r.p}</b><br>${r.n}건 · ${pct1(r.n, n)}<br>금액 ${won(r.v)}`)}"><i class="${r.p === '미확인' ? 'hatch' : ''}" style="${r.p === '미확인' ? '' : `background:${PAY_COLOR[r.p]}`}"></i><span>${r.p}</span><span class="c num">${r.n}건</span><span class="p num">${pct1(r.n, n)}</span></div>`).join('');
+  $('#ch-pay').innerHTML = `<div class="stack">${seg}</div><div class="legend">${lg}</div>`;
+  bindTips($('#ch-pay'));
+}
+
+function drawHour(c) {
+  const box = $('#ch-hour');
+  const timed = c.rs.filter(r => r.time), excl = c.tx - timed.length;
+  $('#hour-cap').innerHTML = `시간 기재 전표 <b>${timed.length}/${c.tx}건</b> 분석 · 미기재 ${excl}건 제외 (커버리지 ${c.tx ? pct1(timed.length, c.tx) : '–'})`;
+  if (!timed.length) { box.innerHTML = '<div class="empty">시간이 기록된 거래가 없습니다.</div>'; return; }
+  const by = new Map(HOURS.map(h => [h, { v: 0, n: 0 }]));
+  timed.forEach(r => { const o = by.get(+r.time.slice(0, 2)); o.v += c.amt.get(r.receipt_id); o.n++; });
+  const W = box.clientWidth, H = box.clientHeight;
+  const m = { l: 34, r: 4, t: 20, b: 22 };
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const vals = HOURS.map(h => by.get(h));
+  const max = Math.max(...vals.map(o => o.v));
+  const { max: ymax, step } = niceMax(max, 3);
+  const y = v => m.t + ih - v / ymax * ih;
+  const band = iw / HOURS.length, bw = Math.max(3, band * 0.6);
+  const best = vals.findIndex(o => o.v === max);
+  let g = '';
+  for (let t = 0; t <= ymax + 1e-9; t += step) {
+    g += `<line class="${t === 0 ? 'base' : 'grid'}" x1="${m.l}" x2="${m.l + iw}" y1="${y(t)}" y2="${y(t)}"/><text class="tick" x="${m.l - 6}" y="${y(t) + 4}" text-anchor="end">${manwon(t)}</text>`;
+  }
+  HOURS.forEach((h, i) => {
+    const o = vals[i], x = m.l + band * i + band / 2;
+    g += `<g class="col" data-tip="${esc(`<b>${h}시대</b> (${h}:00–${h}:59)<br>매출 ${won(o.v)}<br>거래 ${o.n}건`)}"><rect class="hit" x="${m.l + band * i}" y="${m.t}" width="${band}" height="${ih}"/>`;
+    if (o.v) g += `<rect class="bar" x="${x - bw / 2}" y="${y(o.v)}" width="${bw}" height="${ih * o.v / ymax}" rx="1"/>`;
+    g += `</g>`;
+    if (i % 2 === 0 || i === best) g += `<text class="tick${i === best ? ' strong' : ''}" x="${x}" y="${m.t + ih + 15}" text-anchor="middle">${h}</text>`;
+  });
+  const bx = m.l + band * best + band / 2;
+  g += `<text class="lbl" x="${Math.min(Math.max(bx, m.l + 30), W - 30)}" y="${y(max) - 6}" text-anchor="middle">${manwon(max)}원</text>`;
+  box.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="시간대별 매출 막대 차트">${g}</svg>`;
+  bindTips(box);
+}
+
+function writeInsights(c) {
+  const el = $('#insights');
+  if (!c.tx) { el.innerHTML = '<li>선택한 조건에 해당하는 거래가 없습니다. 기간을 넓히거나 필터를 초기화해 보세요.</li>'; return; }
+  const out = [];
+  const scope = scopeLabel(c);
+  out.push(`${rangeLabel(c)}${scope ? ` · ${esc(scope)}` : ''} 기준 매출 <b>${won(c.revenue)}</b>, 거래 <b>${c.tx}건</b>, ${c.itemFilter ? '선택 상품 기준 거래당 매출' : '평균 객단가'} <b>${won(c.revenue / c.tx)}</b>.`);
+  const byDay = new Map();
+  c.rs.forEach(r => byDay.set(r.date, (byDay.get(r.date) || 0) + c.amt.get(r.receipt_id)));
+  const dayRows = [...byDay.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  if (dayRows.length > 1) {
+    const avgDay = c.revenue / dayRows.length;
+    out.push(`일 매출 최고 <b>${md(dayRows[0][0])}(${wd(dayRows[0][0])})</b> ${won(dayRows[0][1])}, 거래일 ${dayRows.length}일 평균의 ${(dayRows[0][1] / avgDay).toFixed(1)}배. 표본이 작아 요일 효과로 해석하지 않습니다.`);
+  }
+  const prodAgg = new Map(); c.ls.forEach(l => prodAgg.set(l.product_id, (prodAgg.get(l.product_id) || 0) + l.line_amount));
+  const p1 = [...prodAgg.entries()].sort((a, b) => b[1] - a[1])[0];
+  const lsTotal = sum(c.ls, l => l.line_amount);
+  if (p1 && !st.prod) {
+    const catAgg = new Map(); c.ls.forEach(l => catAgg.set(l.category, (catAgg.get(l.category) || 0) + l.line_amount));
+    const c1 = [...catAgg.entries()].sort((a, b) => b[1] - a[1])[0];
+    out.push(`상품 매출 1위 <b>${esc(prodById.get(p1[0]).product_name)}</b> ${won(p1[1])} (${pct1(p1[1], lsTotal)})${!st.cat ? ` · 카테고리 비중 1위 <b>${c1[0]}</b> ${pct1(c1[1], lsTotal)}` : ''}.`);
+  }
+  if (!st.pay) {
+    const pr = PAYS.map(p => [p, c.rs.filter(r => r.payment_method === p).length]).filter(x => x[1]);
+    out.push(`결제수단 사용률 ${pr.map(([p, n]) => `${p} <b>${pct1(n, c.tx)}</b>`).join(' · ')} (전표 수 기준${pr.some(x => x[0] === '미확인') ? ', 미확인 포함' : ''}).`);
+  }
+  const timed = c.rs.filter(r => r.time);
+  if (timed.length) {
+    const ha = new Map(); timed.forEach(r => { const h = +r.time.slice(0, 2); ha.set(h, (ha.get(h) || 0) + c.amt.get(r.receipt_id)); });
+    const h1 = [...ha.entries()].sort((a, b) => b[1] - a[1])[0];
+    const ex = c.tx - timed.length;
+    out.push(`시간대 매출 1위 <b>${h1[0]}시대</b> ${won(h1[1])} (시간 기재 ${timed.length}건 기준${ex ? `, 미기재 ${ex}건 제외` : ''}).`);
+  }
+  const issue = c.rs.filter(hasIssue).length;
+  if (issue) out.push(`전표 ${c.tx}건 모두 정제 완료. 다만 <b>${issue}건</b>은 시간 또는 결제수단이 비어 있어 정보 완전 전표는 ${c.tx - issue}건입니다.`);
+  el.innerHTML = out.map(s => `<li>${s}</li>`).join('');
+}
+
+/* ---------- 정제 현황 ---------- */
+function rawTotal(rid) { const x = rawById.get(rid); const k = profById.get(x.profile_id).fields; return Number(String(x.data[k.total]).replace(/[^\d-]/g, '')); }
+function renderClean() {
+  renderBasis(compute());
+  const issue = receipts.filter(hasIssue).length;
+  const mt = receipts.filter(r => !r.time).length, mp = receipts.filter(r => r.payment_method === '미확인').length;
+  const both = receipts.filter(r => !r.time && r.payment_method === '미확인').length;
+  const diffs = receipts.filter(r => rawTotal(r.receipt_id) !== r.receipt_amount || sum(linesByRec.get(r.receipt_id), l => l.line_amount) !== r.receipt_amount);
+  const diffAmt = sum(receipts, r => Math.abs(rawTotal(r.receipt_id) - r.receipt_amount));
+  const profCount = new Map(); receipts.forEach(r => profCount.set(r.profile_id, (profCount.get(r.profile_id) || 0) + 1));
+  const ruleIds = Object.keys(D.summary.changes_by_rule);
+  $('#kpi-clean').innerHTML = [
+    { label: '원본 형식', value: `${D.profiles.length}<small>종</small>`, sub: [...profCount.entries()].map(([p, n]) => `${p.replace('POS_', '')} ${n}`).join(' · ') + '건' },
+    { label: '정제 완료 전표', value: `${receipts.length}<small>건</small>`, sub: `상품 행 ${lines.length}개 · 상품 마스터 ${D.products.length}종 연결`, cls: 'is-hero' },
+    { label: '일부 정보 미확인', value: `${issue}<small>건</small>`, sub: `시간 미기재 ${mt} · 결제 미확인 ${mp} (${both}건 중복)`, cls: 'is-warn' },
+    { label: '값 변환 기록', value: `${fmt(D.log.length)}<small>건</small>`, sub: `${ruleIds.length}개 규칙 · 형변환·항목명 대응 제외` },
+    { label: '원본 결제금액과 차이', value: `${fmt(diffAmt)}<small>원</small>`, sub: diffs.length ? `불일치 전표 ${diffs.length}건` : `${receipts.length}건 모두 원본 = 상품 합계 = 정제값` },
+  ].map(kpiHtml).join('');
+
+  /* 규칙 */
+  const rows = ruleIds.map(id => ({ id, ...D.summary.changes_by_rule[id] })).sort((a, b) => b.changed_fields - a.changed_fields);
+  const max = Math.max(...rows.map(r => r.changed_fields));
+  $('#rules').innerHTML = rows.map(r => {
+    const meta = RULE[r.id] || {};
+    const t = `<b>${RULE_KO[r.id] || r.id}</b> (${r.id})<br>${esc(meta.target || '')} · ${esc(meta.rule || '')}<br>결과: ${esc(meta.result || '')}${meta.note ? `<br>근거: ${esc(meta.note)}` : ''}`;
+    return `<button type="button" class="rule${r.id.startsWith('MISSING') ? ' missing' : ''}${st.logRule === r.id ? ' on' : ''}" data-rule="${r.id}" data-tip="${esc(t)}" aria-pressed="${st.logRule === r.id}">
+      <span class="rn">${RULE_KO[r.id] || r.id}<span>${r.id}</span></span>
+      <span class="rv">${fmt(r.changed_fields)}칸 <span>· ${r.affected_receipts}건</span></span>
+      <span class="rt"><div style="width:${(r.changed_fields / max * 100).toFixed(2)}%"></div></span></button>`;
+  }).join('');
+  document.querySelectorAll('#rules .rule').forEach(b => b.addEventListener('click', () => { st.logRule = st.logRule === b.dataset.rule ? '' : b.dataset.rule; hideTip(); renderClean(); }));
+  bindTips($('#rules'));
+
+  /* 원본 형식 */
+  $('#profiles').innerHTML = `<table><thead><tr><th>형식</th><th>날짜</th><th>시간</th><th>상품 키</th><th>금액 키</th><th class="r">전표</th></tr></thead><tbody>${D.profiles.map(p => `<tr><td><b>${p.profile_id}</b></td><td class="mono">${esc(p.date_format)}</td><td class="mono">${esc(p.time_format)}</td><td>${esc(p.fields.product)}</td><td>${esc(p.fields.total)}</td><td class="r">${profCount.get(p.profile_id) || 0}건</td></tr>`).join('')}</tbody></table>`;
+
+  /* 완전성 */
+  const catFill = D.log.filter(e => e.rule_id === 'CATEGORY_FILL').length;
+  const M = [
+    { n: '거래일', ok: receipts.filter(r => r.date).length, fill: 0, tot: receipts.length, unit: '건', d: '5가지 날짜 표기를 형식별 파서로 해석 (POS_B는 월/일/년)' },
+    { n: '거래시간', ok: receipts.filter(r => r.time).length, fill: 0, tot: receipts.length, unit: '건', d: `미기재 ${mt}건은 추정하지 않고 비워 둠 · 시간대 분석에서만 제외` },
+    { n: '결제수단', ok: receipts.filter(r => r.payment_method !== '미확인').length, fill: 0, tot: receipts.length, unit: '건', d: `미기재 ${mp}건은 ‘미확인’ · 매출과 사용률 분모에는 포함` },
+    { n: '카테고리', ok: lines.length - catFill, fill: catFill, tot: lines.length, unit: '행', d: `원본 빈칸 ${catFill}행은 상품 별칭으로 확인된 상품 마스터 값으로 보완` },
+    { n: '결제금액', ok: receipts.length - diffs.length, fill: 0, tot: receipts.length, unit: '건', d: '원본 결제금액 = 상품금액 합계 확인' },
+  ];
+  $('#meters').innerHTML = M.map(m => {
+    const no = m.tot - m.ok - m.fill;
+    return `<div class="meter"><div class="mn">${m.n}</div><div class="mt">${m.ok ? `<div class="ok" style="width:${pct(m.ok, m.tot)}%"></div>` : ''}${m.fill ? `<div class="fill" style="width:${pct(m.fill, m.tot)}%"></div>` : ''}${no ? `<div class="no" style="width:${pct(no, m.tot)}%"></div>` : ''}</div><div class="mv">${m.ok + m.fill}/${m.tot}${m.unit}</div><div class="md">${m.d}</div></div>`;
+  }).join('');
+
+  renderLog();
+}
+
+function renderLog() {
+  const ruleIds = Object.keys(D.summary.changes_by_rule);
+  fillSelect($('#log-rule'), [['', '전체 규칙'], ...ruleIds.map(r => [r, `${RULE_KO[r] || r} (${r})`])], st.logRule);
+  const q = st.logQ.trim().toLowerCase();
+  const rows = D.log.filter(e => (!st.logRule || e.rule_id === st.logRule) && (!q || [e.receipt_id, e.raw_value, e.cleaned_value, e.field, FIELD_KO[e.field]].some(v => String(v ?? '').toLowerCase().includes(q))));
+  $('#log-cnt').textContent = `${fmt(rows.length)} / ${fmt(D.log.length)}건`;
+  const shown = rows.slice(0, 400);
+  const cell = v => (v === '' || v == null) ? '<span class="blank">(빈칸)</span>' : esc(v);
+  $('#log').innerHTML = `<table><thead><tr><th>전표</th><th class="c">행</th><th>항목</th><th>원문</th><th>정제</th></tr></thead><tbody>${shown.map(e => `<tr class="clickable" data-rid="${e.receipt_id}" title="${esc(RULE_KO[e.rule_id] || e.rule_id)}"><td class="mono"><b>${e.receipt_id}</b></td><td class="c">${e.line_no ?? '–'}</td><td>${FIELD_KO[e.field] || e.field}</td><td class="raw">${cell(e.raw_value)}</td><td class="${e.rule_id.startsWith('MISSING') ? 'miss' : ''}">${e.rule_id === 'MISSING_TIME' ? '미기재 (null)' : cell(e.cleaned_value)}</td></tr>`).join('')}${rows.length > shown.length ? `<tr><td colspan="5" class="c" style="color:var(--muted)">처음 ${shown.length}건 표시 · 규칙이나 검색어로 좁혀 보세요</td></tr>` : ''}${!rows.length ? '<tr><td colspan="5" class="c" style="color:var(--muted)">일치하는 기록이 없습니다</td></tr>' : ''}</tbody></table>`;
+  $('#log').querySelectorAll('tr[data-rid]').forEach(tr => tr.addEventListener('click', () => openReceipt(tr.dataset.rid)));
+}
+$('#log-rule').addEventListener('change', e => { st.logRule = e.target.value; renderClean(); });
+$('#log-q').addEventListener('input', e => { st.logQ = e.target.value; renderLog(); });
+
+/* ---------- 전표·원본 비교 ---------- */
+function openReceipt(rid) {
+  st.sel = rid;
+  const c = compute();
+  if (!c.rs.some(r => r.receipt_id === rid)) Object.assign(st, { period: 'all', cat: '', prod: '', pay: '' });
+  st.issuesOnly = st.issuesOnly && hasIssue(recById.get(rid));
+  syncFilters();
+  setView('recs');
+  const row = document.querySelector(`#list tr[data-rid="${rid}"]`);
+  if (row) row.scrollIntoView({ block: 'center' });
+}
+$('#ls-all').addEventListener('click', () => { st.issuesOnly = false; renderRecs(); });
+$('#ls-issue').addEventListener('click', () => { st.issuesOnly = true; renderRecs(); });
+
+function statusBadge(r) {
+  if (!r.issue_codes) return '<span class="badge good">완전</span>';
+  return r.issue_codes.split(';').map(c => `<span class="badge warn">${c === 'MISSING_TIME' ? '시간 미기재' : '결제 미확인'}</span>`).join(' ');
+}
+
+function renderRecs() {
+  const c = compute();
+  renderBasis(c);
+  $('#ls-all').setAttribute('aria-pressed', String(!st.issuesOnly));
+  $('#ls-issue').setAttribute('aria-pressed', String(st.issuesOnly));
+  const list = (st.issuesOnly ? c.rs.filter(hasIssue) : c.rs).slice().sort((a, b) => a.receipt_id.localeCompare(b.receipt_id));
+  $('#list-cap').textContent = `필터 적용 ${c.tx}건${st.issuesOnly ? ` 중 미확인 정보가 있는 ${list.length}건` : ''} · 행을 누르면 원문과 정제값을 비교합니다`;
+  if (!list.some(r => r.receipt_id === st.sel)) st.sel = list[0]?.receipt_id || null;
+  $('#list').innerHTML = `<table><thead><tr><th>전표</th><th>일자</th><th>시각</th><th>결제</th><th class="r">품목</th><th class="r">${c.itemFilter ? '선택 상품 금액' : '결제금액'}</th><th>상태</th></tr></thead><tbody>${list.map(r => `
+    <tr class="clickable${r.receipt_id === st.sel ? ' sel' : ''}" data-rid="${r.receipt_id}" tabindex="0">
+      <td class="mono"><b>${r.receipt_id}</b></td><td class="mono">${mdShort(r.date)} ${wd(r.date)}</td><td class="mono">${r.time || '<span class="blank">–</span>'}</td>
+      <td>${r.payment_method === '미확인' ? '<span class="blank">미확인</span>' : r.payment_method}</td><td class="r">${r.line_count}</td><td class="r">${fmt(c.amt.get(r.receipt_id))}</td><td>${statusBadge(r)}</td></tr>`).join('')}
+    ${!list.length ? '<tr><td colspan="7" class="c" style="color:var(--muted);padding:24px">조건에 맞는 전표가 없습니다</td></tr>' : ''}</tbody></table>`;
+  $('#list').querySelectorAll('tr[data-rid]').forEach(tr => {
+    const go = () => { st.sel = tr.dataset.rid; $('#list').querySelectorAll('tr.sel').forEach(x => x.classList.remove('sel')); tr.classList.add('sel'); renderDetail(); };
+    tr.addEventListener('click', go);
+    tr.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  });
+  renderDetail();
+}
+
+function renderDetail() {
+  const el = $('#detail');
+  if (!st.sel) { el.innerHTML = '<div class="empty" style="grid-column:1/-1">선택한 조건에 해당하는 전표가 없습니다.</div>'; return; }
+  const r = recById.get(st.sel), raw = rawById.get(st.sel), p = profById.get(raw.profile_id), k = p.fields, src = raw.data;
+  const logs = logByRec.get(st.sel) || [];
+  const ruleFor = (field, line) => logs.filter(e => e.field === field && (e.line_no ?? null) === (line ?? null));
+  const cell = v => (v === '' || v == null) ? '<span class="blank">(빈칸)</span>' : esc(v);
+  const recFields = [
+    ['receipt_id', 'receipt_id', r.receipt_id],
+    ['date', 'date', r.date],
+    ['time', 'time', r.time],
+    ['store', 'store', r.store],
+    ['payment', 'payment_method', r.payment_method],
+    ['total', 'receipt_amount', r.receipt_amount],
+  ];
+  const fieldRows = recFields.map(([pk, cf, cv]) => {
+    const lg = ruleFor(cf, null);
+    const missing = lg.some(e => e.rule_id.startsWith('MISSING'));
+    const how = lg.length ? lg.map(e => RULE_KO[e.rule_id]).join(', ') : '변경 없음';
+    const cleanTxt = cf === 'time' && cv == null ? '미기재 (null)' : (typeof cv === 'number' ? fmt(cv) : cv);
+    return `<tr><td><b>${FIELD_KO[cf]}</b></td><td class="sub">${esc(k[pk])}</td><td class="raw">${cell(src[k[pk]])}</td><td class="${missing ? 'miss' : lg.length ? 'chg' : ''}">${esc(cleanTxt)}</td><td class="sub">${how}</td></tr>`;
+  }).join('');
+  const recLines = linesByRec.get(st.sel);
+  const lineRows = src[k.items].map(it => {
+    const l = recLines.find(x => x.line_no === it.line_no);
+    const chg = f => ruleFor(f, it.line_no).length ? (ruleFor(f, it.line_no).some(e => e.rule_id.startsWith('MISSING') || e.rule_id === 'CATEGORY_FILL') ? 'miss' : 'chg') : '';
+    return `<tr class="raw-row"><td rowspan="2" class="c">${it.line_no}</td><td>원문</td><td>${cell(it[k.product])}</td><td>${cell(it[k.category])}</td><td class="r">${cell(it[k.quantity])}</td><td class="r">${cell(it[k.unit_price])}</td><td class="r">${cell(it[k.discount])}</td><td class="r">${cell(it[k.amount])}</td></tr>
+      <tr class="cl-row"><td style="font-weight:700">정제</td><td class="${chg('product_name')}">${esc(l.product_name)}</td><td class="${chg('category')}">${esc(l.category)}</td><td class="r ${chg('quantity')}">${l.quantity}</td><td class="r ${chg('unit_price')}">${fmt(l.unit_price)}</td><td class="r ${chg('discount')}">${fmt(l.discount)}</td><td class="r ${chg('line_amount')}">${fmt(l.line_amount)}</td></tr>`;
+  }).join('');
+  const lineSum = sum(recLines, l => l.line_amount), rt = rawTotal(r.receipt_id);
+  const okAmt = lineSum === r.receipt_amount && rt === r.receipt_amount;
+  el.innerHTML = `
+    <div class="d-main">
+      <div class="d-head">
+        <div class="rid">${r.receipt_id}</div>
+        <div class="meta"><span class="badge plain">${r.profile_id} 형식</span><span class="badge plain">${md(r.date)} (${wd(r.date)}) ${r.time || '시간 미기재'}</span>${statusBadge(r)}</div>
+        <div class="amt">결제금액 <b class="num">${won(r.receipt_amount)}</b> · 상품 ${r.line_count}행 · 수량 ${r.item_quantity}개 · 할인 ${won(r.discount)} · <span style="color:${okAmt ? 'var(--good-ink)' : 'var(--warn-ink)'};font-weight:700">${okAmt ? '원본 금액 = 상품 합계 일치' : '금액 불일치'}</span></div>
+      </div>
+      <div>
+        <p class="sub-h">전표 항목 · 원본 항목명과 원문 값을 정제 값과 나란히 비교</p>
+        <div class="tbl-plain"><table><thead><tr><th>표준 항목</th><th>원본 항목명</th><th>원문 값</th><th>정제 값</th><th>처리</th></tr></thead><tbody>${fieldRows}</tbody></table></div>
+      </div>
+      <div>
+        <p class="sub-h">상품 행 · 원본 키 ${esc(k.product)} / ${esc(k.category)} / ${esc(k.quantity)} / ${esc(k.unit_price)} / ${esc(k.discount)} / ${esc(k.amount)}</p>
+        <div class="tbl-plain"><table><thead><tr><th class="c">행</th><th>구분</th><th>상품명</th><th>카테고리</th><th class="r">수량</th><th class="r">단가</th><th class="r">할인</th><th class="r">금액</th></tr></thead><tbody>${lineRows}</tbody></table></div>
+        <div class="mini-legend"><span><i style="background:var(--accent-soft);border:1px solid var(--accent)"></i>표기 변환</span><span><i style="background:var(--warn-soft);border:1px solid var(--warn)"></i>결측 처리·보완</span></div>
+      </div>
+    </div>
+    <div class="d-prev">
+      <p class="sub-h" style="text-align:center;margin:0">원본 전표 (${esc(r.source_file)})</p>
+      <div class="img"><img src="previews/${r.receipt_id}.png" alt="${r.receipt_id} 원본 전표 미리보기" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'blank',textContent:'미리보기 이미지를 찾을 수 없습니다'}))"></div>
+      <a class="btn primary" href="${esc(r.source_file)}" target="_blank" rel="noopener">원본 PDF 보기</a>
+      <div class="cap">PDF는 압축을 푼 폴더의 receipts/ 에서 열립니다</div>
+    </div>`;
+}
+
+/* ---------- 렌더 ---------- */
+function render() {
+  if (st.view === 'sales') renderSales();
+  else if (st.view === 'clean') renderClean();
+  else renderRecs();
+}
+function update() { syncFilters(); hideTip(); render(); }
+
+/* 16:9 맞춤 */
+const vp = $('#viewport'), stage = $('#stage');
+function fit() {
+  const vw = document.documentElement.clientWidth, vh = window.innerHeight;
+  const wide = vw >= 900;
+  document.documentElement.classList.toggle('fluid', !wide);
+  if (wide) {
+    let s = vw / 1600;
+    if (vh >= 420) s = Math.min(s, vh / 900);
+    stage.style.transform = `scale(${s})`;
+    vp.style.width = 1600 * s + 'px'; vp.style.height = 900 * s + 'px';
+  } else {
+    stage.style.transform = ''; vp.style.width = ''; vp.style.height = '';
+  }
+  render();
+}
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(fit, 80); });
+document.addEventListener('scroll', hideTip, true);
+
+syncFilters();
+const startView = (location.hash || '').slice(1);
+if (['sales', 'clean', 'recs'].includes(startView)) { st.view = startView; }
+setView(st.view);
+fit();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+</script>
