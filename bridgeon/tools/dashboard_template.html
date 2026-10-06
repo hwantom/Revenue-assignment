@@ -215,7 +215,7 @@ tbody tr.click:hover{background:var(--accent-soft)}
 .cmp .hd{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--muted);padding:6px 10px}
 .cmp .o,.cmp .s2{padding:8px 10px;border-top:1px solid var(--border)}
 .cmp .o{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;background:var(--warn-bg);color:var(--warn-ink)}
-.cmp .s2{font-weight:600}
+.cmp .s2{font-weight:600;display:flex;align-items:flex-end}
 .cmp .ar{display:grid;place-items:center;color:var(--muted);border-top:1px solid var(--border)}
 .cmp .fld{display:block;font-size:10px;letter-spacing:.08em;color:var(--muted);font-weight:700;font-family:inherit}
 .cmp .rl{display:block;font-size:10.5px;color:var(--muted);font-weight:500}
@@ -300,28 +300,28 @@ h4{margin:0 0 8px;font-size:13px}
       <div class="kpis" id="kpis"></div>
 
       <div class="card map-card">
-        <div class="card-h"><h2>GLOBAL TRANSACTION MAP</h2><span class="sub">서울 본점 기준 국가별 거래 · 원을 누르면 국가 상세로 이동</span>
+        <div class="card-h"><h2>GLOBAL TRANSACTION MAP</h2>
           <div class="right"><div class="seg" id="mapMetric"><button data-m="krw" aria-pressed="true">거래액</button><button data-m="rev" aria-pressed="false">수익</button><button data-m="cnt" aria-pressed="false">건수</button></div></div>
         </div>
         <div class="map-body"><div class="map-wrap"><svg class="map-svg" id="map" role="img" aria-label="국가별 거래 지도"></svg></div>
-        <div><div class="hint" style="margin:2px 6px 4px">국가 순위 · 비중</div><div class="rank" id="rank"></div></div></div>
+        <div class="rank" id="rank"></div></div>
       </div>
 
       <div class="card trend-card">
-        <div class="card-h"><h2>MONTHLY TREND</h2><span class="sub">2026년 1~9월 · 월을 누르면 월 상세</span></div>
+        <div class="card-h"><h2>MONTHLY TREND</h2></div>
         <div id="trend"></div>
       </div>
 
       <div class="card svc-card">
-        <div class="card-h"><h2>SERVICE REVENUE</h2><span class="sub">서비스별 수익 · 수익률</span></div>
+        <div class="card-h"><h2>SERVICE REVENUE</h2></div>
         <div id="svc"></div>
       </div>
       <div class="card cust-card">
-        <div class="card-h"><h2>CUSTOMER</h2><span class="sub">고객유형별 건수 비중 vs 거래액 비중</span></div>
+        <div class="card-h"><h2>CUSTOMER</h2></div>
         <div id="cust"></div>
       </div>
       <div class="card chan-card">
-        <div class="card-h"><h2>CHANNEL MIX</h2><span class="sub">분기별 거래건수 채널 비중</span></div>
+        <div class="card-h"><h2>CHANNEL MIX</h2></div>
         <div id="chan"></div>
       </div>
 
@@ -336,7 +336,6 @@ h4{margin:0 0 8px;font-size:13px}
         <div class="right"><input class="search" id="ledgerQ" placeholder="거래번호·국가·통화·원본 파일 검색" aria-label="거래 검색"></div>
       </div>
       <div class="tbl-wrap" style="max-height:calc(100vh - 230px)"><table id="ledger"></table></div>
-      <p class="hint">행을 누르면 계산 근거와 원본 전표 비교 화면이 열립니다. 상단 필터가 함께 적용됩니다.</p>
     </div>
   </section>
 
@@ -792,7 +791,7 @@ function renderDrawer() {
   const grid = document.createElement("div"); grid.className = "grid2";
   for (const d of bd.slice(0, 4)) {
     const card = document.createElement("div"); card.className = "card";
-    card.innerHTML = `<div class="card-h"><h2>BY ${DIM[d].tag}</h2><span class="sub">${DIM[d].ko}별 거래액 · 누르면 하위 단계</span></div>`;
+    card.innerHTML = `<div class="card-h"><h2>BY ${DIM[d].tag}</h2></div>`;
     const host = document.createElement("div"); card.appendChild(host); grid.appendChild(card);
     const g = group(rows, d);
     const items = DIM[d].order.filter(v => g.has(v)).map(v => { const aa = agg(g.get(v)); return {label: DIM[d].label(v), value: aa.krw, valueLabel: won(aa.krw), sub: `${aa.cnt}건 · 수익 ${won(aa.rev)}`,
@@ -803,13 +802,13 @@ function renderDrawer() {
   // monthly
   if (!used.has("Month")) {
     const card = document.createElement("div"); card.className = "card";
-    card.innerHTML = `<div class="card-h"><h2>BY MONTH</h2><span class="sub">월별 거래액 (막대) · 건수 (라벨)</span></div>`;
+    card.innerHTML = `<div class="card-h"><h2>BY MONTH</h2></div>`;
     const host = document.createElement("div"); card.appendChild(host); body.appendChild(card);
     requestAnimationFrame(() => monthBars(host, rows));
   }
   // transactions
   const card = document.createElement("div"); card.className = "card";
-  card.innerHTML = `<div class="card-h"><h2>TRANSACTIONS</h2><span class="sub">${rows.length}건 · 누르면 거래 상세와 원본 전표</span></div>`;
+  card.innerHTML = `<div class="card-h"><h2>TRANSACTIONS</h2><span class="sub">${rows.length}건</span></div>`;
   card.appendChild(txnTable(rows, true)); body.appendChild(card);
 }
 function monthBars(host, rows) {
@@ -847,19 +846,62 @@ function txnTable(rows, inDrawer) {
 }
 
 const CMP_FIELDS = [["date","Date","거래일"],["service","Service","서비스"],["customer","Customer_Type","고객유형"],["country","Country","국가"],["currency","Currency","통화"],["channel","Channel","채널"],["amount","Foreign_Amount","외화금액"],["tenor","Tenor_Days","여신기간"]];
+function stdValue(s, sk) {
+  return sk === "Foreign_Amount" ? s.Foreign_Amount.toLocaleString("en-US") : sk === "Tenor_Days" ? `${s.Tenor_Days}일` : sk === "Country" ? `${s.Country} (${CTRY[s.Country].ko})` : sk === "Service" ? `${s.Service} (${SVC_KO[s.Service]})` : s[sk];
+}
+const rawFields = s => CMP_FIELDS.filter(([rk]) => s.Raw[rk] !== undefined && String(s.Raw[rk]).trim() !== "");
+
+// TRANSACTION 단계: 값만 보여 준다 (설명은 마지막 RAW SLIP 단계에서)
 function renderTxnView(s) {
   $("#drTitle").textContent = s.Transaction_ID;
   $("#drBadges").innerHTML = `<span class="pill">${flagHtml(s.Country)}${esc(CTRY[s.Country].ko)}</span> <span class="pill">${SVC_KO[s.Service]}</span>`;
   const body = $("#drBody"); body.replaceChildren();
-  const logs = LOG_BY_FILE[s.Source_File] || [];
-  const unitNote = s.FX_Quote_Unit !== 1 ? ` (고시 ${s.FX_Quote.toLocaleString()}원 / ${s.FX_Quote_Unit} ${s.Currency})` : "";
-  const fxNote = s.FX_Rate_Date !== s.Date ? ` · 비영업일 → ${s.FX_Rate_Date} 고시` : "";
   const k = document.createElement("div"); k.className = "mini-kpis";
-  k.innerHTML = [["원화 거래액", won(s.KRW_Amount), fmtAmt(s.Foreign_Amount, s.Currency)], ["총 수익", won(s.Total_Revenue), `수익률 ${s.Revenue_Rate.toFixed(3)}%`], ["국가", flagHtml(s.Country, "lg") + esc(CTRY[s.Country].ko), esc(s.Country)], ["고객 · 채널", CUST_KO[s.Customer_Type], CHAN_KO[s.Channel]]]
+  k.innerHTML = [["원화 거래액", won(s.KRW_Amount), fmtAmt(s.Foreign_Amount, s.Currency)], ["총 수익", won(s.Total_Revenue), pct(s.Revenue_Rate / 100, 3)], ["국가", flagHtml(s.Country, "lg") + esc(CTRY[s.Country].ko), s.Date], ["고객 · 채널", CUST_KO[s.Customer_Type], CHAN_KO[s.Channel]]]
     .map(([kk, v, sub]) => `<div class="card"><div class="k">${kk}</div><div class="v num">${v}</div><div class="s">${sub}</div></div>`).join("");
   body.appendChild(k);
+  const cmp = document.createElement("div"); cmp.className = "card";
+  const rows = rawFields(s).map(([rk, sk, ko]) =>
+    `<div class="o"><span class="fld">${esc(ko)}</span>${esc(String(s.Raw[rk]))}</div><div class="ar">→</div><div class="s2">${esc(stdValue(s, sk))}</div>`).join("");
+  cmp.innerHTML = `<div class="card-h"><h2>ORIGINAL ↔ STANDARDIZED</h2><div class="right"><button class="btn primary" id="toRaw">원본 전표 →</button></div></div>
+    <div class="cmp"><div class="hd">ORIGINAL</div><div></div><div class="hd">STANDARDIZED</div>${rows}</div>`;
+  body.appendChild(cmp);
+  $("#toRaw", cmp).addEventListener("click", () => pushDrill({raw: s.Source_File}));
+}
+
+// RAW SLIP 단계 (마지막): 원본 파일 + 정제·환율·수익 계산 설명을 모두 여기서 보여 준다
+function renderRawView(file) {
+  const raw = RAW_BY_FILE[file], s = BY_ID[raw.transaction_id];
+  $("#drTitle").textContent = file.split("/").pop();
+  $("#drBadges").innerHTML = `<span class="pill">${esc(SYS_KO[raw.system])} · ${esc(raw.format)}</span>`;
+  const body = $("#drBody"); body.replaceChildren();
+  const dups = DATA.summary.pipeline.duplicates.filter(d => d.duplicate_of === file);
+
+  const card = document.createElement("div"); card.className = "card";
+  card.innerHTML = `<div class="card-h"><h2>RAW SLIP</h2><span class="sub">원본 파일 그대로 (수정 없음)</span><div class="right"><a class="btn" style="display:inline-flex;align-items:center;text-decoration:none" href="${esc(file)}" target="_blank" rel="noopener">파일 열기</a></div></div>`;
+  const pre = document.createElement("pre"); pre.className = "raw-pre"; pre.textContent = raw.text; card.appendChild(pre);
+  const meta = document.createElement("dl"); meta.className = "kv"; meta.style.marginTop = "12px";
+  meta.innerHTML = `<dt>파일 경로</dt><dd class="mono">${esc(file)}</dd><dt>원천 시스템 · 형식</dt><dd>${esc(SYS_KO[raw.system])} · ${esc(raw.format)}</dd><dt>원천번호</dt><dd class="mono">${esc(s ? s.Source_Ref : "-")}</dd><dt>정제 결과</dt><dd class="mono">${esc(raw.transaction_id || "-")}</dd>` + (dups.length ? `<dt>재전송 중복</dt><dd>${dups.map(d => `<span class="mono">${esc(d.file.split("/").pop())}</span>`).join(", ")} → 제거됨 (R00_DEDUP: 같은 시스템·원천번호·내용의 재전송 파일은 1건만 남김)</dd>` : "");
+  card.appendChild(meta);
+  body.appendChild(card);
+  if (!s) return;
+
+  // 필드별 정제 설명
+  const logs = LOG_BY_FILE[file] || [];
+  const ruleDesc = Object.fromEntries(DATA.rules.map(r => [r.id, r.rule]));
+  const steps = document.createElement("div"); steps.className = "card";
+  steps.innerHTML = `<div class="card-h"><h2>HOW IT WAS CLEANED</h2><span class="sub">필드별 적용 규칙</span></div>
+    <div class="tbl-wrap"><table><thead><tr><th>필드</th><th>원문</th><th>표준값</th><th>규칙</th><th>설명</th></tr></thead><tbody>${rawFields(s).map(([rk, sk, ko]) => {
+      const l = logs.find(x => x.field === sk);
+      return `<tr><td>${esc(ko)}</td><td class="mono" style="color:var(--warn-ink)">${esc(JSON.stringify(String(s.Raw[rk])))}</td><td><b>${esc(stdValue(s, sk))}</b></td><td class="mono">${l ? esc(l.rule) : '<span class="same">변경 없음</span>'}</td><td style="white-space:normal;min-width:220px">${l ? esc(l.rule === "R01_DATE" ? `원본 형식 ${l.note} → YYYY-MM-DD` : (l.note || ruleDesc[l.rule] || "")) : ""}</td></tr>`;
+    }).join("")}</tbody></table></div>`;
+  body.appendChild(steps);
+
+  // 환율·수익 계산 근거
+  const unitNote = s.FX_Quote_Unit !== 1 ? ` (고시 ${s.FX_Quote.toLocaleString()}원 / ${s.FX_Quote_Unit} ${s.Currency} → 1단위 환산)` : "";
+  const fxNote = s.FX_Rate_Date !== s.Date ? ` · 거래일이 비영업일이라 직전 고시일 환율 적용 (R09_FX_JOIN)` : "";
   const calc = document.createElement("div"); calc.className = "card";
-  calc.innerHTML = `<div class="card-h"><h2>CALCULATION</h2><span class="sub">계산 근거 (환율 출처: ${esc(DATA.fx_meta.source_label)})</span></div>
+  calc.innerHTML = `<div class="card-h"><h2>HOW IT WAS CALCULATED</h2><span class="sub">환율 출처: ${esc(DATA.fx_meta.source_label)}</span></div>
     <div class="eq num">${fmtAmt(s.Foreign_Amount, s.Currency)} × ${s.FX_Rate.toLocaleString(undefined, {maximumFractionDigits: 4})}원${esc(unitNote)} = <span style="color:var(--accent-ink)">${n0(s.KRW_Amount)}원</span></div>
     <dl class="calc num">
       <dt>적용 환율일</dt><dd>${s.FX_Rate_Date}${esc(fxNote)}</dd>
@@ -867,33 +909,10 @@ function renderTxnView(s) {
       <dt>수수료 수익</dt><dd>${n0(s.Fee)}원</dd>
       <dt>외환 관련 수익</dt><dd>${n0(s.FX_Revenue)}원</dd>
       <dt>금융 수익</dt><dd>${n0(s.Finance_Revenue)}원</dd>
-      <dt>총 수익</dt><dd style="color:var(--accent-ink)">${n0(s.Total_Revenue)}원 = ${n0(s.Fee)} + ${n0(s.FX_Revenue)} + ${n0(s.Finance_Revenue)}</dd>
-    </dl>`;
+      <dt>총 수익</dt><dd style="color:var(--accent-ink)">${n0(s.Total_Revenue)}원 = ${n0(s.Fee)} + ${n0(s.FX_Revenue)} + ${n0(s.Finance_Revenue)} · 수익률 ${s.Revenue_Rate.toFixed(3)}%</dd>
+    </dl>
+    <p class="hint" style="margin:10px 0 0">${esc(DATA.policy.basis)}${DATA.fx_meta.source === "SIMULATED" ? " 환율은 ECOS 연결 전 시뮬레이션 값입니다." : ""}</p>`;
   body.appendChild(calc);
-  const cmp = document.createElement("div"); cmp.className = "card";
-  const rows = CMP_FIELDS.filter(([rk]) => s.Raw[rk] !== undefined && String(s.Raw[rk]).trim() !== "").map(([rk, sk, ko]) => {
-    const l = logs.find(x => x.field === sk);
-    const std = sk === "Foreign_Amount" ? s.Foreign_Amount.toLocaleString("en-US") : sk === "Tenor_Days" ? `${s.Tenor_Days}일` : sk === "Country" ? `${s.Country} (${CTRY[s.Country].ko})` : sk === "Service" ? `${s.Service} (${SVC_KO[s.Service]})` : s[sk];
-    return `<div class="o"><span class="fld">${esc(ko)}</span>${esc(JSON.stringify(String(s.Raw[rk])))}</div><div class="ar">→</div><div class="s2"><span class="fld">${esc(sk)}</span><span class="${l ? "chg" : "same"}">${esc(std)}</span><span class="rl">${l ? esc(l.rule + (l.note ? " · " + l.note : "")) : "변경 없음"}</span></div>`;
-  }).join("");
-  cmp.innerHTML = `<div class="card-h"><h2>ORIGINAL ↔ STANDARDIZED</h2><span class="sub">${esc(SYS_KO[s.Source_System])} · ${esc(s.Source_Format)} · 원천번호 ${esc(s.Source_Ref)}</span><div class="right"><button class="btn primary" id="toRaw">원본 전표 보기 →</button></div></div>
-    <div class="cmp"><div class="hd">ORIGINAL</div><div></div><div class="hd">STANDARDIZED</div>${rows}</div>`;
-  body.appendChild(cmp);
-  $("#toRaw", cmp).addEventListener("click", () => pushDrill({raw: s.Source_File}));
-}
-function renderRawView(file) {
-  const raw = RAW_BY_FILE[file];
-  $("#drTitle").textContent = file.split("/").pop();
-  $("#drBadges").innerHTML = `<span class="pill">${esc(SYS_KO[raw.system])} · ${esc(raw.format)}</span>`;
-  const body = $("#drBody"); body.replaceChildren();
-  const dups = DATA.summary.pipeline.duplicates.filter(d => d.duplicate_of === file);
-  const card = document.createElement("div"); card.className = "card";
-  card.innerHTML = `<div class="card-h"><h2>RAW SLIP</h2><span class="sub">원본 파일 그대로 (수정 없음)</span><div class="right"><a class="btn" style="display:inline-flex;align-items:center;text-decoration:none" href="${esc(file)}" target="_blank" rel="noopener">파일 열기</a></div></div>`;
-  const pre = document.createElement("pre"); pre.className = "raw-pre"; pre.textContent = raw.text; card.appendChild(pre);
-  const meta = document.createElement("dl"); meta.className = "kv"; meta.style.marginTop = "12px";
-  meta.innerHTML = `<dt>파일 경로</dt><dd class="mono">${esc(file)}</dd><dt>원천 시스템</dt><dd>${esc(SYS_KO[raw.system])}</dd><dt>형식</dt><dd>${esc(raw.format)}</dd><dt>정제 결과</dt><dd class="mono">${esc(raw.transaction_id || "-")}</dd>` + (dups.length ? `<dt>재전송 중복</dt><dd>${dups.map(d => `<span class="mono">${esc(d.file.split("/").pop())}</span>`).join(", ")} → 제거됨 (R00_DEDUP)</dd>` : "");
-  card.appendChild(meta);
-  body.appendChild(card);
 }
 
 // ---------- LEDGER ----------
@@ -1018,7 +1037,7 @@ function renderBasis() {
 function render() {
   const rows = rowsNow();
   const fl = [state.f.Customer_Type, state.f.Service, state.f.Channel].filter(v => v !== "all").length;
-  $("#fMeta").textContent = `${rows.length}건 표시 · 환율: ${DATA.fx_meta.source_label}${fl ? ` · 필터 ${fl}개 적용` : ""}`;
+  $("#fMeta").textContent = `${rows.length}건`;
   if (state.tab === "home") { renderKpis(rows); renderMap(rows); renderTrend(); renderService(rows); renderCustomer(rows); renderChannel(rows); renderInsight(rows); }
   if (state.tab === "ledger") renderLedger();
   if ($("#drawer").classList.contains("on")) renderDrawer();
