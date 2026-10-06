@@ -99,9 +99,9 @@ main{padding:12px 24px 24px}
 
 .home{display:grid;gap:12px;grid-template-columns:repeat(12,minmax(0,1fr))}
 .kpis{grid-column:1/-1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
-.kpi{padding:10px 16px}
+.kpi{padding:9px 14px}
 .kpi .k{font-size:11px;letter-spacing:.1em;font-weight:700;color:var(--muted)}
-.kpi .v{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-top:4px;line-height:1.15}
+.kpi .v{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-top:4px;line-height:1.15}
 .kpi .v small{font-size:14px;font-weight:700;margin-left:2px}
 .kpi .s{font-size:12px;color:var(--ink-2);margin-top:4px}
 .delta{font-weight:700}
@@ -111,7 +111,7 @@ main{padding:12px 24px 24px}
 .svc-card{grid-column:1/span 4}
 .cust-card{grid-column:5/span 4}
 .chan-card{grid-column:9/span 4}
-.insight{grid-column:1/-1;display:flex;gap:14px;align-items:stretch;background:var(--navy);color:var(--on-navy);border-radius:var(--radius);padding:12px 16px;flex-wrap:wrap}
+.insight{grid-column:1/-1;display:flex;gap:14px;align-items:stretch;background:var(--navy);color:var(--on-navy);border-radius:var(--radius);padding:8px 16px;flex-wrap:wrap}
 .insight .lab{font-weight:800;letter-spacing:.12em;font-size:12px;display:flex;align-items:center;padding-right:6px;color:#f5c35b}
 .insight .it{flex:1 1 auto;border-left:1px solid rgba(255,255,255,.14);padding-left:14px;font-size:13px;line-height:1.5}
 .insight .it b{color:#fff}
@@ -119,7 +119,7 @@ main{padding:12px 24px 24px}
 /* map */
 .map-body{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:12px;align-items:start}
 .map-wrap{position:relative}
-.map-svg{width:100%;height:auto;max-height:250px;display:block;background:var(--chart);border-radius:8px}
+.map-svg{width:100%;height:auto;max-height:232px;display:block;background:var(--chart);border-radius:8px}
 .map-svg .land{fill:var(--land);stroke:var(--chart);stroke-width:.5}
 .map-svg .land.active{fill:var(--land-active);cursor:pointer}
 .map-svg .land.active:hover,.map-svg .land.hot{fill:var(--land-hover)}
@@ -262,6 +262,58 @@ body{padding-bottom:var(--led-h)}
 .led .sep{color:#5a4a1e;margin:0 16px;font-size:12px}
 .led .flag{width:20px;height:15px;margin:0;box-shadow:none;filter:saturate(1.2) brightness(1.1)}
 @media (prefers-reduced-motion:reduce){.led-track{animation:none}.led-view{overflow-x:auto;mask-image:none}}
+
+/* ---------- 미니 시각 요소 ---------- */
+.spark{display:block;width:100%;height:24px;margin-top:4px;overflow:visible}
+.kpi{position:relative}
+.kpi-tag{position:absolute;top:10px;right:12px;font-size:11px;font-weight:700;color:var(--ink-2);background:var(--surface-2);border-radius:999px;padding:1px 7px}
+.flags-row{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
+.flags-row .flag{margin:0;width:22px;height:16.5px}
+.flags-row .off{opacity:.22;filter:grayscale(1)}
+.mom-bars{display:grid;grid-template-columns:auto 1fr;gap:2px 6px;align-items:center;margin-top:4px;font-size:10.5px;color:var(--muted)}
+.mom-bars i{display:block;height:7px;border-radius:2px}
+.sbar{display:flex;height:10px;border-radius:3px;overflow:hidden;gap:2px;background:var(--surface-2)}
+.sbar i{display:block;height:100%}
+.ins{display:flex;align-items:center;gap:10px;flex:1 1 auto;border-left:1px solid rgba(255,255,255,.14);padding-left:14px;min-width:0}
+.ins-v{flex:none;display:flex;align-items:center}
+.ins-t{display:flex;flex-direction:column;line-height:1.2}
+.ins-t b{font-size:15px;color:#fff;white-space:nowrap}
+.ins-t small{font-size:11px;color:var(--on-navy-2);white-space:nowrap}
+.ins .up{color:#ff6b61}.ins .dn{color:#6db3ff}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:3px 8px;border-radius:6px;background:var(--surface-2);border:1px solid var(--border);white-space:nowrap}
+.chip.raw{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--warn-bg);color:var(--warn-ink);border-color:transparent}
+.chip.std{font-weight:700;background:var(--accent-soft);color:var(--accent-ink);border-color:transparent}
+.chip.tag{font-size:10.5px;font-weight:700;letter-spacing:.04em;color:var(--ink-2);padding:2px 7px;border-radius:999px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.map-rows{display:grid;grid-template-columns:72px minmax(0,auto) 18px minmax(0,auto) 1fr;gap:8px 8px;align-items:center;font-size:12px}
+.map-rows .fl{color:var(--muted);font-size:11px;font-weight:700}
+.map-rows .ar{color:var(--muted);text-align:center}
+.map-rows .tg{justify-self:end}
+.eqs{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.eqb{background:var(--surface-2);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;justify-content:center;min-width:110px}
+.eqb b{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+.eqb small{font-size:11px;color:var(--muted);margin-top:2px}
+.eqb.hl{background:var(--accent-soft)} .eqb.hl b{color:var(--accent-ink)}
+.eqo{display:flex;align-items:center;font-size:20px;font-weight:700;color:var(--muted)}
+.vt{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.vt>div{background:var(--surface-2);border-radius:10px;padding:12px;display:flex;align-items:center;gap:10px}
+.vt .ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#fff;background:var(--up);flex:none}
+.vt .ic.bad{background:var(--down)}
+.vt b{font-size:20px;font-weight:800;display:block;line-height:1.1}
+.vt small{font-size:11.5px;color:var(--muted)}
+.fx-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.fx-grid>div{background:var(--surface-2);border-radius:10px;padding:10px 12px}
+.fx-grid .c{font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--ink-2)}
+.fx-grid .q{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;letter-spacing:.06em;padding:6px 12px;border-radius:999px;border:1px solid var(--border-strong);background:var(--surface)}
+.badge i{width:8px;height:8px;border-radius:50%;background:#f5a524;display:inline-block}
+.badge.ok i{background:var(--up)}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.legend.sm{font-size:11px;margin-top:4px}
+.sbar-row{display:grid;grid-template-columns:52px 1fr;gap:8px;align-items:center;margin-bottom:8px;font-size:11.5px;color:var(--ink-2)}
+.sbar-row .sbar{height:18px}
+.sbar-row .sbar i{display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;color:#fff;overflow:hidden;white-space:nowrap}
 @media (max-width:1180px){
   .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
   .map-card,.trend-card{grid-column:1/-1}
@@ -272,6 +324,7 @@ body{padding-bottom:var(--led-h)}
   .pipe{grid-template-columns:repeat(4,minmax(0,1fr))}
   .step::after{display:none}
   .fmt3{grid-template-columns:1fr}
+  .fx-grid,.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:720px){
   .led-tag span{display:none}
@@ -287,6 +340,9 @@ body{padding-bottom:var(--led-h)}
   .grid2{grid-template-columns:1fr}
   .pipe{grid-template-columns:repeat(2,minmax(0,1fr))}
   .kv{grid-template-columns:110px 1fr}
+  .map-rows{grid-template-columns:60px minmax(0,1fr) 14px minmax(0,1fr)}
+  .map-rows .tg{display:none}
+  .vt{grid-template-columns:1fr}
   .search{min-width:0;width:100%}
 }
 </style>
@@ -368,16 +424,16 @@ body{padding-bottom:var(--led-h)}
   <!-- PIPELINE -->
   <section class="view" id="view-pipeline">
     <div class="stack">
-      <div class="card"><div class="card-h"><h2>AUTOMATION PIPELINE</h2><span class="sub">Raw 전표 수집부터 대시보드까지 실제 처리 건수</span></div><div class="pipe" id="pipe"></div></div>
-      <div class="card"><div class="card-h"><h2>SOURCE FORMATS</h2><span class="sub">같은 종류의 거래가 시스템마다 다른 형식으로 들어온다</span></div><div class="fmt3" id="fmt3"></div></div>
+      <div class="card"><div class="card-h"><h2>AUTOMATION FLOW</h2></div><div id="flow"></div></div>
+      <div class="card"><div class="card-h"><h2>SOURCE FORMATS</h2></div><div class="fmt3" id="fmt3"></div></div>
       <div class="grid2">
-        <div class="card"><div class="card-h"><h2>STANDARDIZATION RULES</h2><span class="sub">규칙별 변경 건수 (한 전표에 여러 규칙이 적용되므로 합산 금지)</span></div><div class="tbl-wrap"><table id="rules"></table></div></div>
-        <div class="card"><div class="card-h"><h2>VALIDATION</h2><span class="sub">정제 결과 자동 검증</span></div><div id="valid"></div></div>
+        <div class="card"><div class="card-h"><h2>RULES</h2></div><div id="rules"></div></div>
+        <div class="card"><div class="card-h"><h2>VALIDATION</h2></div><div id="valid"></div></div>
       </div>
-      <div class="card"><div class="card-h"><h2>DICTIONARY</h2><span class="sub">표준 사전: 원본 표기 → 표준 값</span><div class="right"><div class="seg" id="dictSeg"></div></div></div><div class="tbl-wrap" style="max-height:360px"><table id="dict"></table></div></div>
+      <div class="card"><div class="card-h"><h2>DICTIONARY</h2><div class="right"><div class="seg" id="dictSeg"></div></div></div><div class="tbl-wrap" style="max-height:360px"><table id="dict"></table></div></div>
       <div class="card">
         <div class="card-h"><h2>CLEANING LOG</h2><span class="sub" id="logSub"></span>
-          <div class="right"><div class="f"><select id="logRule" aria-label="규칙 선택"></select></div><input class="search" id="logQ" placeholder="원문·표준값·파일 검색" aria-label="변환 이력 검색"></div>
+          <div class="right"><div class="f"><select id="logRule" aria-label="규칙 선택"></select></div><input class="search" id="logQ" placeholder="검색" aria-label="변환 이력 검색"></div>
         </div>
         <div class="tbl-wrap" style="max-height:480px"><table id="log"></table></div>
         <div class="pager" id="logPager"></div>
@@ -388,14 +444,13 @@ body{padding-bottom:var(--led-h)}
   <!-- BASIS -->
   <section class="view" id="view-basis">
     <div class="stack">
-      <div class="callout" id="basisCallout"></div>
+      <div class="badges" id="basisBadges"></div>
+      <div class="card"><div class="card-h"><h2>FX RATES</h2><span class="sub" id="fxSrcLabel"></span></div><div class="fx-grid" id="fxGrid"></div></div>
+      <div class="grid4" id="policy"></div>
       <div class="grid2">
-        <div class="card"><div class="card-h"><h2>FX RATE SOURCE</h2></div><div id="fxSrc"></div></div>
-        <div class="card"><div class="card-h"><h2>DATA COMPOSITION</h2></div><div id="dataComp"></div></div>
+        <div class="card"><div class="card-h"><h2>DATA</h2></div><div id="dataComp"></div></div>
+        <div class="card"><div class="card-h"><h2>FORMULA</h2></div><div id="fields"></div></div>
       </div>
-      <div class="card"><div class="card-h"><h2>MONTHLY AVERAGE FX</h2><span class="sub">원화 / 외화 1단위 · JPY·VND 는 100단위 고시를 1단위로 환산</span></div><div class="tbl-wrap"><table id="fxTbl"></table></div></div>
-      <div class="card"><div class="card-h"><h2>FEE &amp; SPREAD POLICY</h2><span class="sub" id="policySub"></span></div><div class="grid2" id="policy"></div></div>
-      <div class="card"><div class="card-h"><h2>STANDARD FIELDS</h2><span class="sub">정제 후 표준 데이터셋</span></div><div class="tbl-wrap"><table id="fields"></table></div></div>
     </div>
   </section>
 </main>
@@ -526,26 +581,51 @@ function initFilters() {
 const baseRows = () => S.filter(s => ["Customer_Type","Service","Channel"].every(k => state.f[k] === "all" || s[k] === state.f[k]));
 const rowsNow = () => { const ms = new Set(periodMonths()); return baseRows().filter(s => ms.has(s.Month)); };
 
+// ---------- 미니 시각 요소 (숫자만 들어가는 문자열 SVG) ----------
+function sparkSvg(vals, color, sel, kind = "line", fit = false) {
+  const W = 200, H = 30, n = vals.length, max = Math.max(...vals, 1), min = fit ? Math.min(...vals) : 0, span = (max - min) || 1;
+  const x = i => 3 + (W - 6) * i / (n - 1), y = v => H - 3 - (H - 8) * (v - min) / span, st = (W - 6) / (n - 1);
+  let out = "";
+  if (sel && sel.size < n) { const ix = [...sel].sort((a, b) => a - b); out += `<rect x="${x(ix[0]) - st/2}" y="0" width="${st * ix.length}" height="${H}" rx="3" fill="var(--accent-soft)"/>`; }
+  if (kind === "bar") {
+    const bw = st * .55;
+    vals.forEach((v, i) => { const h = Math.max(v ? 2 : 0, (H - 5) * v / max); out += `<rect x="${x(i) - bw/2}" y="${H - 1 - h}" width="${bw}" height="${h}" rx="1.5" fill="${!sel || sel.has(i) ? color : "var(--axis)"}"/>`; });
+  } else {
+    const pts = vals.map((v, i) => `${x(i)},${y(v)}`);
+    out += `<path d="M${x(0)},${H - 1} L${pts.join(" L")} L${x(n - 1)},${H - 1} Z" fill="${color}" fill-opacity=".12"/><path d="M${pts.join(" L")}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`;
+    const li = sel ? Math.max(...sel) : n - 1; out += `<circle cx="${x(li)}" cy="${y(vals[li])}" r="2.8" fill="${color}"/>`;
+  }
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">${out}</svg>`;
+}
+// 100% 막대: [[값, 색, 라벨]]
+function stackBar(parts, cls = "sbar", inner = false) {
+  const t = parts.reduce((a, p) => a + p[0], 0) || 1;
+  return `<div class="${cls}">${parts.filter(p => p[0] > 0).map(([v, c, l]) => `<i style="width:${v / t * 100}%;background:${c}" title="${esc(l)} ${share(v / t)}">${inner && v / t > .09 ? esc(l) : ""}</i>`).join("")}</div>`;
+}
+
 // ---------- KPI ----------
 function renderKpis(rows) {
   const a = agg(rows);
   const ms = periodMonths(), last = ms[ms.length-1], idx = MONTHS.indexOf(last), prev = MONTHS[idx-1];
-  const base = baseRows();
-  const cur = agg(base.filter(s => s.Month === last)), pv = prev ? agg(base.filter(s => s.Month === prev)) : null;
+  const base = baseRows(), sel = new Set(ms.map(m => MONTHS.indexOf(m)));
+  const byM = MONTHS.map(m => agg(base.filter(s => s.Month === m)));
+  const cur = byM[idx], pv = prev ? byM[idx - 1] : null;
   const g = (c, p) => p && p > 0 ? (c - p) / p : NaN;
   const gK = pv ? g(cur.krw, pv.krw) : NaN, gR = pv ? g(cur.rev, pv.rev) : NaN;
-  const active = new Set(rows.map(r => r.Country)).size;
-  const d = v => isFinite(v) ? `<span class="delta ${v >= 0 ? "up" : "down"}">${v >= 0 ? "▲" : "▼"} ${Math.abs(v*100).toFixed(1)}%</span>` : `<span class="same">비교 불가</span>`;
+  const activeSet = new Set(rows.map(r => r.Country));
+  const d = (v, big) => isFinite(v) ? `<span class="delta ${v >= 0 ? "up" : "down"}"${big ? ' style="font-size:24px"' : ""}>${v >= 0 ? "▲" : "▼"} ${Math.abs(v*100).toFixed(1)}%</span>` : `<span class="same">–</span>`;
   const [kv, ku] = wonParts(a.krw), [rv, ru] = wonParts(a.rev), [av, au] = wonParts(a.avg);
+  const momMax = Math.max(cur.krw, pv ? pv.krw : 0, 1);
+  const momViz = pv ? `<div class="mom-bars"><span>${+prev.slice(5)}월</span><i style="width:${pv.krw / momMax * 100}%;background:var(--axis)"></i><span>${+last.slice(5)}월</span><i style="width:${cur.krw / momMax * 100}%;background:var(--s1)"></i></div>` : "";
   const tiles = [
-    ["TOTAL TRANSACTION", `${kv}<small>${ku}</small>`, `원화 환산 거래액`],
-    ["REVENUE", `${rv}<small>${ru}</small>`, `수익률 <b class="num">${pct(a.rate, 3)}</b>`],
-    ["ORDERS", `${a.cnt}<small>건</small>`, `전체 100건 중 ${pct(a.cnt/100, 0)}`],
-    ["AVG. VALUE", `${av}<small>${au}</small>`, `건당 평균 거래액`],
-    ["MoM", d(gK).replace('class="delta', 'style="font-size:24px" class="delta'), prev ? `${+last.slice(5)}월 vs ${+prev.slice(5)}월 거래액 · 수익 ${d(gR)}` : `1월은 전월 데이터 없음`],
-    ["ACTIVE COUNTRIES", `${active}<small>/ 8</small>`, `거래 발생 국가`],
+    ["TOTAL TRANSACTION", `${kv}<small>${ku}</small>`, sparkSvg(byM.map(x => x.krw), "var(--s1)", sel), ""],
+    ["REVENUE", `${rv}<small>${ru}</small>`, sparkSvg(byM.map(x => x.rev), "var(--s2)", sel), pct(a.rate, 2)],
+    ["ORDERS", `${a.cnt}<small>건</small>`, sparkSvg(byM.map(x => x.cnt), "var(--s1)", sel, "bar"), ""],
+    ["AVG. VALUE", `${av}<small>${au}</small>`, sparkSvg(byM.map(x => x.avg), "var(--c3)", sel), ""],
+    ["MoM", d(gK, true), momViz, pv ? `수익 ${d(gR)}` : ""],
+    ["ACTIVE COUNTRIES", `${activeSet.size}<small>/ 8</small>`, `<div class="flags-row">${CTRY_LIST.map(c => flagHtml(c, activeSet.has(c) ? "" : "off").replace("<img", `<img title="${esc(CTRY[c].ko)}"`)).join("")}</div>`, ""],
   ];
-  $("#kpis").innerHTML = tiles.map(([k, v, s]) => `<div class="card kpi"><div class="k">${k}</div><div class="v num">${v}</div><div class="s">${s}</div></div>`).join("");
+  $("#kpis").innerHTML = tiles.map(([k, v, viz, tag]) => `<div class="card kpi"><div class="k">${k}</div>${tag ? `<span class="kpi-tag">${tag}</span>` : ""}<div class="v num">${v}</div>${viz}</div>`).join("");
 }
 
 // ---------- MAP ----------
@@ -617,7 +697,7 @@ function renderTrend() {
   const host = $("#trend"), W = Math.max(300, host.clientWidth || 480);
   const base = baseRows(), sel = new Set(periodMonths());
   const byM = MONTHS.map(m => agg(base.filter(s => s.Month === m)));
-  const H1 = 92, gap = 22, padL = 46, padR = 12, padT = 18, padB = 22;
+  const H1 = 84, gap = 20, padL = 46, padR = 12, padT = 18, padB = 22;
   const H = padT + H1 + gap + H1 + padB;
   const el = svg("svg", {class: "chart-svg", viewBox: `0 0 ${W} ${H}`, height: H, role: "img", "aria-label": "월별 거래액과 수익 추이"});
   const x = i => padL + (W - padL - padR) * (i / (MONTHS.length - 1));
@@ -686,7 +766,7 @@ function hbars(host, items, opts) {
 function renderService(rows) {
   const g = group(rows, "Service"), total = sum(rows, "Total_Revenue") || 1;
   hbars($("#svc"), SVC.map(s => { const a = agg(g.get(s) || []); return {
-    label: SVC_KO[s], value: a.rev, color: SVC_COLOR[s], valueLabel: won(a.rev), sub: `${share(a.rev/total)} · 수익률 ${pct(a.rate, 2)} · ${a.cnt}건`,
+    label: SVC_KO[s], value: a.rev, color: SVC_COLOR[s], valueLabel: won(a.rev), sub: share(a.rev/total),
     tipTitle: `${SVC_KO[s]} · ${s}`, tip: tipRows(g.get(s) || []), onClick: a.cnt ? () => openDrill([{dim: "Service", value: s}]) : null }; }),
     {aria: "서비스별 수익", padL: 86, rowH: 36});
 }
@@ -742,13 +822,15 @@ function renderChannel(rows) {
   host.replaceChildren(el, lg);
 }
 
-// ---------- insights (현재 필터의 실제 계산 결과로 생성) ----------
+// ---------- insights: 숫자 + 미니 그래픽 (현재 필터의 실제 계산 결과) ----------
 function renderInsight(rows) {
   const out = [];
   const base = baseRows();
-  if (!rows.length) { $("#insight").innerHTML = `<span class="lab">INSIGHT</span><span class="it">선택한 조건에 해당하는 거래가 없습니다.</span>`; return; }
-  // 1) 최근 2개월 vs 이전 월평균 건수 증가가 가장 큰 국가
-  const ms = periodMonths(); const last2 = MONTHS.slice(Math.max(0, MONTHS.indexOf(ms[ms.length-1]) - 1), MONTHS.indexOf(ms[ms.length-1]) + 1);
+  const card = (viz, big, label) => `<div class="ins"><div class="ins-v">${viz}</div><div class="ins-t"><b>${big}</b><small>${label}</small></div></div>`;
+  const mini = (vals, cols, w = 14) => `<svg width="${vals.length * (w + 3)}" height="24" aria-hidden="true">${vals.map((v, i) => `<rect x="${i * (w + 3)}" y="${24 - Math.max(2, 22 * v)}" width="${w}" height="${Math.max(2, 22 * v)}" rx="2" fill="${cols[i]}"/>`).join("")}</svg>`;
+  if (!rows.length) { $("#insight").innerHTML = `<span class="lab">INSIGHT</span>` + card("", "0건", "—"); return; }
+  // 1) 최근 2개월 월평균 건수 증가가 가장 큰 국가
+  const ms = periodMonths(), li = MONTHS.indexOf(ms[ms.length-1]), last2 = MONTHS.slice(Math.max(0, li - 1), li + 1);
   const before = MONTHS.slice(0, MONTHS.indexOf(last2[0]));
   if (before.length >= 2) {
     let best = null;
@@ -757,24 +839,31 @@ function renderInsight(rows) {
       const b = base.filter(s => s.Country === c && before.includes(s.Month)).length / before.length;
       if (a >= 2 && (!best || a - b > best.diff)) best = {c, a, b, diff: a - b};
     }
-    if (best && best.diff > 0) out.push(`${flagHtml(best.c)}<b>${CTRY[best.c].ko}</b> 거래 ${last2.map(m => +m.slice(5)).join("~")}월 월평균 <b>${best.a.toFixed(1)}건</b> · 이전 월평균 ${best.b.toFixed(1)}건 대비 <b>${best.b ? "+" + Math.round((best.a/best.b - 1) * 100) + "%" : "신규"}</b>`);
+    if (best && best.diff > 0) out.push(card(flagHtml(best.c, "lg"), `<span class="up">▲ ${best.b ? Math.round((best.a/best.b - 1) * 100) + "%" : "NEW"}</span>`, `${esc(CTRY[best.c].ko)} · ${last2.map(m => +m.slice(5)).join("~")}월 건수`));
   }
   // 2) 통화 집중도
-  const byCcy = [...group(rows, "Currency")].map(([k, r]) => [k, sum(r, "KRW_Amount")]).sort((a, b) => b[1] - a[1]);
   const tk = sum(rows, "KRW_Amount");
-  out.push(`<b>${byCcy[0][0]}</b> 비중 <b>${share(byCcy[0][1]/tk)}</b> (거래액 기준) · 2위 ${byCcy[1] ? `${byCcy[1][0]} ${share(byCcy[1][1]/tk)}` : "없음"}`);
-  // 3) 기업 고액화
+  const byCcy = [...group(rows, "Currency")].map(([k, r]) => [k, sum(r, "KRW_Amount")]).sort((a, b) => b[1] - a[1]);
+  const ccyCols = ["#86b6ef", "rgba(255,255,255,.55)", "rgba(255,255,255,.25)"];
+  const top = byCcy.slice(0, 2).map(([k, v], i) => [v, ccyCols[i], k]).concat([[byCcy.slice(2).reduce((a, x) => a + x[1], 0), ccyCols[2], "기타"]]);
+  out.push(card(`<div style="width:70px">${stackBar(top)}</div>`, `${byCcy[0][0]} ${share(byCcy[0][1]/tk)}`, "통화 비중"));
+  // 3) 기업: 건수 비중 vs 거래액 비중
   const corp = rows.filter(r => r.Customer_Type === "Corporate");
-  if (corp.length && corp.length < rows.length) out.push(`기업 고객은 건수 <b>${share(corp.length/rows.length)}</b>지만 거래액 <b>${share(sum(corp, "KRW_Amount")/tk)}</b> · 건당 ${won(sum(corp, "KRW_Amount")/corp.length)}`);
-  // 4) 모바일 비중 변화 (개인·외국인)
+  if (corp.length && corp.length < rows.length) {
+    const c1 = corp.length / rows.length, c2 = sum(corp, "KRW_Amount") / tk;
+    out.push(card(mini([c1, c2], ["rgba(255,255,255,.45)", "#86b6ef"]), `${share(c1)} → ${share(c2)}`, "기업 건수 → 거래액"));
+  }
+  // 4) 개인·외국인 모바일 비중 1분기 → 3분기
   const retail = base.filter(r => r.Customer_Type !== "Corporate");
   const mshare = mm => { const r = retail.filter(x => mm.includes(x.Month)); return r.length ? r.filter(x => x.Channel === "Mobile").length / r.length : NaN; };
   const q1 = mshare(MONTHS.slice(0,3)), q3 = mshare(MONTHS.slice(6,9));
-  if (isFinite(q1) && isFinite(q3)) out.push(`개인·외국인 모바일 비중 1분기 <b>${pct(q1, 0)}</b> → 3분기 <b>${pct(q3, 0)}</b>`);
-  // 5) 서비스 최대 수익
-  const sv = [...group(rows, "Service")].map(([k, r]) => [k, sum(r, "Total_Revenue")]).sort((a, b) => b[1] - a[1]);
-  if (out.length < 4) out.push(`최대 수익 서비스 <b>${SVC_KO[sv[0][0]]}</b> ${won(sv[0][1])} (${share(sv[0][1]/sum(rows, "Total_Revenue"))})`);
-  $("#insight").innerHTML = `<span class="lab">INSIGHT</span>` + out.slice(0, 4).map(t => `<span class="it">${t}</span>`).join("");
+  if (isFinite(q1) && isFinite(q3)) out.push(card(mini([q1, q3], ["rgba(255,255,255,.45)", "#e87ba4"]), `${pct(q1, 0)} → ${pct(q3, 0)}`, "모바일 1Q → 3Q"));
+  // 5) 최대 수익 서비스 (자리가 남을 때)
+  if (out.length < 4) {
+    const sv = [...group(rows, "Service")].map(([k, r]) => [k, sum(r, "Total_Revenue")]).sort((a, b) => b[1] - a[1]);
+    out.push(card(`<span class="dot" style="background:${SVC_COLOR[sv[0][0]]};width:12px;height:12px"></span>`, `${SVC_KO[sv[0][0]]} ${share(sv[0][1]/sum(rows, "Total_Revenue"))}`, "최대 수익"));
+  }
+  $("#insight").innerHTML = `<span class="lab">INSIGHT</span>` + out.slice(0, 4).join("");
 }
 
 // ---------- DRILL-DOWN ----------
@@ -899,49 +988,51 @@ function renderTxnView(s) {
   $("#toRaw", cmp).addEventListener("click", () => pushDrill({raw: s.Source_File}));
 }
 
-// RAW SLIP 단계 (마지막): 원본 파일 + 정제·환율·수익 계산 설명을 모두 여기서 보여 준다
+// RAW SLIP 단계 (마지막): 원본 파일 + 정제·계산 과정을 그림으로
+const RULE_KO = {R00_DEDUP: "중복", R01_DATE: "날짜", R02_SERVICE: "서비스", R03_CUSTOMER: "고객", R04_COUNTRY: "국가", R05_CHANNEL: "채널", R06_CURRENCY: "통화", R07_AMOUNT: "금액·단위", R08_TYPO: "오탈자", R09_FX_JOIN: "환율일", R10_REVENUE: "수익"};
 function renderRawView(file) {
   const raw = RAW_BY_FILE[file], s = BY_ID[raw.transaction_id];
   $("#drTitle").textContent = file.split("/").pop();
   $("#drBadges").innerHTML = `<span class="pill">${esc(SYS_KO[raw.system])} · ${esc(raw.format)}</span>`;
   const body = $("#drBody"); body.replaceChildren();
   const dups = DATA.summary.pipeline.duplicates.filter(d => d.duplicate_of === file);
+  const ruleDesc = Object.fromEntries(DATA.rules.map(r => [r.id, r.rule]));
 
   const card = document.createElement("div"); card.className = "card";
-  card.innerHTML = `<div class="card-h"><h2>RAW SLIP</h2><span class="sub">원본 파일 그대로 (수정 없음)</span><div class="right"><a class="btn" style="display:inline-flex;align-items:center;text-decoration:none" href="${esc(file)}" target="_blank" rel="noopener">파일 열기</a></div></div>`;
+  card.innerHTML = `<div class="card-h"><h2>RAW SLIP</h2><div class="right"><a class="btn" style="display:inline-flex;align-items:center;text-decoration:none" href="${esc(file)}" target="_blank" rel="noopener">파일 열기</a></div></div>`;
   const pre = document.createElement("pre"); pre.className = "raw-pre"; pre.textContent = raw.text; card.appendChild(pre);
-  const meta = document.createElement("dl"); meta.className = "kv"; meta.style.marginTop = "12px";
-  meta.innerHTML = `<dt>파일 경로</dt><dd class="mono">${esc(file)}</dd><dt>원천 시스템 · 형식</dt><dd>${esc(SYS_KO[raw.system])} · ${esc(raw.format)}</dd><dt>원천번호</dt><dd class="mono">${esc(s ? s.Source_Ref : "-")}</dd><dt>정제 결과</dt><dd class="mono">${esc(raw.transaction_id || "-")}</dd>` + (dups.length ? `<dt>재전송 중복</dt><dd>${dups.map(d => `<span class="mono">${esc(d.file.split("/").pop())}</span>`).join(", ")} → 제거됨 (R00_DEDUP: 같은 시스템·원천번호·내용의 재전송 파일은 1건만 남김)</dd>` : "");
+  const meta = document.createElement("div"); meta.className = "chips"; meta.style.marginTop = "10px";
+  meta.innerHTML = `<span class="chip mono">${esc(s ? s.Source_Ref : "-")}</span><span class="same">→</span><span class="chip std mono">${esc(raw.transaction_id || "-")}</span>` +
+    dups.map(d => `<span class="chip tag" title="${esc(ruleDesc.R00_DEDUP)}">✕ ${esc(d.file.split("/").pop())} 중복 제거</span>`).join("");
   card.appendChild(meta);
   body.appendChild(card);
   if (!s) return;
 
-  // 필드별 정제 설명
+  // 원문 → 표준값 (규칙 태그에 마우스를 올리면 규칙 설명)
   const logs = LOG_BY_FILE[file] || [];
-  const ruleDesc = Object.fromEntries(DATA.rules.map(r => [r.id, r.rule]));
-  const steps = document.createElement("div"); steps.className = "card";
-  steps.innerHTML = `<div class="card-h"><h2>HOW IT WAS CLEANED</h2><span class="sub">필드별 적용 규칙</span></div>
-    <div class="tbl-wrap"><table><thead><tr><th>필드</th><th>원문</th><th>표준값</th><th>규칙</th><th>설명</th></tr></thead><tbody>${rawFields(s).map(([rk, sk, ko]) => {
-      const l = logs.find(x => x.field === sk);
-      return `<tr><td>${esc(ko)}</td><td class="mono" style="color:var(--warn-ink)">${esc(JSON.stringify(String(s.Raw[rk])))}</td><td><b>${esc(stdValue(s, sk))}</b></td><td class="mono">${l ? esc(l.rule) : '<span class="same">변경 없음</span>'}</td><td style="white-space:normal;min-width:220px">${l ? esc(l.rule === "R01_DATE" ? `원본 형식 ${l.note} → YYYY-MM-DD` : (l.note || ruleDesc[l.rule] || "")) : ""}</td></tr>`;
-    }).join("")}</tbody></table></div>`;
-  body.appendChild(steps);
+  const cl = document.createElement("div"); cl.className = "card";
+  cl.innerHTML = `<div class="card-h"><h2>CLEANED</h2></div><div class="map-rows">${rawFields(s).map(([rk, sk, ko]) => {
+    const l = logs.find(x => x.field === sk);
+    const tip = l ? (l.rule === "R01_DATE" ? `${l.note} → YYYY-MM-DD` : (l.note || ruleDesc[l.rule] || "")) : "";
+    const std = sk === "Country" ? flagHtml(s.Country) + esc(s.Country) : sk === "Service" ? `<span class="dot" style="background:${SVC_COLOR[s.Service]}"></span>${esc(s.Service)}` : esc(stdValue(s, sk));
+    return `<span class="fl">${esc(ko)}</span><span class="chip raw">${esc(String(s.Raw[rk]))}</span><span class="ar">${l ? "→" : "="}</span><span class="chip std">${std}</span><span class="tg">${l ? `<span class="chip tag" title="${esc(tip)}">${RULE_KO[l.rule] || esc(l.rule)}</span>` : ""}</span>`;
+  }).join("")}</div>`;
+  body.appendChild(cl);
 
-  // 환율·수익 계산 근거
-  const unitNote = s.FX_Quote_Unit !== 1 ? ` (고시 ${s.FX_Quote.toLocaleString()}원 / ${s.FX_Quote_Unit} ${s.Currency} → 1단위 환산)` : "";
-  const fxNote = s.FX_Rate_Date !== s.Date ? ` · 거래일이 비영업일이라 직전 고시일 환율 적용 (R09_FX_JOIN)` : "";
+  // 계산: 외화 × 환율 = 원화, 수익 구성
+  const fxDate = s.FX_Rate_Date.slice(5).replace("-", "/") + (s.FX_Rate_Date !== s.Date ? " ↶" : "");
+  const parts = [[s.Fee, "var(--s2)", "수수료"], [s.FX_Revenue, "var(--s1)", "외환"], [s.Finance_Revenue, "var(--s4)", "금융"]];
   const calc = document.createElement("div"); calc.className = "card";
-  calc.innerHTML = `<div class="card-h"><h2>HOW IT WAS CALCULATED</h2><span class="sub">환율 출처: ${esc(DATA.fx_meta.source_label)}</span></div>
-    <div class="eq num">${fmtAmt(s.Foreign_Amount, s.Currency)} × ${s.FX_Rate.toLocaleString(undefined, {maximumFractionDigits: 4})}원${esc(unitNote)} = <span style="color:var(--accent-ink)">${n0(s.KRW_Amount)}원</span></div>
-    <dl class="calc num">
-      <dt>적용 환율일</dt><dd>${s.FX_Rate_Date}${esc(fxNote)}</dd>
-      ${s.Revenue_Steps.map((t, i) => `<dt>${i ? "" : "수익 산식"}</dt><dd>${esc(t)}</dd>`).join("")}
-      <dt>수수료 수익</dt><dd>${n0(s.Fee)}원</dd>
-      <dt>외환 관련 수익</dt><dd>${n0(s.FX_Revenue)}원</dd>
-      <dt>금융 수익</dt><dd>${n0(s.Finance_Revenue)}원</dd>
-      <dt>총 수익</dt><dd style="color:var(--accent-ink)">${n0(s.Total_Revenue)}원 = ${n0(s.Fee)} + ${n0(s.FX_Revenue)} + ${n0(s.Finance_Revenue)} · 수익률 ${s.Revenue_Rate.toFixed(3)}%</dd>
-    </dl>
-    <p class="hint" style="margin:10px 0 0">${esc(DATA.policy.basis)}${DATA.fx_meta.source === "SIMULATED" ? " 환율은 ECOS 연결 전 시뮬레이션 값입니다." : ""}</p>`;
+  calc.innerHTML = `<div class="card-h"><h2>CALCULATED</h2><div class="right">${DATA.fx_meta.source === "SIMULATED" ? '<span class="chip tag">SIM 환율</span>' : '<span class="chip tag">ECOS</span>'}<span class="chip tag" title="${esc(DATA.policy.basis)}">가상 정책</span></div></div>
+    <div class="eqs">
+      <div class="eqb"><b>${esc(s.Foreign_Amount.toLocaleString("en-US"))}</b><small>${esc(s.Currency)}</small></div><div class="eqo">×</div>
+      <div class="eqb" title="${s.FX_Quote_Unit !== 1 ? esc(`${s.FX_Quote.toLocaleString()}원 / ${s.FX_Quote_Unit} ${s.Currency}`) : ""}${s.FX_Rate_Date !== s.Date ? esc(` · 직전 고시일 ${s.FX_Rate_Date}`) : ""}"><b>${s.FX_Rate.toLocaleString(undefined, {maximumFractionDigits: 4})}</b><small>₩ · ${esc(fxDate)}</small></div><div class="eqo">=</div>
+      <div class="eqb hl"><b>₩${n0(s.KRW_Amount)}</b><small>KRW</small></div>
+    </div>
+    <div style="margin-top:14px">${stackBar(parts, "sbar", false).replace('class="sbar"', 'class="sbar" style="height:14px"')}
+      <div class="legend sm">${parts.map(([v, c, l]) => `<span><i style="background:${c}"></i>${l} <b class="num">${n0(v)}</b></span>`).join("")}<span style="margin-left:auto"><b class="num" style="color:var(--accent-ink)">₩${n0(s.Total_Revenue)}</b> · ${s.Revenue_Rate.toFixed(3)}%</span></div>
+    </div>
+    <div class="chips" style="margin-top:10px">${s.Revenue_Steps.map(t => `<span class="chip">${esc(t)}</span>`).join("")}</div>`;
   body.appendChild(calc);
 }
 
@@ -967,43 +1058,73 @@ function renderLedger() {
   t.querySelectorAll("th.sortable").forEach(th => th.addEventListener("click", () => { const k = th.dataset.k; state.ledgerSort = [k, state.ledgerSort[0] === k ? -state.ledgerSort[1] : (["KRW_Amount","Total_Revenue","Foreign_Amount","Revenue_Rate"].includes(k) ? -1 : 1)]; renderLedger(); }));
 }
 
-// ---------- PIPELINE ----------
+// ---------- PIPELINE: 흐름도 + 막대 + 체크 타일 ----------
 function renderPipeline() {
   const P = DATA.summary.pipeline, V = DATA.validation;
   const ruleCount = r => DATA.log.filter(l => l.rule === r).length;
-  const steps = [
-    ["01 수집", "Raw 전표 수집", P.collected, "개 파일", `TXT ${P.detected_formats["BRANCH/TXT"]} · JSON ${P.detected_formats["DIGITAL/JSON"]} · CSV ${P.detected_formats["CORP/CSV"]}`],
-    ["02 감지", "형식 감지", Object.keys(P.detected_formats).length, "종 형식", "시스템별 항목명·날짜·금액 패턴 식별"],
-    ["03 정제", "중복·공백·오탈자", P.duplicates.length, "건 중복 제거", `오탈자 교정 ${ruleCount("R08_TYPO")}건 · 금액 단위 ${ruleCount("R07_AMOUNT")}건`],
-    ["04 표준화", "사전 기반 치환", P.standardized, "건 표준화", `값 변경 기록 ${P.changes_logged}건`],
-    ["05 결합", "환율 결합", P.fx_joined, "건 환율 결합", `직전 고시일 적용 ${ruleCount("R09_FX_JOIN")}건`],
-    ["06 계산", "수익 계산", S.length, "건 수익 산출", `총 수익 ${won(DATA.summary.total_revenue)}`],
-    ["07 시각화", "대시보드·Drill-down", S.length, "건 원본 연결", V.passed ? "검증 통과" : "검증 실패"],
+  const SYS_COL = {BRANCH: "var(--c3)", DIGITAL: "var(--c1)", CORP: "var(--c4)"};
+  const fmtCnt = sys => DATA.raw.filter(r => r.system === sys).length;
+  const sameDay = S.filter(x => x.FX_Rate_Date === x.Date).length;
+  // 흐름도: 열마다 누적 막대, 열 사이를 띠로 연결
+  const cols = [
+    {t: "수집", n: P.collected, u: "files", segs: [["BRANCH", fmtCnt("BRANCH"), SYS_COL.BRANCH, "TXT"], ["DIGITAL", fmtCnt("DIGITAL"), SYS_COL.DIGITAL, "JSON"], ["CORP", fmtCnt("CORP"), SYS_COL.CORP, "CSV"]]},
+    {t: "중복 제거", n: P.deduplicated, u: `−${P.duplicates.length}`, segs: [["k", P.deduplicated, "var(--accent)", ""], ["x", P.duplicates.length, "var(--axis)", "✕"]]},
+    {t: "표준화", n: P.standardized, u: `${P.changes_logged} edits`, segs: [["k", P.standardized, "var(--accent)", ""]]},
+    {t: "환율 결합", n: P.fx_joined, u: `↶ ${S.length - sameDay}`, segs: [["k", sameDay, "var(--accent)", ""], ["p", S.length - sameDay, "var(--land-hover)", "↶"]]},
+    {t: "수익 계산", n: won(DATA.summary.total_revenue), u: "KRW", segs: SVC.map(v => [v, S.filter(x => x.Service === v).length, SVC_COLOR[v], ""])},
   ];
-  $("#pipe").innerHTML = steps.map(([no, nm, big, unit, ds]) => `<div class="step"><div class="no">${no}</div><div class="nm">${nm}</div><div class="big num">${big}<small style="font-size:12px;font-weight:600;color:var(--ink-2)"> ${unit}</small></div><div class="ds">${ds}</div></div>`).join("");
-  // formats
-  const fmtInfo = {BRANCH: ["영업점 시스템", "TXT · 한글 항목명", "YYYY.MM.DD / YYYY년 M월 D일 · 한글 국가·통화명 · 쉼표 금액"], DIGITAL: ["디지털 시스템 (모바일·인터넷)", "JSON · 영문 약어 키", "MM/DD/YY hh:mm · $3.5K 같은 기호+단위 · 오탈자·앞뒤 공백"], CORP: ["기업뱅킹 시스템", "CSV · 대문자 컬럼", "DD-MON-YYYY · RMB/CNH · 500K / 1.2M 단위 · 여신기간 90D"]};
+  const host = $("#flow"), W = Math.max(560, host.clientWidth || 900), H = 230, top = 46, colH = 150, bw = 26;
+  const sc = colH / P.collected, xs = cols.map((_, i) => 20 + (W - 40 - bw) * i / (cols.length - 1));
+  const el = svg("svg", {class: "chart-svg", viewBox: `0 0 ${W} ${H}`, height: H, role: "img", "aria-label": "정제 자동화 흐름"});
+  // 띠 (유지되는 흐름만)
+  for (let i = 0; i < cols.length - 1; i++) {
+    const keep = i === 0 ? P.collected : cols[i].segs.filter(sg => sg[0] !== "x").reduce((a, sg) => a + sg[1], 0);
+    const nextKeep = i === 0 ? P.collected : keep;
+    const x1 = xs[i] + bw, x2 = xs[i + 1], h1 = keep * sc, h2 = (i === 0 ? P.collected : nextKeep) * sc, mx = (x1 + x2) / 2;
+    svg("path", {d: `M${x1},${top} C${mx},${top} ${mx},${top} ${x2},${top} L${x2},${top + h2} C${mx},${top + h2} ${mx},${top + h1} ${x1},${top + h1} Z`, fill: "var(--accent)", "fill-opacity": .1}, el);
+  }
+  cols.forEach((c, i) => {
+    let y = top;
+    c.segs.forEach(([key, n, col, lab]) => {
+      const h = n * sc;
+      const r = svg("rect", {x: xs[i], y: y + 1, width: bw, height: Math.max(1, h - 2), rx: 3, fill: col}, el);
+      bindTip(r, `${c.t}`, [[key === "x" ? "중복 제거" : key === "p" ? "직전 고시일 환율" : SYS_KO[key] || SVC_KO[key] || "처리", `${n}`, col]]);
+      if (lab && h > 14) { const t = svg("text", {x: xs[i] + bw + 5, y: y + h / 2 + 4, class: "val2"}, el); t.textContent = `${lab} ${n}`; }
+      y += h;
+    });
+    const t1 = svg("text", {x: xs[i], y: 16, class: "ttl"}, el); t1.textContent = c.t;
+    const t2 = svg("text", {x: xs[i], y: 36, class: "val num", "font-size": 18}, el); t2.textContent = typeof c.n === "number" ? c.n : c.n;
+    const t3 = svg("text", {x: xs[i], y: top + colH + 22, class: "tick"}, el); t3.textContent = c.u;
+  });
+  host.replaceChildren(el);
+
+  // 원본 형식 3종: 원문 그대로
   $("#fmt3").innerHTML = ["BRANCH", "DIGITAL", "CORP"].map(sys => {
     const ex = DATA.raw.find(r => r.system === sys && !r.duplicate);
-    const n = DATA.raw.filter(r => r.system === sys).length;
-    return `<div><h4>${fmtInfo[sys][0]} <span class="pill">${n}개 파일</span></h4><p class="hint" style="margin:0 0 8px">${fmtInfo[sys][1]} — ${fmtInfo[sys][2]}</p><pre class="raw-pre">${esc(ex.text)}</pre><p class="hint">예시 파일: <span class="mono">${esc(ex.file)}</span> → <a href="#" data-txn="${esc(ex.transaction_id)}">${esc(ex.transaction_id)}</a></p></div>`;
+    return `<div><div class="chips" style="margin-bottom:8px"><span class="dot" style="background:${SYS_COL[sys]};width:10px;height:10px"></span><b>${esc(SYS_KO[sys])}</b><span class="pill">${esc(ex.format)}</span><span class="pill">${fmtCnt(sys)}</span></div><pre class="raw-pre">${esc(ex.text)}</pre><div class="chips" style="margin-top:6px"><a href="#" class="chip std mono" data-txn="${esc(ex.transaction_id)}" style="text-decoration:none">→ ${esc(ex.transaction_id)}</a></div></div>`;
   }).join("");
   $("#fmt3").querySelectorAll("a[data-txn]").forEach(a => a.addEventListener("click", e => { e.preventDefault(); openDrill([{txn: a.dataset.txn}]); }));
-  // rules
-  const rc = r => r.id === "R00_DEDUP" ? P.duplicates.length : r.id === "R10_REVENUE" ? S.length : ruleCount(r.id);
-  $("#rules").innerHTML = `<thead><tr><th>규칙</th><th>대상</th><th>내용</th><th class="r">건수</th></tr></thead><tbody>${DATA.rules.map(r => `<tr><td class="mono">${r.id}</td><td>${esc(r.target)}</td><td style="white-space:normal;min-width:260px">${esc(r.rule)}<br><span class="hint">${esc(r.example)}</span></td><td class="r num">${rc(r)}</td></tr>`).join("")}</tbody>`;
-  // validation
-  $("#valid").innerHTML = `<dl class="kv">
-    <dt>결과</dt><dd>${V.passed ? '<span class="ok">✓ PASS</span>' : '<b style="color:var(--down)">✕ FAIL</b>'}</dd>
-    <dt>원본 파일</dt><dd class="num">${V.raw_files}개 → 중복 ${V.duplicates_removed}개 제거 → 정제 ${V.clean_rows}건</dd>
-    <dt>해석 실패</dt><dd class="num">${V.parse_issues.length}건</dd>
-    <dt>정답 대조</dt><dd class="num">생성 시점 정답 ${V.truth_rows}건과 비교 · 불일치 ${V.truth_mismatches.length}건</dd>
-    <dt>원화 환산 검산</dt><dd>${V.krw_identity_ok ? "✓" : "✕"} KRW = 외화금액 × 적용환율</dd>
-    <dt>수익 항등식</dt><dd>${V.revenue_identity_ok ? "✓" : "✕"} 총수익 = 수수료 + 외환수익 + 금융수익</dd>
-  </dl>
-  <p class="hint">정답 대조는 생성 스크립트가 남긴 truth.json 을 정제 이후에만 읽어 비교합니다. 정제 로직은 원본 파일만 사용합니다.</p>
-  <h4 style="margin-top:14px">재전송 중복</h4>
-  <div class="tbl-wrap"><table><thead><tr><th>제거된 파일</th><th>원본</th><th>원천번호</th></tr></thead><tbody>${P.duplicates.map(d => `<tr><td class="mono">${esc(d.file.split("/").pop())}</td><td class="mono">${esc(d.duplicate_of.split("/").pop())}</td><td class="mono">${esc(d.ref)}</td></tr>`).join("")}</tbody></table></div>`;
+
+  // 규칙: 변경 건수 막대 + 실제 예시 1건 (설명은 툴팁)
+  const ruleRows = DATA.rules.filter(r => r.id !== "R10_REVENUE").map(r => {
+    const n = r.id === "R00_DEDUP" ? P.duplicates.length : ruleCount(r.id);
+    const ex = r.id === "R00_DEDUP" ? {raw: P.duplicates[0]?.file.split("/").pop(), clean: "✕"} : DATA.log.find(l => l.rule === r.id && String(l.raw).trim() !== String(l.clean));
+    return {r, n, ex};
+  }).sort((a, b) => b.n - a.n);
+  const maxN = Math.max(...ruleRows.map(x => x.n), 1);
+  $("#rules").innerHTML = `<div class="map-rows" style="grid-template-columns:64px 1fr auto 14px auto">${ruleRows.map(({r, n, ex}) =>
+    `<span class="fl" title="${esc(r.rule)}">${RULE_KO[r.id]}</span><span title="${esc(r.rule)}" style="display:flex;align-items:center;gap:6px"><i style="display:block;height:12px;border-radius:3px;background:var(--accent);width:${Math.max(2, n / maxN * 100)}%"></i><b class="num" style="font-size:12px">${n}</b></span>` +
+    (ex ? `<span class="chip raw">${esc(String(ex.raw).trim())}</span><span class="ar">→</span><span class="chip std">${esc(String(ex.clean))}</span>` : `<span></span><span></span><span></span>`)).join("")}</div>`;
+
+  // 검증: 체크 타일
+  const tile = (ok, big, label) => `<div><span class="ic ${ok ? "" : "bad"}">${ok ? "✓" : "✕"}</span><span><b class="num">${big}</b><small>${label}</small></span></div>`;
+  $("#valid").innerHTML = `<div class="vt">
+    ${tile(V.truth_mismatches.length === 0, `${V.truth_rows - V.truth_mismatches.length}/${V.truth_rows}`, "정답 일치")}
+    ${tile(V.parse_issues.length === 0, `${V.parse_issues.length}`, "해석 실패")}
+    ${tile(V.krw_identity_ok, "외화 × 환율", "= 원화")}
+    ${tile(V.revenue_identity_ok, "Σ 수익", "= 수수료+외환+금융")}
+  </div>
+  <div class="chips" style="margin-top:12px">${P.duplicates.map(d => `<span class="chip raw">${esc(d.file.split("/").pop())}</span><span class="same">=</span><span class="chip">${esc(d.duplicate_of.split("/").pop())}</span>`).join('<span style="width:10px"></span>')}</div>`;
   renderDict(); renderLog();
 }
 function renderDict() {
@@ -1025,7 +1146,7 @@ function renderLog() {
   const rows = DATA.log.filter(l => (state.logRule === "all" || l.rule === state.logRule) && (!q || [l.raw, l.clean, l.file, l.Transaction_ID, l.field, l.note].join(" ").toLowerCase().includes(q)));
   const per = 60, pages = Math.max(1, Math.ceil(rows.length / per)); state.logPage = Math.min(state.logPage, pages - 1);
   const page = rows.slice(state.logPage * per, (state.logPage + 1) * per);
-  $("#logSub").textContent = `${rows.length}건 (값이 실제로 바뀐 경우만 기록)`;
+  $("#logSub").textContent = `${rows.length}`;
   const t = $("#log");
   t.innerHTML = `<thead><tr><th>거래번호</th><th>원본 파일</th><th>필드</th><th>원문</th><th></th><th>표준값</th><th>규칙</th><th>비고</th></tr></thead>`;
   const tb = document.createElement("tbody");
@@ -1040,27 +1161,53 @@ function renderLog() {
   $("#lp").onclick = () => { state.logPage--; renderLog(); }; $("#ln").onclick = () => { state.logPage++; renderLog(); };
 }
 
-// ---------- BASIS ----------
+// ---------- BASIS: 배지 + 미니 차트 + 산식 블록 ----------
 function renderBasis() {
-  const fx = DATA.fx_meta, sim = fx.source === "SIMULATED";
-  $("#basisCallout").innerHTML = `<b>데이터 원칙</b> — 거래전표 100건은 실제 고객정보가 없는 <b>Synthetic / Simulated</b> 데이터입니다. 국가·통화 코드는 국제 표준(ISO 3166 / ISO 4217)을 따르고, 수수료는 시중은행 공개 수수료 체계를 참고한 BridgeOn 가상 정책입니다.` + (sim ? ` <b>현재 환율도 시뮬레이션 값</b>이며, <span class="mono">tools/fetch_ecos_rates.mjs</span> 로 한국은행 ECOS 실제 환율을 받은 뒤 다시 빌드하면 교체됩니다.` : ` 환율은 한국은행 ECOS 실제 고시 값입니다.`);
-  $("#fxSrc").innerHTML = `<dl class="kv"><dt>출처</dt><dd><b>${esc(fx.source_label)}</b></dd><dt>기간</dt><dd class="num">${fx.period.join(" ~ ")}</dd><dt>고시 단위</dt><dd>${Object.entries(fx.quote_units).filter(([, u]) => u !== 1).map(([c, u]) => `${c} ${u}단위`).join(", ")} 고시 → 1단위로 환산</dd><dt>결합 규칙</dt><dd>거래일 당일 고시 환율, 없으면 직전 고시일 환율 (R09)</dd><dt>비고</dt><dd>${esc(fx.note)}</dd></dl>`;
-  const P = DATA.summary;
-  $("#dataComp").innerHTML = `<dl class="kv"><dt>거래전표</dt><dd class="num">${S.length}건 · ${P.period.join(" ~ ")}</dd><dt>원천 시스템</dt><dd>영업점 TXT · 디지털 JSON · 기업뱅킹 CSV</dd><dt>서비스 구성</dt><dd>${SVC.map(s => `${SVC_KO[s]} ${S.filter(x => x.Service === s).length}건`).join(" · ")}</dd><dt>분석 차원</dt><dd>국가 8 · 통화 ${new Set(S.map(s => s.Currency)).size} · 고객유형 3 · 채널 4 · 월 9</dd><dt>총 거래액</dt><dd class="num">${n0(P.total_krw)}원</dd><dt>총 수익</dt><dd class="num">${n0(P.total_revenue)}원 (수수료 ${won(P.fee)} · 외환 ${won(P.fx_revenue)} · 금융 ${won(P.finance_revenue)})</dd></dl>`;
-  const ccys = Object.keys(DICT.currency);
-  $("#fxTbl").innerHTML = `<thead><tr><th>월</th>${ccys.map(c => `<th class="r">${c}</th>`).join("")}</tr></thead><tbody>${MONTHS.map(m => `<tr><td>${+m.slice(5)}월</td>${ccys.map(c => { const v = DATA.fx_monthly[m]?.[c]; return `<td class="r num">${v == null ? "–" : v.toLocaleString(undefined, {maximumFractionDigits: v < 10 ? 4 : 2})}</td>`; }).join("")}</tr>`).join("")}</tbody>`;
-  const pol = DATA.policy.services;
-  $("#policySub").textContent = DATA.policy.basis;
-  const rfx = pol["Retail FX"], rem = pol["Overseas Remittance"], cfx = pol["Corporate FX"], tf = pol["Trade Finance"];
-  $("#policy").innerHTML = `
-    <div><h4>개인 환전 · 현찰 스프레드 × (1 − 채널 우대율)</h4><div class="tbl-wrap"><table><thead><tr><th>통화</th><th class="r">스프레드</th></tr></thead><tbody>${Object.entries(rfx.cash_spread).map(([c, v]) => `<tr><td>${c}</td><td class="r num">${pct(v, 2)}</td></tr>`).join("")}</tbody></table></div>
-      <p class="hint">우대율: ${Object.entries(rfx.preferential_rate).map(([c, v]) => `${CHAN_KO[c]} ${pct(v, 0)}`).join(" · ")}</p></div>
-    <div><h4>해외송금 · 송금수수료 + 전신료 + 환율 스프레드 ${pct(rem.fx_spread, 1)}</h4><div class="tbl-wrap"><table><thead><tr><th>송금액 (USD 환산)</th><th class="r">영업점</th><th class="r">전자금융</th></tr></thead><tbody>${rem.fee_tiers_usd.map((t, i, a) => `<tr><td>${i ? `${a[i-1].max_usd.toLocaleString()} 초과 ` : ""}${t.max_usd < 1e12 ? `${t.max_usd.toLocaleString()} 이하` : ""}</td><td class="r num">${n0(t.branch_krw)}원</td><td class="r num">${n0(t.digital_krw)}원</td></tr>`).join("")}</tbody></table></div>
-      <p class="hint">전신료: 영업점 ${n0(rem.cable_charge.branch_krw)}원 · 전자금융 ${n0(rem.cable_charge.digital_krw)}원 / 우대율: ${Object.entries(rem.preferential_rate).map(([c, v]) => `${CHAN_KO[c]} ${pct(v, 0)}`).join(" · ")}</p></div>
-    <div><h4>기업 외환거래 · 거래액 × 스프레드</h4><p>${Object.entries(cfx.spread).map(([c, v]) => `${CHAN_KO[c]} <b>${pct(v, 2)}</b>`).join(" · ")}</p></div>
-    <div><h4>무역금융 · 수수료 + 금융수익</h4><p>수수료 <b>${pct(tf.fee_rate, 2)}</b> (최저 ${n0(tf.min_fee_krw)}원) + 거래액 × 연 <b>${pct(tf.annual_margin, 2)}</b> × 여신일수/365</p></div>`;
-  const F = [["Transaction_ID","거래전표번호","FX-YYMMDD-NNN (거래일 순 일련번호)"],["Date","표준 거래일","YYYY-MM-DD"],["Service","금융서비스","Retail FX · Overseas Remittance · Corporate FX · Trade Finance"],["Customer_Type","고객유형","Individual · Foreigner · Corporate"],["Country","관련 국가","영문 표준 국가명 (+ Country_Code ISO 3166)"],["Currency","거래 통화","ISO 4217"],["Channel","거래 채널","Mobile · Internet Banking · Branch · Corporate Banking"],["Foreign_Amount","외화 거래금액","숫자"],["FX_Rate","거래일 적용 환율","원 / 외화 1단위 (FX_Rate_Date 기준)"],["KRW_Amount","원화 환산 거래액","Foreign_Amount × FX_Rate"],["Fee","수수료 수익","송금수수료·전신료·L/C 수수료"],["FX_Revenue","외환 관련 수익","스프레드 수익"],["Finance_Revenue","금융 수익","무역금융 여신 마진"],["Total_Revenue","은행 총 수익","Fee + FX_Revenue + Finance_Revenue"],["Source_File","원본 전표 파일","raw_slips/… (Drill-down 원본 보기)"]];
-  $("#fields").innerHTML = `<thead><tr><th>필드</th><th>정의</th><th>형식 · 계산</th></tr></thead><tbody>${F.map(([a, b, c]) => `<tr><td class="mono">${a}</td><td>${b}</td><td style="white-space:normal">${c}</td></tr>`).join("")}</tbody>`;
+  const fx = DATA.fx_meta, sim = fx.source === "SIMULATED", P = DATA.summary;
+  $("#basisBadges").innerHTML = `<span class="badge" title="실제 고객정보 없음"><i></i>거래 SIMULATED</span><span class="badge ${sim ? "" : "ok"}" title="${esc(fx.note)}"><i></i>환율 ${sim ? "SIMULATED" : "ECOS"}</span><span class="badge" title="${esc(DATA.policy.basis)}"><i></i>수수료 가상 정책</span><span class="badge ok"><i></i>ISO 3166 · ISO 4217</span>`;
+  $("#fxSrcLabel").textContent = `${fx.period.join(" ~ ")}`;
+  const units = fx.quote_units;
+  $("#fxGrid").innerHTML = Object.keys(DICT.currency).map(c => {
+    const u = units[c] || 1, vals = MONTHS.map(m => (DATA.fx_monthly[m]?.[c] ?? NaN) * u);
+    const first = vals[0], last = vals[vals.length - 1], r = (last - first) / first;
+    const dig = last < 10 ? 2 : 2;
+    return `<div><div class="chips" style="justify-content:space-between"><span class="c">${c}${u !== 1 ? ` (${u})` : ""}</span><span class="delta" style="font-size:11.5px;color:${r >= 0 ? "#d92d20" : "#1f6fd1"}">${r >= 0 ? "▲" : "▼"} ${Math.abs(r * 100).toFixed(1)}%</span></div><div class="q">${last.toLocaleString(undefined, {minimumFractionDigits: dig, maximumFractionDigits: dig})}</div>${sparkSvg(vals, r >= 0 ? "#d92d20" : "#1f6fd1", null, "line", true)}</div>`;
+  }).join("");
+
+  // 정책 4종
+  const pol = DATA.policy.services, rfx = pol["Retail FX"], rem = pol["Overseas Remittance"], cfx = pol["Corporate FX"], tf = pol["Trade Finance"];
+  const bars = (items, max, col) => `<div class="map-rows" style="grid-template-columns:44px 1fr 46px;gap:6px">${items.map(([l, v, c]) => `<span class="fl">${l}</span><i style="display:block;height:10px;border-radius:3px;background:${c || col};width:${Math.max(3, v / max * 100)}%"></i><b class="num" style="font-size:12px;text-align:right">${pct(v, 2)}</b>`).join("")}</div>`;
+  const chanPref = pref => `<div class="chips" style="margin-top:10px">${Object.entries(pref).map(([c, v]) => `<span class="chip" title="${esc(CHAN_KO[c])} 우대율"><span class="dot" style="background:${CHAN_COLOR[c]}"></span>${esc(CHAN_KO[c])} −${pct(v, 0)}</span>`).join("")}</div>`;
+  const spreads = Object.entries(rfx.cash_spread).sort((a, b) => a[1] - b[1]);
+  // 송금 수수료: 구간별 묶음 막대
+  const tiers = rem.fee_tiers_usd, maxFee = Math.max(...tiers.map(t => t.branch_krw));
+  const tierLab = (t, i) => t.max_usd >= 1e12 ? `>${(tiers[i - 1].max_usd / 1000)}K` : t.max_usd >= 1000 ? `≤${t.max_usd / 1000}K` : `≤${t.max_usd}`;
+  const remChart = `<svg class="chart-svg" viewBox="0 0 260 130" height="130" aria-label="송금 수수료 구간">${tiers.map((t, i) => {
+    const x = 8 + i * 50, h1 = 90 * t.branch_krw / maxFee, h2 = 90 * t.digital_krw / maxFee;
+    return `<rect x="${x}" y="${100 - h1}" width="18" height="${h1}" rx="3" fill="var(--c3)"><title>영업점 ${n0(t.branch_krw)}원</title></rect><rect x="${x + 20}" y="${100 - h2}" width="18" height="${h2}" rx="3" fill="var(--c1)"><title>전자금융 ${n0(t.digital_krw)}원</title></rect><text x="${x + 19}" y="${96 - h1}" text-anchor="middle" class="val2">${t.branch_krw / 1000}K</text><text x="${x + 19}" y="116" text-anchor="middle" class="tick">$${tierLab(t, i)}</text>`;
+  }).join("")}<line x1="4" x2="256" y1="100" y2="100" class="axis"/></svg>`;
+  const card = (t, inner) => `<div class="card"><div class="card-h"><h2>${t}</h2></div>${inner}</div>`;
+  $("#policy").innerHTML =
+    card(`<span class="dot" style="background:var(--s1)"></span>개인 환전`, bars(spreads.map(([c, v]) => [c, v]), spreads[spreads.length - 1][1], "var(--s1)") + chanPref(rfx.preferential_rate)) +
+    card(`<span class="dot" style="background:var(--s2)"></span>해외송금`, remChart + `<div class="legend sm"><span><i style="background:var(--c3)"></i>영업점</span><span><i style="background:var(--c1)"></i>전자금융</span></div><div class="chips" style="margin-top:8px"><span class="chip">+ 전신료 ${rem.cable_charge.branch_krw / 1000}K / ${rem.cable_charge.digital_krw / 1000}K</span><span class="chip">+ 스프레드 ${pct(rem.fx_spread, 1)}</span></div>`) +
+    card(`<span class="dot" style="background:var(--s3)"></span>기업 외환`, bars(Object.entries(cfx.spread).map(([c, v]) => [CHAN_KO[c], v, CHAN_COLOR[c]]), Math.max(...Object.values(cfx.spread)), "var(--s3)").replace("44px 1fr", "64px 1fr")) +
+    card(`<span class="dot" style="background:var(--s4)"></span>무역금융`, `<div class="eqs"><div class="eqb"><b>${pct(tf.fee_rate, 2)}</b><small>수수료 · min ${tf.min_fee_krw / 1000}K</small></div><div class="eqo">+</div><div class="eqb"><b>${pct(tf.annual_margin, 1)}</b><small>연 · 일수/365</small></div></div>`);
+
+  // 데이터 구성: 100% 막대
+  const cnt = (k, v) => S.filter(x => x[k] === v).length;
+  const row = (label, parts) => `<div class="sbar-row"><span>${label}</span>${stackBar(parts, "sbar", true)}</div>`;
+  $("#dataComp").innerHTML =
+    row("서비스", SVC.map(v => [cnt("Service", v), SVC_COLOR[v], SVC_KO[v]])) +
+    row("원천", [["BRANCH", "var(--c3)", "TXT"], ["DIGITAL", "var(--c1)", "JSON"], ["CORP", "var(--c4)", "CSV"]].map(([k, c, l]) => [S.filter(x => x.Source_System === k).length, c, l])) +
+    row("고객", [["Individual", "var(--s1)"], ["Foreigner", "var(--s3)"], ["Corporate", "var(--c3)"]].map(([k, c]) => [cnt("Customer_Type", k), c, CUST_KO[k]])) +
+    row("채널", CHAN.map(c => [cnt("Channel", c), CHAN_COLOR[c], CHAN_KO[c]])) +
+    `<div class="chips" style="margin-top:6px"><span class="chip">${S.length}건</span><span class="chip">${P.period.join(" ~ ")}</span><span class="chip">${CTRY_LIST.map(c => flagHtml(c)).join("").replace(/class="flag /g, 'style="margin-right:2px" class="flag ')}</span></div>`;
+
+  // 산식: 필드 블록
+  const fb = (name, ko, hl) => `<div class="eqb${hl ? " hl" : ""}" style="min-width:0"><b style="font-size:14px">${ko}</b><small class="mono">${name}</small></div>`;
+  $("#fields").innerHTML = `<div class="eqs">${fb("Foreign_Amount", "외화금액")}<div class="eqo">×</div>${fb("FX_Rate", "환율")}<div class="eqo">=</div>${fb("KRW_Amount", "원화 거래액", 1)}</div>
+    <div class="eqs" style="margin-top:10px">${fb("Fee", "수수료")}<div class="eqo">+</div>${fb("FX_Revenue", "외환")}<div class="eqo">+</div>${fb("Finance_Revenue", "금융")}<div class="eqo">=</div>${fb("Total_Revenue", "총 수익", 1)}</div>
+    <div class="eqs" style="margin-top:10px">${fb("Total_Revenue", "총 수익")}<div class="eqo">÷</div>${fb("KRW_Amount", "원화 거래액")}<div class="eqo">=</div>${fb("Revenue_Rate", "수익률", 1)}</div>`;
 }
 
 // ---------- render ----------
