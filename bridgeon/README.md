@@ -3,7 +3,7 @@
 글로벌 금융서비스 거래전표 100건 자동 정제 및 수익 분석 대시보드
 목56 AI 데이터 자동화 · 5주차 프로젝트 · 202101308 민승환
 
-`dashboard.html` 을 브라우저로 열면 됩니다. 데이터·세계지도·Pretendard 글꼴(사용 글자만 남긴 부분 글꼴)이 HTML 안에 들어 있으므로 인터넷이나 로컬 서버 없이 `file://` 에서도 동작합니다. 차트와 지도는 외부 라이브러리 없이 SVG로 그립니다.
+`dashboard.html` 을 브라우저로 열면 됩니다. 데이터·세계지도·국기·Pretendard 글꼴(사용 글자만 남긴 부분 글꼴)이 HTML 안에 들어 있으므로 인터넷이나 로컬 서버 없이 `file://` 에서도 동작합니다. 차트와 지도는 외부 라이브러리 없이 SVG로 그립니다.
 
 > **데이터 원칙** — 거래전표 100건은 실제 고객정보가 없는 시뮬레이션(Synthetic) 데이터입니다. 수수료는 시중은행 공개 수수료 구조를 참고한 BridgeOn 가상 정책입니다.
 > **환율은 아직 시뮬레이션 기준값입니다.** 이 작업 환경에서는 한국은행 ECOS 에 접속할 수 없어 실제 환율을 받지 못했습니다. 아래 “실제 ECOS 환율로 교체” 절차를 실행하면 실제 고시 환율로 바뀌고, 대시보드의 출처 표시도 함께 바뀝니다.
@@ -12,7 +12,7 @@
 
 | 탭 | 내용 |
 |---|---|
-| 홈 대시보드 (16:9) | 기간·고객·서비스·채널 필터 / KPI 6종(총 거래액, 수익, 건수, 평균 거래액, 전월 대비, 활성 국가) / 세계지도(거래액·수익·건수 전환, 서울 본점 기준 흐름선) / 월별 거래액·수익 추이 / 서비스별 수익 / 고객유형별 건수 vs 거래액 비중 / 분기별 채널 비중 / 현재 필터로 계산한 Insight 문장 |
+| 홈 대시보드 (16:9) | 기간·고객·서비스·채널 필터 / KPI 6종(총 거래액, 수익, 건수, 평균 거래액, 전월 대비, 활성 국가) / 세계지도(거래액·수익·건수 전환, 서울 본점 기준 흐름선, 국가 라벨·순위에 국기 표시) / 월별 거래액·수익 추이 / 서비스별 수익 / 고객유형별 건수 vs 거래액 비중 / 분기별 채널 비중 / 현재 필터로 계산한 Insight 문장 |
 | Drill-down 패널 | 지도·차트·순위를 누르면 열림. `GLOBAL → COUNTRY → SERVICE → TRANSACTION → RAW SLIP` 경로를 breadcrumb 로 표시. 각 단계에서 하위 차원(서비스·국가·고객·채널·통화·월)을 다시 눌러 내려감 |
 | 거래 상세 | 외화금액 × 적용환율 = 원화 거래액, 수익 산식, ORIGINAL ↔ STANDARDIZED 필드별 비교(적용 규칙 표시), 원본 전표 파일 보기 |
 | 거래 원장 | 100건 정렬·검색, 행 클릭 시 거래 상세 |
@@ -36,6 +36,7 @@
 | `data/summary.json`, `data/validation_report.json` | 집계값, 자동 검증 결과 |
 | `data/truth.json` | 생성 시점의 정답 값. 정제 로직은 읽지 않고, 정제 후 검증에만 사용 |
 | `data/world_map.json` | Natural Earth 1:110m 기반 사전 계산 SVG 지도 경로 |
+| `data/flags.json` | 8개 거래국 + 한국 국기 SVG (flag-icons, MIT). 이모지 국기는 Windows 에서 글자로 보이므로 SVG 를 넣어 사용 |
 | `tools/` | 생성·정제·지도·빌드·ECOS 스크립트, 대시보드 템플릿 |
 
 ## 처리 흐름과 검산 결과
@@ -77,11 +78,12 @@ node tools/build_dashboard.mjs
 ## 다시 만들기
 
 ```
-npm install            # 지도 계산(d3-geo, topojson-client, world-atlas)과 Pretendard 글꼴
+npm install            # 지도 계산(d3-geo, topojson-client, world-atlas), 국기(flag-icons), Pretendard 글꼴
 pip install fonttools brotli   # 글꼴 부분 추출 (없으면 시스템 글꼴로 빌드)
 node tools/generate_slips.mjs  # 원본 전표 재생성 (고정 시드, ECOS 환율 파일은 덮어쓰지 않음)
 node tools/clean_slips.mjs     # 정제·검증
 node tools/build_map.mjs       # 지도 경로 (변경 시에만)
+node tools/build_flags.mjs     # 국기 SVG (국가 변경 시에만)
 node tools/build_dashboard.mjs # dashboard.html
 ```
 

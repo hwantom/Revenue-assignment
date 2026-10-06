@@ -38,6 +38,7 @@ const data = {
   dict: load("dictionaries.json"),
   policy: load("fee_policy.json"),
   map: load("world_map.json"),
+  flags: load("flags.json").flags,
   fx_meta: fx.meta,
   fx_monthly: fxMonthly,
 };

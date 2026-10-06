@@ -113,7 +113,7 @@ main{padding:12px 24px 24px}
 .chan-card{grid-column:9/span 4}
 .insight{grid-column:1/-1;display:flex;gap:14px;align-items:stretch;background:var(--navy);color:var(--on-navy);border-radius:var(--radius);padding:12px 16px;flex-wrap:wrap}
 .insight .lab{font-weight:800;letter-spacing:.12em;font-size:12px;display:flex;align-items:center;padding-right:6px;color:#f5c35b}
-.insight .it{flex:1 1 220px;border-left:1px solid rgba(255,255,255,.14);padding-left:14px;font-size:13px;line-height:1.5}
+.insight .it{flex:1 1 auto;border-left:1px solid rgba(255,255,255,.14);padding-left:14px;font-size:13px;line-height:1.5}
 .insight .it b{color:#fff}
 
 /* map */
@@ -176,6 +176,9 @@ tbody tr.click{cursor:pointer}
 tbody tr.click:hover{background:var(--accent-soft)}
 .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
 .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--border)}
+.flag{display:inline-block;width:18px;height:13.5px;border-radius:2px;vertical-align:-2px;margin-right:6px;box-shadow:0 0 0 1px var(--border-strong);object-fit:cover;flex:none}
+.flag.lg{width:28px;height:21px;border-radius:3px;vertical-align:-3px;margin-right:8px}
+.tip .t .flag{margin-right:6px}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:0}
 .chg{color:var(--accent-ink);font-weight:600}
 .same{color:var(--muted)}
@@ -189,6 +192,7 @@ tbody tr.click:hover{background:var(--accent-soft)}
 .dr-h{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 18px}
 .crumbs{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:12px}
 .crumb{border:0;background:var(--surface-2);border-radius:6px;padding:4px 8px;cursor:pointer;color:var(--ink-2);font-weight:600}
+.crumb .flag{width:14px;height:10.5px;margin-right:4px;vertical-align:-1px}
 .crumb small{display:block;font-size:9.5px;letter-spacing:.1em;color:var(--muted);font-weight:700}
 .crumb.cur{background:var(--accent-soft);color:var(--accent-ink);cursor:default}
 .crumbs .sep{color:var(--muted)}
@@ -396,6 +400,19 @@ const CHAN_KO = {Mobile:"모바일","Internet Banking":"인터넷뱅킹",Branch:
 const CHAN_COLOR = {Mobile:"var(--c1)","Internet Banking":"var(--c2)",Branch:"var(--c3)","Corporate Banking":"var(--c4)"};
 const CTRY = Object.fromEntries(Object.entries(DICT.country).map(([code,c]) => [c.label,{code,ko:c.ko,n3:c.iso_n3}]));
 const CTRY_LIST = Object.keys(CTRY);
+const FLAGS = DATA.flags;
+// 국기: 이모지는 Windows 에서 글자로 보이므로 HTML 에 넣은 SVG 를 쓴다
+const flagSrc = name => FLAGS[CTRY[name]?.code || name];
+const flagHtml = (name, cls = "") => flagSrc(name) ? `<img class="flag ${cls}" src="${flagSrc(name)}" alt="" aria-hidden="true">` : "";
+function flagEl(name, cls = "") { const src = flagSrc(name); if (!src) return null; const i = document.createElement("img"); i.className = "flag " + cls; i.src = src; i.alt = ""; i.setAttribute("aria-hidden", "true"); return i; }
+function svgFlag(parent, name, x, y, w = 18) {
+  const src = flagSrc(name); if (!src) return null;
+  const h = w * 0.75, g = svg("g", {"pointer-events": "none"}, parent);
+  svg("rect", {x: x - .5, y: y - .5, width: w + 1, height: h + 1, rx: 2, fill: "var(--border-strong)"}, g);
+  const im = svg("image", {x, y, width: w, height: h, href: src, preserveAspectRatio: "xMidYMid slice"}, g);
+  im.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", src);
+  return g;
+}
 const MONTHS = ["2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09"];
 const SYS_KO = {BRANCH:"영업점",DIGITAL:"디지털(모바일·인터넷)",CORP:"기업뱅킹"};
 const DIM = {
@@ -435,7 +452,9 @@ function agg(rows) { const krw = sum(rows, "KRW_Amount"), rev = sum(rows, "Total
 const tip = $("#tip");
 function showTip(ev, title, rows) {
   tip.replaceChildren();
-  const t = document.createElement("div"); t.className = "t"; t.textContent = title; tip.appendChild(t);
+  const t = document.createElement("div"); t.className = "t";
+  if (Array.isArray(title)) { const f = flagEl(title[0]); if (f) t.appendChild(f); t.appendChild(document.createTextNode(title[1])); } else t.textContent = title;
+  tip.appendChild(t);
   for (const [label, value, color] of rows) {
     const r = document.createElement("div"); r.className = "r";
     const a = document.createElement("span");
@@ -515,7 +534,7 @@ function renderMap(rows) {
   for (const c of M.countries) {
     const name = activeN3.get(c.id);
     const p = svg("path", {d: c.d, class: "land" + (name && byC.has(name) ? " active" : "")}, gLand);
-    if (name && byC.has(name)) { landEls[name] = p; bindTip(p, `${CTRY[name].ko} · ${name}`, () => tipRows(byC.get(name)), () => openDrill([{dim: "Country", value: name}])); }
+    if (name && byC.has(name)) { landEls[name] = p; bindTip(p, [name, `${CTRY[name].ko} · ${name}`], () => tipRows(byC.get(name)), () => openDrill([{dim: "Country", value: name}])); }
   }
   const hq = M.points.KR;
   const max = Math.max(1, ...CTRY_LIST.map(val));
@@ -536,21 +555,28 @@ function renderMap(rows) {
     const over = () => { b.classList.add("hot"); landEls[c]?.classList.add("hot"); };
     const out = () => { b.classList.remove("hot"); landEls[c]?.classList.remove("hot"); };
     hit.addEventListener("pointerenter", over); hit.addEventListener("pointerleave", out);
-    bindTip(hit, `${CTRY[c].ko} · ${c}`, () => tipRows(byC.get(c)), () => openDrill([{dim: "Country", value: c}]));
+    bindTip(hit, [c, `${CTRY[c].ko} · ${c}`], () => tipRows(byC.get(c)), () => openDrill([{dim: "Country", value: c}]));
     const [dx, dy, anchor] = LABEL_POS[code];
-    const t = svg("text", {class: "lbl", x: x + dx*(r+5), y: y + dy*(r+6) + 4, "text-anchor": anchor}, gB);
+    const ax = x + dx*(r+5), ay = y + dy*(r+6) + 5, fw = 20, gapF = 5;
+    const t = svg("text", {class: "lbl", x: 0, y: ay}, gB);
     t.textContent = CTRY[c].ko + " ";
     const ts = svg("tspan", {class: "v"}, t); ts.textContent = fmt(v);
+    const tw = t.getComputedTextLength ? t.getComputedTextLength() : 0, total = fw + gapF + tw;
+    const x0 = anchor === "start" ? ax : anchor === "end" ? ax - total : ax - total/2;
+    t.setAttribute("x", x0 + fw + gapF);
+    svgFlag(gB, c, x0, ay - 12, fw);
   }
   const gHq = svg("g", {"pointer-events": "none"}, el);
   svg("circle", {class: "hq", cx: hq[0], cy: hq[1], r: 4.5}, gHq);
-  const hqL = svg("text", {class: "lbl", x: hq[0] - 4, y: hq[1] - 34, "text-anchor": "middle"}, gHq); hqL.textContent = "서울 본점";
+  const hqL = svg("text", {class: "lbl", x: hq[0] - 4 + 12, y: hq[1] - 34, "text-anchor": "middle"}, gHq); hqL.textContent = "서울 본점";
+  const hw = hqL.getComputedTextLength ? hqL.getComputedTextLength() : 60;
+  svgFlag(gHq, "KR", hq[0] - 4 + 12 - hw/2 - 24, hq[1] - 46, 20);
   svg("line", {x1: hq[0], y1: hq[1] - 5, x2: hq[0] - 3, y2: hq[1] - 30, stroke: "var(--ink-2)", "stroke-width": 1}, gHq);
   // ranking
   const total = sum(CTRY_LIST, val) || 1;
   $("#rank").replaceChildren(...ordered.map((c, i) => {
     const b = document.createElement("button");
-    b.innerHTML = `<span class="n num">${i+1}</span><span class="nm">${esc(CTRY[c].ko)}</span><span class="vv num">${share(val(c)/total)}</span>`;
+    b.innerHTML = `<span class="n num">${i+1}</span><span class="nm">${flagHtml(c)}${esc(CTRY[c].ko)}</span><span class="vv num">${share(val(c)/total)}</span>`;
     b.addEventListener("click", () => openDrill([{dim: "Country", value: c}]));
     return b;
   }));
@@ -614,7 +640,8 @@ function hbars(host, items, opts) {
   const max = Math.max(...items.map(i => i.value), 1);
   items.forEach((it, i) => {
     const y = i * rowH + 4;
-    const l = svg("text", {class: "val2", x: 0, y: y + 14}, el); l.textContent = it.label;
+    if (it.flag) svgFlag(el, it.flag, 0, y + 4, 16);
+    const l = svg("text", {class: "val2", x: it.flag ? 21 : 0, y: y + 14}, el); l.textContent = it.label;
     const bw = Math.max(it.value > 0 ? 3 : 0, (W - padL - padR) * (it.value / max));
     svg("rect", {x: padL, y: y + 4, width: W - padL - padR, height: 14, rx: 4, fill: "var(--surface-2)"}, el);
     const r = svg("rect", {class: "bar", x: padL, y: y + 4, width: bw, height: 14, rx: 4, fill: it.color || "var(--accent)"}, el);
@@ -701,7 +728,7 @@ function renderInsight(rows) {
       const b = base.filter(s => s.Country === c && before.includes(s.Month)).length / before.length;
       if (a >= 2 && (!best || a - b > best.diff)) best = {c, a, b, diff: a - b};
     }
-    if (best && best.diff > 0) out.push(`<b>${CTRY[best.c].ko}</b> 거래 ${last2.map(m => +m.slice(5)).join("~")}월 월평균 <b>${best.a.toFixed(1)}건</b> · 이전 월평균 ${best.b.toFixed(1)}건 대비 <b>${best.b ? "+" + Math.round((best.a/best.b - 1) * 100) + "%" : "신규"}</b>`);
+    if (best && best.diff > 0) out.push(`${flagHtml(best.c)}<b>${CTRY[best.c].ko}</b> 거래 ${last2.map(m => +m.slice(5)).join("~")}월 월평균 <b>${best.a.toFixed(1)}건</b> · 이전 월평균 ${best.b.toFixed(1)}건 대비 <b>${best.b ? "+" + Math.round((best.a/best.b - 1) * 100) + "%" : "신규"}</b>`);
   }
   // 2) 통화 집중도
   const byCcy = [...group(rows, "Currency")].map(([k, r]) => [k, sum(r, "KRW_Amount")]).sort((a, b) => b[1] - a[1]);
@@ -731,14 +758,14 @@ function renderCrumbs() {
   const items = [{tag: "GLOBAL", text: "전체", path: []}];
   state.path.forEach((p, i) => {
     const path = state.path.slice(0, i + 1);
-    if (p.dim) items.push({tag: DIM[p.dim].tag, text: DIM[p.dim].label(p.value), path});
+    if (p.dim) items.push({tag: DIM[p.dim].tag, text: DIM[p.dim].label(p.value), path, flag: p.dim === "Country" ? p.value : null});
     else if (p.raw) items.push({tag: "RAW SLIP", text: p.raw.split("/").pop(), path});
     else items.push({tag: "TRANSACTION", text: p.txn, path});
   });
   items.forEach((it, i) => {
     if (i) { const s = document.createElement("span"); s.className = "sep"; s.textContent = "›"; c.appendChild(s); }
     const b = document.createElement("button"); b.className = "crumb" + (i === items.length - 1 ? " cur" : "");
-    const sm = document.createElement("small"); sm.textContent = it.tag; b.append(sm, document.createTextNode(it.text));
+    const sm = document.createElement("small"); sm.textContent = it.tag; b.append(sm); if (it.flag) { const f = flagEl(it.flag); if (f) b.appendChild(f); } b.appendChild(document.createTextNode(it.text));
     if (i < items.length - 1) b.addEventListener("click", () => { if (!it.path.length) { closeDrill(); return; } state.path = it.path; renderDrawer(); });
     c.appendChild(b);
   });
@@ -750,7 +777,8 @@ function renderDrawer() {
   if (last?.txn) return renderTxnView(BY_ID[last.txn]);
   const rows = sliceRows(), a = agg(rows), all = agg(rowsNow());
   const dims = state.path.filter(p => p.dim);
-  $("#drTitle").textContent = dims.length ? dims.map(p => DIM[p.dim].label(p.value)).join(" · ") : "전체";
+  const ct = dims.find(p => p.dim === "Country"), f = ct && flagEl(ct.value, "lg");
+  $("#drTitle").replaceChildren(...(f ? [f] : []), document.createTextNode(dims.length ? dims.map(p => DIM[p.dim].label(p.value)).join(" · ") : "전체"));
   $("#drBadges").innerHTML = `<span class="pill">${esc(PERIODS.find(p => p[0] === state.f.period)[1])}</span>`;
   const body = $("#drBody"); body.replaceChildren();
   const k = document.createElement("div"); k.className = "mini-kpis";
@@ -768,7 +796,7 @@ function renderDrawer() {
     const host = document.createElement("div"); card.appendChild(host); grid.appendChild(card);
     const g = group(rows, d);
     const items = DIM[d].order.filter(v => g.has(v)).map(v => { const aa = agg(g.get(v)); return {label: DIM[d].label(v), value: aa.krw, valueLabel: won(aa.krw), sub: `${aa.cnt}건 · 수익 ${won(aa.rev)}`,
-      color: d === "Service" ? SVC_COLOR[v] : d === "Channel" ? CHAN_COLOR[v] : "var(--accent)", tipTitle: DIM[d].label(v), tip: tipRows(g.get(v)), onClick: () => pushDrill({dim: d, value: v})}; }).sort((x, y) => y.value - x.value);
+      color: d === "Service" ? SVC_COLOR[v] : d === "Channel" ? CHAN_COLOR[v] : "var(--accent)", flag: d === "Country" ? v : null, tipTitle: d === "Country" ? [v, DIM[d].label(v)] : DIM[d].label(v), tip: tipRows(g.get(v)), onClick: () => pushDrill({dim: d, value: v})}; }).sort((x, y) => y.value - x.value);
     requestAnimationFrame(() => hbars(host, items, {padL: 84, rowH: 42}));
   }
   body.appendChild(grid);
@@ -810,7 +838,7 @@ function txnTable(rows, inDrawer) {
   const tb = document.createElement("tbody");
   for (const s of [...rows].sort((a, b) => a.Date.localeCompare(b.Date))) {
     const tr = document.createElement("tr"); tr.className = "click"; tr.tabIndex = 0;
-    tr.innerHTML = `<td class="mono">${esc(s.Transaction_ID)}</td><td class="num">${s.Date}</td><td><span class="dot" style="background:${SVC_COLOR[s.Service]}"></span>${SVC_KO[s.Service]}</td><td>${esc(CTRY[s.Country].ko)}</td><td class="r num">${fmtAmt(s.Foreign_Amount, s.Currency)}</td><td class="r num">${won(s.KRW_Amount)}</td><td class="r num">${won(s.Total_Revenue)}</td><td>${CHAN_KO[s.Channel]}</td>`;
+    tr.innerHTML = `<td class="mono">${esc(s.Transaction_ID)}</td><td class="num">${s.Date}</td><td><span class="dot" style="background:${SVC_COLOR[s.Service]}"></span>${SVC_KO[s.Service]}</td><td>${flagHtml(s.Country)}${esc(CTRY[s.Country].ko)}</td><td class="r num">${fmtAmt(s.Foreign_Amount, s.Currency)}</td><td class="r num">${won(s.KRW_Amount)}</td><td class="r num">${won(s.Total_Revenue)}</td><td>${CHAN_KO[s.Channel]}</td>`;
     const go = () => inDrawer ? pushDrill({txn: s.Transaction_ID}) : openDrill([{txn: s.Transaction_ID}]);
     tr.addEventListener("click", go); tr.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
     tb.appendChild(tr);
@@ -821,13 +849,13 @@ function txnTable(rows, inDrawer) {
 const CMP_FIELDS = [["date","Date","거래일"],["service","Service","서비스"],["customer","Customer_Type","고객유형"],["country","Country","국가"],["currency","Currency","통화"],["channel","Channel","채널"],["amount","Foreign_Amount","외화금액"],["tenor","Tenor_Days","여신기간"]];
 function renderTxnView(s) {
   $("#drTitle").textContent = s.Transaction_ID;
-  $("#drBadges").innerHTML = `<span class="pill">${SVC_KO[s.Service]}</span>`;
+  $("#drBadges").innerHTML = `<span class="pill">${flagHtml(s.Country)}${esc(CTRY[s.Country].ko)}</span> <span class="pill">${SVC_KO[s.Service]}</span>`;
   const body = $("#drBody"); body.replaceChildren();
   const logs = LOG_BY_FILE[s.Source_File] || [];
   const unitNote = s.FX_Quote_Unit !== 1 ? ` (고시 ${s.FX_Quote.toLocaleString()}원 / ${s.FX_Quote_Unit} ${s.Currency})` : "";
   const fxNote = s.FX_Rate_Date !== s.Date ? ` · 비영업일 → ${s.FX_Rate_Date} 고시` : "";
   const k = document.createElement("div"); k.className = "mini-kpis";
-  k.innerHTML = [["원화 거래액", won(s.KRW_Amount), fmtAmt(s.Foreign_Amount, s.Currency)], ["총 수익", won(s.Total_Revenue), `수익률 ${s.Revenue_Rate.toFixed(3)}%`], ["국가", esc(CTRY[s.Country].ko), esc(s.Country)], ["고객 · 채널", CUST_KO[s.Customer_Type], CHAN_KO[s.Channel]]]
+  k.innerHTML = [["원화 거래액", won(s.KRW_Amount), fmtAmt(s.Foreign_Amount, s.Currency)], ["총 수익", won(s.Total_Revenue), `수익률 ${s.Revenue_Rate.toFixed(3)}%`], ["국가", flagHtml(s.Country, "lg") + esc(CTRY[s.Country].ko), esc(s.Country)], ["고객 · 채널", CUST_KO[s.Customer_Type], CHAN_KO[s.Channel]]]
     .map(([kk, v, sub]) => `<div class="card"><div class="k">${kk}</div><div class="v num">${v}</div><div class="s">${sub}</div></div>`).join("");
   body.appendChild(k);
   const calc = document.createElement("div"); calc.className = "card";
@@ -881,7 +909,7 @@ function renderLedger() {
   const tb = document.createElement("tbody");
   for (const s of rows) {
     const tr = document.createElement("tr"); tr.className = "click"; tr.tabIndex = 0;
-    tr.innerHTML = `<td class="mono">${s.Transaction_ID}</td><td class="num">${s.Date}</td><td><span class="dot" style="background:${SVC_COLOR[s.Service]}"></span>${SVC_KO[s.Service]}</td><td>${CUST_KO[s.Customer_Type]}</td><td>${esc(CTRY[s.Country].ko)}</td><td>${s.Currency}</td><td class="r num">${s.Foreign_Amount.toLocaleString("en-US")}</td><td class="r num">${s.FX_Rate.toLocaleString(undefined, {maximumFractionDigits: 4})}</td><td class="r num">${n0(s.KRW_Amount)}</td><td class="r num">${n0(s.Total_Revenue)}</td><td class="r num">${s.Revenue_Rate.toFixed(3)}%</td><td>${CHAN_KO[s.Channel]}</td><td class="mono">${esc(s.Source_File.replace("raw_slips/", ""))}</td>`;
+    tr.innerHTML = `<td class="mono">${s.Transaction_ID}</td><td class="num">${s.Date}</td><td><span class="dot" style="background:${SVC_COLOR[s.Service]}"></span>${SVC_KO[s.Service]}</td><td>${CUST_KO[s.Customer_Type]}</td><td>${flagHtml(s.Country)}${esc(CTRY[s.Country].ko)}</td><td>${s.Currency}</td><td class="r num">${s.Foreign_Amount.toLocaleString("en-US")}</td><td class="r num">${s.FX_Rate.toLocaleString(undefined, {maximumFractionDigits: 4})}</td><td class="r num">${n0(s.KRW_Amount)}</td><td class="r num">${n0(s.Total_Revenue)}</td><td class="r num">${s.Revenue_Rate.toFixed(3)}%</td><td>${CHAN_KO[s.Channel]}</td><td class="mono">${esc(s.Source_File.replace("raw_slips/", ""))}</td>`;
     const go = () => openDrill([{txn: s.Transaction_ID}]);
     tr.addEventListener("click", go); tr.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
     tb.appendChild(tr);
@@ -938,7 +966,7 @@ function renderDict() {
   for (const l of DATA.log) if (l.field === fieldOf) used[`${l.raw}`.trim()] = (used[`${l.raw}`.trim()] || 0) + 1;
   $("#dict").innerHTML = `<thead><tr><th>표준 값</th><th>한글</th><th>원본 별칭</th><th class="r">변경 기록</th></tr></thead><tbody>${Object.entries(DICT[state.dict]).map(([code, e]) => {
     const n = sum(e.aliases, a => used[a] || 0);
-    return `<tr><td><b>${esc(e.label)}</b></td><td>${esc(e.ko)}</td><td style="white-space:normal">${e.aliases.map(a => `<span class="pill mono" style="margin:1px 2px">${esc(a)}</span>`).join("")}</td><td class="r num">${n}</td></tr>`;
+    return `<tr><td>${state.dict === "country" ? flagHtml(e.label) : ""}<b>${esc(e.label)}</b></td><td>${esc(e.ko)}</td><td style="white-space:normal">${e.aliases.map(a => `<span class="pill mono" style="margin:1px 2px">${esc(a)}</span>`).join("")}</td><td class="r num">${n}</td></tr>`;
   }).join("")}</tbody>`;
 }
 function renderLog() {
@@ -1020,6 +1048,8 @@ try { const t = localStorage.getItem("bo-theme"); if (t) document.documentElemen
 let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(render, 120); });
 initFilters();
 render();
+// 글꼴 로딩 후 지도 라벨 폭을 다시 재서 국기 위치를 맞춘다
+document.fonts?.ready.then(() => { if (state.tab === "home") renderMap(rowsNow()); });
 })();
 </script>
 </body>
