@@ -39,8 +39,6 @@ const data = {
   policy: load("fee_policy.json"),
   map: load("world_map.json"),
   flags: load("flags.json").flags,
-  // 작성자 사진 (assets/profile.jpg 가 있을 때만)
-  avatar: fs.existsSync(path.join(ROOT, "assets", "profile.jpg")) ? "data:image/jpeg;base64," + fs.readFileSync(path.join(ROOT, "assets", "profile.jpg")).toString("base64") : null,
   fx_meta: fx.meta,
   fx_monthly: fxMonthly,
   // LED 전광판용: 마지막 고시일과 직전 고시일 환율 (고시 단위 그대로)

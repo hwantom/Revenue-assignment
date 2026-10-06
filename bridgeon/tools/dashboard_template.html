@@ -119,7 +119,7 @@ main{padding:12px 24px 24px}
 /* map */
 .map-body{display:grid;grid-template-columns:minmax(0,1fr) 172px;gap:12px;align-items:start}
 .map-wrap{position:relative}
-.map-svg{width:100%;height:auto;max-height:196px;display:block;background:var(--chart);border-radius:8px}
+.map-svg{width:100%;height:auto;max-height:226px;display:block;background:var(--chart);border-radius:8px}
 .map-svg .land{fill:var(--land);stroke:var(--chart);stroke-width:.5}
 .map-svg .land.active{fill:var(--land-active);cursor:pointer}
 .map-svg .land.active:hover,.map-svg .land.hot{fill:var(--land-hover)}
@@ -581,8 +581,18 @@ td{font-size:13px}
 .up-t{color:var(--up)}.dn-t{color:var(--down)}
 @media (max-width:1180px){.home{grid-template-columns:1fr}.summary{grid-template-columns:1fr}.msg-2col{grid-template-columns:1fr}}
 @media (max-width:720px){.sum-k{grid-template-columns:repeat(2,minmax(0,1fr))}.msg-tag{display:none}}
-.profile .av{width:34px;height:34px;overflow:hidden}
-.profile .av img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ===== 화면마다 맨 위 '핵심 인사이트' 한 줄 ===== */
+.kbar{display:flex;align-items:center;gap:12px;background:var(--accent-soft);color:var(--ink);border-radius:14px;padding:11px 16px;min-width:0}
+.kbar .kb-tag{flex:none;font-size:11.5px;font-weight:800;letter-spacing:.04em;color:#fff;background:var(--accent);padding:4px 10px;border-radius:999px}
+.kbar .kb-t{font-size:15px;font-weight:700;line-height:1.45;letter-spacing:-.01em;min-width:0}
+.kbar .kb-t b{color:var(--accent-ink);white-space:nowrap}
+.kbar.hero{grid-column:1/-1;background:var(--hero);box-shadow:var(--hero-shadow);color:#fff;padding:13px 20px;border-radius:var(--radius)}
+.kbar.hero .kb-tag{background:rgba(255,255,255,.22)}
+.kbar.hero .kb-t{font-size:17px}
+.kbar.hero .kb-t b{color:#fff;background:rgba(255,255,255,.18);padding:0 5px;border-radius:5px}
+.view>.kbar,.stack>.kbar{margin-bottom:12px}
+.stack>.kbar{margin-bottom:0}
 </style>
 </head>
 <body>
@@ -626,7 +636,7 @@ td{font-size:13px}
   <!-- HOME -->
   <section class="view on" id="view-home">
     <div class="home">
-      <div class="card summary" id="summary"></div>
+      <div class="kbar hero" id="summary"></div>
 
       <div class="card msg" id="msgA">
         <div class="msg-h"><span class="msg-no">1</span><div class="msg-tx" id="msgAh"></div><span class="msg-tag">서비스별 수익</span></div>
@@ -650,6 +660,7 @@ td{font-size:13px}
 
   <!-- LEDGER -->
   <section class="view" id="view-ledger">
+    <div class="kbar" id="kbLedger"></div>
     <div class="card">
       <div class="card-h"><h2>거래 원장</h2><span class="sub" id="ledgerSub"></span>
         <div class="right"><input class="search" id="ledgerQ" placeholder="거래번호·국가·통화·원본 파일 검색" aria-label="거래 검색"></div>
@@ -661,6 +672,7 @@ td{font-size:13px}
   <!-- PIPELINE -->
   <section class="view" id="view-pipeline">
     <div class="stack">
+      <div class="kbar" id="kbPipe"></div>
       <div class="card"><div class="card-h"><h2>처리 흐름</h2></div><div id="flow"></div></div>
       <div class="card"><div class="card-h"><h2>원본 형식</h2></div><div class="fmt3" id="fmt3"></div></div>
       <div class="grid2">
@@ -681,6 +693,7 @@ td{font-size:13px}
   <!-- BASIS -->
   <section class="view" id="view-basis">
     <div class="stack">
+      <div class="kbar" id="kbBasis"></div>
       <div class="badges" id="basisBadges"></div>
       <div class="card"><div class="card-h"><h2>환율</h2><span class="sub" id="fxSrcLabel"></span></div><div class="fx-grid" id="fxGrid"></div></div>
       <div class="grid4" id="policy"></div>
@@ -874,27 +887,56 @@ function cmpWindow() {
 }
 const arrow = (v, d = 1) => !isFinite(v) ? "–" : `${v >= 0 ? "▲" : "▼"} ${Math.abs(v * 100).toFixed(d)}%`;
 const chg = (a, b) => b ? a / b - 1 : NaN;
+function kbarHtml(text) { return `<span class="kb-tag">핵심 인사이트</span><span class="kb-t">${text}</span>`; }
 function renderSummary(rows) {
-  const a = agg(rows), base = baseRows(), W = cmpWindow();
+  const a = agg(rows), W = cmpWindow(), base = baseRows();
   const per = PERIODS.find(p => p[0] === state.f.period)[1];
   const fl = ["Customer_Type", "Service", "Channel"].filter(k => state.f[k] !== "all").map(k => DIM[k].label(state.f[k]));
   $("#pageSub").innerHTML = `BridgeOn은행 해외 금융서비스(환전·해외송금·기업외환·무역금융) 거래 <b>${a.cnt}건</b> · <b>2026년 ${esc(per)}</b>${fl.length ? ` · ${esc(fl.join(" · "))}` : ""} · 시뮬레이션 데이터`;
-  if (!rows.length) { $("#summary").innerHTML = `<div><div class="lab">핵심 결론</div><div class="bl">선택한 조건에 해당하는 거래가 없습니다.</div></div>`; return; }
-  const sv = topBy(rows, "Service", "Total_Revenue")[0];
-  const corp = sum(rows.filter(r => r.Customer_Type === "Corporate"), "KRW_Amount") / (a.krw || 1);
+  if (!rows.length) { $("#summary").innerHTML = kbarHtml("선택한 조건에 해당하는 거래가 없습니다."); return; }
+  const sv = topBy(rows, "Service", "Total_Revenue")[0], svCnt = rows.filter(r => r.Service === sv.k).length;
   const C = agg(base.filter(s => W.cur.includes(s.Month))), P = W.pre.length ? agg(base.filter(s => W.pre.includes(s.Month))) : null;
-  let s2 = "";
-  if (P && P.krw) {
-    const gk = chg(C.krw, P.krw), gr = chg(C.rev, P.rev);
-    s2 = gk >= 0 && gr < 0 ? ` ${W.lab} 거래액은 ${W.plab}보다 늘었지만 <b>수익은 ${arrow(gr)}</b>로 수익성이 낮아졌습니다.`
-       : ` ${W.lab} 거래액 <b>${arrow(gk)}</b>, 수익 <b>${arrow(gr)}</b> (${W.plab} 대비).`;
-  }
-  const bl = `수익 <b>${won(a.rev)}</b>(수익률 ${pct(a.rate, 2)}) 중 <b>${share(sv.v / (a.rev || 1))}</b>가 ${SVC_KO[sv.k]}에서 나왔고, 거래액의 ${share(corp)}는 기업 고객입니다.` + s2;
-  const kp = (k, v, d) => `<div><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d}</div></div>`;
-  const dlab = P ? `${W.plab} 대비 ` : "";
-  $("#summary").innerHTML = `<div><div class="lab">핵심 결론</div><div class="bl">${bl}</div></div>
-    <div class="sum-k">${kp("총 거래액", won(a.krw), P ? dlab + arrow(chg(C.krw, P.krw)) : `${a.cnt}건`)}${kp("총 수익", won(a.rev), P ? dlab + arrow(chg(C.rev, P.rev)) : "")}${kp("수익률", pct(a.rate, 2), P ? `${W.lab} ${pct(C.rate, 2)}` : "")}${kp("거래 건수", `${a.cnt}건`, P ? dlab + arrow(chg(C.cnt, P.cnt), 0) : "")}</div>`;
+  const trend = P && P.krw ? ` · ${W.lab} 거래액 <b>${arrow(chg(C.krw, P.krw))}</b>` : "";
+  $("#summary").innerHTML = kbarHtml(`수익 <b>${won(a.rev)}</b>의 <b>${share(sv.v / (a.rev || 1))}</b>가 ${SVC_KO[sv.k]} ${svCnt}건에서 나와, 소수 대형 거래 의존도가 높습니다${trend}`);
 }
+// 드릴다운 · 탭별 한 줄 인사이트
+function drillOneLiner(path) {
+  const last = path[path.length - 1];
+  if (!last) return "";
+  if (last.raw) {
+    const raw = RAW_BY_FILE[last.raw], s = BY_ID[raw.transaction_id];
+    if (!s) return `${SYS_KO[raw.system]} 원본 파일입니다.`;
+    const logs = (LOG_BY_FILE[last.raw] || []).filter(l => l.field !== "FX_Rate_Date");
+    return `원본 ${rawFields(s).length}개 항목 중 <b>${logs.length}개</b>를 자동 정제해 원화 <b>${won(s.KRW_Amount)}</b>, 수익 <b>${won(s.Total_Revenue)}</b>을 산출했습니다`;
+  }
+  if (last.txn) {
+    const s = BY_ID[last.txn], same = S.filter(x => x.Service === s.Service), avg = sum(same, "Total_Revenue") / sum(same, "KRW_Amount");
+    const rank = [...S].sort((x, y) => y.KRW_Amount - x.KRW_Amount).findIndex(x => x.Transaction_ID === s.Transaction_ID) + 1;
+    return `${CTRY[s.Country].ko} ${SVC_KO[s.Service]} <b>${won(s.KRW_Amount)}</b> (전체 ${rank}위) · 수익률 <b>${s.Revenue_Rate.toFixed(2)}%</b>로 서비스 평균(${pct(avg, 2)})보다 ${s.Revenue_Rate / 100 >= avg ? "높습니다" : "낮습니다"}`;
+  }
+  const dims = path.filter(p => p.dim), rows = sliceRows(), all = agg(rowsNow()), a = agg(rows);
+  if (!rows.length) return "해당 거래가 없습니다.";
+  const name = dims.map(p => DIM[p.dim].label(p.value)).join(" · ");
+  const nd = ["Service", "Country", "Channel", "Customer_Type"].find(d => !dims.some(p => p.dim === d));
+  const t = nd ? topBy(rows, nd)[0] : null;
+  const diff = a.rate - all.rate;
+  return `${esc(name)}: 거래액의 <b>${share(a.krw / (all.krw || 1))}</b>·수익의 <b>${share(a.rev / (all.rev || 1))}</b> · 수익률 ${pct(a.rate, 2)}(평균 대비 ${diff >= 0 ? "+" : "−"}${(Math.abs(diff) * 10000).toFixed(0)}bp)${t ? ` · 주력 ${josa(DIM[nd].ko, "은는")} <b>${esc(DIM[nd].label(t.k))}</b>(${share(t.v / a.krw)})` : ""}`;
+}
+function ledgerOneLiner() {
+  const rows = rowsNow(); if (!rows.length) return "해당 거래가 없습니다.";
+  const a = agg(rows), sorted = [...rows].sort((x, y) => y.KRW_Amount - x.KRW_Amount), med = sorted[Math.floor(sorted.length / 2)].KRW_Amount;
+  return `상위 10건이 거래액의 <b>${share(sum(sorted.slice(0, 10), "KRW_Amount") / a.krw)}</b> · 평균 ${won(a.avg)} vs 중앙값 <b>${won(med)}</b>: 소수 대형 거래가 전체를 좌우합니다`;
+}
+function pipeOneLiner() {
+  const P = DATA.summary.pipeline, V = DATA.validation;
+  return `원본 <b>${P.collected}개</b> → 중복 ${P.duplicates.length}개 제거 → <b>${P.standardized}건</b> 표준화 · 값 변경 ${P.changes_logged}건(오탈자 ${DATA.log.filter(l => l.rule === "R08_TYPO").length}건 자동 교정) · 정답 대조 <b>${V.truth_rows - V.truth_mismatches.length}/${V.truth_rows} 일치</b>`;
+}
+function basisOneLiner() {
+  const sim = DATA.fx_meta.source === "SIMULATED";
+  const mv = Object.keys(DICT.currency).map(c => { const f = DATA.fx_monthly[MONTHS[0]]?.[c], l = DATA.fx_monthly[MONTHS[8]]?.[c]; return [c, f && l ? l / f - 1 : 0]; }).sort((x, y) => y[1] - x[1]);
+  return `거래는 시뮬레이션${sim ? " · 환율도 시뮬레이션 값" : " · 환율은 ECOS 실제 값"} · 수수료는 가상 정책 · 1월 대비 <b>${mv[0][0]} ${arrow(mv[0][1])}</b>, <b>${mv[mv.length - 1][0]} ${arrow(mv[mv.length - 1][1])}</b>`;
+}
+
 function msgHead(id, title, sub) { $(id).innerHTML = `<div class="msg-t">${title}</div>${sub ? `<div class="msg-s">${sub}</div>` : ""}`; }
 function renderMessages(rows) {
   const a = agg(rows), base = baseRows();
@@ -1010,7 +1052,7 @@ function renderTrend() {
   const host = $("#trend"), W = Math.max(300, host.clientWidth || 480);
   const base = baseRows(), sel = new Set(periodMonths());
   const byM = MONTHS.map(m => agg(base.filter(s => s.Month === m)));
-  const H1 = 74, gap = 18, padL = 46, padR = 12, padT = 18, padB = 22;
+  const H1 = 86, gap = 20, padL = 46, padR = 12, padT = 18, padB = 22;
   const H = padT + H1 + gap + H1 + padB;
   const el = svg("svg", {class: "chart-svg", viewBox: `0 0 ${W} ${H}`, height: H, role: "img", "aria-label": "월별 거래액과 수익 추이"});
   const x = i => padL + (W - padL - padR) * (i / (MONTHS.length - 1));
@@ -1115,7 +1157,12 @@ function renderCrumbs() {
     c.appendChild(b);
   });
 }
-function renderDrawer() { renderDrawerView(); if (AI.on) renderAI(); }
+function renderDrawer() {
+  renderDrawerView();
+  const kb = document.createElement("div"); kb.className = "kbar"; kb.innerHTML = kbarHtml(drillOneLiner(state.path));
+  $("#drBody").prepend(kb);
+  if (AI.on) renderAI();
+}
 function renderDrawerView() {
   renderCrumbs();
   const last = state.path[state.path.length - 1];
@@ -1267,6 +1314,7 @@ function renderRawView(file) {
 // ---------- LEDGER ----------
 const LEDGER_COLS = [["Transaction_ID","거래번호"],["Date","일자"],["Service","서비스"],["Customer_Type","고객"],["Country","국가"],["Currency","통화"],["Foreign_Amount","외화금액","r"],["FX_Rate","적용환율","r"],["KRW_Amount","원화 거래액","r"],["Total_Revenue","수익","r"],["Revenue_Rate","수익률","r"],["Channel","채널"],["Source_File","원본 파일"]];
 function renderLedger() {
+  $("#kbLedger").innerHTML = kbarHtml(ledgerOneLiner());
   const q = state.ledgerQ.trim().toLowerCase();
   let rows = rowsNow().filter(s => !q || [s.Transaction_ID, s.Country, CTRY[s.Country].ko, s.Currency, s.Service, SVC_KO[s.Service], s.Source_File, s.Source_Ref].join(" ").toLowerCase().includes(q));
   const [key, dir] = state.ledgerSort;
@@ -1288,6 +1336,7 @@ function renderLedger() {
 
 // ---------- PIPELINE: 흐름도 + 막대 + 체크 타일 ----------
 function renderPipeline() {
+  $("#kbPipe").innerHTML = kbarHtml(pipeOneLiner());
   const P = DATA.summary.pipeline, V = DATA.validation;
   const ruleCount = r => DATA.log.filter(l => l.rule === r).length;
   const SYS_COL = {BRANCH: "var(--c3)", DIGITAL: "var(--c1)", CORP: "var(--c4)"};
@@ -1391,6 +1440,7 @@ function renderLog() {
 
 // ---------- BASIS: 배지 + 미니 차트 + 산식 블록 ----------
 function renderBasis() {
+  $("#kbBasis").innerHTML = kbarHtml(basisOneLiner());
   const fx = DATA.fx_meta, sim = fx.source === "SIMULATED", P = DATA.summary;
   $("#basisBadges").innerHTML = `<span class="badge" title="실제 고객정보 없음"><i></i>거래 SIMULATED</span><span class="badge ${sim ? "" : "ok"}" title="${esc(fx.note)}"><i></i>환율 ${sim ? "SIMULATED" : "ECOS"}</span><span class="badge" title="${esc(DATA.policy.basis)}"><i></i>수수료 가상 정책</span><span class="badge ok"><i></i>ISO 3166 · ISO 4217</span>`;
   $("#fxSrcLabel").textContent = `${fx.period.join(" ~ ")}`;
@@ -1455,7 +1505,7 @@ function topBy(rows, key, val = "KRW_Amount") {
 function aiHome() {
   const rows = rowsNow(), base = baseRows(), a = agg(rows), out = {about: [], ins: [], warn: [], act: []};
   const per = PERIODS.find(p => p[0] === state.f.period)[1];
-  out.about.push(`보고용 요약 화면입니다. 맨 위 파란 띠가 ${B("결론 한 문장과 핵심 숫자 4개")}이고, 아래 네 카드는 ${B("제목이 결론, 그 아래 차트가 근거")}입니다. 하단 전광판은 환율과 분기 비교를 흘려 보여 줍니다.`);
+  out.about.push(`보고용 요약 화면입니다. 맨 위 띠가 ${B("핵심 인사이트 한 줄")}이고, 아래 네 카드는 ${B("제목이 결론, 그 아래 차트가 근거")}입니다. 하단 전광판은 환율과 분기 비교를 흘려 보여 줍니다.`);
   out.about.push(`지금은 ${B(per)} 기준이며, 지도·차트를 누르면 국가 → 서비스 → 거래 → 원본 전표까지 내려갈 수 있습니다.`);
   if (!rows.length) { out.ins.push("선택한 조건에 해당하는 거래가 없습니다."); return out; }
   out.ins.push(`거래액 ${B(won(a.krw))}, 수익 ${B(won(a.rev))}으로 수익률은 ${B(pct(a.rate, 3))}입니다.`);
@@ -1718,7 +1768,6 @@ function setSkin(k) {
 document.querySelectorAll(".skins button").forEach(b => b.addEventListener("click", () => { setSkin(b.dataset.skin); render(); }));
 try { const k = localStorage.getItem("bo-skin"); if (k) setSkin(k); } catch (e) {}
 let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(render, 120); });
-if (DATA.avatar) { const im = document.createElement("img"); im.src = DATA.avatar; im.alt = "민승환"; document.querySelector(".profile .av").replaceChildren(im); }
 initFilters();
 render();
 // 글꼴 로딩 후 지도 라벨 폭을 다시 재서 국기 위치를 맞춘다
