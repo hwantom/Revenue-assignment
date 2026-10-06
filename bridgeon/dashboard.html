@@ -255,7 +255,6 @@ body{padding-bottom:var(--led-h)}
 @media (prefers-reduced-motion:reduce){.led-track{animation:none}.led-view{overflow-x:auto;mask-image:none}}
 
 /* ---------- 미니 시각 요소 ---------- */
-.spark{display:block;width:100%;height:24px;margin-top:4px;overflow:visible}
 .sbar{display:flex;height:10px;border-radius:3px;overflow:hidden;gap:2px;background:var(--surface-2)}
 .sbar i{display:block;height:100%}
 .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:3px 8px;border-radius:6px;background:var(--surface-2);border:1px solid var(--border);white-space:nowrap}
@@ -514,35 +513,29 @@ td{font-size:13px}
 @media (max-width:720px){.skins{display:none}}
 
 /* ===== 결정권자용 배치: 요약·인사이트 → 지도(메인) → 세부 차트 ===== */
-.brief{grid-column:1/-1;display:flex;align-items:center;gap:10px 18px;flex-wrap:wrap;background:var(--hero);box-shadow:var(--hero-shadow);color:#fff;border-radius:var(--radius);padding:14px 20px}
-.brief .lab{flex:none;font-size:12px;font-weight:800;letter-spacing:.1em;color:rgba(255,255,255,.8)}
-.brief .hl{flex:1 1 460px;margin:0;font-size:16.5px;font-weight:600;line-height:1.5;color:rgba(255,255,255,.92)}
-.brief .hl b{color:#fff;font-weight:800}
-.brief .delta.up,.brief .delta.down{color:#fff}
-.brief .pri{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.brief .pri>span{font-size:12px;font-weight:700;color:rgba(255,255,255,.8);margin-right:2px}
-.brief .pri button{border:0;border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.16);color:#fff;white-space:nowrap}
-.brief .pri button:hover{background:rgba(255,255,255,.28)}
-.brief .pri button i{font-style:normal;opacity:.75;margin-right:5px}
-.sumgrid{grid-column:1/-1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
-.sm{display:flex;flex-direction:column;gap:3px;text-align:left;cursor:pointer;padding:12px 14px;transition:border-color .12s}
+.brief{grid-column:1/-1;display:flex;flex-direction:column;gap:4px;background:var(--hero);box-shadow:var(--hero-shadow);color:#fff;border-radius:var(--radius);padding:14px 20px}
+.brief .lab{font-size:12px;font-weight:800;letter-spacing:.1em;color:rgba(255,255,255,.78)}
+.brief .hl{margin:0;font-size:20px;font-weight:800;line-height:1.4;letter-spacing:-.01em}
+.brief .base{margin:0;font-size:13px;color:rgba(255,255,255,.82)}
+.brief .base b{color:#fff}
+.sumgrid{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.sm{display:flex;flex-direction:column;gap:2px;text-align:left;cursor:pointer;padding:14px 18px;transition:border-color .12s}
 .sm:hover{border-color:var(--accent)}
 .sm>span{display:block;min-width:0}
-.sm .hd{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--ink-2)}
-.sm .no{flex:none;width:18px;height:18px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);font-size:11px;font-weight:800;display:grid;place-items:center}
-.sm .tg{margin-left:auto;font-size:11px;font-weight:800;padding:1px 8px;border-radius:999px;white-space:nowrap}
+.sm .hd{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--ink-2)}
+.sm .no{flex:none;width:20px;height:20px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);font-size:11.5px;font-weight:800;display:grid;place-items:center}
+.sm .tg{margin-left:auto;font-size:11.5px;font-weight:800;padding:2px 9px;border-radius:999px;white-space:nowrap}
 .tg.warn{background:var(--warn-bg);color:var(--warn-ink)}
 .tg.opp{background:color-mix(in srgb,var(--up) 13%,transparent);color:var(--up)}
 .tg.info{background:var(--surface-2);color:var(--muted)}
-.sm .v{font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-top:4px;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sm .v small{font-size:14px;font-weight:700;color:var(--ink-2)}
+.sm .v{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-top:6px;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sm .v small{font-size:15px;font-weight:700;color:var(--ink-2)}
 .sm .v .flag{margin:0}
-.sm .mt{font-size:12px;color:var(--ink-2)}
-.sm .spark{margin:2px 0 0}
-.sm .tx{margin-top:auto;padding-top:8px;border-top:1px solid var(--border);font-size:12.5px;line-height:1.5;color:var(--ink)}
-.sm .tx .flag{width:16px;height:12px;margin-right:4px}
-.sm .hd,.sm .v,.sm .mt{margin-bottom:0}
-.sm .mt+.tx,.sm .spark+.tx{margin-top:auto}
+.sm .ky{font-size:14.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.sm .mt{font-size:12px;color:var(--muted)}
+.take{font-size:12.5px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);border-radius:999px;padding:2px 10px}
+.take:empty{display:none}
+.take .flag{width:14px;height:10.5px;margin-right:4px;vertical-align:-1px}
 .home>.card.flash,.sm.flash{animation:flash 1.4s ease}
 @keyframes flash{0%,45%{box-shadow:0 0 0 3px var(--accent)}100%{box-shadow:var(--shadow)}}
 .map-card,.trend-card,.svc-card,.cust-card,.chan-card{grid-column:span 6}
@@ -553,7 +546,6 @@ td{font-size:13px}
 .rank-h{font-size:12px;font-weight:700;color:var(--muted);padding:0 8px 6px}
 .rank{display:block}
 @media (prefers-reduced-motion:reduce){.home>.card.flash,.sm.flash{animation:none;box-shadow:0 0 0 3px var(--accent)}}
-@media (max-width:1360px){.sumgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:1180px){
   .map-body{grid-template-columns:1fr}
   .rank .blist{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}
@@ -561,14 +553,17 @@ td{font-size:13px}
   .svc-card,.cust-card{grid-column:span 6}
 }
 @media (max-width:720px){
-  .sumgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .brief{padding:12px 16px}.brief .hl{font-size:15px;flex-basis:100%}
+  .sumgrid{grid-template-columns:1fr;gap:10px}
+  .brief{padding:12px 16px}.brief .hl{font-size:17px}
   .rank .blist{grid-template-columns:1fr}
   .svc-card,.cust-card{grid-column:1/-1}
   .map-svg .lbl{font-size:19px}
 }
-@media (max-width:520px){.sumgrid{grid-template-columns:1fr}}
 /* BridgeOn 로고: B 마크 + 워드마크 (Bridge 네이비 · On 블루) */
+/* 환율 전광판: 기본은 숨김, 헤더 버튼으로 켠다 */
+:root:not(.led-on){--led-h:0px}
+:root:not(.led-on) .led{display:none}
+#ledBtn[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent-ink);border-color:transparent}
 :root{--logo-ink:#0f2350;--logo-blue:#1a6fe0}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--logo-ink:#dbe6f7;--logo-blue:#5ea0ff}}
 :root[data-theme="dark"]{--logo-ink:#dbe6f7;--logo-blue:#5ea0ff}
@@ -598,6 +593,7 @@ td{font-size:13px}
       <button data-skin="navy" aria-pressed="false" title="네이비" aria-label="네이비 테마" style="background:#143a6b"></button>
     </div>
     <button class="ai-btn" id="aiBtn" aria-pressed="false" aria-controls="aiPanel" title="현재 화면 AI 해설 켜기/끄기">✦ <span class="lbl">AI 해설</span><span class="sw" aria-hidden="true"></span></button>
+    <button class="theme-btn" id="ledBtn" aria-pressed="false" title="환율 전광판 켜기/끄기" aria-label="환율 전광판 켜기/끄기"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="4" width="13" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4 8h2M8 8h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
     <button class="theme-btn" id="themeBtn" title="라이트/다크 전환" aria-label="라이트/다크 전환"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg></button>
     <div class="profile" title="목56 AI 데이터 자동화"><span class="av">민</span><span><b>민승환</b><small>202101308</small></span></div>
   </div>
@@ -623,7 +619,7 @@ td{font-size:13px}
       <div class="sumgrid" id="sumgrid"></div>
 
       <div class="card map-card" id="sec-map">
-        <div class="card-h"><h2>국가별 거래</h2><span class="sub">원 크기 = 선택 지표 · 국가를 누르면 상세 분석</span>
+        <div class="card-h"><h2>국가별 거래</h2><span class="take" id="take-sec-map"></span><span class="sub">원 크기 = 선택 지표 · 국가를 누르면 상세</span>
           <div class="right"><div class="seg" id="mapMetric"><button data-m="krw" aria-pressed="true">거래액</button><button data-m="rev" aria-pressed="false">수익</button><button data-m="cnt" aria-pressed="false">건수</button></div></div>
         </div>
         <div class="map-body"><div class="map-wrap"><svg class="map-svg" id="map" role="img" aria-label="국가별 거래 지도"></svg></div>
@@ -631,19 +627,19 @@ td{font-size:13px}
       </div>
 
       <div class="card trend-card" id="sec-trend">
-        <div class="card-h"><h2>월별 추이</h2></div>
+        <div class="card-h"><h2>월별 추이</h2><span class="take" id="take-sec-trend"></span></div>
         <div id="trend"></div>
       </div>
       <div class="card svc-card" id="sec-svc">
-        <div class="card-h"><h2>서비스별 수익</h2></div>
+        <div class="card-h"><h2>서비스별 수익</h2><span class="take" id="take-sec-svc"></span></div>
         <div id="svc"></div>
       </div>
       <div class="card cust-card" id="sec-cust">
-        <div class="card-h"><h2>고객 유형</h2></div>
+        <div class="card-h"><h2>고객 유형</h2><span class="take" id="take-sec-cust"></span></div>
         <div id="cust"></div>
       </div>
       <div class="card chan-card" id="sec-chan">
-        <div class="card-h"><h2>채널 비중</h2></div>
+        <div class="card-h"><h2>채널 비중</h2><span class="take" id="take-sec-chan"></span></div>
         <div id="chan"></div>
       </div>
     </div>
@@ -843,22 +839,6 @@ function svgGrad(parent, color, a = .32) {
   svg("stop", {offset: 0, style: `stop-color:${color};stop-opacity:${a}`}, lg); svg("stop", {offset: 1, style: `stop-color:${color};stop-opacity:0`}, lg);
   return `url(#${id})`;
 }
-// ---------- 미니 시각 요소 (숫자만 들어가는 문자열 SVG) ----------
-function sparkSvg(vals, color, sel, kind = "line", fit = false) {
-  const W = 200, H = 30, n = vals.length, max = Math.max(...vals, 1), min = fit ? Math.min(...vals) : 0, span = (max - min) || 1;
-  const x = i => 3 + (W - 6) * i / (n - 1), y = v => H - 3 - (H - 8) * (v - min) / span, st = (W - 6) / (n - 1);
-  let out = "";
-  if (sel && sel.size < n) { const ix = [...sel].sort((a, b) => a - b); out += `<rect x="${x(ix[0]) - st/2}" y="0" width="${st * ix.length}" height="${H}" rx="3" fill="var(--accent-soft)"/>`; }
-  if (kind === "bar") {
-    const bw = st * .55;
-    vals.forEach((v, i) => { const h = Math.max(v ? 2 : 0, (H - 5) * v / max); out += `<rect x="${x(i) - bw/2}" y="${H - 1 - h}" width="${bw}" height="${h}" rx="1.5" fill="${!sel || sel.has(i) ? color : "var(--axis)"}"/>`; });
-  } else {
-    const P = vals.map((v, i) => [x(i), y(v)]), gid = "sg" + (++gradSeq), line = smoothD(P);
-    out += `<defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:${color};stop-opacity:.3"/><stop offset="1" style="stop-color:${color};stop-opacity:0"/></linearGradient></defs><path d="${line} L${x(n - 1)},${H - 1} L${x(0)},${H - 1} Z" fill="url(#${gid})"/><path d="${line}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`;
-    const li = sel ? Math.max(...sel) : n - 1; out += `<circle cx="${x(li)}" cy="${y(vals[li])}" r="2.8" fill="${color}"/>`;
-  }
-  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">${out}</svg>`;
-}
 // 100% 막대: [[값, 색, 라벨]]
 function stackBar(parts, cls = "sbar", inner = false) {
   const t = parts.reduce((a, p) => a + p[0], 0) || 1;
@@ -874,39 +854,38 @@ function goSection(id) {
 }
 function renderBrief(rows) {
   const per = PERIODS.find(p => p[0] === state.f.period)[1];
+  const takes = ["sec-map", "sec-trend", "sec-svc", "sec-cust", "sec-chan"];
   if (!rows.length) {
-    $("#brief").innerHTML = `<span class="lab">한눈에 보기</span><p class="hl">${esc(per)} · 선택한 조건에 해당하는 거래가 없습니다. 필터를 넓혀 보세요.</p>`;
-    $("#sumgrid").replaceChildren(); return;
+    $("#brief").innerHTML = `<span class="lab">한눈에 보기 · ${esc(per)}</span><p class="hl">선택한 조건에 해당하는 거래가 없습니다.</p><p class="base">필터를 넓혀 보세요.</p>`;
+    $("#sumgrid").replaceChildren(); takes.forEach(id => { $("#take-" + id).textContent = ""; }); return;
   }
-  const B = v => `<b>${v}</b>`;
   const base = baseRows(), a = agg(rows);
-  const ms = periodMonths(), li = MONTHS.indexOf(ms[ms.length - 1]), sel = new Set(ms.map(m => MONTHS.indexOf(m)));
+  const ms = periodMonths(), li = MONTHS.indexOf(ms[ms.length - 1]);
   const byM = MONTHS.map(m => agg(base.filter(s => s.Month === m)));
   const cur = byM[li], pv = li > 0 ? byM[li - 1] : null;
   const gK = pv && pv.krw ? cur.krw / pv.krw - 1 : NaN, gR = pv && pv.rev ? cur.rev / pv.rev - 1 : NaN;
   const m1 = +MONTHS[li].slice(5);
   const arrow = v => isFinite(v) ? `<span class="delta ${v >= 0 ? "up" : "down"}">${v >= 0 ? "▲" : "▼"} ${pct(Math.abs(v), 1)}</span>` : `<span class="same">–</span>`;
   const wv = v => { const [n, u] = wonParts(v); return `${n}<small>${u}</small>`; };
-  const cards = [];
+  // 후보: 지표마다 {핵심 수치 v, 한 줄 요점 ky, 맥락 mt, 자세한 설명 tx(마우스 오버), 결론 문장 head}
+  const C = [];
 
-  // 1) 거래 규모
+  // 거래 규모
   const pk = ms.reduce((b, m) => byM[MONTHS.indexOf(m)].krw > byM[MONTHS.indexOf(b)].krw ? m : b);
-  cards.push({go: "sec-trend", name: "거래 규모", tag: "info", v: wv(a.krw),
-    mt: `${a.cnt}건 · 건당 ${won(a.avg)}${pv ? ` · ${m1}월 전월 대비 ${arrow(gK)}` : ""}`,
-    viz: sparkSvg(byM.map(x => x.krw), "var(--accent)", sel),
-    tx: ms.length > 1 ? `월 거래액은 ${B(+pk.slice(5) + "월")}이 ${B(won(byM[MONTHS.indexOf(pk)].krw))}로 가장 컸습니다. 월 10건 안팎이라 변화율은 크게 튈 수 있습니다.` : `${m1}월 한 달 거래 ${a.cnt}건입니다.`});
+  C.push({go: "sec-trend", name: "거래 규모", tag: "info", v: wv(a.krw),
+    ky: ms.length > 1 ? `최대 ${+pk.slice(5)}월 ${won(byM[MONTHS.indexOf(pk)].krw)}` : `${m1}월 ${a.cnt}건`,
+    mt: `${a.cnt}건 · 건당 ${won(a.avg)}`,
+    tx: "월 10건 안팎이라 전월 대비 변화율은 크게 튈 수 있습니다."});
 
-  // 2) 수익성
-  const drop = isFinite(gK) && isFinite(gR) && gK > 0 && gR < 0;
-  cards.push({go: "sec-trend", name: "수익성", tag: drop || gR < -0.1 ? "warn" : "info", pill: drop ? "수익률 하락" : gR < -0.1 ? "수익 감소" : "",
-    hl: drop ? `${m1}월 거래액은 ${arrow(gK)} 늘었지만 수익은 ${arrow(gR)} 줄었습니다.` : `${m1}월 수익이 전월 대비 ${arrow(gR)} 줄었습니다.`,
-    v: wv(a.rev), mt: `수익률 ${pct(a.rate, 2)}${pv ? ` · ${m1}월 전월 대비 ${arrow(gR)}` : ""}`,
-    viz: sparkSvg(byM.map(x => x.rev), "var(--accent-2)", sel),
-    tx: drop ? `${m1}월 거래액은 늘었지만 수익은 줄어, 수익률이 ${pct(pv.rate, 2)} → ${B(pct(cur.rate, 2))}로 낮아졌습니다. 마진이 낮은 거래 비중이 커졌습니다.`
-      : isFinite(gR) ? `${m1}월 수익은 전월 대비 ${arrow(gR)}, 그 달 수익률은 ${B(pct(cur.rate, 2))}입니다.`
-      : `수익률(수익 ÷ 거래액)은 ${B(pct(a.rate, 2))}입니다.`});
+  // 수익성
+  const drop = isFinite(gK) && isFinite(gR) && gK > 0 && gR < 0, fall = isFinite(gR) && gR < -0.1;
+  C.push({go: "sec-trend", name: "수익성", tag: drop || fall ? "warn" : "info", v: wv(a.rev),
+    ky: drop ? `${m1}월 수익률 ${pct(pv.rate, 2)} → ${pct(cur.rate, 2)}` : isFinite(gR) ? `${m1}월 수익 전월 대비 ${arrow(gR)}` : `수익률 ${pct(a.rate, 2)}`,
+    mt: drop ? `거래액 ${arrow(gK)} · 수익 ${arrow(gR)}` : `수익률 ${pct(a.rate, 2)}`,
+    tx: drop ? `${m1}월 거래액은 늘었지만 수익은 줄었습니다. 마진이 낮은 거래 비중이 커졌습니다.` : "수익률 = 수익 ÷ 거래액",
+    head: drop ? "거래는 늘었지만 수익은 줄었습니다." : `${m1}월 수익이 전월보다 줄었습니다.`});
 
-  // 3) 국가 (지도)
+  // 국가
   const ct = topBy(rows, "Country"), top2 = (ct[0].v + (ct[1]?.v || 0)) / a.krw;
   const last2 = MONTHS.slice(Math.max(0, li - 1), li + 1), before = MONTHS.slice(0, MONTHS.indexOf(last2[0]));
   let best = null;
@@ -915,57 +894,72 @@ function renderBrief(rows) {
     const y = base.filter(s => s.Country === c && before.includes(s.Month)).length / before.length;
     if (x >= 2 && x > y && (!best || x - y > best.diff)) best = {c, x, y, diff: x - y};
   }
-  const bestTxt = best ? `${flagHtml(best.c)}${BJ(CTRY[best.c].ko, "은는")} ${last2.map(m => +m.slice(5)).join("~")}월 월평균 건수가 이전보다 ${B(best.y ? "▲" + Math.round((best.x / best.y - 1) * 100) + "%" : "신규")} 늘었습니다.` : "";
-  cards.push({go: "sec-map", name: "국가", tag: best ? "opp" : top2 > .6 ? "warn" : "info", pill: best ? `${CTRY[best.c].ko} 거래 증가` : top2 > .6 ? "국가 집중" : "", hl: `거래액의 ${B(share(top2))}가 상위 2개국에 몰려 있습니다.`,
-    v: `${flagHtml(ct[0].k)}${esc(CTRY[ct[0].k].ko)}<small>${share(ct[0].v / a.krw)}</small>`,
-    mt: `거래액 1위 · ${ct.length}/${CTRY_LIST.length}개국 거래`,
-    tx: (ct[1] ? `상위 2개국(${CTRY[ct[0].k].ko}·${CTRY[ct[1].k].ko})이 거래액의 ${B(share(top2))}입니다. ` : "") + bestTxt});
+  const grow = best ? (best.y ? "▲" + Math.round((best.x / best.y - 1) * 100) + "%" : "신규") : "";
+  const L2 = last2.map(m => +m.slice(5)).join("~");
+  C.push({go: "sec-map", name: "국가", tag: best ? "opp" : top2 > .6 ? "warn" : "info",
+    v: best ? `${flagHtml(best.c)}${esc(CTRY[best.c].ko)}<small>${grow}</small>` : `${flagHtml(ct[0].k)}${esc(CTRY[ct[0].k].ko)}<small>${share(ct[0].v / a.krw)}</small>`,
+    ky: best ? `${L2}월 월평균 ${best.x.toFixed(1)}건 (이전 ${best.y.toFixed(1)}건)` : `상위 2개국 ${share(top2)}`,
+    mt: best ? `거래액 1위는 ${CTRY[ct[0].k].ko} ${share(ct[0].v / a.krw)}` : `거래액 1위 · ${ct.length}/${CTRY_LIST.length}개국 거래`,
+    note: `${flagHtml(ct[0].k)}${esc(CTRY[ct[0].k].ko)} 1위 · 상위 2개국 ${share(top2)}`,
+    tx: best ? `최근 2개월(${L2}월) 월평균 건수를 그 이전 월평균과 비교했습니다.` : "",
+    head: best ? `${CTRY[best.c].ko} 거래가 빠르게 늘고 있습니다.` : "거래가 상위 2개국에 쏠려 있습니다."});
 
-  // 4) 서비스
+  // 서비스
   const sv = topBy(rows, "Service", "Total_Revenue"), svS = a.rev ? sv[0].v / a.rev : 0, svC = sv[0].n / a.cnt;
-  const svAll = state.f.Service === "all";
-  cards.push({go: "sec-svc", name: "서비스", tag: svAll && svS > .6 ? "warn" : "info", pill: svAll && svS > .6 ? `${SVC_KO[sv[0].k]} 수익 집중` : "", hl: `수익의 ${B(share(svS))}가 ${esc(SVC_KO[sv[0].k])}에 몰려 있습니다.`,
-    v: `${esc(SVC_KO[sv[0].k])}<small>${share(svS)}</small>`, mt: svAll ? "수익 1위 서비스" : "선택한 서비스",
-    tx: !svAll ? `건당 평균 수익은 ${B(won(a.rev / a.cnt))}입니다.`
-      : svC < svS - .2 ? `수익의 ${B(share(svS))}가 한 서비스에서 나오지만 건수 비중은 ${share(svC)}뿐입니다. 큰 거래 몇 건이 빠지면 수익이 크게 흔들립니다.`
-      : `수익 비중 ${B(share(svS))}, 건수 비중 ${share(svC)}입니다.`});
+  const svAll = state.f.Service === "all", conc = svAll && svS > .6;
+  C.push({go: "sec-svc", name: "서비스", tag: conc ? "warn" : "info",
+    v: `${esc(SVC_KO[sv[0].k])}<small>${share(svS)}</small>`,
+    ky: svAll ? `건수 비중은 ${share(svC)}` : `건당 수익 ${won(a.rev / a.cnt)}`,
+    mt: svAll ? "수익 비중 1위 서비스" : "선택한 서비스",
+    tx: conc ? "큰 거래 몇 건이 빠지면 수익이 크게 흔들립니다." : "",
+    head: `수익이 ${SVC_KO[sv[0].k]}에 쏠려 있습니다.`});
 
-  // 5) 고객
+  // 고객
   const corp = rows.filter(r => r.Customer_Type === "Corporate");
   if (corp.length && corp.length < rows.length) {
     const c1 = corp.length / a.cnt, c2 = sum(corp, "KRW_Amount") / a.krw;
-    cards.push({go: "sec-cust", name: "고객", tag: "info", v: `기업<small>${share(c2)}</small>`, mt: "거래액 중 기업 고객 비중",
-      tx: `기업은 건수 ${B(share(c1))}로 거래액 ${B(share(c2))}를 만듭니다. 개인·외국인 건당 평균은 ${won(sum(rows.filter(r => r.Customer_Type !== "Corporate"), "KRW_Amount") / (a.cnt - corp.length))}입니다.`});
+    C.push({go: "sec-cust", name: "고객", tag: "info", v: `기업<small>${share(c2)}</small>`,
+      ky: `건수 ${share(c1)} → 거래액 ${share(c2)}`, mt: "거래액 중 기업 고객 비중",
+      tx: `개인·외국인 건당 평균 ${won(sum(rows.filter(r => r.Customer_Type !== "Corporate"), "KRW_Amount") / (a.cnt - corp.length))}`});
   } else {
     const cu = topBy(rows, "Customer_Type");
-    cards.push({go: "sec-cust", name: "고객", tag: "info", v: `${esc(CUST_KO[cu[0].k])}<small>${share(cu[0].v / a.krw)}</small>`, mt: "거래액 1위 고객 유형",
-      tx: `${corp.length ? "기업 거래만" : "기업 거래가 없는"} 조건입니다. 건당 평균 거래액은 ${B(won(a.avg))}입니다.`});
+    C.push({go: "sec-cust", name: "고객", tag: "info", v: `${esc(CUST_KO[cu[0].k])}<small>${share(cu[0].v / a.krw)}</small>`,
+      ky: `건당 평균 ${won(a.avg)}`, mt: "거래액 1위 고객 유형", tx: ""});
   }
 
-  // 6) 채널 (개인·외국인 모바일 전환, 1Q → 3Q)
+  // 채널 (개인·외국인 모바일 전환)
   const retail = base.filter(r => r.Customer_Type !== "Corporate");
   const msh = mm => { const r = retail.filter(x => mm.includes(x.Month)); return r.length ? r.filter(x => x.Channel === "Mobile").length / r.length : NaN; };
   const q1 = msh(MONTHS.slice(0, 3)), q3 = msh(MONTHS.slice(6, 9));
   if (state.f.Channel === "all" && isFinite(q1) && isFinite(q3)) {
-    cards.push({go: "sec-chan", name: "채널", tag: q3 > q1 ? "opp" : "info", pill: q3 > q1 ? "모바일 전환" : "",
-      v: `모바일<small>${pct(q3, 0)}</small>`, mt: "개인·외국인 · 3분기 건수 비중",
-      tx: `1분기 ${pct(q1, 0)} → 3분기 ${B(pct(q3, 0))}로 ${q3 > q1 ? "늘어 비대면 전환이 진행 중입니다. 모바일 우대·프로모션 효과를 따로 측정할 때입니다" : "줄었습니다"}.`});
+    C.push({go: "sec-chan", name: "채널", tag: q3 > q1 ? "opp" : "info", v: `모바일<small>${pct(q3, 0)}</small>`,
+      ky: `1분기 ${pct(q1, 0)} → 3분기 ${pct(q3, 0)}`, mt: "개인·외국인 거래 건수 기준",
+      note: `모바일(개인·외국인) ${pct(q1, 0)} → ${pct(q3, 0)}`,
+      tx: q3 > q1 ? "모바일 우대·프로모션 효과를 따로 측정할 때입니다." : "", head: "모바일 전환이 빨라지고 있습니다."});
   } else {
     const ch = [...group(rows, "Channel")].map(([k, r]) => [k, r.length]).sort((x, y) => y[1] - x[1]);
-    cards.push({go: "sec-chan", name: "채널", tag: "info", v: `${esc(CHAN_KO[ch[0][0]])}<small>${share(ch[0][1] / a.cnt)}</small>`, mt: "건수 1위 채널",
-      tx: `선택한 조건에서 거래 건수의 ${B(share(ch[0][1] / a.cnt))}가 ${esc(CHAN_KO[ch[0][0]])}에서 발생했습니다.`});
+    C.push({go: "sec-chan", name: "채널", tag: "info", v: `${esc(CHAN_KO[ch[0][0]])}<small>${share(ch[0][1] / a.cnt)}</small>`,
+      ky: `건수 비중 ${share(ch[0][1] / a.cnt)}`, mt: "건수 1위 채널", tx: ""});
   }
 
-  // 한 줄 결론 + 먼저 볼 것
-  const issues = cards.filter(c => c.tag === "warn").map(c => c.hl).slice(0, 2);
-  const hl = `${esc(per)} 거래액 ${B(won(a.krw))} · 수익 ${B(won(a.rev))} (수익률 ${pct(a.rate, 2)}). ` + (issues.length ? issues.join(" ") : "현재 조건에서 두드러진 주의 신호는 없습니다.");
-  const pri = cards.map((c, i) => ({...c, i})).filter(c => c.pill).sort((x, y) => (x.tag === "warn" ? 0 : 1) - (y.tag === "warn" ? 0 : 1)).slice(0, 3);
-  $("#brief").innerHTML = `<span class="lab">한눈에 보기</span><p class="hl">${hl}</p>` +
-    (pri.length ? `<div class="pri"><span>먼저 확인</span>${pri.map(c => `<button type="button" data-card="${c.i}"><i>${c.i + 1}</i>${esc(c.pill)}</button>`).join("")}</div>` : "");
-  $("#sumgrid").innerHTML = cards.map((c, i) => `<button class="card sm" type="button" data-go="${c.go}"><span class="hd"><span class="no">${i + 1}</span>${c.name}<span class="tg ${c.tag}">${TAG[c.tag]}</span></span><span class="v num">${c.v}</span><span class="mt">${c.mt}</span>${c.viz || ""}<span class="tx">${c.tx}</span></button>`).join("");
+  // 결정이 필요한 3장만: 주의 → 기회 → 참고 순
+  const rank = {warn: 0, opp: 1, info: 2};
+  const top = C.map((c, i) => ({...c, i})).sort((x, y) => rank[x.tag] - rank[y.tag] || x.i - y.i).slice(0, 3);
+  const flagged = top.filter(c => c.tag !== "info");
+  const lead = flagged.filter(c => c.tag === "warn").length ? flagged.filter(c => c.tag === "warn") : flagged;
+  const hl = lead.length ? lead.slice(0, 2).map(c => c.head).join(" ") : "두드러진 변화는 없습니다.";
+  $("#brief").innerHTML = `<span class="lab">한눈에 보기 · ${esc(per)}</span><p class="hl">${esc(hl)}</p>` +
+    `<p class="base">거래액 <b>${won(a.krw)}</b> · 수익 <b>${won(a.rev)}</b> · 수익률 <b>${pct(a.rate, 2)}</b> · <b>${a.cnt}건</b></p>`;
+  const plain = h => h.replace(/<[^>]+>/g, "");
+  $("#sumgrid").innerHTML = top.map((c, k) => `<button class="card sm" type="button" data-go="${c.go}"${c.tx ? ` title="${esc(plain(c.tx))}"` : ""}><span class="hd"><span class="no">${k + 1}</span>${c.name}<span class="tg ${c.tag}">${TAG[c.tag]}</span></span><span class="v num">${c.v}</span><span class="ky">${c.ky}</span><span class="mt">${c.mt}</span></button>`).join("");
+  // 차트 머리글: 위 카드에 나온 차트는 번호만, 나머지는 한 줄 요점
+  for (const id of takes) {
+    const nums = top.map((c, k) => c.go === id ? k + 1 : 0).filter(Boolean);
+    const first = C.find(c => c.go === id);
+    $("#take-" + id).innerHTML = nums.length ? `요약 ${nums.map(n => "①②③"[n - 1]).join("")}` : first ? (first.note || first.ky) : "";
+  }
 }
 $("#sumgrid").addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) goSection(b.dataset.go); });
-$("#brief").addEventListener("click", e => { const b = e.target.closest("[data-card]"); if (!b) return; const c = $("#sumgrid").children[+b.dataset.card]; if (c) { goSection(c.dataset.go); c.classList.remove("flash"); void c.offsetWidth; c.classList.add("flash"); } });
 
 // ---------- MAP ----------
 const LABEL_POS = {US:[1,0,"start"],BR:[1,0,"start"],FR:[0,-1,"middle"],AE:[-1,0.2,"end"],CN:[-1,-0.35,"end"],JP:[1,0,"start"],VN:[1,0.1,"start"],SG:[1,0.75,"start"]};
@@ -1505,7 +1499,7 @@ function topBy(rows, key, val = "KRW_Amount") {
 function aiHome() {
   const rows = rowsNow(), base = baseRows(), a = agg(rows), out = {about: [], ins: [], warn: [], act: []};
   const per = PERIODS.find(p => p[0] === state.f.period)[1];
-  out.about.push(`글로벌 금융서비스 거래 ${B(a.cnt + "건")}을 한 화면에 모은 관제 화면입니다. 맨 위 ‘한눈에 보기’ 결론과 지표별 요약·인사이트 카드를 먼저 읽고, 가운데 국가별 거래 지도, 아래 월별 추이와 서비스·고객·채널 구성 순서로 내려가면 됩니다. 요약 카드를 누르면 해당 차트로 이동합니다.`);
+  out.about.push(`글로벌 금융서비스 거래 ${B(a.cnt + "건")}을 한 화면에 모은 관제 화면입니다. 맨 위 ‘한눈에 보기’ 결론 한 줄과 결정이 필요한 카드 3장을 먼저 보고, 가운데 국가별 거래 지도, 아래 월별 추이와 서비스·고객·채널 구성 순서로 내려가면 됩니다. 카드를 누르면 해당 차트로 이동하고, 차트 제목 옆 요점은 각 차트의 결론입니다. 환율 전광판은 헤더 버튼으로 켤 수 있습니다.`);
   out.about.push(`지금은 ${B(per)} 기준이며, 지도·차트를 누르면 국가 → 서비스 → 거래 → 원본 전표까지 내려갈 수 있습니다.`);
   if (!rows.length) { out.ins.push("선택한 조건에 해당하는 거래가 없습니다."); return out; }
   out.ins.push(`거래액 ${B(won(a.krw))}, 수익 ${B(won(a.rev))}으로 수익률은 ${B(pct(a.rate, 3))}입니다.`);
@@ -1752,6 +1746,13 @@ $("#aiBtn").addEventListener("click", () => setAI(!AI.on));
 $("#aiClose").addEventListener("click", () => setAI(false));
 $("#scrim").addEventListener("click", closeDrill);
 addEventListener("keydown", e => { if (e.key === "Escape") closeDrill(); });
+function setLed(on) {
+  document.documentElement.classList.toggle("led-on", on);
+  $("#ledBtn").setAttribute("aria-pressed", on);
+  try { localStorage.setItem("bo-led", on ? "1" : "0"); } catch (e) {}
+}
+$("#ledBtn").addEventListener("click", () => setLed(!document.documentElement.classList.contains("led-on")));
+try { if (localStorage.getItem("bo-led") === "1") setLed(true); } catch (e) {}
 $("#themeBtn").addEventListener("click", () => {
   const root = document.documentElement, dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
   root.dataset.theme = dark ? "light" : "dark";
