@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2604051203",
+  "ts": "04/05/26 13:19",
+  "svc": "Overseas Transfer",
+  "cust": "INDIV",
+  "dest": "  Brasil",
+  "ccy": "US Dollar",
+  "amt": "450",
+  "chnl": "app"
+}

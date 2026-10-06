@@ -1,0 +1,10 @@
+{
+  "txn_ref": "WEB2604181238",
+  "ts": "04/18/26 20:49",
+  "svc": "Remittance",
+  "cust": "FRGN",
+  "dest": "Vietnma",
+  "ccy": "VND",
+  "amt": "9,500,000 VND",
+  "chnl": "WEB"
+}

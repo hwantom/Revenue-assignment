@@ -1,0 +1,10 @@
+{
+  "txn_ref": "WEB2608221588",
+  "ts": "08/22/26 21:33",
+  "svc": "Remittance",
+  "cust": "INDIV",
+  "dest": "Japan",
+  "ccy": "¥",
+  "amt": "¥778K",
+  "chnl": "IB-Retail"
+}

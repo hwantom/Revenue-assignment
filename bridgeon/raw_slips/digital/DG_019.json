@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2606051357",
+  "ts": "06/05/26 18:02",
+  "svc": "Overseas Transfer",
+  "cust": "personal",
+  "dest": "Chian",
+  "ccy": "Yuan",
+  "amt": "26,100 CNY",
+  "chnl": "APP"
+}

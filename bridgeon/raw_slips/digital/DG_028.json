@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2608151567",
+  "ts": "08/15/26 08:49",
+  "svc": "REMIT",
+  "cust": "Foreigner",
+  "dest": "Japn",
+  "ccy": "JPY",
+  "amt": "175,000 JPY",
+  "chnl": "Mobile Banking"
+}

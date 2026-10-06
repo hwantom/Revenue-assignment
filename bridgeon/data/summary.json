@@ -1,0 +1,44 @@
+{
+  "transactions": 100,
+  "total_krw": 38193602951,
+  "total_revenue": 178418646,
+  "fee": 38738512,
+  "fx_revenue": 36610818,
+  "finance_revenue": 103069316,
+  "avg_krw": 381936030,
+  "fx_source": "SIMULATED",
+  "fx_source_label": "시뮬레이션 기준환율 (ECOS 연결 전 임시값)",
+  "period": [
+    "2026-01-07",
+    "2026-09-29"
+  ],
+  "pipeline": {
+    "collected": 103,
+    "deduplicated": 100,
+    "standardized": 100,
+    "fx_joined": 100,
+    "detected_formats": {
+      "BRANCH/TXT": 22,
+      "DIGITAL/JSON": 41,
+      "CORP/CSV": 40
+    },
+    "changes_logged": 625,
+    "duplicates": [
+      {
+        "file": "raw_slips/digital/DG_039_resend.json",
+        "duplicate_of": "raw_slips/digital/DG_006.json",
+        "ref": "WEB2603031140"
+      },
+      {
+        "file": "raw_slips/digital/DG_040_resend.json",
+        "duplicate_of": "raw_slips/digital/DG_020.json",
+        "ref": "APP2606131385"
+      },
+      {
+        "file": "raw_slips/digital/DG_041_resend.json",
+        "duplicate_of": "raw_slips/digital/DG_034.json",
+        "ref": "APP2609081644"
+      }
+    ]
+  }
+}

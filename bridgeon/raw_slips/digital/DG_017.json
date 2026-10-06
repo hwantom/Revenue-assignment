@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2605261322",
+  "ts": "05/26/26 20:53",
+  "svc": "Currency Exchange",
+  "cust": "Non-resident",
+  "dest": "U.S.",
+  "ccy": "$",
+  "amt": "$310",
+  "chnl": "Mobile Banking"
+}

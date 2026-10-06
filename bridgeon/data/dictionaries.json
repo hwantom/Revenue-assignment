@@ -1,0 +1,39 @@
+{
+  "service": {
+    "RFX": { "label": "Retail FX", "ko": "개인 환전", "aliases": ["환전", "외화환전", "FX_EXCHANGE", "Currency Exchange", "Exchange"] },
+    "REM": { "label": "Overseas Remittance", "ko": "해외송금", "aliases": ["해외송금", "당발송금", "REMIT", "Remittance", "Overseas Transfer", "OUTWARD TT"] },
+    "CFX": { "label": "Corporate FX", "ko": "기업 외환거래", "aliases": ["외환매매", "기업외환", "FX", "FX SPOT", "FX FWD"] },
+    "TF": { "label": "Trade Finance", "ko": "무역금융", "aliases": ["무역금융", "수입L/C", "TRADE FIN", "L/C", "IMPORT LC"] }
+  },
+  "customer_type": {
+    "Individual": { "label": "Individual", "ko": "개인", "aliases": ["개인", "Personal", "INDIV"] },
+    "Foreigner": { "label": "Foreigner", "ko": "외국인", "aliases": ["외국인", "개인(외국인)", "Foreigner", "Non-resident", "FRGN"] },
+    "Corporate": { "label": "Corporate", "ko": "기업", "aliases": ["법인", "기업", "Biz", "Business", "CORP", "Corp.", "CORPORATE"] }
+  },
+  "country": {
+    "US": { "label": "United States", "ko": "미국", "iso_n3": "840", "lonlat": [-98, 39], "aliases": ["미국", "USA", "United States", "U.S.", "US"] },
+    "JP": { "label": "Japan", "ko": "일본", "iso_n3": "392", "lonlat": [138.5, 36.5], "aliases": ["일본", "日本", "Japan", "JP"] },
+    "CN": { "label": "China", "ko": "중국", "iso_n3": "156", "lonlat": [104, 34.5], "aliases": ["중국", "China", "CN", "PRC"] },
+    "VN": { "label": "Vietnam", "ko": "베트남", "iso_n3": "704", "lonlat": [106, 16], "aliases": ["베트남", "월남", "Vietnam", "Viet Nam", "VN"] },
+    "BR": { "label": "Brazil", "ko": "브라질", "iso_n3": "076", "lonlat": [-52, -10], "aliases": ["브라질", "Brazil", "Brasil", "BR"] },
+    "SG": { "label": "Singapore", "ko": "싱가포르", "iso_n3": "702", "lonlat": [103.8, 1.35], "aliases": ["싱가포르", "싱가폴", "Singapore", "SG"] },
+    "FR": { "label": "France", "ko": "프랑스", "iso_n3": "250", "lonlat": [2.5, 46.5], "aliases": ["프랑스", "불란서", "France", "FR"] },
+    "AE": { "label": "UAE", "ko": "아랍에미리트", "iso_n3": "784", "lonlat": [54, 24], "aliases": ["아랍에미리트", "UAE", "United Arab Emirates", "AE"] }
+  },
+  "channel": {
+    "Mobile": { "label": "Mobile", "ko": "모바일", "aliases": ["APP", "Mobile Banking"] },
+    "Branch": { "label": "Branch", "ko": "영업점", "aliases": ["창구"] },
+    "Internet Banking": { "label": "Internet Banking", "ko": "인터넷뱅킹", "aliases": ["WEB", "Internet Banking", "IB-Retail"] },
+    "Corporate Banking": { "label": "Corporate Banking", "ko": "기업뱅킹", "aliases": ["CMS", "IB"] }
+  },
+  "currency": {
+    "USD": { "label": "USD", "ko": "미국 달러", "aliases": ["USD", "미달러", "US Dollar", "$"] },
+    "JPY": { "label": "JPY", "ko": "일본 엔", "aliases": ["JPY", "엔화", "Yen", "¥"] },
+    "CNY": { "label": "CNY", "ko": "중국 위안", "aliases": ["CNY", "위안화", "Yuan", "RMB", "CNH"] },
+    "EUR": { "label": "EUR", "ko": "유로", "aliases": ["EUR", "유로", "Euro", "€"] },
+    "BRL": { "label": "BRL", "ko": "브라질 헤알", "aliases": ["BRL", "헤알", "Real", "R$"] },
+    "SGD": { "label": "SGD", "ko": "싱가포르 달러", "aliases": ["SGD", "싱가포르달러", "S$"] },
+    "VND": { "label": "VND", "ko": "베트남 동", "aliases": ["VND", "동", "Dong"] },
+    "AED": { "label": "AED", "ko": "UAE 디르함", "aliases": ["AED", "디르함", "Dirham"] }
+  }
+}

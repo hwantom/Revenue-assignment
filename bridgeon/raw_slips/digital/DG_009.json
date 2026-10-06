@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2603221182",
+  "ts": "03/22/26 08:32",
+  "svc": "exchange",
+  "cust": "personal",
+  "dest": "Singapore",
+  "ccy": "SGD",
+  "amt": "1,560 SGD",
+  "chnl": "APP"
+}

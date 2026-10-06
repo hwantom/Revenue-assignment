@@ -1,0 +1,10 @@
+{
+  "txn_ref": "WEB2601281049",
+  "ts": "01/28/26 12:08",
+  "svc": "Overseas Transfer",
+  "cust": "INDIV",
+  "dest": "France",
+  "ccy": "Euro",
+  "amt": "1,150 EUR",
+  "chnl": "WEB"
+}

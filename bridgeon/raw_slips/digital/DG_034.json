@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2609081644",
+  "ts": "09/08/26 16:11",
+  "svc": "Currency Exchange",
+  "cust": "personal",
+  "dest": "U.A.E.",
+  "ccy": "AED",
+  "amt": "4,840 AED",
+  "chnl": "app"
+}

@@ -1,0 +1,10 @@
+{
+  "txn_ref": "WEB2603121161",
+  "ts": "03/12/26 11:19",
+  "svc": "REMIT",
+  "cust": "personal",
+  "dest": "USA",
+  "ccy": "usd",
+  "amt": "6750",
+  "chnl": "IB-Retail"
+}

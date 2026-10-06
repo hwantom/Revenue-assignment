@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2606131385",
+  "ts": "06/13/26 20:30",
+  "svc": "Currency Exchange",
+  "cust": "INDIV",
+  "dest": "FR",
+  "ccy": "Euro",
+  "amt": "€200",
+  "chnl": "app"
+}

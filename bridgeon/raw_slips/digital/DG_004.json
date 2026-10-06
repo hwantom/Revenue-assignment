@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2602071098",
+  "ts": "02/07/26 16:31",
+  "svc": "FX_EXCHANGE",
+  "cust": "Foreigner",
+  "dest": "JP",
+  "ccy": "Yen",
+  "amt": "259K",
+  "chnl": "app"
+}

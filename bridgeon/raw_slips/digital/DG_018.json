@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2606011343",
+  "ts": "06/01/26 09:24",
+  "svc": "REMIT",
+  "cust": "INDIV",
+  "dest": "UAE",
+  "ccy": "Dirham",
+  "amt": "3,300 AED",
+  "chnl": "app"
+}

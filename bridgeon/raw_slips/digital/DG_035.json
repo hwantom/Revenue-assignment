@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2609091658",
+  "ts": "09/09/26 13:41",
+  "svc": "Currency Exchange",
+  "cust": "personal",
+  "dest": "United States",
+  "ccy": "US Dollar",
+  "amt": "230",
+  "chnl": "Mobile Banking"
+}

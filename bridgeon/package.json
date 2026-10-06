@@ -1,0 +1,19 @@
+{
+  "name": "bridgeon-bank-dashboard",
+  "private": true,
+  "type": "module",
+  "description": "BridgeOn Bank Global Revenue Intelligence — 전표 정제·분석 대시보드 빌드",
+  "scripts": {
+    "generate": "node tools/generate_slips.mjs",
+    "clean": "node tools/clean_slips.mjs",
+    "map": "node tools/build_map.mjs",
+    "build": "node tools/build_dashboard.mjs",
+    "all": "node tools/generate_slips.mjs && node tools/clean_slips.mjs && node tools/build_dashboard.mjs"
+  },
+  "devDependencies": {
+    "d3-geo": "^3.1.1",
+    "pretendard": "1.3.9",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
+  }
+}

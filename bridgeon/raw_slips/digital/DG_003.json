@@ -1,0 +1,10 @@
+{
+  "txn_ref": "WEB2602041084",
+  "ts": "02/04/26 20:54",
+  "svc": "Remittance",
+  "cust": "INDIV",
+  "dest": "Untied States",
+  "ccy": "US Dollar",
+  "amt": "3,250 USD",
+  "chnl": "WEB"
+}

@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2601151021",
+  "ts": "01/15/26 12:26",
+  "svc": "exchange",
+  "cust": "INDIV",
+  "dest": "Japan",
+  "ccy": "¥",
+  "amt": "43,000 JPY",
+  "chnl": "Mobile Banking"
+}

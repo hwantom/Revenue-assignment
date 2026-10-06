@@ -1,0 +1,13 @@
+[
+  { "id": "R00_DEDUP", "step": "정제", "target": "전표 전체", "rule": "같은 시스템·같은 원천 참조번호·같은 내용의 재전송 파일은 1건만 남긴다.", "example": "DG_039_resend.json = DG_006.json 재전송" },
+  { "id": "R01_DATE", "step": "표준화", "target": "Date", "rule": "YYYY.MM.DD · YYYY년 M월 D일 · MM/DD/YY(디지털, 미국식) · DD-MON-YYYY 를 ISO 날짜로 변환한다.", "example": "03/15/26 · 15-MAR-2026 → 2026-03-15" },
+  { "id": "R02_SERVICE", "step": "표준화", "target": "Service", "rule": "업무구분·svc·PRODUCT 값을 서비스 사전의 4개 표준 서비스로 치환한다.", "example": "당발송금 · REMIT · OUTWARD TT → Overseas Remittance" },
+  { "id": "R03_CUSTOMER", "step": "표준화", "target": "Customer_Type", "rule": "고객구분 표기를 Individual / Foreigner / Corporate 로 통일한다.", "example": "Personal · 개인 → Individual, Corp. · 법인 → Corporate" },
+  { "id": "R04_COUNTRY", "step": "표준화", "target": "Country", "rule": "국가명·국가코드·한글명을 영문 표준 국가명으로 치환한다.", "example": "USA · 미국 · U.S. → United States" },
+  { "id": "R05_CHANNEL", "step": "표준화", "target": "Channel", "rule": "창구·APP·WEB·CMS·IB 등 채널 코드를 4개 표준 채널로 치환한다.", "example": "APP → Mobile, IB(기업) → Corporate Banking" },
+  { "id": "R06_CURRENCY", "step": "표준화", "target": "Currency", "rule": "통화명·기호·별칭을 ISO 4217 코드로 치환한다.", "example": "US Dollar · $ → USD, RMB · CNH → CNY" },
+  { "id": "R07_AMOUNT", "step": "정제", "target": "Foreign_Amount", "rule": "통화기호·통화코드·천단위 쉼표를 분리하고 K(천)·M(백만) 단위를 숫자로 전개한다.", "example": "$3.5K → 3,500 / 1.2M → 1,200,000" },
+  { "id": "R08_TYPO", "step": "정제", "target": "Country 등", "rule": "사전에 없는 값은 공백·대소문자를 무시하고, 그래도 없으면 편집거리(인접 글자 뒤바뀜 1회) 1~2 이내의 별칭으로 교정한다.", "example": "Japn → Japan, Untied States → United States" },
+  { "id": "R09_FX_JOIN", "step": "외부 데이터 결합", "target": "FX_Rate", "rule": "거래일 환율을 결합하고, 주말·휴일 거래는 직전 고시일 환율을 적용한다. JPY·VND 는 100단위 고시를 1단위로 환산한다.", "example": "2026-03-15(일) → 2026-03-13 고시 환율" },
+  { "id": "R10_REVENUE", "step": "수익 계산", "target": "Total_Revenue", "rule": "서비스별 가상 정책(스프레드·수수료·전신료·금융수익)을 적용해 Fee + FX_Revenue + Finance_Revenue 를 계산한다.", "example": "fee_policy.json 참조" }
+]

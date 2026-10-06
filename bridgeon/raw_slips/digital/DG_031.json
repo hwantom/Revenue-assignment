@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2608231595",
+  "ts": "08/23/26 12:20",
+  "svc": "Remittance",
+  "cust": "FRGN",
+  "dest": "Japn",
+  "ccy": "¥",
+  "amt": "428K",
+  "chnl": "Mobile Banking"
+}

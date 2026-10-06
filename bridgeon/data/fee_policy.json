@@ -1,0 +1,30 @@
+{
+  "name": "BridgeOn Bank 가상 수수료·스프레드 정책 v1",
+  "basis": "시중은행이 공개한 환전 스프레드·해외송금 수수료 구조(금액 구간별 송금수수료, 전신료, 채널별 우대)를 참고해 과제용으로 재설계한 가상 정책입니다. 특정 은행의 실제 요율이 아닙니다.",
+  "services": {
+    "Retail FX": {
+      "cash_spread": { "USD": 0.0175, "JPY": 0.0175, "EUR": 0.0199, "CNY": 0.05, "SGD": 0.04, "VND": 0.09, "AED": 0.06, "BRL": 0.08 },
+      "preferential_rate": { "Mobile": 0.8, "Internet Banking": 0.5, "Branch": 0.3, "Corporate Banking": 0.3 }
+    },
+    "Overseas Remittance": {
+      "fee_tiers_usd": [
+        { "max_usd": 500, "branch_krw": 5000, "digital_krw": 2500 },
+        { "max_usd": 2000, "branch_krw": 10000, "digital_krw": 5000 },
+        { "max_usd": 5000, "branch_krw": 15000, "digital_krw": 7500 },
+        { "max_usd": 20000, "branch_krw": 20000, "digital_krw": 10000 },
+        { "max_usd": 1e15, "branch_krw": 25000, "digital_krw": 12500 }
+      ],
+      "cable_charge": { "branch_krw": 8000, "digital_krw": 5000 },
+      "fx_spread": 0.01,
+      "preferential_rate": { "Mobile": 0.9, "Internet Banking": 0.7, "Branch": 0.3, "Corporate Banking": 0.5 }
+    },
+    "Corporate FX": {
+      "spread": { "Corporate Banking": 0.0025, "Branch": 0.004 }
+    },
+    "Trade Finance": {
+      "fee_rate": 0.0015,
+      "min_fee_krw": 30000,
+      "annual_margin": 0.015
+    }
+  }
+}

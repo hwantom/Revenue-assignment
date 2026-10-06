@@ -1,0 +1,10 @@
+{
+  "txn_ref": "WEB2602151112",
+  "ts": "02/15/26 13:25",
+  "svc": "Overseas Transfer",
+  "cust": "Foreigner",
+  "dest": "Untied States",
+  "ccy": "US Dollar",
+  "amt": "$2050",
+  "chnl": "Internet Banking"
+}

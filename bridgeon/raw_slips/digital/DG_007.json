@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2603101154",
+  "ts": "03/10/26 12:45",
+  "svc": "Overseas Transfer",
+  "cust": "INDIV",
+  "dest": "CN",
+  "ccy": "Yuan",
+  "amt": "46,350 CNY",
+  "chnl": "Mobile Banking"
+}

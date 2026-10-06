@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2604141210",
+  "ts": "04/14/26 10:22",
+  "svc": "Overseas Transfer",
+  "cust": "Non-resident",
+  "dest": "Brasil",
+  "ccy": "$",
+  "amt": "5850",
+  "chnl": "APP"
+}

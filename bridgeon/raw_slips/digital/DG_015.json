@@ -1,0 +1,10 @@
+{
+  "txn_ref": "WEB2605051266",
+  "ts": "05/05/26 08:56",
+  "svc": "Currency Exchange",
+  "cust": "Non-resident",
+  "dest": "Japn",
+  "ccy": "Yen",
+  "amt": "301K",
+  "chnl": "IB-Retail"
+}

@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2608111553",
+  "ts": "08/11/26 11:30",
+  "svc": "Currency Exchange",
+  "cust": "INDIV",
+  "dest": "  japan",
+  "ccy": "¥",
+  "amt": "¥38K",
+  "chnl": "app"
+}

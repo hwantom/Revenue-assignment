@@ -1,0 +1,10 @@
+{
+  "txn_ref": "WEB2608071539",
+  "ts": "08/07/26 16:18",
+  "svc": "Currency Exchange",
+  "cust": "Personal",
+  "dest": "japan",
+  "ccy": "¥",
+  "amt": "153K",
+  "chnl": "WEB"
+}

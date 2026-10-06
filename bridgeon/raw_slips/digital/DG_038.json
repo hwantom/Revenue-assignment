@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2609291700",
+  "ts": "09/29/26 21:06",
+  "svc": "Currency Exchange",
+  "cust": "Non-resident",
+  "dest": "Japn",
+  "ccy": "JPY",
+  "amt": "64K",
+  "chnl": "Mobile Banking"
+}

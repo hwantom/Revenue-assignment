@@ -1,0 +1,11 @@
+{
+  "raw_files": 103,
+  "duplicates_removed": 3,
+  "clean_rows": 100,
+  "parse_issues": [],
+  "truth_rows": 100,
+  "truth_mismatches": [],
+  "revenue_identity_ok": true,
+  "krw_identity_ok": true,
+  "passed": true
+}

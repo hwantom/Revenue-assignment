@@ -1,0 +1,10 @@
+{
+  "txn_ref": "WEB2608051518",
+  "ts": "08/05/26 12:26",
+  "svc": "exchange",
+  "cust": "Personal",
+  "dest": "  France",
+  "ccy": "€",
+  "amt": "2730",
+  "chnl": "WEB"
+}

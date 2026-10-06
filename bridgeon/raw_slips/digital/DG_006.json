@@ -1,0 +1,10 @@
+{
+  "txn_ref": "WEB2603031140",
+  "ts": "03/03/26 17:52",
+  "svc": "Overseas Transfer",
+  "cust": "Non-resident",
+  "dest": "U.S.",
+  "ccy": "$",
+  "amt": "$2K",
+  "chnl": "IB-Retail"
+}

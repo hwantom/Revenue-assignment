@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2609191679",
+  "ts": "09/19/26 15:39",
+  "svc": "exchange",
+  "cust": "Personal",
+  "dest": "Untied States",
+  "ccy": "usd",
+  "amt": "450",
+  "chnl": "app"
+}

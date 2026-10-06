@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2607281497",
+  "ts": "07/28/26 14:57",
+  "svc": "Remittance",
+  "cust": "Non-resident",
+  "dest": "japan",
+  "ccy": "JPY",
+  "amt": "88,000 JPY",
+  "chnl": "app"
+}

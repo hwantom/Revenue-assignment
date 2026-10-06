@@ -1,0 +1,10 @@
+{
+  "txn_ref": "APP2604011196",
+  "ts": "04/01/26 14:15",
+  "svc": "exchange",
+  "cust": "INDIV",
+  "dest": "United Arab Emirates",
+  "ccy": "AED",
+  "amt": "5,770 AED",
+  "chnl": "Mobile Banking"
+}

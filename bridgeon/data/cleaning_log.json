@@ -1,0 +1,6252 @@
+[
+ {
+  "file": "raw_slips/branch/BR_001.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.1.22",
+  "clean": "2026-01-22",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260122-005"
+ },
+ {
+  "file": "raw_slips/branch/BR_001.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "외화환전",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260122-005"
+ },
+ {
+  "file": "raw_slips/branch/BR_001.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "개인",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260122-005"
+ },
+ {
+  "file": "raw_slips/branch/BR_001.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "미 국",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260122-005"
+ },
+ {
+  "file": "raw_slips/branch/BR_001.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260122-005"
+ },
+ {
+  "file": "raw_slips/branch/BR_001.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "1,480.00",
+  "clean": 1480,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260122-005"
+ },
+ {
+  "file": "raw_slips/branch/BR_002.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026년 2월 9일",
+  "clean": "2026-02-09",
+  "rule": "R01_DATE",
+  "note": "YYYY년 M월 D일",
+  "Transaction_ID": "FX-260209-015"
+ },
+ {
+  "file": "raw_slips/branch/BR_002.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "수입L/C",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260209-015"
+ },
+ {
+  "file": "raw_slips/branch/BR_002.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "법인",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260209-015"
+ },
+ {
+  "file": "raw_slips/branch/BR_002.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "중국",
+  "clean": "China",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260209-015"
+ },
+ {
+  "file": "raw_slips/branch/BR_002.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260209-015"
+ },
+ {
+  "file": "raw_slips/branch/BR_002.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "9,614,000",
+  "clean": 9614000,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260209-015"
+ },
+ {
+  "file": "raw_slips/branch/BR_002.txt",
+  "system": "BRANCH",
+  "field": "Tenor_Days",
+  "raw": "120일",
+  "clean": 120,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260209-015"
+ },
+ {
+  "file": "raw_slips/branch/BR_003.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.2.20",
+  "clean": "2026-02-20",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260220-017"
+ },
+ {
+  "file": "raw_slips/branch/BR_003.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "당발송금",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260220-017"
+ },
+ {
+  "file": "raw_slips/branch/BR_003.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "개인(외국인)",
+  "clean": "Foreigner",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260220-017"
+ },
+ {
+  "file": "raw_slips/branch/BR_003.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "베트남",
+  "clean": "Vietnam",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260220-017"
+ },
+ {
+  "file": "raw_slips/branch/BR_003.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260220-017"
+ },
+ {
+  "file": "raw_slips/branch/BR_003.txt",
+  "system": "BRANCH",
+  "field": "Currency",
+  "raw": "동",
+  "clean": "VND",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260220-017"
+ },
+ {
+  "file": "raw_slips/branch/BR_003.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "16,600,000",
+  "clean": 16600000,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260220-017"
+ },
+ {
+  "file": "raw_slips/branch/BR_004.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.03.03",
+  "clean": "2026-03-03",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260303-019"
+ },
+ {
+  "file": "raw_slips/branch/BR_004.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "외환매매",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260303-019"
+ },
+ {
+  "file": "raw_slips/branch/BR_004.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "기업",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260303-019"
+ },
+ {
+  "file": "raw_slips/branch/BR_004.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "미 국",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260303-019"
+ },
+ {
+  "file": "raw_slips/branch/BR_004.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260303-019"
+ },
+ {
+  "file": "raw_slips/branch/BR_004.txt",
+  "system": "BRANCH",
+  "field": "Currency",
+  "raw": "미달러",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260303-019"
+ },
+ {
+  "file": "raw_slips/branch/BR_005.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.03.05",
+  "clean": "2026-03-05",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260305-021"
+ },
+ {
+  "file": "raw_slips/branch/BR_005.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "환전",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260305-021"
+ },
+ {
+  "file": "raw_slips/branch/BR_005.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "개인",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260305-021"
+ },
+ {
+  "file": "raw_slips/branch/BR_005.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "미 국",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260305-021"
+ },
+ {
+  "file": "raw_slips/branch/BR_005.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260305-021"
+ },
+ {
+  "file": "raw_slips/branch/BR_005.txt",
+  "system": "BRANCH",
+  "field": "Currency",
+  "raw": "미달러",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260305-021"
+ },
+ {
+  "file": "raw_slips/branch/BR_005.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "1,880",
+  "clean": 1880,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260305-021"
+ },
+ {
+  "file": "raw_slips/branch/BR_006.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026년 3월 16일",
+  "clean": "2026-03-16",
+  "rule": "R01_DATE",
+  "note": "YYYY년 M월 D일",
+  "Transaction_ID": "FX-260316-024"
+ },
+ {
+  "file": "raw_slips/branch/BR_006.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "당발송금",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260316-024"
+ },
+ {
+  "file": "raw_slips/branch/BR_006.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "개인",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260316-024"
+ },
+ {
+  "file": "raw_slips/branch/BR_006.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "미국",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260316-024"
+ },
+ {
+  "file": "raw_slips/branch/BR_006.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260316-024"
+ },
+ {
+  "file": "raw_slips/branch/BR_006.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "1,400.00",
+  "clean": 1400,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260316-024"
+ },
+ {
+  "file": "raw_slips/branch/BR_007.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026년 4월 14일",
+  "clean": "2026-04-14",
+  "rule": "R01_DATE",
+  "note": "YYYY년 M월 D일",
+  "Transaction_ID": "FX-260414-030"
+ },
+ {
+  "file": "raw_slips/branch/BR_007.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "환전",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260414-030"
+ },
+ {
+  "file": "raw_slips/branch/BR_007.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "개인",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260414-030"
+ },
+ {
+  "file": "raw_slips/branch/BR_007.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "미 국",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260414-030"
+ },
+ {
+  "file": "raw_slips/branch/BR_007.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260414-030"
+ },
+ {
+  "file": "raw_slips/branch/BR_007.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "2,740",
+  "clean": 2740,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260414-030"
+ },
+ {
+  "file": "raw_slips/branch/BR_008.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.4.23",
+  "clean": "2026-04-23",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260423-035"
+ },
+ {
+  "file": "raw_slips/branch/BR_008.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "해외송금",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260423-035"
+ },
+ {
+  "file": "raw_slips/branch/BR_008.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "개인(외국인)",
+  "clean": "Foreigner",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260423-035"
+ },
+ {
+  "file": "raw_slips/branch/BR_008.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "미 국",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260423-035"
+ },
+ {
+  "file": "raw_slips/branch/BR_008.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260423-035"
+ },
+ {
+  "file": "raw_slips/branch/BR_008.txt",
+  "system": "BRANCH",
+  "field": "Currency",
+  "raw": "미달러",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260423-035"
+ },
+ {
+  "file": "raw_slips/branch/BR_008.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "1,350",
+  "clean": 1350,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260423-035"
+ },
+ {
+  "file": "raw_slips/branch/BR_009.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.5.12",
+  "clean": "2026-05-12",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260512-040"
+ },
+ {
+  "file": "raw_slips/branch/BR_009.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "무역금융",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260512-040"
+ },
+ {
+  "file": "raw_slips/branch/BR_009.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "법인",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260512-040"
+ },
+ {
+  "file": "raw_slips/branch/BR_009.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "일본",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260512-040"
+ },
+ {
+  "file": "raw_slips/branch/BR_009.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260512-040"
+ },
+ {
+  "file": "raw_slips/branch/BR_009.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "204,200,000.00",
+  "clean": 204200000,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260512-040"
+ },
+ {
+  "file": "raw_slips/branch/BR_009.txt",
+  "system": "BRANCH",
+  "field": "Tenor_Days",
+  "raw": "120일",
+  "clean": 120,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260512-040"
+ },
+ {
+  "file": "raw_slips/branch/BR_010.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026년 5월 20일",
+  "clean": "2026-05-20",
+  "rule": "R01_DATE",
+  "note": "YYYY년 M월 D일",
+  "Transaction_ID": "FX-260520-043"
+ },
+ {
+  "file": "raw_slips/branch/BR_010.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "해외송금",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260520-043"
+ },
+ {
+  "file": "raw_slips/branch/BR_010.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "개인",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260520-043"
+ },
+ {
+  "file": "raw_slips/branch/BR_010.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "싱가폴",
+  "clean": "Singapore",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260520-043"
+ },
+ {
+  "file": "raw_slips/branch/BR_010.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260520-043"
+ },
+ {
+  "file": "raw_slips/branch/BR_010.txt",
+  "system": "BRANCH",
+  "field": "Currency",
+  "raw": "미달러",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260520-043"
+ },
+ {
+  "file": "raw_slips/branch/BR_010.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "300.00",
+  "clean": 300,
+  "rule": "R07_AMOUNT",
+  "note": "",
+  "Transaction_ID": "FX-260520-043"
+ },
+ {
+  "file": "raw_slips/branch/BR_011.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.5.26",
+  "clean": "2026-05-26",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260526-045"
+ },
+ {
+  "file": "raw_slips/branch/BR_011.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "당발송금",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260526-045"
+ },
+ {
+  "file": "raw_slips/branch/BR_011.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "기업",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260526-045"
+ },
+ {
+  "file": "raw_slips/branch/BR_011.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "싱가폴",
+  "clean": "Singapore",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260526-045"
+ },
+ {
+  "file": "raw_slips/branch/BR_011.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260526-045"
+ },
+ {
+  "file": "raw_slips/branch/BR_011.txt",
+  "system": "BRANCH",
+  "field": "Currency",
+  "raw": "싱가포르달러",
+  "clean": "SGD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260526-045"
+ },
+ {
+  "file": "raw_slips/branch/BR_011.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "16,950.00",
+  "clean": 16950,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260526-045"
+ },
+ {
+  "file": "raw_slips/branch/BR_012.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.05.27",
+  "clean": "2026-05-27",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260527-047"
+ },
+ {
+  "file": "raw_slips/branch/BR_012.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "당발송금",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260527-047"
+ },
+ {
+  "file": "raw_slips/branch/BR_012.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "개인",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260527-047"
+ },
+ {
+  "file": "raw_slips/branch/BR_012.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260527-047"
+ },
+ {
+  "file": "raw_slips/branch/BR_013.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.06.08",
+  "clean": "2026-06-08",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260608-052"
+ },
+ {
+  "file": "raw_slips/branch/BR_013.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "외환매매",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260608-052"
+ },
+ {
+  "file": "raw_slips/branch/BR_013.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "법인",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260608-052"
+ },
+ {
+  "file": "raw_slips/branch/BR_013.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "미국",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260608-052"
+ },
+ {
+  "file": "raw_slips/branch/BR_013.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260608-052"
+ },
+ {
+  "file": "raw_slips/branch/BR_013.txt",
+  "system": "BRANCH",
+  "field": "Currency",
+  "raw": "미달러",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260608-052"
+ },
+ {
+  "file": "raw_slips/branch/BR_014.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.6.17",
+  "clean": "2026-06-17",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260617-056"
+ },
+ {
+  "file": "raw_slips/branch/BR_014.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "환전",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260617-056"
+ },
+ {
+  "file": "raw_slips/branch/BR_014.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "개인(외국인)",
+  "clean": "Foreigner",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260617-056"
+ },
+ {
+  "file": "raw_slips/branch/BR_014.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "日本",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260617-056"
+ },
+ {
+  "file": "raw_slips/branch/BR_014.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260617-056"
+ },
+ {
+  "file": "raw_slips/branch/BR_014.txt",
+  "system": "BRANCH",
+  "field": "Currency",
+  "raw": "엔화",
+  "clean": "JPY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260617-056"
+ },
+ {
+  "file": "raw_slips/branch/BR_014.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": " 69,000.00 ",
+  "clean": 69000,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260617-056"
+ },
+ {
+  "file": "raw_slips/branch/BR_015.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.07.03",
+  "clean": "2026-07-03",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260703-063"
+ },
+ {
+  "file": "raw_slips/branch/BR_015.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "외환매매",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260703-063"
+ },
+ {
+  "file": "raw_slips/branch/BR_015.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "법인",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260703-063"
+ },
+ {
+  "file": "raw_slips/branch/BR_015.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "일본",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260703-063"
+ },
+ {
+  "file": "raw_slips/branch/BR_015.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260703-063"
+ },
+ {
+  "file": "raw_slips/branch/BR_015.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "306,000",
+  "clean": 306000,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260703-063"
+ },
+ {
+  "file": "raw_slips/branch/BR_016.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026년 7월 22일",
+  "clean": "2026-07-22",
+  "rule": "R01_DATE",
+  "note": "YYYY년 M월 D일",
+  "Transaction_ID": "FX-260722-069"
+ },
+ {
+  "file": "raw_slips/branch/BR_016.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "수입L/C",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260722-069"
+ },
+ {
+  "file": "raw_slips/branch/BR_016.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "법인",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260722-069"
+ },
+ {
+  "file": "raw_slips/branch/BR_016.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "日本",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260722-069"
+ },
+ {
+  "file": "raw_slips/branch/BR_016.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260722-069"
+ },
+ {
+  "file": "raw_slips/branch/BR_016.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "219,100,000",
+  "clean": 219100000,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260722-069"
+ },
+ {
+  "file": "raw_slips/branch/BR_016.txt",
+  "system": "BRANCH",
+  "field": "Tenor_Days",
+  "raw": "60일",
+  "clean": 60,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260722-069"
+ },
+ {
+  "file": "raw_slips/branch/BR_017.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.7.23",
+  "clean": "2026-07-23",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260723-070"
+ },
+ {
+  "file": "raw_slips/branch/BR_017.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "환전",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260723-070"
+ },
+ {
+  "file": "raw_slips/branch/BR_017.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "개인",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260723-070"
+ },
+ {
+  "file": "raw_slips/branch/BR_017.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "일본",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260723-070"
+ },
+ {
+  "file": "raw_slips/branch/BR_017.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260723-070"
+ },
+ {
+  "file": "raw_slips/branch/BR_017.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "35,000.00",
+  "clean": 35000,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260723-070"
+ },
+ {
+  "file": "raw_slips/branch/BR_018.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.07.30",
+  "clean": "2026-07-30",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260730-073"
+ },
+ {
+  "file": "raw_slips/branch/BR_018.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "환전",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260730-073"
+ },
+ {
+  "file": "raw_slips/branch/BR_018.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "개인",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260730-073"
+ },
+ {
+  "file": "raw_slips/branch/BR_018.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "日本",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260730-073"
+ },
+ {
+  "file": "raw_slips/branch/BR_018.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260730-073"
+ },
+ {
+  "file": "raw_slips/branch/BR_018.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "256,000.00",
+  "clean": 256000,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260730-073"
+ },
+ {
+  "file": "raw_slips/branch/BR_019.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.08.18",
+  "clean": "2026-08-18",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260818-082"
+ },
+ {
+  "file": "raw_slips/branch/BR_019.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "외환매매",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260818-082"
+ },
+ {
+  "file": "raw_slips/branch/BR_019.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "법인",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260818-082"
+ },
+ {
+  "file": "raw_slips/branch/BR_019.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "브라질",
+  "clean": "Brazil",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260818-082"
+ },
+ {
+  "file": "raw_slips/branch/BR_019.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260818-082"
+ },
+ {
+  "file": "raw_slips/branch/BR_019.txt",
+  "system": "BRANCH",
+  "field": "Currency",
+  "raw": "미달러",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260818-082"
+ },
+ {
+  "file": "raw_slips/branch/BR_019.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "125,000",
+  "clean": 125000,
+  "rule": "R07_AMOUNT",
+  "note": "천단위 쉼표 제거",
+  "Transaction_ID": "FX-260818-082"
+ },
+ {
+  "file": "raw_slips/branch/BR_020.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.8.25",
+  "clean": "2026-08-25",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260825-087"
+ },
+ {
+  "file": "raw_slips/branch/BR_020.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "외화환전",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260825-087"
+ },
+ {
+  "file": "raw_slips/branch/BR_020.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "개인",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260825-087"
+ },
+ {
+  "file": "raw_slips/branch/BR_020.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "미국",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260825-087"
+ },
+ {
+  "file": "raw_slips/branch/BR_020.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260825-087"
+ },
+ {
+  "file": "raw_slips/branch/BR_020.txt",
+  "system": "BRANCH",
+  "field": "Foreign_Amount",
+  "raw": "410.00",
+  "clean": 410,
+  "rule": "R07_AMOUNT",
+  "note": "",
+  "Transaction_ID": "FX-260825-087"
+ },
+ {
+  "file": "raw_slips/branch/BR_021.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026년 9월 2일",
+  "clean": "2026-09-02",
+  "rule": "R01_DATE",
+  "note": "YYYY년 M월 D일",
+  "Transaction_ID": "FX-260902-090"
+ },
+ {
+  "file": "raw_slips/branch/BR_021.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "기업외환",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260902-090"
+ },
+ {
+  "file": "raw_slips/branch/BR_021.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "기업",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260902-090"
+ },
+ {
+  "file": "raw_slips/branch/BR_021.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260902-090"
+ },
+ {
+  "file": "raw_slips/branch/BR_021.txt",
+  "system": "BRANCH",
+  "field": "Currency",
+  "raw": "디르함",
+  "clean": "AED",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260902-090"
+ },
+ {
+  "file": "raw_slips/branch/BR_022.txt",
+  "system": "BRANCH",
+  "field": "Date",
+  "raw": "2026.09.23",
+  "clean": "2026-09-23",
+  "rule": "R01_DATE",
+  "note": "YYYY.MM.DD",
+  "Transaction_ID": "FX-260923-098"
+ },
+ {
+  "file": "raw_slips/branch/BR_022.txt",
+  "system": "BRANCH",
+  "field": "Service",
+  "raw": "기업외환",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260923-098"
+ },
+ {
+  "file": "raw_slips/branch/BR_022.txt",
+  "system": "BRANCH",
+  "field": "Customer_Type",
+  "raw": "기업",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260923-098"
+ },
+ {
+  "file": "raw_slips/branch/BR_022.txt",
+  "system": "BRANCH",
+  "field": "Country",
+  "raw": "미국",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260923-098"
+ },
+ {
+  "file": "raw_slips/branch/BR_022.txt",
+  "system": "BRANCH",
+  "field": "Channel",
+  "raw": "창구",
+  "clean": "Branch",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260923-098"
+ },
+ {
+  "file": "raw_slips/branch/BR_022.txt",
+  "system": "BRANCH",
+  "field": "Currency",
+  "raw": "미달러",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260923-098"
+ },
+ {
+  "file": "raw_slips/digital/DG_001.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "01/15/26 12:26",
+  "clean": "2026-01-15",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260115-003"
+ },
+ {
+  "file": "raw_slips/digital/DG_001.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260115-003"
+ },
+ {
+  "file": "raw_slips/digital/DG_001.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260115-003"
+ },
+ {
+  "file": "raw_slips/digital/DG_001.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "Mobile Banking",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260115-003"
+ },
+ {
+  "file": "raw_slips/digital/DG_001.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "¥",
+  "clean": "JPY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260115-003"
+ },
+ {
+  "file": "raw_slips/digital/DG_001.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "43,000 JPY",
+  "clean": 43000,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260115-003"
+ },
+ {
+  "file": "raw_slips/digital/DG_002.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "01/28/26 12:08",
+  "clean": "2026-01-28",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260128-007"
+ },
+ {
+  "file": "raw_slips/digital/DG_002.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Overseas Transfer",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260128-007"
+ },
+ {
+  "file": "raw_slips/digital/DG_002.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260128-007"
+ },
+ {
+  "file": "raw_slips/digital/DG_002.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "WEB",
+  "clean": "Internet Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260128-007"
+ },
+ {
+  "file": "raw_slips/digital/DG_002.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "Euro",
+  "clean": "EUR",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260128-007"
+ },
+ {
+  "file": "raw_slips/digital/DG_002.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "1,150 EUR",
+  "clean": 1150,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260128-007"
+ },
+ {
+  "file": "raw_slips/digital/DG_003.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "02/04/26 20:54",
+  "clean": "2026-02-04",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260204-012"
+ },
+ {
+  "file": "raw_slips/digital/DG_003.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Remittance",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260204-012"
+ },
+ {
+  "file": "raw_slips/digital/DG_003.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260204-012"
+ },
+ {
+  "file": "raw_slips/digital/DG_003.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "Untied States",
+  "clean": "United States",
+  "rule": "R08_TYPO",
+  "note": "'Untied States' ≈ 'United States' (편집거리 1)",
+  "Transaction_ID": "FX-260204-012"
+ },
+ {
+  "file": "raw_slips/digital/DG_003.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "WEB",
+  "clean": "Internet Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260204-012"
+ },
+ {
+  "file": "raw_slips/digital/DG_003.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "US Dollar",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260204-012"
+ },
+ {
+  "file": "raw_slips/digital/DG_003.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "3,250 USD",
+  "clean": 3250,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260204-012"
+ },
+ {
+  "file": "raw_slips/digital/DG_004.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "02/07/26 16:31",
+  "clean": "2026-02-07",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260207-014"
+ },
+ {
+  "file": "raw_slips/digital/DG_004.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "FX_EXCHANGE",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260207-014"
+ },
+ {
+  "file": "raw_slips/digital/DG_004.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "JP",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260207-014"
+ },
+ {
+  "file": "raw_slips/digital/DG_004.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "app",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260207-014"
+ },
+ {
+  "file": "raw_slips/digital/DG_004.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "Yen",
+  "clean": "JPY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260207-014"
+ },
+ {
+  "file": "raw_slips/digital/DG_004.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "259K",
+  "clean": 259000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260207-014"
+ },
+ {
+  "file": "raw_slips/digital/DG_004.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-02-07",
+  "clean": "2026-02-06",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260207-014"
+ },
+ {
+  "file": "raw_slips/digital/DG_005.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "02/15/26 13:25",
+  "clean": "2026-02-15",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260215-016"
+ },
+ {
+  "file": "raw_slips/digital/DG_005.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Overseas Transfer",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260215-016"
+ },
+ {
+  "file": "raw_slips/digital/DG_005.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "Untied States",
+  "clean": "United States",
+  "rule": "R08_TYPO",
+  "note": "'Untied States' ≈ 'United States' (편집거리 1)",
+  "Transaction_ID": "FX-260215-016"
+ },
+ {
+  "file": "raw_slips/digital/DG_005.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "US Dollar",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260215-016"
+ },
+ {
+  "file": "raw_slips/digital/DG_005.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "$2050",
+  "clean": 2050,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리",
+  "Transaction_ID": "FX-260215-016"
+ },
+ {
+  "file": "raw_slips/digital/DG_005.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-02-15",
+  "clean": "2026-02-13",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260215-016"
+ },
+ {
+  "file": "raw_slips/digital/DG_006.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "03/03/26 17:52",
+  "clean": "2026-03-03",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260303-020"
+ },
+ {
+  "file": "raw_slips/digital/DG_006.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Overseas Transfer",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260303-020"
+ },
+ {
+  "file": "raw_slips/digital/DG_006.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "Non-resident",
+  "clean": "Foreigner",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260303-020"
+ },
+ {
+  "file": "raw_slips/digital/DG_006.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "U.S.",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260303-020"
+ },
+ {
+  "file": "raw_slips/digital/DG_006.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "IB-Retail",
+  "clean": "Internet Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260303-020"
+ },
+ {
+  "file": "raw_slips/digital/DG_006.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "$",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260303-020"
+ },
+ {
+  "file": "raw_slips/digital/DG_006.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "$2K",
+  "clean": 2000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개, 통화기호/코드 분리",
+  "Transaction_ID": "FX-260303-020"
+ },
+ {
+  "file": "raw_slips/digital/DG_007.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "03/10/26 12:45",
+  "clean": "2026-03-10",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260310-022"
+ },
+ {
+  "file": "raw_slips/digital/DG_007.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Overseas Transfer",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260310-022"
+ },
+ {
+  "file": "raw_slips/digital/DG_007.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260310-022"
+ },
+ {
+  "file": "raw_slips/digital/DG_007.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "CN",
+  "clean": "China",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260310-022"
+ },
+ {
+  "file": "raw_slips/digital/DG_007.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "Mobile Banking",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260310-022"
+ },
+ {
+  "file": "raw_slips/digital/DG_007.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "Yuan",
+  "clean": "CNY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260310-022"
+ },
+ {
+  "file": "raw_slips/digital/DG_007.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "46,350 CNY",
+  "clean": 46350,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260310-022"
+ },
+ {
+  "file": "raw_slips/digital/DG_008.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "03/12/26 11:19",
+  "clean": "2026-03-12",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260312-023"
+ },
+ {
+  "file": "raw_slips/digital/DG_008.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "REMIT",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260312-023"
+ },
+ {
+  "file": "raw_slips/digital/DG_008.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "personal",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260312-023"
+ },
+ {
+  "file": "raw_slips/digital/DG_008.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "USA",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260312-023"
+ },
+ {
+  "file": "raw_slips/digital/DG_008.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "IB-Retail",
+  "clean": "Internet Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260312-023"
+ },
+ {
+  "file": "raw_slips/digital/DG_008.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "usd",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260312-023"
+ },
+ {
+  "file": "raw_slips/digital/DG_009.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "03/22/26 08:32",
+  "clean": "2026-03-22",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260322-026"
+ },
+ {
+  "file": "raw_slips/digital/DG_009.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260322-026"
+ },
+ {
+  "file": "raw_slips/digital/DG_009.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "personal",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260322-026"
+ },
+ {
+  "file": "raw_slips/digital/DG_009.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "APP",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260322-026"
+ },
+ {
+  "file": "raw_slips/digital/DG_009.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "1,560 SGD",
+  "clean": 1560,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260322-026"
+ },
+ {
+  "file": "raw_slips/digital/DG_009.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-03-22",
+  "clean": "2026-03-20",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260322-026"
+ },
+ {
+  "file": "raw_slips/digital/DG_010.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "04/01/26 14:15",
+  "clean": "2026-04-01",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260401-028"
+ },
+ {
+  "file": "raw_slips/digital/DG_010.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260401-028"
+ },
+ {
+  "file": "raw_slips/digital/DG_010.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260401-028"
+ },
+ {
+  "file": "raw_slips/digital/DG_010.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "United Arab Emirates",
+  "clean": "UAE",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260401-028"
+ },
+ {
+  "file": "raw_slips/digital/DG_010.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "Mobile Banking",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260401-028"
+ },
+ {
+  "file": "raw_slips/digital/DG_010.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "5,770 AED",
+  "clean": 5770,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260401-028"
+ },
+ {
+  "file": "raw_slips/digital/DG_011.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "04/05/26 13:19",
+  "clean": "2026-04-05",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260405-029"
+ },
+ {
+  "file": "raw_slips/digital/DG_011.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Overseas Transfer",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260405-029"
+ },
+ {
+  "file": "raw_slips/digital/DG_011.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260405-029"
+ },
+ {
+  "file": "raw_slips/digital/DG_011.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "  Brasil",
+  "clean": "Brazil",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260405-029"
+ },
+ {
+  "file": "raw_slips/digital/DG_011.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "app",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260405-029"
+ },
+ {
+  "file": "raw_slips/digital/DG_011.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "US Dollar",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260405-029"
+ },
+ {
+  "file": "raw_slips/digital/DG_011.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-04-05",
+  "clean": "2026-04-03",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260405-029"
+ },
+ {
+  "file": "raw_slips/digital/DG_012.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "04/14/26 10:22",
+  "clean": "2026-04-14",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260414-032"
+ },
+ {
+  "file": "raw_slips/digital/DG_012.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Overseas Transfer",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260414-032"
+ },
+ {
+  "file": "raw_slips/digital/DG_012.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "Non-resident",
+  "clean": "Foreigner",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260414-032"
+ },
+ {
+  "file": "raw_slips/digital/DG_012.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "Brasil",
+  "clean": "Brazil",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260414-032"
+ },
+ {
+  "file": "raw_slips/digital/DG_012.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "APP",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260414-032"
+ },
+ {
+  "file": "raw_slips/digital/DG_012.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "$",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260414-032"
+ },
+ {
+  "file": "raw_slips/digital/DG_013.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "04/17/26 17:32",
+  "clean": "2026-04-17",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260417-033"
+ },
+ {
+  "file": "raw_slips/digital/DG_013.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Currency Exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260417-033"
+ },
+ {
+  "file": "raw_slips/digital/DG_013.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "personal",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260417-033"
+ },
+ {
+  "file": "raw_slips/digital/DG_013.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "USA",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260417-033"
+ },
+ {
+  "file": "raw_slips/digital/DG_013.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "APP",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260417-033"
+ },
+ {
+  "file": "raw_slips/digital/DG_013.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "$",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260417-033"
+ },
+ {
+  "file": "raw_slips/digital/DG_014.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "04/18/26 20:49",
+  "clean": "2026-04-18",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260418-034"
+ },
+ {
+  "file": "raw_slips/digital/DG_014.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Remittance",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260418-034"
+ },
+ {
+  "file": "raw_slips/digital/DG_014.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "FRGN",
+  "clean": "Foreigner",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260418-034"
+ },
+ {
+  "file": "raw_slips/digital/DG_014.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "Vietnma",
+  "clean": "Vietnam",
+  "rule": "R08_TYPO",
+  "note": "'Vietnma' ≈ 'Vietnam' (편집거리 1)",
+  "Transaction_ID": "FX-260418-034"
+ },
+ {
+  "file": "raw_slips/digital/DG_014.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "WEB",
+  "clean": "Internet Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260418-034"
+ },
+ {
+  "file": "raw_slips/digital/DG_014.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "9,500,000 VND",
+  "clean": 9500000,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260418-034"
+ },
+ {
+  "file": "raw_slips/digital/DG_014.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-04-18",
+  "clean": "2026-04-17",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260418-034"
+ },
+ {
+  "file": "raw_slips/digital/DG_015.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "05/05/26 08:56",
+  "clean": "2026-05-05",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260505-038"
+ },
+ {
+  "file": "raw_slips/digital/DG_015.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Currency Exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260505-038"
+ },
+ {
+  "file": "raw_slips/digital/DG_015.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "Non-resident",
+  "clean": "Foreigner",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260505-038"
+ },
+ {
+  "file": "raw_slips/digital/DG_015.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "Japn",
+  "clean": "Japan",
+  "rule": "R08_TYPO",
+  "note": "'Japn' ≈ 'Japan' (편집거리 1)",
+  "Transaction_ID": "FX-260505-038"
+ },
+ {
+  "file": "raw_slips/digital/DG_015.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "IB-Retail",
+  "clean": "Internet Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260505-038"
+ },
+ {
+  "file": "raw_slips/digital/DG_015.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "Yen",
+  "clean": "JPY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260505-038"
+ },
+ {
+  "file": "raw_slips/digital/DG_015.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "301K",
+  "clean": 301000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260505-038"
+ },
+ {
+  "file": "raw_slips/digital/DG_016.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "05/12/26 17:20",
+  "clean": "2026-05-12",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260512-041"
+ },
+ {
+  "file": "raw_slips/digital/DG_016.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Overseas Transfer",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260512-041"
+ },
+ {
+  "file": "raw_slips/digital/DG_016.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260512-041"
+ },
+ {
+  "file": "raw_slips/digital/DG_016.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "app",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260512-041"
+ },
+ {
+  "file": "raw_slips/digital/DG_016.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "4,700 CNY",
+  "clean": 4700,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260512-041"
+ },
+ {
+  "file": "raw_slips/digital/DG_017.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "05/26/26 20:53",
+  "clean": "2026-05-26",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260526-046"
+ },
+ {
+  "file": "raw_slips/digital/DG_017.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Currency Exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260526-046"
+ },
+ {
+  "file": "raw_slips/digital/DG_017.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "Non-resident",
+  "clean": "Foreigner",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260526-046"
+ },
+ {
+  "file": "raw_slips/digital/DG_017.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "U.S.",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260526-046"
+ },
+ {
+  "file": "raw_slips/digital/DG_017.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "Mobile Banking",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260526-046"
+ },
+ {
+  "file": "raw_slips/digital/DG_017.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "$",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260526-046"
+ },
+ {
+  "file": "raw_slips/digital/DG_017.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "$310",
+  "clean": 310,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리",
+  "Transaction_ID": "FX-260526-046"
+ },
+ {
+  "file": "raw_slips/digital/DG_018.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "06/01/26 09:24",
+  "clean": "2026-06-01",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260601-049"
+ },
+ {
+  "file": "raw_slips/digital/DG_018.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "REMIT",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260601-049"
+ },
+ {
+  "file": "raw_slips/digital/DG_018.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260601-049"
+ },
+ {
+  "file": "raw_slips/digital/DG_018.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "app",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260601-049"
+ },
+ {
+  "file": "raw_slips/digital/DG_018.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "Dirham",
+  "clean": "AED",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260601-049"
+ },
+ {
+  "file": "raw_slips/digital/DG_018.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "3,300 AED",
+  "clean": 3300,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260601-049"
+ },
+ {
+  "file": "raw_slips/digital/DG_019.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "06/05/26 18:02",
+  "clean": "2026-06-05",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260605-051"
+ },
+ {
+  "file": "raw_slips/digital/DG_019.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Overseas Transfer",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260605-051"
+ },
+ {
+  "file": "raw_slips/digital/DG_019.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "personal",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260605-051"
+ },
+ {
+  "file": "raw_slips/digital/DG_019.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "Chian",
+  "clean": "China",
+  "rule": "R08_TYPO",
+  "note": "'Chian' ≈ 'China' (편집거리 1)",
+  "Transaction_ID": "FX-260605-051"
+ },
+ {
+  "file": "raw_slips/digital/DG_019.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "APP",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260605-051"
+ },
+ {
+  "file": "raw_slips/digital/DG_019.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "Yuan",
+  "clean": "CNY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260605-051"
+ },
+ {
+  "file": "raw_slips/digital/DG_019.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "26,100 CNY",
+  "clean": 26100,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260605-051"
+ },
+ {
+  "file": "raw_slips/digital/DG_020.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "06/13/26 20:30",
+  "clean": "2026-06-13",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260613-055"
+ },
+ {
+  "file": "raw_slips/digital/DG_020.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Currency Exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260613-055"
+ },
+ {
+  "file": "raw_slips/digital/DG_020.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260613-055"
+ },
+ {
+  "file": "raw_slips/digital/DG_020.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "FR",
+  "clean": "France",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260613-055"
+ },
+ {
+  "file": "raw_slips/digital/DG_020.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "app",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260613-055"
+ },
+ {
+  "file": "raw_slips/digital/DG_020.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "Euro",
+  "clean": "EUR",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260613-055"
+ },
+ {
+  "file": "raw_slips/digital/DG_020.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "€200",
+  "clean": 200,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리",
+  "Transaction_ID": "FX-260613-055"
+ },
+ {
+  "file": "raw_slips/digital/DG_020.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-06-13",
+  "clean": "2026-06-12",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260613-055"
+ },
+ {
+  "file": "raw_slips/digital/DG_021.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "07/04/26 15:18",
+  "clean": "2026-07-04",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260704-064"
+ },
+ {
+  "file": "raw_slips/digital/DG_021.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Remittance",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260704-064"
+ },
+ {
+  "file": "raw_slips/digital/DG_021.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "Non-resident",
+  "clean": "Foreigner",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260704-064"
+ },
+ {
+  "file": "raw_slips/digital/DG_021.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "APP",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260704-064"
+ },
+ {
+  "file": "raw_slips/digital/DG_021.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "¥63K",
+  "clean": 63000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개, 통화기호/코드 분리",
+  "Transaction_ID": "FX-260704-064"
+ },
+ {
+  "file": "raw_slips/digital/DG_021.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-07-04",
+  "clean": "2026-07-03",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260704-064"
+ },
+ {
+  "file": "raw_slips/digital/DG_022.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "07/12/26 18:47",
+  "clean": "2026-07-12",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260712-067"
+ },
+ {
+  "file": "raw_slips/digital/DG_022.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260712-067"
+ },
+ {
+  "file": "raw_slips/digital/DG_022.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260712-067"
+ },
+ {
+  "file": "raw_slips/digital/DG_022.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "  Vietnam",
+  "clean": "Vietnam",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260712-067"
+ },
+ {
+  "file": "raw_slips/digital/DG_022.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "Dong",
+  "clean": "VND",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260712-067"
+ },
+ {
+  "file": "raw_slips/digital/DG_022.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "17,400,000 VND",
+  "clean": 17400000,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260712-067"
+ },
+ {
+  "file": "raw_slips/digital/DG_022.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-07-12",
+  "clean": "2026-07-10",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260712-067"
+ },
+ {
+  "file": "raw_slips/digital/DG_023.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "07/21/26 18:32",
+  "clean": "2026-07-21",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260721-068"
+ },
+ {
+  "file": "raw_slips/digital/DG_023.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Remittance",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260721-068"
+ },
+ {
+  "file": "raw_slips/digital/DG_023.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "app",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260721-068"
+ },
+ {
+  "file": "raw_slips/digital/DG_023.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "83,000 JPY",
+  "clean": 83000,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260721-068"
+ },
+ {
+  "file": "raw_slips/digital/DG_024.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "07/28/26 14:57",
+  "clean": "2026-07-28",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260728-071"
+ },
+ {
+  "file": "raw_slips/digital/DG_024.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Remittance",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260728-071"
+ },
+ {
+  "file": "raw_slips/digital/DG_024.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "Non-resident",
+  "clean": "Foreigner",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260728-071"
+ },
+ {
+  "file": "raw_slips/digital/DG_024.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "japan",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260728-071"
+ },
+ {
+  "file": "raw_slips/digital/DG_024.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "app",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260728-071"
+ },
+ {
+  "file": "raw_slips/digital/DG_024.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "88,000 JPY",
+  "clean": 88000,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260728-071"
+ },
+ {
+  "file": "raw_slips/digital/DG_025.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "08/05/26 12:26",
+  "clean": "2026-08-05",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260805-075"
+ },
+ {
+  "file": "raw_slips/digital/DG_025.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260805-075"
+ },
+ {
+  "file": "raw_slips/digital/DG_025.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "Personal",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260805-075"
+ },
+ {
+  "file": "raw_slips/digital/DG_025.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "  France",
+  "clean": "France",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260805-075"
+ },
+ {
+  "file": "raw_slips/digital/DG_025.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "WEB",
+  "clean": "Internet Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260805-075"
+ },
+ {
+  "file": "raw_slips/digital/DG_025.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "€",
+  "clean": "EUR",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260805-075"
+ },
+ {
+  "file": "raw_slips/digital/DG_026.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "08/07/26 16:18",
+  "clean": "2026-08-07",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260807-077"
+ },
+ {
+  "file": "raw_slips/digital/DG_026.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Currency Exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260807-077"
+ },
+ {
+  "file": "raw_slips/digital/DG_026.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "Personal",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260807-077"
+ },
+ {
+  "file": "raw_slips/digital/DG_026.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "japan",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260807-077"
+ },
+ {
+  "file": "raw_slips/digital/DG_026.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "WEB",
+  "clean": "Internet Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260807-077"
+ },
+ {
+  "file": "raw_slips/digital/DG_026.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "¥",
+  "clean": "JPY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260807-077"
+ },
+ {
+  "file": "raw_slips/digital/DG_026.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "153K",
+  "clean": 153000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260807-077"
+ },
+ {
+  "file": "raw_slips/digital/DG_027.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "08/11/26 11:30",
+  "clean": "2026-08-11",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260811-079"
+ },
+ {
+  "file": "raw_slips/digital/DG_027.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Currency Exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260811-079"
+ },
+ {
+  "file": "raw_slips/digital/DG_027.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260811-079"
+ },
+ {
+  "file": "raw_slips/digital/DG_027.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "  japan",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260811-079"
+ },
+ {
+  "file": "raw_slips/digital/DG_027.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "app",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260811-079"
+ },
+ {
+  "file": "raw_slips/digital/DG_027.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "¥",
+  "clean": "JPY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260811-079"
+ },
+ {
+  "file": "raw_slips/digital/DG_027.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "¥38K",
+  "clean": 38000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개, 통화기호/코드 분리",
+  "Transaction_ID": "FX-260811-079"
+ },
+ {
+  "file": "raw_slips/digital/DG_028.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "08/15/26 08:49",
+  "clean": "2026-08-15",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260815-081"
+ },
+ {
+  "file": "raw_slips/digital/DG_028.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "REMIT",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260815-081"
+ },
+ {
+  "file": "raw_slips/digital/DG_028.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "Japn",
+  "clean": "Japan",
+  "rule": "R08_TYPO",
+  "note": "'Japn' ≈ 'Japan' (편집거리 1)",
+  "Transaction_ID": "FX-260815-081"
+ },
+ {
+  "file": "raw_slips/digital/DG_028.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "Mobile Banking",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260815-081"
+ },
+ {
+  "file": "raw_slips/digital/DG_028.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "175,000 JPY",
+  "clean": 175000,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260815-081"
+ },
+ {
+  "file": "raw_slips/digital/DG_028.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-08-15",
+  "clean": "2026-08-14",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260815-081"
+ },
+ {
+  "file": "raw_slips/digital/DG_029.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "08/21/26 21:30",
+  "clean": "2026-08-21",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260821-083"
+ },
+ {
+  "file": "raw_slips/digital/DG_029.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Overseas Transfer",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260821-083"
+ },
+ {
+  "file": "raw_slips/digital/DG_029.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "Personal",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260821-083"
+ },
+ {
+  "file": "raw_slips/digital/DG_029.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "Japn",
+  "clean": "Japan",
+  "rule": "R08_TYPO",
+  "note": "'Japn' ≈ 'Japan' (편집거리 1)",
+  "Transaction_ID": "FX-260821-083"
+ },
+ {
+  "file": "raw_slips/digital/DG_029.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "WEB",
+  "clean": "Internet Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260821-083"
+ },
+ {
+  "file": "raw_slips/digital/DG_029.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "¥",
+  "clean": "JPY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260821-083"
+ },
+ {
+  "file": "raw_slips/digital/DG_029.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "¥102K",
+  "clean": 102000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개, 통화기호/코드 분리",
+  "Transaction_ID": "FX-260821-083"
+ },
+ {
+  "file": "raw_slips/digital/DG_030.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "08/22/26 21:33",
+  "clean": "2026-08-22",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260822-084"
+ },
+ {
+  "file": "raw_slips/digital/DG_030.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Remittance",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260822-084"
+ },
+ {
+  "file": "raw_slips/digital/DG_030.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260822-084"
+ },
+ {
+  "file": "raw_slips/digital/DG_030.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "IB-Retail",
+  "clean": "Internet Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260822-084"
+ },
+ {
+  "file": "raw_slips/digital/DG_030.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "¥",
+  "clean": "JPY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260822-084"
+ },
+ {
+  "file": "raw_slips/digital/DG_030.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "¥778K",
+  "clean": 778000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개, 통화기호/코드 분리",
+  "Transaction_ID": "FX-260822-084"
+ },
+ {
+  "file": "raw_slips/digital/DG_030.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-08-22",
+  "clean": "2026-08-21",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260822-084"
+ },
+ {
+  "file": "raw_slips/digital/DG_031.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "08/23/26 12:20",
+  "clean": "2026-08-23",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260823-085"
+ },
+ {
+  "file": "raw_slips/digital/DG_031.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Remittance",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260823-085"
+ },
+ {
+  "file": "raw_slips/digital/DG_031.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "FRGN",
+  "clean": "Foreigner",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260823-085"
+ },
+ {
+  "file": "raw_slips/digital/DG_031.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "Japn",
+  "clean": "Japan",
+  "rule": "R08_TYPO",
+  "note": "'Japn' ≈ 'Japan' (편집거리 1)",
+  "Transaction_ID": "FX-260823-085"
+ },
+ {
+  "file": "raw_slips/digital/DG_031.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "Mobile Banking",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260823-085"
+ },
+ {
+  "file": "raw_slips/digital/DG_031.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "¥",
+  "clean": "JPY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260823-085"
+ },
+ {
+  "file": "raw_slips/digital/DG_031.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "428K",
+  "clean": 428000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260823-085"
+ },
+ {
+  "file": "raw_slips/digital/DG_031.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-08-23",
+  "clean": "2026-08-21",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260823-085"
+ },
+ {
+  "file": "raw_slips/digital/DG_032.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "08/23/26 16:59",
+  "clean": "2026-08-23",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260823-086"
+ },
+ {
+  "file": "raw_slips/digital/DG_032.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Currency Exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260823-086"
+ },
+ {
+  "file": "raw_slips/digital/DG_032.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "Personal",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260823-086"
+ },
+ {
+  "file": "raw_slips/digital/DG_032.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "JP",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260823-086"
+ },
+ {
+  "file": "raw_slips/digital/DG_032.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "app",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260823-086"
+ },
+ {
+  "file": "raw_slips/digital/DG_032.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "Yen",
+  "clean": "JPY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260823-086"
+ },
+ {
+  "file": "raw_slips/digital/DG_032.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "58K",
+  "clean": 58000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260823-086"
+ },
+ {
+  "file": "raw_slips/digital/DG_032.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-08-23",
+  "clean": "2026-08-21",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260823-086"
+ },
+ {
+  "file": "raw_slips/digital/DG_033.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "08/31/26 16:12",
+  "clean": "2026-08-31",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260831-088"
+ },
+ {
+  "file": "raw_slips/digital/DG_033.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Remittance",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260831-088"
+ },
+ {
+  "file": "raw_slips/digital/DG_033.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "Japn",
+  "clean": "Japan",
+  "rule": "R08_TYPO",
+  "note": "'Japn' ≈ 'Japan' (편집거리 1)",
+  "Transaction_ID": "FX-260831-088"
+ },
+ {
+  "file": "raw_slips/digital/DG_033.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "app",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260831-088"
+ },
+ {
+  "file": "raw_slips/digital/DG_033.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "590K",
+  "clean": 590000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260831-088"
+ },
+ {
+  "file": "raw_slips/digital/DG_034.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "09/08/26 16:11",
+  "clean": "2026-09-08",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260908-092"
+ },
+ {
+  "file": "raw_slips/digital/DG_034.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Currency Exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260908-092"
+ },
+ {
+  "file": "raw_slips/digital/DG_034.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "personal",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260908-092"
+ },
+ {
+  "file": "raw_slips/digital/DG_034.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "U.A.E.",
+  "clean": "UAE",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260908-092"
+ },
+ {
+  "file": "raw_slips/digital/DG_034.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "app",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260908-092"
+ },
+ {
+  "file": "raw_slips/digital/DG_034.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "4,840 AED",
+  "clean": 4840,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260908-092"
+ },
+ {
+  "file": "raw_slips/digital/DG_035.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "09/09/26 13:41",
+  "clean": "2026-09-09",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260909-094"
+ },
+ {
+  "file": "raw_slips/digital/DG_035.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Currency Exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260909-094"
+ },
+ {
+  "file": "raw_slips/digital/DG_035.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "personal",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260909-094"
+ },
+ {
+  "file": "raw_slips/digital/DG_035.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "Mobile Banking",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260909-094"
+ },
+ {
+  "file": "raw_slips/digital/DG_035.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "US Dollar",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260909-094"
+ },
+ {
+  "file": "raw_slips/digital/DG_036.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "09/19/26 15:39",
+  "clean": "2026-09-19",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260919-097"
+ },
+ {
+  "file": "raw_slips/digital/DG_036.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260919-097"
+ },
+ {
+  "file": "raw_slips/digital/DG_036.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "Personal",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260919-097"
+ },
+ {
+  "file": "raw_slips/digital/DG_036.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "Untied States",
+  "clean": "United States",
+  "rule": "R08_TYPO",
+  "note": "'Untied States' ≈ 'United States' (편집거리 1)",
+  "Transaction_ID": "FX-260919-097"
+ },
+ {
+  "file": "raw_slips/digital/DG_036.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "app",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260919-097"
+ },
+ {
+  "file": "raw_slips/digital/DG_036.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "usd",
+  "clean": "USD",
+  "rule": "R06_CURRENCY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260919-097"
+ },
+ {
+  "file": "raw_slips/digital/DG_036.json",
+  "system": "DIGITAL",
+  "field": "FX_Rate_Date",
+  "raw": "2026-09-19",
+  "clean": "2026-09-18",
+  "rule": "R09_FX_JOIN",
+  "note": "비영업일 거래 → 직전 고시일 환율 적용",
+  "Transaction_ID": "FX-260919-097"
+ },
+ {
+  "file": "raw_slips/digital/DG_037.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "09/25/26 19:39",
+  "clean": "2026-09-25",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260925-099"
+ },
+ {
+  "file": "raw_slips/digital/DG_037.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Currency Exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260925-099"
+ },
+ {
+  "file": "raw_slips/digital/DG_037.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "INDIV",
+  "clean": "Individual",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260925-099"
+ },
+ {
+  "file": "raw_slips/digital/DG_037.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "  japan",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260925-099"
+ },
+ {
+  "file": "raw_slips/digital/DG_037.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "APP",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260925-099"
+ },
+ {
+  "file": "raw_slips/digital/DG_037.json",
+  "system": "DIGITAL",
+  "field": "Currency",
+  "raw": "¥",
+  "clean": "JPY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260925-099"
+ },
+ {
+  "file": "raw_slips/digital/DG_037.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "291,000 JPY",
+  "clean": 291000,
+  "rule": "R07_AMOUNT",
+  "note": "통화기호/코드 분리, 천단위 쉼표 제거",
+  "Transaction_ID": "FX-260925-099"
+ },
+ {
+  "file": "raw_slips/digital/DG_038.json",
+  "system": "DIGITAL",
+  "field": "Date",
+  "raw": "09/29/26 21:06",
+  "clean": "2026-09-29",
+  "rule": "R01_DATE",
+  "note": "MM/DD/YY hh:mm",
+  "Transaction_ID": "FX-260929-100"
+ },
+ {
+  "file": "raw_slips/digital/DG_038.json",
+  "system": "DIGITAL",
+  "field": "Service",
+  "raw": "Currency Exchange",
+  "clean": "Retail FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260929-100"
+ },
+ {
+  "file": "raw_slips/digital/DG_038.json",
+  "system": "DIGITAL",
+  "field": "Customer_Type",
+  "raw": "Non-resident",
+  "clean": "Foreigner",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260929-100"
+ },
+ {
+  "file": "raw_slips/digital/DG_038.json",
+  "system": "DIGITAL",
+  "field": "Country",
+  "raw": "Japn",
+  "clean": "Japan",
+  "rule": "R08_TYPO",
+  "note": "'Japn' ≈ 'Japan' (편집거리 1)",
+  "Transaction_ID": "FX-260929-100"
+ },
+ {
+  "file": "raw_slips/digital/DG_038.json",
+  "system": "DIGITAL",
+  "field": "Channel",
+  "raw": "Mobile Banking",
+  "clean": "Mobile",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260929-100"
+ },
+ {
+  "file": "raw_slips/digital/DG_038.json",
+  "system": "DIGITAL",
+  "field": "Foreign_Amount",
+  "raw": "64K",
+  "clean": 64000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260929-100"
+ },
+ {
+  "file": "raw_slips/corporate/CB_001.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "07-JAN-2026",
+  "clean": "2026-01-07",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260107-001"
+ },
+ {
+  "file": "raw_slips/corporate/CB_001.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260107-001"
+ },
+ {
+  "file": "raw_slips/corporate/CB_001.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260107-001"
+ },
+ {
+  "file": "raw_slips/corporate/CB_001.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "BR",
+  "clean": "Brazil",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260107-001"
+ },
+ {
+  "file": "raw_slips/corporate/CB_001.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260107-001"
+ },
+ {
+  "file": "raw_slips/corporate/CB_001.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "125K",
+  "clean": 125000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260107-001"
+ },
+ {
+  "file": "raw_slips/corporate/CB_002.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "08-JAN-2026",
+  "clean": "2026-01-08",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260108-002"
+ },
+ {
+  "file": "raw_slips/corporate/CB_002.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "IMPORT LC",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260108-002"
+ },
+ {
+  "file": "raw_slips/corporate/CB_002.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260108-002"
+ },
+ {
+  "file": "raw_slips/corporate/CB_002.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "US",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260108-002"
+ },
+ {
+  "file": "raw_slips/corporate/CB_002.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260108-002"
+ },
+ {
+  "file": "raw_slips/corporate/CB_002.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "465K",
+  "clean": 465000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260108-002"
+ },
+ {
+  "file": "raw_slips/corporate/CB_002.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "180D",
+  "clean": 180,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260108-002"
+ },
+ {
+  "file": "raw_slips/corporate/CB_003.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "21-JAN-2026",
+  "clean": "2026-01-21",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260121-004"
+ },
+ {
+  "file": "raw_slips/corporate/CB_003.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX SPOT",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260121-004"
+ },
+ {
+  "file": "raw_slips/corporate/CB_003.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260121-004"
+ },
+ {
+  "file": "raw_slips/corporate/CB_003.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "JAPAN",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260121-004"
+ },
+ {
+  "file": "raw_slips/corporate/CB_003.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260121-004"
+ },
+ {
+  "file": "raw_slips/corporate/CB_004.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "27-JAN-2026",
+  "clean": "2026-01-27",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260127-006"
+ },
+ {
+  "file": "raw_slips/corporate/CB_004.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "L/C",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260127-006"
+ },
+ {
+  "file": "raw_slips/corporate/CB_004.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260127-006"
+ },
+ {
+  "file": "raw_slips/corporate/CB_004.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "BR",
+  "clean": "Brazil",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260127-006"
+ },
+ {
+  "file": "raw_slips/corporate/CB_004.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260127-006"
+ },
+ {
+  "file": "raw_slips/corporate/CB_004.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "120D",
+  "clean": 120,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260127-006"
+ },
+ {
+  "file": "raw_slips/corporate/CB_005.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "29-JAN-2026",
+  "clean": "2026-01-29",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260129-008"
+ },
+ {
+  "file": "raw_slips/corporate/CB_005.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260129-008"
+ },
+ {
+  "file": "raw_slips/corporate/CB_005.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260129-008"
+ },
+ {
+  "file": "raw_slips/corporate/CB_005.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "CN",
+  "clean": "China",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260129-008"
+ },
+ {
+  "file": "raw_slips/corporate/CB_005.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260129-008"
+ },
+ {
+  "file": "raw_slips/corporate/CB_005.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "77K",
+  "clean": 77000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260129-008"
+ },
+ {
+  "file": "raw_slips/corporate/CB_006.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "02-FEB-2026",
+  "clean": "2026-02-02",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260202-009"
+ },
+ {
+  "file": "raw_slips/corporate/CB_006.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "IMPORT LC",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260202-009"
+ },
+ {
+  "file": "raw_slips/corporate/CB_006.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260202-009"
+ },
+ {
+  "file": "raw_slips/corporate/CB_006.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "JAPAN",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260202-009"
+ },
+ {
+  "file": "raw_slips/corporate/CB_006.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260202-009"
+ },
+ {
+  "file": "raw_slips/corporate/CB_006.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "180D",
+  "clean": 180,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260202-009"
+ },
+ {
+  "file": "raw_slips/corporate/CB_007.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "03-FEB-2026",
+  "clean": "2026-02-03",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260203-010"
+ },
+ {
+  "file": "raw_slips/corporate/CB_007.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX FWD",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260203-010"
+ },
+ {
+  "file": "raw_slips/corporate/CB_007.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260203-010"
+ },
+ {
+  "file": "raw_slips/corporate/CB_007.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "CHINA",
+  "clean": "China",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260203-010"
+ },
+ {
+  "file": "raw_slips/corporate/CB_007.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260203-010"
+ },
+ {
+  "file": "raw_slips/corporate/CB_007.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "210K",
+  "clean": 210000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260203-010"
+ },
+ {
+  "file": "raw_slips/corporate/CB_008.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "04-FEB-2026",
+  "clean": "2026-02-04",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260204-011"
+ },
+ {
+  "file": "raw_slips/corporate/CB_008.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260204-011"
+ },
+ {
+  "file": "raw_slips/corporate/CB_008.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "Corp.",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260204-011"
+ },
+ {
+  "file": "raw_slips/corporate/CB_008.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "USA",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260204-011"
+ },
+ {
+  "file": "raw_slips/corporate/CB_008.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "IB",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260204-011"
+ },
+ {
+  "file": "raw_slips/corporate/CB_008.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "60K",
+  "clean": 60000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260204-011"
+ },
+ {
+  "file": "raw_slips/corporate/CB_009.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "05-FEB-2026",
+  "clean": "2026-02-05",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260205-013"
+ },
+ {
+  "file": "raw_slips/corporate/CB_009.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "TRADE FIN",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260205-013"
+ },
+ {
+  "file": "raw_slips/corporate/CB_009.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260205-013"
+ },
+ {
+  "file": "raw_slips/corporate/CB_009.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "US",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260205-013"
+ },
+ {
+  "file": "raw_slips/corporate/CB_009.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260205-013"
+ },
+ {
+  "file": "raw_slips/corporate/CB_009.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "284K",
+  "clean": 284000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260205-013"
+ },
+ {
+  "file": "raw_slips/corporate/CB_009.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "120D",
+  "clean": 120,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260205-013"
+ },
+ {
+  "file": "raw_slips/corporate/CB_010.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "02-MAR-2026",
+  "clean": "2026-03-02",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260302-018"
+ },
+ {
+  "file": "raw_slips/corporate/CB_010.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX SPOT",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260302-018"
+ },
+ {
+  "file": "raw_slips/corporate/CB_010.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260302-018"
+ },
+ {
+  "file": "raw_slips/corporate/CB_010.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "BR",
+  "clean": "Brazil",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260302-018"
+ },
+ {
+  "file": "raw_slips/corporate/CB_010.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260302-018"
+ },
+ {
+  "file": "raw_slips/corporate/CB_011.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "16-MAR-2026",
+  "clean": "2026-03-16",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260316-025"
+ },
+ {
+  "file": "raw_slips/corporate/CB_011.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "TRADE FIN",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260316-025"
+ },
+ {
+  "file": "raw_slips/corporate/CB_011.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "Corp.",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260316-025"
+ },
+ {
+  "file": "raw_slips/corporate/CB_011.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "PRC",
+  "clean": "China",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260316-025"
+ },
+ {
+  "file": "raw_slips/corporate/CB_011.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260316-025"
+ },
+ {
+  "file": "raw_slips/corporate/CB_011.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "207K",
+  "clean": 207000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260316-025"
+ },
+ {
+  "file": "raw_slips/corporate/CB_011.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "90D",
+  "clean": 90,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260316-025"
+ },
+ {
+  "file": "raw_slips/corporate/CB_012.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "23-MAR-2026",
+  "clean": "2026-03-23",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260323-027"
+ },
+ {
+  "file": "raw_slips/corporate/CB_012.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "IMPORT LC",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260323-027"
+ },
+ {
+  "file": "raw_slips/corporate/CB_012.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260323-027"
+ },
+ {
+  "file": "raw_slips/corporate/CB_012.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260323-027"
+ },
+ {
+  "file": "raw_slips/corporate/CB_012.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "90D",
+  "clean": 90,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260323-027"
+ },
+ {
+  "file": "raw_slips/corporate/CB_013.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "14-APR-2026",
+  "clean": "2026-04-14",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260414-031"
+ },
+ {
+  "file": "raw_slips/corporate/CB_013.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "TRADE FIN",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260414-031"
+ },
+ {
+  "file": "raw_slips/corporate/CB_013.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260414-031"
+ },
+ {
+  "file": "raw_slips/corporate/CB_013.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "AE",
+  "clean": "UAE",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260414-031"
+ },
+ {
+  "file": "raw_slips/corporate/CB_013.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260414-031"
+ },
+ {
+  "file": "raw_slips/corporate/CB_013.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "176K",
+  "clean": 176000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260414-031"
+ },
+ {
+  "file": "raw_slips/corporate/CB_013.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "180D",
+  "clean": 180,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260414-031"
+ },
+ {
+  "file": "raw_slips/corporate/CB_014.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "24-APR-2026",
+  "clean": "2026-04-24",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260424-036"
+ },
+ {
+  "file": "raw_slips/corporate/CB_014.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX SPOT",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260424-036"
+ },
+ {
+  "file": "raw_slips/corporate/CB_014.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260424-036"
+ },
+ {
+  "file": "raw_slips/corporate/CB_014.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "CHINA",
+  "clean": "China",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260424-036"
+ },
+ {
+  "file": "raw_slips/corporate/CB_014.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260424-036"
+ },
+ {
+  "file": "raw_slips/corporate/CB_014.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "352K",
+  "clean": 352000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260424-036"
+ },
+ {
+  "file": "raw_slips/corporate/CB_015.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "27-APR-2026",
+  "clean": "2026-04-27",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260427-037"
+ },
+ {
+  "file": "raw_slips/corporate/CB_015.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX FWD",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260427-037"
+ },
+ {
+  "file": "raw_slips/corporate/CB_015.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260427-037"
+ },
+ {
+  "file": "raw_slips/corporate/CB_015.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "CN",
+  "clean": "China",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260427-037"
+ },
+ {
+  "file": "raw_slips/corporate/CB_015.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260427-037"
+ },
+ {
+  "file": "raw_slips/corporate/CB_015.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "432K",
+  "clean": 432000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260427-037"
+ },
+ {
+  "file": "raw_slips/corporate/CB_016.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "11-MAY-2026",
+  "clean": "2026-05-11",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260511-039"
+ },
+ {
+  "file": "raw_slips/corporate/CB_016.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX SPOT",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260511-039"
+ },
+ {
+  "file": "raw_slips/corporate/CB_016.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260511-039"
+ },
+ {
+  "file": "raw_slips/corporate/CB_016.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "SINGAPORE",
+  "clean": "Singapore",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260511-039"
+ },
+ {
+  "file": "raw_slips/corporate/CB_016.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260511-039"
+ },
+ {
+  "file": "raw_slips/corporate/CB_016.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "76K",
+  "clean": 76000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260511-039"
+ },
+ {
+  "file": "raw_slips/corporate/CB_017.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "19-MAY-2026",
+  "clean": "2026-05-19",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260519-042"
+ },
+ {
+  "file": "raw_slips/corporate/CB_017.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "REMIT",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260519-042"
+ },
+ {
+  "file": "raw_slips/corporate/CB_017.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "Corp.",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260519-042"
+ },
+ {
+  "file": "raw_slips/corporate/CB_017.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "JP",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260519-042"
+ },
+ {
+  "file": "raw_slips/corporate/CB_017.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260519-042"
+ },
+ {
+  "file": "raw_slips/corporate/CB_017.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "3107K",
+  "clean": 3107000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260519-042"
+ },
+ {
+  "file": "raw_slips/corporate/CB_018.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "22-MAY-2026",
+  "clean": "2026-05-22",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260522-044"
+ },
+ {
+  "file": "raw_slips/corporate/CB_018.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "IMPORT LC",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260522-044"
+ },
+ {
+  "file": "raw_slips/corporate/CB_018.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "Corp.",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260522-044"
+ },
+ {
+  "file": "raw_slips/corporate/CB_018.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "VIETNAM",
+  "clean": "Vietnam",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260522-044"
+ },
+ {
+  "file": "raw_slips/corporate/CB_018.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260522-044"
+ },
+ {
+  "file": "raw_slips/corporate/CB_018.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "1219K",
+  "clean": 1219000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260522-044"
+ },
+ {
+  "file": "raw_slips/corporate/CB_018.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "90D",
+  "clean": 90,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260522-044"
+ },
+ {
+  "file": "raw_slips/corporate/CB_019.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "27-MAY-2026",
+  "clean": "2026-05-27",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260527-048"
+ },
+ {
+  "file": "raw_slips/corporate/CB_019.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260527-048"
+ },
+ {
+  "file": "raw_slips/corporate/CB_019.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260527-048"
+ },
+ {
+  "file": "raw_slips/corporate/CB_019.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "SINGAPORE",
+  "clean": "Singapore",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260527-048"
+ },
+ {
+  "file": "raw_slips/corporate/CB_019.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260527-048"
+ },
+ {
+  "file": "raw_slips/corporate/CB_019.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "539K",
+  "clean": 539000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260527-048"
+ },
+ {
+  "file": "raw_slips/corporate/CB_020.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "03-JUN-2026",
+  "clean": "2026-06-03",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260603-050"
+ },
+ {
+  "file": "raw_slips/corporate/CB_020.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "OUTWARD TT",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260603-050"
+ },
+ {
+  "file": "raw_slips/corporate/CB_020.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260603-050"
+ },
+ {
+  "file": "raw_slips/corporate/CB_020.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260603-050"
+ },
+ {
+  "file": "raw_slips/corporate/CB_021.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "08-JUN-2026",
+  "clean": "2026-06-08",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260608-053"
+ },
+ {
+  "file": "raw_slips/corporate/CB_021.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "L/C",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260608-053"
+ },
+ {
+  "file": "raw_slips/corporate/CB_021.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "Corp.",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260608-053"
+ },
+ {
+  "file": "raw_slips/corporate/CB_021.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "VIETNAM",
+  "clean": "Vietnam",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260608-053"
+ },
+ {
+  "file": "raw_slips/corporate/CB_021.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260608-053"
+ },
+ {
+  "file": "raw_slips/corporate/CB_021.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "466K",
+  "clean": 466000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260608-053"
+ },
+ {
+  "file": "raw_slips/corporate/CB_021.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "30D",
+  "clean": 30,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260608-053"
+ },
+ {
+  "file": "raw_slips/corporate/CB_022.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "11-JUN-2026",
+  "clean": "2026-06-11",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260611-054"
+ },
+ {
+  "file": "raw_slips/corporate/CB_022.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "IMPORT LC",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260611-054"
+ },
+ {
+  "file": "raw_slips/corporate/CB_022.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "Corp.",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260611-054"
+ },
+ {
+  "file": "raw_slips/corporate/CB_022.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "VN",
+  "clean": "Vietnam",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260611-054"
+ },
+ {
+  "file": "raw_slips/corporate/CB_022.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260611-054"
+ },
+ {
+  "file": "raw_slips/corporate/CB_022.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "1404K",
+  "clean": 1404000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260611-054"
+ },
+ {
+  "file": "raw_slips/corporate/CB_022.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "90D",
+  "clean": 90,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260611-054"
+ },
+ {
+  "file": "raw_slips/corporate/CB_023.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "19-JUN-2026",
+  "clean": "2026-06-19",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260619-057"
+ },
+ {
+  "file": "raw_slips/corporate/CB_023.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX SPOT",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260619-057"
+ },
+ {
+  "file": "raw_slips/corporate/CB_023.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260619-057"
+ },
+ {
+  "file": "raw_slips/corporate/CB_023.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "USA",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260619-057"
+ },
+ {
+  "file": "raw_slips/corporate/CB_023.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260619-057"
+ },
+ {
+  "file": "raw_slips/corporate/CB_023.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "698K",
+  "clean": 698000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260619-057"
+ },
+ {
+  "file": "raw_slips/corporate/CB_024.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "22-JUN-2026",
+  "clean": "2026-06-22",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260622-058"
+ },
+ {
+  "file": "raw_slips/corporate/CB_024.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "TRADE FIN",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260622-058"
+ },
+ {
+  "file": "raw_slips/corporate/CB_024.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "Corp.",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260622-058"
+ },
+ {
+  "file": "raw_slips/corporate/CB_024.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "PRC",
+  "clean": "China",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260622-058"
+ },
+ {
+  "file": "raw_slips/corporate/CB_024.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260622-058"
+ },
+ {
+  "file": "raw_slips/corporate/CB_024.csv",
+  "system": "CORP",
+  "field": "Currency",
+  "raw": "RMB",
+  "clean": "CNY",
+  "rule": "R06_CURRENCY",
+  "note": "",
+  "Transaction_ID": "FX-260622-058"
+ },
+ {
+  "file": "raw_slips/corporate/CB_024.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "17359K",
+  "clean": 17359000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260622-058"
+ },
+ {
+  "file": "raw_slips/corporate/CB_024.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "90D",
+  "clean": 90,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260622-058"
+ },
+ {
+  "file": "raw_slips/corporate/CB_025.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "26-JUN-2026",
+  "clean": "2026-06-26",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260626-059"
+ },
+ {
+  "file": "raw_slips/corporate/CB_025.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX FWD",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260626-059"
+ },
+ {
+  "file": "raw_slips/corporate/CB_025.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260626-059"
+ },
+ {
+  "file": "raw_slips/corporate/CB_025.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "VN",
+  "clean": "Vietnam",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260626-059"
+ },
+ {
+  "file": "raw_slips/corporate/CB_025.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260626-059"
+ },
+ {
+  "file": "raw_slips/corporate/CB_025.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "409K",
+  "clean": 409000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260626-059"
+ },
+ {
+  "file": "raw_slips/corporate/CB_026.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "01-JUL-2026",
+  "clean": "2026-07-01",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260701-060"
+ },
+ {
+  "file": "raw_slips/corporate/CB_026.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260701-060"
+ },
+ {
+  "file": "raw_slips/corporate/CB_026.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260701-060"
+ },
+ {
+  "file": "raw_slips/corporate/CB_026.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "CHINA",
+  "clean": "China",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260701-060"
+ },
+ {
+  "file": "raw_slips/corporate/CB_026.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "IB",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260701-060"
+ },
+ {
+  "file": "raw_slips/corporate/CB_026.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "2.89M",
+  "clean": 2890000,
+  "rule": "R07_AMOUNT",
+  "note": "M 단위 전개",
+  "Transaction_ID": "FX-260701-060"
+ },
+ {
+  "file": "raw_slips/corporate/CB_027.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "01-JUL-2026",
+  "clean": "2026-07-01",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260701-061"
+ },
+ {
+  "file": "raw_slips/corporate/CB_027.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "L/C",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260701-061"
+ },
+ {
+  "file": "raw_slips/corporate/CB_027.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260701-061"
+ },
+ {
+  "file": "raw_slips/corporate/CB_027.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "JP",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260701-061"
+ },
+ {
+  "file": "raw_slips/corporate/CB_027.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260701-061"
+ },
+ {
+  "file": "raw_slips/corporate/CB_027.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "280900K",
+  "clean": 280900000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260701-061"
+ },
+ {
+  "file": "raw_slips/corporate/CB_027.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "90D",
+  "clean": 90,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260701-061"
+ },
+ {
+  "file": "raw_slips/corporate/CB_028.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "01-JUL-2026",
+  "clean": "2026-07-01",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260701-062"
+ },
+ {
+  "file": "raw_slips/corporate/CB_028.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "TRADE FIN",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260701-062"
+ },
+ {
+  "file": "raw_slips/corporate/CB_028.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260701-062"
+ },
+ {
+  "file": "raw_slips/corporate/CB_028.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "USA",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260701-062"
+ },
+ {
+  "file": "raw_slips/corporate/CB_028.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "IB",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260701-062"
+ },
+ {
+  "file": "raw_slips/corporate/CB_028.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "532K",
+  "clean": 532000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260701-062"
+ },
+ {
+  "file": "raw_slips/corporate/CB_028.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "30D",
+  "clean": 30,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260701-062"
+ },
+ {
+  "file": "raw_slips/corporate/CB_029.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "07-JUL-2026",
+  "clean": "2026-07-07",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260707-065"
+ },
+ {
+  "file": "raw_slips/corporate/CB_029.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "OUTWARD TT",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260707-065"
+ },
+ {
+  "file": "raw_slips/corporate/CB_029.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260707-065"
+ },
+ {
+  "file": "raw_slips/corporate/CB_029.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "JP",
+  "clean": "Japan",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260707-065"
+ },
+ {
+  "file": "raw_slips/corporate/CB_029.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260707-065"
+ },
+ {
+  "file": "raw_slips/corporate/CB_029.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "8885K",
+  "clean": 8885000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260707-065"
+ },
+ {
+  "file": "raw_slips/corporate/CB_030.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "10-JUL-2026",
+  "clean": "2026-07-10",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260710-066"
+ },
+ {
+  "file": "raw_slips/corporate/CB_030.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "L/C",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260710-066"
+ },
+ {
+  "file": "raw_slips/corporate/CB_030.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260710-066"
+ },
+ {
+  "file": "raw_slips/corporate/CB_030.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "BR",
+  "clean": "Brazil",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260710-066"
+ },
+ {
+  "file": "raw_slips/corporate/CB_030.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260710-066"
+ },
+ {
+  "file": "raw_slips/corporate/CB_030.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "1353K",
+  "clean": 1353000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260710-066"
+ },
+ {
+  "file": "raw_slips/corporate/CB_030.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "90D",
+  "clean": 90,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260710-066"
+ },
+ {
+  "file": "raw_slips/corporate/CB_031.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "29-JUL-2026",
+  "clean": "2026-07-29",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260729-072"
+ },
+ {
+  "file": "raw_slips/corporate/CB_031.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX SPOT",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260729-072"
+ },
+ {
+  "file": "raw_slips/corporate/CB_031.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260729-072"
+ },
+ {
+  "file": "raw_slips/corporate/CB_031.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "US",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260729-072"
+ },
+ {
+  "file": "raw_slips/corporate/CB_031.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260729-072"
+ },
+ {
+  "file": "raw_slips/corporate/CB_031.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "568K",
+  "clean": 568000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260729-072"
+ },
+ {
+  "file": "raw_slips/corporate/CB_032.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "05-AUG-2026",
+  "clean": "2026-08-05",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260805-074"
+ },
+ {
+  "file": "raw_slips/corporate/CB_032.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "IMPORT LC",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260805-074"
+ },
+ {
+  "file": "raw_slips/corporate/CB_032.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260805-074"
+ },
+ {
+  "file": "raw_slips/corporate/CB_032.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260805-074"
+ },
+ {
+  "file": "raw_slips/corporate/CB_032.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "230K",
+  "clean": 230000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260805-074"
+ },
+ {
+  "file": "raw_slips/corporate/CB_032.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "30D",
+  "clean": 30,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260805-074"
+ },
+ {
+  "file": "raw_slips/corporate/CB_033.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "07-AUG-2026",
+  "clean": "2026-08-07",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260807-076"
+ },
+ {
+  "file": "raw_slips/corporate/CB_033.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX FWD",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260807-076"
+ },
+ {
+  "file": "raw_slips/corporate/CB_033.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260807-076"
+ },
+ {
+  "file": "raw_slips/corporate/CB_033.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "IB",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260807-076"
+ },
+ {
+  "file": "raw_slips/corporate/CB_034.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "10-AUG-2026",
+  "clean": "2026-08-10",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260810-078"
+ },
+ {
+  "file": "raw_slips/corporate/CB_034.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "REMIT",
+  "clean": "Overseas Remittance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260810-078"
+ },
+ {
+  "file": "raw_slips/corporate/CB_034.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "Corp.",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260810-078"
+ },
+ {
+  "file": "raw_slips/corporate/CB_034.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "SG",
+  "clean": "Singapore",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260810-078"
+ },
+ {
+  "file": "raw_slips/corporate/CB_034.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260810-078"
+ },
+ {
+  "file": "raw_slips/corporate/CB_035.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "14-AUG-2026",
+  "clean": "2026-08-14",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260814-080"
+ },
+ {
+  "file": "raw_slips/corporate/CB_035.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "TRADE FIN",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260814-080"
+ },
+ {
+  "file": "raw_slips/corporate/CB_035.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORP",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260814-080"
+ },
+ {
+  "file": "raw_slips/corporate/CB_035.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "CHINA",
+  "clean": "China",
+  "rule": "R04_COUNTRY",
+  "note": "공백·대소문자 정규화 후 사전 매칭",
+  "Transaction_ID": "FX-260814-080"
+ },
+ {
+  "file": "raw_slips/corporate/CB_035.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "IB",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260814-080"
+ },
+ {
+  "file": "raw_slips/corporate/CB_035.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "1353K",
+  "clean": 1353000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260814-080"
+ },
+ {
+  "file": "raw_slips/corporate/CB_035.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "180D",
+  "clean": 180,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260814-080"
+ },
+ {
+  "file": "raw_slips/corporate/CB_036.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "01-SEP-2026",
+  "clean": "2026-09-01",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260901-089"
+ },
+ {
+  "file": "raw_slips/corporate/CB_036.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "IMPORT LC",
+  "clean": "Trade Finance",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260901-089"
+ },
+ {
+  "file": "raw_slips/corporate/CB_036.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "CORPORATE",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260901-089"
+ },
+ {
+  "file": "raw_slips/corporate/CB_036.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260901-089"
+ },
+ {
+  "file": "raw_slips/corporate/CB_036.csv",
+  "system": "CORP",
+  "field": "Tenor_Days",
+  "raw": "30D",
+  "clean": 30,
+  "rule": "R07_AMOUNT",
+  "note": "기간 단위(일/D) 제거",
+  "Transaction_ID": "FX-260901-089"
+ },
+ {
+  "file": "raw_slips/corporate/CB_037.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "03-SEP-2026",
+  "clean": "2026-09-03",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260903-091"
+ },
+ {
+  "file": "raw_slips/corporate/CB_037.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260903-091"
+ },
+ {
+  "file": "raw_slips/corporate/CB_037.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "Corp.",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260903-091"
+ },
+ {
+  "file": "raw_slips/corporate/CB_037.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "VN",
+  "clean": "Vietnam",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260903-091"
+ },
+ {
+  "file": "raw_slips/corporate/CB_037.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "IB",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260903-091"
+ },
+ {
+  "file": "raw_slips/corporate/CB_038.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "09-SEP-2026",
+  "clean": "2026-09-09",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260909-093"
+ },
+ {
+  "file": "raw_slips/corporate/CB_038.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX FWD",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260909-093"
+ },
+ {
+  "file": "raw_slips/corporate/CB_038.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "Corp.",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260909-093"
+ },
+ {
+  "file": "raw_slips/corporate/CB_038.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "IB",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260909-093"
+ },
+ {
+  "file": "raw_slips/corporate/CB_039.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "11-SEP-2026",
+  "clean": "2026-09-11",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260911-095"
+ },
+ {
+  "file": "raw_slips/corporate/CB_039.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX FWD",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260911-095"
+ },
+ {
+  "file": "raw_slips/corporate/CB_039.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "Corp.",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260911-095"
+ },
+ {
+  "file": "raw_slips/corporate/CB_039.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "VN",
+  "clean": "Vietnam",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260911-095"
+ },
+ {
+  "file": "raw_slips/corporate/CB_039.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260911-095"
+ },
+ {
+  "file": "raw_slips/corporate/CB_039.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "170K",
+  "clean": 170000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260911-095"
+ },
+ {
+  "file": "raw_slips/corporate/CB_040.csv",
+  "system": "CORP",
+  "field": "Date",
+  "raw": "18-SEP-2026",
+  "clean": "2026-09-18",
+  "rule": "R01_DATE",
+  "note": "DD-MON-YYYY",
+  "Transaction_ID": "FX-260918-096"
+ },
+ {
+  "file": "raw_slips/corporate/CB_040.csv",
+  "system": "CORP",
+  "field": "Service",
+  "raw": "FX",
+  "clean": "Corporate FX",
+  "rule": "R02_SERVICE",
+  "note": "",
+  "Transaction_ID": "FX-260918-096"
+ },
+ {
+  "file": "raw_slips/corporate/CB_040.csv",
+  "system": "CORP",
+  "field": "Customer_Type",
+  "raw": "Corp.",
+  "clean": "Corporate",
+  "rule": "R03_CUSTOMER",
+  "note": "",
+  "Transaction_ID": "FX-260918-096"
+ },
+ {
+  "file": "raw_slips/corporate/CB_040.csv",
+  "system": "CORP",
+  "field": "Country",
+  "raw": "USA",
+  "clean": "United States",
+  "rule": "R04_COUNTRY",
+  "note": "",
+  "Transaction_ID": "FX-260918-096"
+ },
+ {
+  "file": "raw_slips/corporate/CB_040.csv",
+  "system": "CORP",
+  "field": "Channel",
+  "raw": "CMS",
+  "clean": "Corporate Banking",
+  "rule": "R05_CHANNEL",
+  "note": "",
+  "Transaction_ID": "FX-260918-096"
+ },
+ {
+  "file": "raw_slips/corporate/CB_040.csv",
+  "system": "CORP",
+  "field": "Foreign_Amount",
+  "raw": "766K",
+  "clean": 766000,
+  "rule": "R07_AMOUNT",
+  "note": "K 단위 전개",
+  "Transaction_ID": "FX-260918-096"
+ }
+]
