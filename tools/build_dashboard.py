@@ -99,6 +99,7 @@ def main():
     data_js = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     body = template.replace("/*__DATA__*/", data_js, 1)
     body = body.replace("/*__FONT__*/", font_b64(args.font, template + data_js), 1)
+    body = body.replace("/*__PHOTO__*/", base64.b64encode((ROOT / "tools" / "profile.jpg").read_bytes()).decode("ascii"), 1)
     samples = [{"name": f.name, "b64": base64.b64encode(f.read_bytes()).decode("ascii")} for f in sorted((ROOT / "samples").glob("*.pdf"))]
     body = body.replace("/*__SAMPLES__*/", json.dumps(samples), 1)
     for marker, name in (("/*__PDFJS__*/", "pdf.min.js"), ("/*__PDFJS_WORKER__*/", "pdf.worker.min.js")):

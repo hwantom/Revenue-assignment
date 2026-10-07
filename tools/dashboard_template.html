@@ -89,9 +89,10 @@ svg.i { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-widt
 .sync-row .dot.on { background: #5fd3a4; box-shadow: 0 0 0 3px rgba(95,211,164,.18); }
 .sync-row span:last-child { margin-left: auto; color: var(--side-muted); font-size: 11px; }
 .notice { display: flex; gap: 8px; align-items: center; font-size: 11.5px; color: #f2c66a; background: rgba(237,161,0,.10); border: 1px solid rgba(237,161,0,.22); border-radius: 10px; padding: 9px 12px; }
-.me { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 14px; background: var(--side-2); border: 1px solid var(--side-line); }
-.avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(145deg, #f2f4f7, #c9d3e0); color: #121418; display: grid; place-items: center; font-weight: 800; font-size: 16px; flex: none; }
-.me .nm { font-size: 14px; font-weight: 700; }
+.me { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px 12px 14px; border-radius: 14px; background: var(--side-2); border: 1px solid var(--side-line); }
+.me .photo { display: block; width: 112px; height: auto; aspect-ratio: 264 / 339; object-fit: contain; border-radius: 8px; background: #fff; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 4px 12px rgba(0,0,0,.35); }
+.me .me-t { text-align: center; }
+.me .nm { font-size: 15px; font-weight: 700; }
 .me .id { font-size: 12px; color: var(--side-muted); font-variant-numeric: tabular-nums; margin-top: 1px; }
 .me .id b { color: #e7e9ec; letter-spacing: .02em; }
 .theme-btn { all: unset; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); flex: none; box-sizing: border-box; }
@@ -428,6 +429,9 @@ tbody tr.clickable.sel td { background: var(--accent-soft); }
 html.fluid #viewport { width: auto !important; height: auto !important; overflow: visible; }
 html.fluid #stage { position: static; transform: none !important; width: auto; height: auto; padding: 16px; grid-template-columns: 1fr; gap: 16px; }
 html.fluid .side { gap: 14px; }
+html.fluid .me { flex-direction: row; justify-content: flex-start; padding: 12px; }
+html.fluid .me .photo { width: 64px; }
+html.fluid .me .me-t { text-align: left; }
 html.fluid .side .grow, html.fluid .sync { display: none; }
 html.fluid .nav { flex-direction: row; flex-wrap: wrap; }
 html.fluid .nav button { flex: 1 1 30%; grid-template-columns: 18px auto; justify-content: center; }
@@ -482,8 +486,8 @@ html.fluid .paper, html.fluid .paper-img { width: min(320px, 100%); }
     </div>
     <div class="notice"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg><span>과제용 가상 데이터</span></div>
     <div class="me">
-      <div class="avatar" aria-hidden="true">민</div>
-      <div style="min-width:0"><div class="nm">민승환</div><div class="id">학번 <b>2021308</b></div></div>
+      <img class="photo" src="data:image/jpeg;base64,/*__PHOTO__*/" alt="민승환 증명사진" width="264" height="339">
+      <div class="me-t"><div class="nm">민승환</div><div class="id">학번 <b>2021308</b></div></div>
     </div>
   </aside>
 
