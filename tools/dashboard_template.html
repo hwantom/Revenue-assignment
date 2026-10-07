@@ -1311,11 +1311,11 @@ async function analyzeFile({ name, bytes, type, source = 'upload' }) {
       }
     } else {
       const j = JSON.parse(new TextDecoder().decode(bytes)), arr = Array.isArray(j) ? j : [j];
-      if (arr.length > 1) { for (const one of arr) await analyzeFile({ name, bytes: new TextEncoder().encode(JSON.stringify(one)), type: 'application/json', source }); return; }
+      if (arr.length > 1) { const out = []; for (const one of arr) out.push(await analyzeFile({ name, bytes: new TextEncoder().encode(JSON.stringify(one)), type: 'application/json', source })); return out.flat(); }
       raw = arr[0]; if (!raw || !profById.get(raw.profile_id)) throw new Error('형식 미인식');
     }
     const res = cleanRaw(raw), id = res.receipt.receipt_id;
-    if (recById.has(id)) { Object.assign(entry, { status: 'dup', id }); FEED.unshift(entry); return; }
+    if (recById.has(id)) { Object.assign(entry, { status: 'dup', id }); if (source !== 'drive') FEED.unshift(entry); return 'dup'; }
     let comment = null, by = 'rule';
     try { comment = await claudeComment(res); if (comment) by = 'claude'; } catch (e) { entry.aiError = e.message; }
     if (!comment) comment = ruleComment(res);
@@ -1323,16 +1323,17 @@ async function analyzeFile({ name, bytes, type, source = 'upload' }) {
     Object.assign(entry, { status: 'ok', id, amount: res.receipt.receipt_amount, profile: raw.ai_extracted ? 'AI 판독' : raw.profile_id.replace('_', ' '), changes: res.log.length, checks: res.checks, comment, by });
     FEED.unshift(entry);
     rebuild();
-  } catch (e) { Object.assign(entry, { status: 'err', error: e.message || String(e) }); FEED.unshift(entry); }
+    return 'ok';
+  } catch (e) { Object.assign(entry, { status: 'err', error: e.message || String(e) }); FEED.unshift(entry); return 'err'; }
 }
 async function analyzeFiles(list) {
   const drops = document.querySelectorAll('.drop'); drops.forEach(d => d.classList.add('busy'));
-  const before = UP.length;
-  try { for (const f of list) await analyzeFile(f); }
+  const before = UP.length, res = [];
+  try { for (const f of list) res.push(await analyzeFile(f)); }
   finally {
     drops.forEach(d => d.classList.remove('busy'));
     saveAll(); renderHead(); render();
-    const added = UP.length - before, recent = FEED.slice(0, list.length), dup = recent.filter(x => x.status === 'dup').length, bad = recent.filter(x => x.status === 'err').length;
+    const flat = res.flat(), added = UP.length - before, dup = flat.filter(x => x === 'dup').length, bad = flat.filter(x => x === 'err').length;
     toast(added ? `${added}건 분석 · 대시보드 반영${dup ? ` · 중복 ${dup}` : ''}${bad ? ` · 실패 ${bad}` : ''}` : dup ? `이미 있는 전표 ${dup}건` : '반영된 전표 없음');
   }
 }
@@ -1401,6 +1402,7 @@ async function driveSync(manual) {
   const url = store.get('ondam-drive-url', '');
   if (!url || driveState.busy) return;
   driveState.busy = true;
+  let more = false;
   try {
     const since = store.get('ondam-drive-since', 0);
     const j = await (await fetch(url + (url.includes('?') ? '&' : '?') + 'since=' + since, { redirect: 'follow' })).json();
@@ -1412,8 +1414,10 @@ async function driveSync(manual) {
       fresh.forEach(f => seen[f.id] = f.updated); store.set('ondam-drive-seen', seen);
     } else if (manual) toast('Drive 연결 · 새 전표 없음');
     if (j.files.length) store.set('ondam-drive-since', Math.max(since, ...j.files.map(f => f.updated)));
+    more = j.pending > 0 && fresh.length > 0;
   } catch (e) { Object.assign(driveState, { ok: false, err: '연결 실패 · URL과 배포 권한 확인' }); }
   finally { driveState.busy = false; renderSide(); if (st.view === 'ai') renderDriveUI(); }
+  if (more) return driveSync(false); // 남은 파일이 있으면 다음 묶음을 바로 받는다
 }
 function startDrive() { clearInterval(driveTimer); if (store.get('ondam-drive-url', '')) { driveSync(true); driveTimer = setInterval(() => { if (!document.hidden) driveSync(false); }, 60000); } }
 $('#drive-btn').addEventListener('click', () => {
