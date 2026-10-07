@@ -3,6 +3,7 @@
 data/*.json 과 정제규칙.xlsx 의 규칙 시트를 HTML 안에 포함하고,
 Pretendard 가변 폰트를 화면에 쓰이는 글자만 남겨 base64로 넣는다.
 receipts/*.pdf 첫 페이지는 previews/*.png 미리보기로 만든다.
+전표 업로드·AI 분석용 pdf.js(tools/vendor, Apache-2.0)와 시연용 신규 전표(samples/*.pdf)도 함께 넣는다.
 
 실행 (패키지 폴더에서):
     python3 tools/build_dashboard.py --font /path/to/PretendardVariable.ttf
@@ -23,6 +24,7 @@ from PIL import Image
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 TEMPLATE = ROOT / "tools" / "dashboard_template.html"
+PDFJS = ROOT / "tools" / "vendor" / "pdfjs-3.11.174"
 
 
 def load(name):
@@ -50,6 +52,7 @@ def build_data():
         "products": load("product_master.json"),
         "log": load("cleaning_log.json"),
         "summary": load("summary.json"),
+        "value_mappings": load("value_mappings.json"),
         "rules": read_rules(),
     }
 
@@ -96,6 +99,12 @@ def main():
     data_js = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     body = template.replace("/*__DATA__*/", data_js, 1)
     body = body.replace("/*__FONT__*/", font_b64(args.font, template + data_js), 1)
+    samples = [{"name": f.name, "b64": base64.b64encode(f.read_bytes()).decode("ascii")} for f in sorted((ROOT / "samples").glob("*.pdf"))]
+    body = body.replace("/*__SAMPLES__*/", json.dumps(samples), 1)
+    for marker, name in (("/*__PDFJS__*/", "pdf.min.js"), ("/*__PDFJS_WORKER__*/", "pdf.worker.min.js")):
+        code = (PDFJS / name).read_text(encoding="utf-8")
+        assert "</script" not in code.lower()
+        body = body.replace(marker, code, 1)
 
     if args.fragment:
         pathlib.Path(args.fragment).write_text(body, encoding="utf-8")

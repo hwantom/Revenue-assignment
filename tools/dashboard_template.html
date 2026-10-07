@@ -1,5 +1,5 @@
 <title>카페 온담 매출 대시보드</title>
-<meta name="description" content="카페 온담 2026년 9월 가상 매출전표 100건의 정제·분석 대시보드 (민승환 · 2021308)">
+<meta name="description" content="카페 온담 2026년 9월 매출전표 정제·분석 대시보드 · AI 전표 분석 · Google Drive 연동 (민승환 · 2021308)">
 <style>
 @font-face {
   font-family: "Pretendard";
@@ -9,68 +9,46 @@
   src: url(data:font/woff2;base64,/*__FONT__*/) format("woff2");
 }
 /* ============================================================
-   Design tokens
-   1600×900 고정 16:9 무대 · 8px 그리드 · 카드 반경 14 · 간격 16
-   데이터 마크는 한 가지 색(--accent)으로, 결제수단만 범주형 3색 + 미확인 빗금
+   Tokens · 1600×900 고정 16:9 · 8px 그리드 · 간격 20 · 카드 안쪽 24
+   데이터 마크는 파란색 한 가지, 결제수단만 범주형 3색 + 미확인 빗금
    ============================================================ */
 :root {
-  --bg: #f3f4f6;
-  --surface: #ffffff;
-  --surface-2: #f7f8fa;
-  --surface-3: #eef0f3;
-  --ink: #111318;
-  --ink-2: #474c55;
-  --muted: #868b94;
-  --line: #e7e9ed;
-  --line-2: #d3d7dd;
-  --accent: #2a78d6;
-  --accent-strong: #1c5cab;
-  --accent-soft: #e8f1fc;
-  --accent-wash: rgba(42, 120, 214, .10);
-  --mark-dim: #cfd9e6;
-  --s-card: #2a78d6;
-  --s-easy: #eb6834;
-  --s-cash: #1baf7a;
-  --s-unknown: #a3a8ae;
-  --warn: #eda100;
-  --warn-ink: #8a5a00;
-  --warn-soft: #fdf4de;
-  --good: #1baf7a;
-  --good-ink: #0b6b46;
-  --good-soft: #e1f5ec;
-  --side: #121418;
-  --side-2: #1b1e24;
-  --side-line: #262a31;
-  --side-ink: #f3f4f6;
-  --side-muted: #8b919b;
-  --shadow: 0 1px 2px rgba(17, 19, 24, .04), 0 2px 8px rgba(17, 19, 24, .04);
-  --shadow-pop: 0 8px 28px rgba(17, 19, 24, .16);
-  --r-lg: 14px;
-  --r-md: 10px;
-  --r-sm: 7px;
-  --gap: 16px;
+  --bg: #f3f4f6; --surface: #ffffff; --surface-2: #f7f8fa; --surface-3: #eef0f3;
+  --ink: #111318; --ink-2: #474c55; --muted: #868b94; --line: #e7e9ed; --line-2: #d3d7dd;
+  --accent: #2a78d6; --accent-strong: #1c5cab; --accent-soft: #e8f1fc; --accent-wash: rgba(42,120,214,.10); --mark-dim: #cfd9e6;
+  --s-card: #2a78d6; --s-easy: #eb6834; --s-cash: #1baf7a; --s-unknown: #a3a8ae;
+  --warn: #eda100; --warn-ink: #8a5a00; --warn-soft: #fdf4de;
+  --good: #1baf7a; --good-ink: #0b6b46; --good-soft: #e1f5ec;
+  --bad-ink: #b4232c; --bad-soft: #fde8e8;
+  --side: #121418; --side-2: #1b1e24; --side-line: #262a31; --side-muted: #8b919b;
+  --shadow: 0 1px 2px rgba(17,19,24,.04), 0 2px 8px rgba(17,19,24,.04);
+  --shadow-pop: 0 8px 28px rgba(17,19,24,.16);
+  --paper: #fffefb; --paper-ink: #1a1a1a; --paper-muted: #8a8a85; --paper-line: #d9d7cf;
+  --r-lg: 16px; --r-md: 10px; --gap: 20px;
   --font: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0c0d10; --surface: #16181d; --surface-2: #1c1f25; --surface-3: #23272e;
     --ink: #f3f4f6; --ink-2: #c1c5cc; --muted: #868c96; --line: #262a31; --line-2: #363b44;
-    --accent: #3987e5; --accent-strong: #86b6ef; --accent-soft: #172a42; --accent-wash: rgba(57, 135, 229, .16); --mark-dim: #2d3d52;
+    --accent: #3987e5; --accent-strong: #86b6ef; --accent-soft: #172a42; --accent-wash: rgba(57,135,229,.16); --mark-dim: #2d3d52;
     --s-card: #3987e5; --s-easy: #d95926; --s-cash: #199e70; --s-unknown: #6b7179;
     --warn: #e0a019; --warn-ink: #f2c66a; --warn-soft: #2f2610; --good: #199e70; --good-ink: #5fd3a4; --good-soft: #10291f;
+    --bad-ink: #ff8a8a; --bad-soft: #3a1416;
     --side: #08090b; --side-2: #121418; --side-line: #1f2228;
-    --shadow: 0 1px 2px rgba(0, 0, 0, .3); --shadow-pop: 0 8px 28px rgba(0, 0, 0, .5);
+    --shadow: 0 1px 2px rgba(0,0,0,.3); --shadow-pop: 0 8px 28px rgba(0,0,0,.5);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0c0d10; --surface: #16181d; --surface-2: #1c1f25; --surface-3: #23272e;
   --ink: #f3f4f6; --ink-2: #c1c5cc; --muted: #868c96; --line: #262a31; --line-2: #363b44;
-  --accent: #3987e5; --accent-strong: #86b6ef; --accent-soft: #172a42; --accent-wash: rgba(57, 135, 229, .16); --mark-dim: #2d3d52;
+  --accent: #3987e5; --accent-strong: #86b6ef; --accent-soft: #172a42; --accent-wash: rgba(57,135,229,.16); --mark-dim: #2d3d52;
   --s-card: #3987e5; --s-easy: #d95926; --s-cash: #199e70; --s-unknown: #6b7179;
   --warn: #e0a019; --warn-ink: #f2c66a; --warn-soft: #2f2610; --good: #199e70; --good-ink: #5fd3a4; --good-soft: #10291f;
+  --bad-ink: #ff8a8a; --bad-soft: #3a1416;
   --side: #08090b; --side-2: #121418; --side-line: #1f2228;
-  --shadow: 0 1px 2px rgba(0, 0, 0, .3); --shadow-pop: 0 8px 28px rgba(0, 0, 0, .5);
+  --shadow: 0 1px 2px rgba(0,0,0,.3); --shadow-pop: 0 8px 28px rgba(0,0,0,.5);
   color-scheme: dark;
 }
 
@@ -82,138 +60,162 @@ button, input, select { font: inherit; color: inherit; }
 b, strong { font-weight: 700; }
 .num { font-variant-numeric: tabular-nums; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+svg.i { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 
-/* ---------- 16:9 무대 ---------- */
+/* ---------- 무대 ---------- */
 .page-wrap { min-height: 100%; display: grid; place-items: center; }
 #viewport { position: relative; margin: 0 auto; overflow: hidden; }
-#stage {
-  position: absolute; left: 0; top: 0; width: 1600px; height: 900px; transform-origin: 0 0;
-  padding: 16px; display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 20px; background: var(--bg);
-}
+#stage { position: absolute; left: 0; top: 0; width: 1600px; height: 900px; transform-origin: 0 0; padding: 20px; display: grid; grid-template-columns: 232px minmax(0, 1fr); gap: 24px; background: var(--bg); }
 
 /* ---------- 사이드바 ---------- */
-.side { background: var(--side); color: var(--side-ink); border: 1px solid var(--side-line); border-radius: 18px; padding: 22px 16px 16px; display: flex; flex-direction: column; gap: 18px; min-height: 0; }
+.side { background: var(--side); color: #f3f4f6; border: 1px solid var(--side-line); border-radius: 20px; padding: 24px 16px 16px; display: flex; flex-direction: column; gap: 22px; min-height: 0; }
 .brand { display: flex; align-items: center; gap: 12px; padding: 0 6px; }
-.logo { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(145deg, #3d8ae6, #1c5cab); display: grid; place-items: center; flex: none; box-shadow: inset 0 1px 0 rgba(255,255,255,.18); }
+.logo { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(145deg, #3d8ae6, #1c5cab); display: grid; place-items: center; flex: none; }
 .logo svg { width: 22px; height: 22px; }
-.brand .bt { font-size: 16px; font-weight: 800; letter-spacing: 0.06em; line-height: 1.1; }
+.brand .bt { font-size: 16px; font-weight: 800; letter-spacing: .06em; line-height: 1.1; }
 .brand .bs { font-size: 11.5px; color: var(--side-muted); margin-top: 2px; }
-.nav-h { font-size: 10.5px; font-weight: 700; letter-spacing: .12em; color: var(--side-muted); padding: 0 10px; margin-bottom: -10px; }
 .nav { display: flex; flex-direction: column; gap: 4px; }
-.nav button { all: unset; box-sizing: border-box; display: grid; grid-template-columns: 20px 1fr auto; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--r-md); font-size: 13.5px; font-weight: 600; color: #c4c8cf; cursor: pointer; position: relative; }
+.nav button { all: unset; box-sizing: border-box; display: grid; grid-template-columns: 18px 1fr auto; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 10px; font-size: 13.5px; font-weight: 600; color: #c4c8cf; cursor: pointer; position: relative; }
 .nav button:hover { background: var(--side-2); color: #fff; }
 .nav button[aria-selected="true"] { background: var(--side-2); color: #fff; box-shadow: inset 0 0 0 1px var(--side-line); }
-.nav button[aria-selected="true"]::before { content: ""; position: absolute; left: -16px; top: 10px; bottom: 10px; width: 3px; border-radius: 0 3px 3px 0; background: var(--accent); }
+.nav button[aria-selected="true"]::before { content: ""; position: absolute; left: -16px; top: 11px; bottom: 11px; width: 3px; border-radius: 0 3px 3px 0; background: var(--accent); }
 .nav button:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
-.nav svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .nav .ct { font-size: 11px; font-weight: 700; color: var(--side-muted); background: rgba(255,255,255,.06); border-radius: 20px; padding: 1px 8px; }
-.ds { background: var(--side-2); border: 1px solid var(--side-line); border-radius: var(--r-lg); padding: 14px; display: flex; flex-direction: column; gap: 10px; }
-.ds-h { display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; font-weight: 700; color: var(--side-muted); letter-spacing: .02em; }
-.pass { display: inline-flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 800; color: #5fd3a4; background: rgba(27,175,122,.14); border-radius: 20px; padding: 2px 8px; letter-spacing: .04em; }
-.pass::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #5fd3a4; }
-.ds dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 7px 10px; font-size: 12px; }
-.ds dt { color: var(--side-muted); }
-.ds dd { margin: 0; text-align: right; font-weight: 600; color: #e7e9ec; font-variant-numeric: tabular-nums; }
-.notice { display: flex; gap: 8px; align-items: flex-start; font-size: 11.5px; line-height: 1.5; color: #f2c66a; background: rgba(237,161,0,.10); border: 1px solid rgba(237,161,0,.22); border-radius: var(--r-md); padding: 10px 12px; }
-.notice svg { width: 14px; height: 14px; flex: none; margin-top: 2px; stroke: currentColor; fill: none; stroke-width: 2; }
+.nav .ct.live { color: #fff; background: var(--accent); }
 .side .grow { flex: 1; }
-.me { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: var(--r-lg); background: var(--side-2); border: 1px solid var(--side-line); }
+.sync { display: flex; flex-direction: column; gap: 10px; }
+.sync-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #c4c8cf; padding: 0 10px; }
+.sync-row .dot { width: 7px; height: 7px; border-radius: 50%; background: #565c66; flex: none; }
+.sync-row .dot.on { background: #5fd3a4; box-shadow: 0 0 0 3px rgba(95,211,164,.18); }
+.sync-row span:last-child { margin-left: auto; color: var(--side-muted); font-size: 11px; }
+.notice { display: flex; gap: 8px; align-items: center; font-size: 11.5px; color: #f2c66a; background: rgba(237,161,0,.10); border: 1px solid rgba(237,161,0,.22); border-radius: 10px; padding: 9px 12px; }
+.me { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 14px; background: var(--side-2); border: 1px solid var(--side-line); }
 .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(145deg, #f2f4f7, #c9d3e0); color: #121418; display: grid; place-items: center; font-weight: 800; font-size: 16px; flex: none; }
 .me .nm { font-size: 14px; font-weight: 700; }
 .me .id { font-size: 12px; color: var(--side-muted); font-variant-numeric: tabular-nums; margin-top: 1px; }
-.me .id b { color: #e7e9ec; font-weight: 700; letter-spacing: .02em; }
-.me .role { font-size: 10.5px; color: var(--side-muted); margin-top: 2px; }
-.theme-btn { all: unset; margin-left: auto; width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; cursor: pointer; color: #c4c8cf; flex: none; }
-.theme-btn:hover { background: rgba(255,255,255,.08); color: #fff; }
+.me .id b { color: #e7e9ec; letter-spacing: .02em; }
+.theme-btn { all: unset; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); flex: none; box-sizing: border-box; }
+.theme-btn:hover { color: var(--ink); background: var(--surface-2); }
 .theme-btn:focus-visible { outline: 2px solid var(--accent); }
-.theme-btn svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; }
 
 /* ---------- 메인 ---------- */
-.main { display: grid; grid-template-rows: 52px 48px minmax(0, 1fr); gap: 16px; min-width: 0; min-height: 0; }
-.head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding: 2px 4px 0; }
+.main { display: grid; grid-template-rows: 52px auto minmax(0, 1fr); gap: 20px; min-width: 0; min-height: 0; }
+.main.nofilter { grid-template-rows: 52px minmax(0, 1fr); }
+.main.nofilter .filters { display: none; }
+.head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding: 0 4px; }
 .crumb { font-size: 12px; color: var(--muted); font-weight: 600; display: flex; gap: 6px; align-items: center; }
 .crumb i { width: 3px; height: 3px; border-radius: 50%; background: var(--line-2); display: block; }
-.head h1 { margin: 3px 0 0; font-size: 26px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; }
-.head-r { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); }
-.head-r .chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); color: var(--ink-2); font-weight: 600; box-shadow: var(--shadow); white-space: nowrap; }
-.head-r .chip b { color: var(--ink); }
-.head-r .chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--good); }
+.head h1 { margin: 4px 0 0; font-size: 26px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; }
+.head-r { display: flex; align-items: center; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); color: var(--ink-2); font-size: 12px; font-weight: 600; box-shadow: var(--shadow); white-space: nowrap; }
+.chip b { color: var(--ink); }
+.chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--good); }
+.chip.blue { background: var(--accent-soft); border-color: transparent; color: var(--accent-strong); box-shadow: none; }
+.chip.blue b { color: var(--accent-strong); }
 
-/* 필터 바 */
-.filters { display: flex; align-items: center; gap: 10px; padding: 0 8px 0 8px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); }
-.seg { display: inline-flex; background: var(--surface-3); border-radius: 9px; padding: 3px; gap: 2px; }
-.seg button { border: 0; background: transparent; padding: 5px 12px; border-radius: 7px; font-size: 12.5px; font-weight: 600; color: var(--ink-2); cursor: pointer; white-space: nowrap; }
+/* 필터 */
+.filters { display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); }
+.seg { display: inline-flex; background: var(--surface-3); border-radius: 10px; padding: 3px; gap: 2px; }
+.seg button { border: 0; background: transparent; padding: 6px 13px; border-radius: 8px; font-size: 12.5px; font-weight: 600; color: var(--ink-2); cursor: pointer; white-space: nowrap; }
 .seg button:hover { color: var(--ink); }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(17,19,24,.10), 0 0 0 1px var(--line); }
 .select { position: relative; display: inline-flex; align-items: center; }
-.select select { appearance: none; -webkit-appearance: none; border: 1px solid var(--line); background: var(--surface-2); border-radius: 9px; padding: 6px 30px 6px 12px; font-size: 12.5px; font-weight: 600; color: var(--ink); cursor: pointer; min-width: 120px; }
+.select select { appearance: none; -webkit-appearance: none; border: 1px solid var(--line); background: var(--surface-2); border-radius: 10px; padding: 7px 30px 7px 12px; font-size: 12.5px; font-weight: 600; color: var(--ink); cursor: pointer; min-width: 118px; }
 .select select:hover { border-color: var(--line-2); }
 .select select.on { background: var(--accent-soft); border-color: transparent; color: var(--accent-strong); }
 .select::after { content: ""; position: absolute; right: 12px; top: 50%; width: 6px; height: 6px; border-right: 1.6px solid var(--muted); border-bottom: 1.6px solid var(--muted); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
-.select .lb { font-size: 11.5px; color: var(--muted); font-weight: 600; margin-right: 6px; white-space: nowrap; }
-.filters input[type="date"] { border: 1px solid var(--line); background: var(--surface-2); border-radius: 9px; padding: 5px 8px; font-size: 12px; color: var(--ink); }
+.select .lb { font-size: 11.5px; color: var(--muted); font-weight: 600; margin-right: 8px; white-space: nowrap; }
+.filters input[type="date"] { border: 1px solid var(--line); background: var(--surface-2); border-radius: 10px; padding: 6px 8px; font-size: 12px; color: var(--ink); }
 .vsep { width: 1px; height: 22px; background: var(--line); flex: none; }
-.btn-ghost { border: 0; background: transparent; color: var(--muted); font-size: 12.5px; font-weight: 600; padding: 6px 10px; border-radius: 8px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
+.btn-ghost { border: 0; background: transparent; color: var(--muted); font-size: 12.5px; font-weight: 600; padding: 7px 10px; border-radius: 8px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
 .btn-ghost:hover { background: var(--surface-3); color: var(--ink); }
-.btn-ghost svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
 .filters .spacer { flex: 1; }
-.basis { font-size: 11.5px; color: var(--muted); text-align: right; line-height: 1.4; padding-right: 8px; white-space: nowrap; }
-.basis b { color: var(--ink-2); }
-.filters.inactive .seg, .filters.inactive .select, .filters.inactive .btn-ghost, .filters.inactive #f-custom, .filters.inactive .vsep { opacity: .35; pointer-events: none; }
+.basis { font-size: 12px; color: var(--muted); padding-right: 8px; white-space: nowrap; }
+.basis b { color: var(--ink); }
 
 /* ---------- 카드 ---------- */
 .view { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); min-height: 0; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: 16px 18px; display: flex; flex-direction: column; min-height: 0; min-width: 0; }
-.ch { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-.ch h2 { margin: 0; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
-.ch p { margin: 3px 0 0; font-size: 11.5px; color: var(--muted); line-height: 1.4; }
-.ch p b { color: var(--ink-2); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: 22px 24px; display: flex; flex-direction: column; min-height: 0; min-width: 0; }
+.ch { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; min-height: 22px; }
+.ch h2 { margin: 0; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; }
+.ch .sub { font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+.ch .sub b { color: var(--ink-2); }
 .cb { flex: 1; min-height: 0; position: relative; }
 .empty { height: 100%; display: grid; place-items: center; color: var(--muted); font-size: 12.5px; text-align: center; }
 .tag { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
 .tag.warn { background: var(--warn-soft); color: var(--warn-ink); }
 .tag.good { background: var(--good-soft); color: var(--good-ink); }
+.tag.bad { background: var(--bad-soft); color: var(--bad-ink); }
 .tag.plain { background: var(--surface-3); color: var(--ink-2); }
 .tag.blue { background: var(--accent-soft); color: var(--accent-strong); }
-.tag.warn::before, .tag.good::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .8; }
+.tag.warn::before, .tag.good::before, .tag.bad::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .8; }
+.btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); font-size: 12.5px; font-weight: 700; color: var(--ink); cursor: pointer; text-decoration: none; white-space: nowrap; }
+.btn:hover { background: var(--surface-2); }
+.btn.dark { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.btn.dark:hover { opacity: .9; }
+.field { display: flex; gap: 8px; }
+.field input { flex: 1; min-width: 0; border: 1px solid var(--line); background: var(--surface-2); border-radius: 10px; padding: 9px 12px; font-size: 12.5px; color: var(--ink); }
 
-/* KPI */
-.kpis { grid-column: 1 / -1; display: grid; grid-template-columns: 2.2fr repeat(4, minmax(0, 1fr)); gap: var(--gap); min-height: 0; }
-.kpis.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: 16px 18px; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; position: relative; overflow: hidden; }
-.kpi .kl { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.kpi .ki { width: 26px; height: 26px; border-radius: 8px; background: var(--surface-3); display: grid; place-items: center; flex: none; color: var(--ink-2); }
-.kpi .ki svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.kpi .kv { font-size: 30px; font-weight: 750; letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; margin-top: 6px; }
-.kpi .kv small { font-size: 15px; font-weight: 600; color: var(--muted); margin-left: 3px; letter-spacing: 0; }
-.kpi .ks { font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 4px; }
-.kpi .ks b { color: var(--ink-2); font-weight: 700; }
-.kpi.hero { background: linear-gradient(160deg, #1f6fd0 0%, #1a5aac 100%); border-color: transparent; color: #fff; }
-.kpi.hero .ks { max-width: 60%; }
-.kpi.hero .kl { color: rgba(255,255,255,.82); }
-.kpi.hero .ki { background: rgba(255,255,255,.16); color: #fff; }
-.kpi.hero .kv { font-size: 40px; font-weight: 800; }
-.kpi.hero .kv small { color: rgba(255,255,255,.75); font-size: 18px; }
-.kpi.hero .ks { color: rgba(255,255,255,.75); }
-.kpi.hero .ks b { color: #fff; }
-.kpi.hero .spark { position: absolute; right: 18px; bottom: 16px; width: 36%; height: 58px; }
-.kpi.hero .spark svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.kpi.hero .spark-cap { position: absolute; right: 0; top: -20px; font-size: 10.5px; color: rgba(255,255,255,.7); font-weight: 600; }
-:root[data-theme="dark"] .kpi.hero { background: linear-gradient(160deg, #1d5fae 0%, #17457f 100%); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .kpi.hero { background: linear-gradient(160deg, #1d5fae 0%, #17457f 100%); } }
-.kpi .meter { height: 6px; border-radius: 6px; background: var(--surface-3); display: flex; gap: 2px; overflow: hidden; margin-top: 8px; }
+/* ---------- 요약(홈) ---------- */
+#v-home { grid-template-rows: 212px 124px minmax(0, 1fr); }
+.hero { grid-column: 1 / -1; border-radius: 20px; padding: 32px 40px; color: #fff; background: radial-gradient(120% 140% at 100% 0%, #3a8ae4 0%, #1f6fd0 38%, #17509c 100%); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: center; overflow: hidden; }
+:root[data-theme="dark"] .hero { background: radial-gradient(120% 140% at 100% 0%, #2a6fc0 0%, #1a559f 40%, #11396e 100%); }
+.hero .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .04em; color: rgba(255,255,255,.8); }
+.hero .eyebrow i { width: 6px; height: 6px; border-radius: 50%; background: #9fe3c6; display: block; }
+.hero h2 { margin: 14px 0 0; font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.25; }
+.hero h2 em { font-style: normal; color: #bfe0ff; }
+.hero .meta { margin-top: 14px; font-size: 12.5px; color: rgba(255,255,255,.7); }
+.hero-stats { display: flex; }
+.hero-stats > div { padding: 0 32px; border-left: 1px solid rgba(255,255,255,.18); }
+.hero-stats > div:first-child { border-left: 0; }
+.hero-stats .v { font-size: 30px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+.hero-stats .v small { font-size: 14px; font-weight: 600; color: rgba(255,255,255,.7); margin-left: 3px; }
+.hero-stats .l { font-size: 12px; color: rgba(255,255,255,.72); margin-top: 6px; white-space: nowrap; }
+.find { grid-column: span 3; flex-direction: row; align-items: center; gap: 16px; }
+.find .ic { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); color: var(--accent-strong); display: grid; place-items: center; flex: none; }
+.find .ic svg { width: 20px; height: 20px; }
+.find .v { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.find .l { font-size: 12px; color: var(--muted); margin-top: 4px; white-space: nowrap; }
+.c-trend { grid-column: span 8; }
+.c-drop { grid-column: span 4; }
+
+/* 업로드 */
+.drop { flex: 1; min-height: 0; border: 1.5px dashed var(--line-2); border-radius: 14px; background: var(--surface-2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; cursor: pointer; transition: border-color .15s, background .15s; padding: 16px; }
+.drop:hover, .drop.over { border-color: var(--accent); background: var(--accent-soft); }
+.drop .ic { width: 48px; height: 48px; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow); display: grid; place-items: center; color: var(--accent); }
+.drop .ic svg { width: 22px; height: 22px; }
+.drop .t { font-size: 14px; font-weight: 700; }
+.drop .s { font-size: 11.5px; color: var(--muted); }
+.drop.busy { pointer-events: none; }
+.drop.busy .ic { animation: pulse 1s ease-in-out infinite; }
+@keyframes pulse { 50% { transform: scale(.9); opacity: .6; } }
+.links { display: flex; gap: 8px; margin-top: 14px; }
+.links .pill { flex: 1; display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 10px; background: var(--surface-2); font-size: 12px; font-weight: 600; color: var(--ink-2); cursor: pointer; border: 0; white-space: nowrap; }
+.links .pill:hover { background: var(--surface-3); }
+.links .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line-2); flex: none; }
+.links .pill .dot.on { background: var(--good); }
+.links .pill span:last-child { margin-left: auto; color: var(--muted); font-weight: 500; }
+
+/* ---------- 매출 분석 ---------- */
+#v-sales, #v-clean { grid-template-rows: 112px minmax(0, 1fr) minmax(0, 1fr); }
+#v-clean { grid-template-rows: 112px minmax(0, 1fr); }
+.kpis { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--gap); min-height: 0; }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: 18px 22px; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+.kpi .kl { font-size: 12.5px; font-weight: 600; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi .kv { font-size: 30px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+.kpi .kv small { font-size: 14px; font-weight: 600; color: var(--muted); margin-left: 3px; letter-spacing: 0; }
+.kpi .ks { font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi.hero-k { background: var(--ink); border-color: var(--ink); color: var(--surface); }
+.kpi.hero-k .kl, .kpi.hero-k .ks, .kpi.hero-k .kv small { color: var(--surface); opacity: .66; }
+.kpi.warn .kv { color: var(--warn-ink); }
+.kpi .meter { height: 5px; border-radius: 5px; background: var(--surface-3); display: flex; gap: 2px; overflow: hidden; }
 .kpi .meter i { display: block; height: 100%; }
 .kpi .meter .ok { background: var(--good); }
 .kpi .meter .no { background: var(--warn); }
-.kpi.warn .kv { color: var(--warn-ink); }
+.c-daily { grid-column: span 8; }
+.c-hour { grid-column: span 4; }
+.c-top, .c-cat, .c-pay { grid-column: span 4; }
 
-/* 매출 분석 레이아웃 */
-#v-sales { grid-template-rows: 124px minmax(0, 1fr) minmax(0, 1fr); }
-.c-daily { grid-column: span 7; }
-.c-ins { grid-column: span 5; }
-.c-top, .c-cat, .c-pay, .c-hour { grid-column: span 3; }
-
-/* SVG 차트 */
 svg.chart { display: block; width: 100%; height: 100%; overflow: visible; }
 svg .grid { stroke: var(--line); stroke-width: 1; }
 svg .base { stroke: var(--line-2); stroke-width: 1; }
@@ -221,23 +223,21 @@ svg .tick { fill: var(--muted); font-size: 11px; font-family: var(--font); }
 svg .tick.strong { fill: var(--ink); font-weight: 700; }
 svg .lbl { fill: var(--ink); font-size: 12px; font-weight: 700; font-family: var(--font); }
 svg .bar { fill: var(--accent); transition: fill .15s; }
-svg .bar.dim { fill: var(--mark-dim); }
+svg .bar.up { fill: var(--good); }
 svg .wkend { fill: var(--surface-2); }
 svg .hit { fill: transparent; }
-svg g.col:hover .bar { fill: var(--accent-strong); }
+svg g.col:hover .bar:not(.up) { fill: var(--accent-strong); }
 svg g.col:hover .hl { fill: var(--accent-wash); }
 svg .hl { fill: transparent; }
-svg .avg { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 0; opacity: .7; }
+svg .avg { stroke: var(--ink-2); stroke-width: 1; opacity: .6; }
 svg .avg-pill { fill: var(--ink); }
 svg .avg-t { fill: var(--surface); font-size: 10.5px; font-weight: 700; font-family: var(--font); }
 .legend-inline { display: flex; gap: 14px; align-items: center; font-size: 11.5px; color: var(--muted); white-space: nowrap; }
 .legend-inline span { display: inline-flex; align-items: center; gap: 6px; }
 .legend-inline i { display: block; width: 10px; height: 10px; border-radius: 3px; }
-.legend-inline i.line { width: 14px; height: 0; border-top: 1.5px solid var(--ink-2); border-radius: 0; }
 
-/* 가로 막대 */
 .hbars { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 6px; }
-.hbar { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 2px 4px; margin: 0 -4px; border-radius: 8px; }
+.hbar { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 2px 6px; margin: 0 -6px; border-radius: 8px; }
 .hbar:hover { background: var(--surface-2); }
 .hbar .rk { width: 22px; height: 22px; border-radius: 7px; background: var(--surface-3); font-size: 11.5px; font-weight: 800; color: var(--ink-2); display: grid; place-items: center; }
 .hbar:first-child .rk { background: var(--ink); color: var(--surface); }
@@ -252,181 +252,210 @@ svg .avg-t { fill: var(--surface); font-size: 10.5px; font-weight: 700; font-fam
 .hbar.cat .nm { font-size: 12px; color: var(--ink-2); }
 .hbar.cat .track { margin-top: 0; height: 12px; border-radius: 4px; }
 .hbar.cat .fill { border-radius: 4px; }
-.hbar.cat .val { min-width: 92px; }
+.hbar.cat .val { min-width: 104px; }
 .hbar.cat .val em { font-style: normal; color: var(--muted); font-weight: 500; font-size: 11px; margin-left: 6px; }
 
-/* 결제수단 도넛 */
-.pay { display: grid; grid-template-columns: 124px minmax(0, 1fr); gap: 18px; align-items: center; height: 100%; }
-.donut { position: relative; width: 124px; height: 124px; }
+.pay { display: grid; grid-template-columns: 136px minmax(0, 1fr); gap: 28px; align-items: center; height: 100%; }
+.donut { position: relative; width: 136px; height: 136px; }
 .donut svg { width: 100%; height: 100%; display: block; overflow: visible; }
-.donut .seg-arc { cursor: default; transition: opacity .15s; }
 .donut .seg-arc.dim { opacity: .25; }
 .donut .ctr { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; pointer-events: none; }
 .donut .ctr b { display: block; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
-.donut .ctr span { font-size: 10.5px; color: var(--muted); font-weight: 600; }
-.legend { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.lg { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: 12px; line-height: 1.3; }
-.lg i { align-self: start; margin-top: 3px; }
+.donut .ctr span { font-size: 11px; color: var(--muted); font-weight: 600; }
+.legend { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.lg { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto auto; gap: 10px; align-items: center; font-size: 12.5px; }
 .lg i { width: 10px; height: 10px; border-radius: 3px; display: block; }
 .lg .t { color: var(--ink-2); font-weight: 600; white-space: nowrap; }
-.lg .t span { display: block; color: var(--muted); font-weight: 500; font-size: 10.5px; line-height: 1.2; }
-.lg .p { font-weight: 700; text-align: right; }
+.lg .c { color: var(--muted); font-size: 11.5px; text-align: right; }
+.lg .p { font-weight: 700; text-align: right; min-width: 46px; }
 .lg.dim { opacity: .4; }
 .hatch { background-image: repeating-linear-gradient(45deg, var(--s-unknown) 0 1.5px, transparent 1.5px 4px); background-color: var(--surface-3); }
 
-/* 인사이트 */
-.ins { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 6px; overflow: auto; height: 100%; counter-reset: ins; }
-.ins li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; font-size: 12.5px; color: var(--ink-2); line-height: 1.5; padding: 0 0 6px; border-bottom: 1px solid var(--line); }
-.ins li:last-child { border-bottom: 0; padding-bottom: 0; }
-.ins li::before { counter-increment: ins; content: counter(ins, decimal-leading-zero); font-size: 10.5px; font-weight: 800; color: var(--accent-strong); background: var(--accent-soft); border-radius: 6px; height: 18px; display: grid; place-items: center; margin-top: 1px; }
-.ins li.warn::before { color: var(--warn-ink); background: var(--warn-soft); }
-.ins b { color: var(--ink); }
-.ins-note { margin-top: 10px; font-size: 11px; color: var(--muted); display: flex; gap: 6px; align-items: center; }
-.ins-note svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; flex: none; }
-
-/* 툴팁 */
-#tip { position: fixed; z-index: 10; pointer-events: none; background: var(--ink); color: var(--surface); font-family: var(--font); font-size: 12px; line-height: 1.55; padding: 9px 12px; border-radius: 10px; box-shadow: var(--shadow-pop); max-width: 280px; }
-#tip b { font-weight: 700; }
+#tip { position: fixed; z-index: 20; pointer-events: none; background: var(--ink); color: var(--surface); font-family: var(--font); font-size: 12px; line-height: 1.55; padding: 9px 12px; border-radius: 10px; box-shadow: var(--shadow-pop); max-width: 280px; }
 
 /* 표 */
-.tbl-wrap { overflow: auto; height: 100%; border: 1px solid var(--line); border-radius: var(--r-md); }
-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-th { position: sticky; top: 0; z-index: 1; background: var(--surface-2); color: var(--muted); font-weight: 700; font-size: 11px; letter-spacing: .02em; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
-td { padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.tbl-wrap { overflow: auto; height: 100%; }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th { position: sticky; top: 0; z-index: 1; background: var(--surface); color: var(--muted); font-weight: 600; font-size: 11.5px; text-align: left; padding: 0 10px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: middle; white-space: nowrap; }
 tr:last-child td { border-bottom: 0; }
 td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
 td.c, th.c { text-align: center; }
-td.mono { font-variant-numeric: tabular-nums; }
 tbody tr.clickable { cursor: pointer; }
 tbody tr.clickable:hover td { background: var(--surface-2); }
 tbody tr.clickable.sel td { background: var(--accent-soft); }
-tbody tr.clickable.sel td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
-td .raw, td.raw { color: var(--ink-2); }
-.blank { color: var(--muted); font-style: normal; }
-.chg { background: var(--accent-soft); color: var(--accent-strong); font-weight: 700; }
-.miss { background: var(--warn-soft); color: var(--warn-ink); font-weight: 700; }
+.blank { color: var(--muted); }
+.sdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--good); }
+.sdot.warn { background: var(--warn); }
+.sdot.new { background: var(--accent); }
 
-/* 정제 현황 */
-#v-clean { grid-template-rows: 124px minmax(0, 1fr); }
-#log td { white-space: nowrap; max-width: 130px; overflow: hidden; text-overflow: ellipsis; }
-#list td { white-space: nowrap; }
-#list td .tag + .tag { margin-left: 2px; }
+/* ---------- 전표 조회 (영수증) ---------- */
+#v-recs { grid-template-rows: minmax(0, 1fr); }
+.c-list { grid-column: span 4; }
+.c-paper { grid-column: span 4; background: var(--surface-2); display: flex; flex-direction: column; align-items: center; gap: 16px; min-height: 0; }
+.c-info { grid-column: span 4; }
+.paper-wrap { flex: 1; min-height: 0; width: 100%; overflow: auto; display: flex; justify-content: center; padding: 6px 0 14px; }
+.paper { width: 320px; height: max-content; background: var(--paper); color: var(--paper-ink); padding: 30px 26px 34px; position: relative; filter: drop-shadow(0 6px 14px rgba(17,19,24,.13)) drop-shadow(0 1px 2px rgba(17,19,24,.08));
+  -webkit-mask: radial-gradient(circle 6px at 7px 0, transparent 5.5px, #000 6px) 0 0 / 14px 51% repeat-x, radial-gradient(circle 6px at 7px 100%, transparent 5.5px, #000 6px) 0 100% / 14px 51% repeat-x;
+          mask: radial-gradient(circle 6px at 7px 0, transparent 5.5px, #000 6px) 0 0 / 14px 51% repeat-x, radial-gradient(circle 6px at 7px 100%, transparent 5.5px, #000 6px) 0 100% / 14px 51% repeat-x; }
+.paper .pc { text-align: center; }
+.paper .pl { width: 34px; height: 34px; margin: 0 auto 8px; border-radius: 50%; border: 1.5px solid var(--paper-ink); display: grid; place-items: center; }
+.paper .pl svg { width: 18px; height: 18px; }
+.paper .st { font-size: 17px; font-weight: 800; letter-spacing: .14em; }
+.paper .st2 { font-size: 11.5px; color: var(--paper-muted); margin-top: 2px; }
+.paper .dash { border: 0; border-top: 1.5px dashed var(--paper-line); margin: 16px 0; }
+.paper .dbl { border: 0; border-top: 3px double var(--paper-ink); margin: 14px 0; }
+.paper .row { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; line-height: 1.9; font-variant-numeric: tabular-nums; }
+.paper .row span:first-child { color: var(--paper-muted); }
+.paper .it { margin-bottom: 10px; }
+.paper .it .n { font-size: 12.5px; font-weight: 700; }
+.paper .it .d { display: flex; justify-content: space-between; gap: 10px; font-size: 11.5px; color: var(--paper-muted); font-variant-numeric: tabular-nums; margin-top: 2px; }
+.paper .it .d b { color: var(--paper-ink); font-weight: 700; }
+.paper .tot { display: flex; justify-content: space-between; align-items: baseline; font-weight: 800; }
+.paper .tot span:first-child { font-size: 13px; }
+.paper .tot span:last-child { font-size: 22px; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.paper .bc { height: 36px; margin: 20px auto 6px; width: 210px; background: repeating-linear-gradient(90deg, var(--paper-ink) 0 2px, transparent 2px 4px, var(--paper-ink) 4px 5px, transparent 5px 8px, var(--paper-ink) 8px 11px, transparent 11px 12px); }
+.paper .foot { text-align: center; font-size: 10.5px; color: var(--paper-muted); letter-spacing: .08em; }
+.paper .stamp { position: absolute; top: 26px; right: 18px; transform: rotate(8deg); border: 2px solid currentColor; border-radius: 6px; padding: 2px 8px; font-size: 11px; font-weight: 800; letter-spacing: .04em; }
+.paper .stamp.ok { color: #1b9e6e; } .paper .stamp.warn { color: #c98500; } .paper .stamp.new { color: #2a78d6; }
+.paper mark { background: none; color: inherit; box-shadow: inset 0 -6px 0 rgba(42,120,214,.22); padding: 0 1px; }
+.paper mark.miss { box-shadow: inset 0 -6px 0 rgba(237,161,0,.32); }
+.paper.raw { background: #fbfaf5; }
+.paper.raw .mono { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 11.5px; }
+.paper-img { width: 320px; height: max-content; background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 6px 16px rgba(17,19,24,.12); }
+.paper-img img, .paper-img canvas { width: 100%; display: block; }
+.info-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.info-head .rid { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+.check { display: flex; align-items: center; gap: 10px; font-size: 12.5px; font-weight: 600; padding: 12px 14px; border-radius: 12px; margin-bottom: 20px; }
+.check.ok { background: var(--good-soft); color: var(--good-ink); }
+.check.bad { background: var(--warn-soft); color: var(--warn-ink); }
+.chg-h { display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; margin-bottom: 8px; }
+.chg-h span { color: var(--muted); font-weight: 500; }
+.chg-list { flex: 1; min-height: 0; overflow: auto; margin: 0 -8px; }
+.chg { display: grid; grid-template-columns: 62px minmax(0, 1fr) 12px minmax(0, 1fr); gap: 8px; align-items: center; padding: 8px; border-radius: 8px; font-size: 12px; }
+.chg:hover { background: var(--surface-2); }
+.chg .f { color: var(--muted); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chg .a { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chg .b { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chg .b.miss { color: var(--warn-ink); }
+.chg svg { width: 12px; height: 12px; color: var(--muted); }
+.info-actions { display: flex; gap: 8px; margin-top: 16px; }
+.info-actions .btn { flex: 1; }
+.ai-note { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 12px; background: var(--accent-soft); color: var(--accent-strong); font-size: 12.5px; font-weight: 600; margin-bottom: 20px; line-height: 1.5; }
+
+/* ---------- 정제 현황 ---------- */
 .c-rules { grid-column: span 4; }
 .c-mid { grid-column: span 4; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: var(--gap); min-height: 0; }
 .c-log { grid-column: span 4; }
-.rules { display: flex; flex-direction: column; justify-content: space-between; gap: 0; overflow: auto; height: 100%; margin: 0 -8px; }
-.rule { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 5px 8px; border-radius: 9px; cursor: pointer; border: 0; background: none; text-align: left; width: 100%; }
+.rules { display: flex; flex-direction: column; justify-content: space-between; height: 100%; margin: 0 -8px; overflow: auto; }
+.rule { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 5px 12px; padding: 5px 8px; border-radius: 9px; cursor: pointer; border: 0; background: none; text-align: left; width: 100%; }
 .rule:hover { background: var(--surface-2); }
 .rule.on { background: var(--accent-soft); }
-.rule .rn { font-size: 12.5px; font-weight: 700; white-space: nowrap; }
-.rule .rn span { color: var(--muted); font-weight: 500; font-size: 10.5px; margin-left: 6px; letter-spacing: .02em; }
+.rule .rn { font-size: 12.5px; font-weight: 600; white-space: nowrap; }
 .rule .rv { text-align: right; font-size: 12.5px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .rule .rv span { color: var(--muted); font-weight: 500; }
 .rule .rt { grid-column: 1 / -1; height: 6px; background: var(--surface-3); border-radius: 6px; overflow: hidden; }
 .rule .rt div { height: 100%; background: var(--accent); border-radius: 6px; }
 .rule.missing .rt div { background: var(--warn); }
-.note { font-size: 11px; color: var(--muted); margin-top: 10px; padding: 8px 10px; background: var(--surface-2); border-radius: 8px; }
-.note b { color: var(--ink-2); }
-.schema td, .schema th { padding: 4px 10px; white-space: nowrap; font-size: 11.5px; }
-.schema tr.std td { background: var(--accent-soft); color: var(--accent-strong); font-weight: 700; border-top: 1px solid var(--line-2); }
-.schema tr.std td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
-.flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
-.flow .src { border: 1px solid var(--line); border-radius: 10px; padding: 8px 8px 7px; background: var(--surface-2); min-width: 0; }
-.flow .src b { display: block; font-size: 11.5px; font-weight: 800; }
-.flow .src span { display: block; font-size: 10.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
-.flow .src em { display: block; font-style: normal; font-size: 10.5px; color: var(--ink-2); font-weight: 600; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.flow-arrow { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin: 10px 0; color: var(--muted); font-size: 11px; font-weight: 600; }
-.flow-arrow::before, .flow-arrow::after { content: ""; height: 1px; background: var(--line-2); }
-.flow-out { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: var(--accent-soft); color: var(--accent-strong); font-size: 12px; font-weight: 700; }
-.flow-out span { color: var(--ink-2); font-weight: 600; font-size: 11px; }
-.meters { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 6px; }
-.mrow { display: grid; grid-template-columns: 58px minmax(0, 1fr) 72px; gap: 2px 12px; align-items: center; }
-.mrow .mn { font-size: 12px; font-weight: 700; }
+.schema td, .schema th { padding: 6px 8px; font-size: 12px; }
+.schema th { padding-bottom: 8px; }
+.schema tr.std td { color: var(--accent-strong); font-weight: 700; border-top: 1px solid var(--line-2); }
+.meters { display: flex; flex-direction: column; justify-content: space-around; height: 100%; }
+.mrow { display: grid; grid-template-columns: 60px minmax(0, 1fr) 70px; gap: 14px; align-items: center; }
+.mrow .mn { font-size: 12.5px; font-weight: 600; }
 .mrow .mt { display: flex; gap: 2px; height: 8px; border-radius: 8px; overflow: hidden; background: var(--surface-3); }
 .mrow .mt i { display: block; height: 100%; }
 .mrow .mt .ok { background: var(--accent); }
 .mrow .mt .fill { background: var(--good); }
 .mrow .mt .no { background: var(--warn); }
-.mrow .mv { font-size: 12px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
-.mrow .md { grid-column: 2 / -1; font-size: 10.5px; color: var(--muted); line-height: 1.35; }
-.mini-legend { display: flex; gap: 14px; font-size: 11px; color: var(--muted); margin-top: 10px; }
-.mini-legend span { display: inline-flex; align-items: center; gap: 6px; }
-.mini-legend i { width: 10px; height: 10px; display: block; border-radius: 3px; }
-.mini-legend.v { flex-direction: column; gap: 3px; margin-top: 0; font-size: 10.5px; white-space: nowrap; }
-.mini-legend.v i { width: 8px; height: 8px; }
-.ctrl { display: flex; gap: 8px; margin-bottom: 10px; align-items: center; }
-.ctrl .select select { min-width: 0; width: 150px; }
+.mrow .mv { font-size: 12.5px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.mini-legend { display: flex; gap: 12px; font-size: 11px; color: var(--muted); }
+.mini-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.mini-legend i { width: 8px; height: 8px; display: block; border-radius: 3px; }
+.ctrl { display: flex; gap: 8px; margin-bottom: 12px; align-items: center; }
+.ctrl .select select { width: 138px; min-width: 0; }
 .search { flex: 1; position: relative; min-width: 0; }
-.search input { width: 100%; border: 1px solid var(--line); background: var(--surface-2); border-radius: 9px; padding: 6px 10px 6px 30px; font-size: 12.5px; }
-.search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 13px; height: 13px; stroke: var(--muted); fill: none; stroke-width: 2; stroke-linecap: round; }
-.ctrl .cnt { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.search input { width: 100%; border: 1px solid var(--line); background: var(--surface-2); border-radius: 10px; padding: 7px 10px 7px 32px; font-size: 12.5px; }
+.search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); width: 13px; height: 13px; color: var(--muted); }
+#log td { max-width: 120px; overflow: hidden; text-overflow: ellipsis; }
+#log td.miss { color: var(--warn-ink); font-weight: 700; }
 
-/* 전표 비교 */
-#v-recs { grid-template-rows: minmax(0, 1fr); }
-.c-list { grid-column: span 5; }
-.c-detail { grid-column: span 7; padding: 0; overflow: hidden; }
-.detail { display: grid; grid-template-columns: minmax(0, 1fr) 260px; height: 100%; min-height: 0; }
-.d-main { display: flex; flex-direction: column; gap: 14px; min-height: 0; min-width: 0; overflow: auto; padding: 18px 20px; }
-.d-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-.d-head .rid { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
-.d-main .meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
-.d-main .meta .s { margin-left: auto; font-size: 11.5px; color: var(--muted); white-space: nowrap; }
-.d-head .amt { text-align: right; }
-.d-head .amt .a { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
-.d-head .amt .a small { font-size: 13px; font-weight: 600; color: var(--muted); margin-left: 2px; }
-.d-head .amt .s { font-size: 11.5px; color: var(--muted); margin-top: 6px; }
-.check { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; padding: 9px 12px; border-radius: 10px; }
-.check.ok { background: var(--good-soft); color: var(--good-ink); }
-.check.bad { background: var(--warn-soft); color: var(--warn-ink); }
-.check svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
-.sub-h { font-size: 12px; font-weight: 700; color: var(--ink); margin: 0 0 8px; display: flex; justify-content: space-between; gap: 8px; }
-.sub-h span { font-weight: 500; color: var(--muted); font-size: 11px; }
-.tbl-plain { border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
-.tbl-plain td.sub { color: var(--muted); font-size: 11px; }
-tr.raw-row td { color: var(--ink-2); background: var(--surface-2); }
-tr.raw-row td.k, tr.cl-row td.k { font-size: 11px; font-weight: 700; }
-tr.raw-row td.k { color: var(--muted); }
-.d-prev { background: var(--surface-2); border-left: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; min-height: 0; padding: 18px 16px; }
-.d-prev .ph { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; }
-.d-prev .ph span { font-size: 10.5px; color: var(--muted); font-weight: 500; }
-.d-prev .img { flex: 1; min-height: 0; border-radius: 8px; background: #ffffff; display: grid; place-items: center; overflow: hidden; box-shadow: 0 1px 2px rgba(17,19,24,.06), 0 6px 18px rgba(17,19,24,.10); }
-.d-prev img { max-width: 100%; max-height: 100%; display: block; }
-.btn-primary { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 10px; background: var(--ink); color: var(--surface); font-size: 13px; font-weight: 700; text-decoration: none; }
-.btn-primary:hover { opacity: .9; }
-.btn-primary svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.d-prev .cap { font-size: 10.5px; color: var(--muted); text-align: center; margin-top: -4px; }
+/* ---------- AI 분석 ---------- */
+#v-ai { grid-template-rows: minmax(0, 1fr); }
+.c-ai-l { grid-column: span 5; display: grid; grid-template-rows: minmax(0, 1fr) auto auto; gap: var(--gap); min-height: 0; }
+.c-ai-r { grid-column: span 7; }
+.steps { display: flex; gap: 6px; margin-top: 16px; }
+.steps span { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 0; border-radius: 9px; background: var(--surface-2); font-size: 11.5px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+.steps span b { color: var(--accent); }
+.conn { display: flex; align-items: center; gap: 14px; }
+.conn .lo { width: 40px; height: 40px; border-radius: 11px; background: var(--surface-2); display: grid; place-items: center; flex: none; }
+.conn .lo svg { width: 22px; height: 22px; }
+.conn .tt { font-size: 14px; font-weight: 700; }
+.conn .ss { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.conn .tag { margin-left: auto; }
+.conn + .field { margin-top: 16px; }
+.feed { display: flex; flex-direction: column; gap: 12px; overflow: auto; height: 100%; }
+.res { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 18px; align-items: center; padding: 16px 18px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; }
+.res:hover { border-color: var(--line-2); background: var(--surface-2); }
+.res .mini { width: 52px; height: 60px; border-radius: 6px; background: var(--paper); box-shadow: 0 2px 6px rgba(17,19,24,.14); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #1a1a1a; }
+.res .mini b { font-size: 11px; font-weight: 800; }
+.res .mini i { display: block; width: 30px; height: 2px; background: #d9d7cf; }
+.res .rt { display: flex; align-items: baseline; gap: 8px; font-size: 14px; font-weight: 700; }
+.res .rt small { font-size: 11.5px; color: var(--muted); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.res .rc { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.res .rm { margin-top: 8px; font-size: 12.5px; color: var(--ink-2); display: flex; gap: 8px; align-items: center; }
+.res .rm svg { color: var(--accent); }
+.res .ra { text-align: right; font-size: 18px; font-weight: 800; letter-spacing: -0.02em; white-space: nowrap; }
+.res .ra small { font-size: 12px; color: var(--muted); font-weight: 600; margin-left: 2px; }
+.res.err { cursor: default; }
+.res.err .mini { background: var(--bad-soft); }
+.feed-empty { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: var(--muted); text-align: center; }
+.feed-empty .ic { width: 56px; height: 56px; border-radius: 16px; background: var(--surface-2); display: grid; place-items: center; }
+.feed-empty .ic svg { width: 24px; height: 24px; }
 
-/* ---------- 좁은 화면: 한 열 ---------- */
+/* 모달 · 토스트 */
+#modal { position: fixed; inset: 0; z-index: 30; background: rgba(10,12,16,.45); display: grid; place-items: center; }
+#modal .box { width: min(440px, calc(100vw - 32px)); background: var(--surface); color: var(--ink); border-radius: 18px; padding: 28px; box-shadow: var(--shadow-pop); font-family: var(--font); }
+#modal h3 { margin: 0 0 18px; font-size: 18px; font-weight: 800; }
+#modal ol { margin: 0; padding: 0; list-style: none; counter-reset: s; display: flex; flex-direction: column; gap: 12px; }
+#modal li { display: grid; grid-template-columns: 26px 1fr; gap: 12px; align-items: center; font-size: 13px; color: var(--ink-2); }
+#modal li::before { counter-increment: s; content: counter(s); width: 26px; height: 26px; border-radius: 8px; background: var(--accent-soft); color: var(--accent-strong); font-weight: 800; font-size: 12px; display: grid; place-items: center; }
+#modal li b { color: var(--ink); }
+#modal .ft { display: flex; justify-content: flex-end; margin-top: 24px; }
+#toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 40; background: var(--ink); color: var(--surface); padding: 11px 18px; border-radius: 12px; font-family: var(--font); font-size: 13px; font-weight: 600; box-shadow: var(--shadow-pop); }
+
+/* ---------- 좁은 화면 ---------- */
 html.fluid #viewport { width: auto !important; height: auto !important; overflow: visible; }
-html.fluid #stage { position: static; transform: none !important; width: auto; height: auto; padding: 16px; grid-template-columns: 1fr; }
+html.fluid #stage { position: static; transform: none !important; width: auto; height: auto; padding: 16px; grid-template-columns: 1fr; gap: 16px; }
 html.fluid .side { gap: 14px; }
-html.fluid .side .grow, html.fluid .ds { display: none; }
+html.fluid .side .grow, html.fluid .sync { display: none; }
 html.fluid .nav { flex-direction: row; flex-wrap: wrap; }
-html.fluid .nav button { flex: 1; grid-template-columns: 18px auto; justify-content: center; }
-html.fluid .nav .ct { display: none; }
-html.fluid .nav button[aria-selected="true"]::before { display: none; }
-html.fluid .main { grid-template-rows: auto; }
+html.fluid .nav button { flex: 1 1 30%; grid-template-columns: 18px auto; justify-content: center; }
+html.fluid .nav .ct, html.fluid .nav button[aria-selected="true"]::before { display: none; }
+html.fluid .main, html.fluid .main.nofilter { grid-template-rows: auto; }
 html.fluid .head { flex-direction: column; align-items: flex-start; }
 html.fluid .head-r { flex-wrap: wrap; }
-html.fluid .filters { flex-wrap: wrap; padding: 10px; }
+html.fluid .filters { flex-wrap: wrap; height: auto; padding: 12px; }
 html.fluid .filters .spacer, html.fluid .vsep { display: none; }
-html.fluid .basis { text-align: left; white-space: normal; width: 100%; }
+html.fluid .basis { white-space: normal; width: 100%; }
 html.fluid .view { grid-template-columns: 1fr; grid-template-rows: none !important; }
-html.fluid .view > * { grid-column: 1 / -1 !important; }
-html.fluid .kpis, html.fluid .kpis.five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-html.fluid .kpi.hero { grid-column: 1 / -1; }
+html.fluid .view > *, html.fluid .find { grid-column: 1 / -1 !important; }
+html.fluid .hero { grid-template-columns: 1fr; padding: 24px; gap: 20px; }
+html.fluid .hero h2 { font-size: 24px; }
+html.fluid .hero-stats > div { padding: 0 14px; }
+html.fluid .hero-stats .v { font-size: 20px; }
+html.fluid .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 html.fluid .kpi .kv { font-size: 24px; }
-html.fluid .kpi.hero .kv { font-size: 32px; }
-html.fluid .c-daily .cb, html.fluid .c-hour .cb { height: 220px; flex: none; }
+html.fluid .c-trend .cb, html.fluid .c-daily .cb, html.fluid .c-hour .cb { height: 220px; flex: none; }
+html.fluid .drop { min-height: 200px; }
 html.fluid .tbl-wrap { max-height: 420px; }
-html.fluid .c-mid { grid-template-rows: auto; }
-html.fluid .detail { grid-template-columns: 1fr; }
-html.fluid .d-prev { border-left: 0; border-top: 1px solid var(--line); }
-html.fluid .d-prev .img { height: 420px; flex: none; }
-html.fluid .rules { max-height: 460px; }
-html.fluid .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+html.fluid .c-mid, html.fluid .c-ai-l { grid-template-rows: auto; }
+html.fluid .feed { max-height: 520px; }
+html.fluid .chg-list, html.fluid .rules { max-height: 420px; }
+html.fluid .paper-wrap { max-height: 640px; }
+html.fluid .paper, html.fluid .paper-img { width: min(320px, 100%); }
 @media (prefers-reduced-motion: no-preference) {
-  .fill, .rule .rt div, .mrow .mt i { transition: width .3s cubic-bezier(.2, .7, .2, 1); }
+  .fill, .rule .rt div, .mrow .mt i { transition: width .3s cubic-bezier(.2,.7,.2,1); }
 }
 </style>
 
@@ -437,62 +466,43 @@ html.fluid .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   <aside class="side">
     <div class="brand">
       <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3.5c0 1 1 1.5 1 2.5M12 3.5c0 1 1 1.5 1 2.5"/></svg></div>
-      <div><div class="bt">ONDAM</div><div class="bs">카페 온담 매출 리포트</div></div>
+      <div><div class="bt">ONDAM</div><div class="bs">매출 리포트</div></div>
     </div>
-
-    <div class="nav-h">WORKSPACE</div>
     <nav class="nav" role="tablist" aria-label="화면 전환">
-      <button role="tab" id="tab-sales" aria-selected="true" data-view="sales"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>매출 분석</span><span class="ct">KPI</span></button>
-      <button role="tab" id="tab-clean" aria-selected="false" data-view="clean"><svg viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><span>정제 현황</span><span class="ct num" id="ct-log"></span></button>
-      <button role="tab" id="tab-recs" aria-selected="false" data-view="recs"><svg viewBox="0 0 24 24"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg><span>전표·원본 비교</span><span class="ct num" id="ct-rec"></span></button>
+      <button role="tab" aria-selected="true" data-view="home"><svg class="i" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>요약</span><span></span></button>
+      <button role="tab" aria-selected="false" data-view="sales"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>매출 분석</span><span></span></button>
+      <button role="tab" aria-selected="false" data-view="recs"><svg class="i" viewBox="0 0 24 24"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg><span>전표 조회</span><span class="ct num" id="ct-rec"></span></button>
+      <button role="tab" aria-selected="false" data-view="clean"><svg class="i" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><span>정제 현황</span><span></span></button>
+      <button role="tab" aria-selected="false" data-view="ai"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/></svg><span>AI 분석</span><span class="ct num" id="ct-ai" hidden></span></button>
     </nav>
-
-    <div class="ds">
-      <div class="ds-h"><span>DATASET</span><span class="pass" title="전표 합계 = 상품 행 합계 = 원본 결제금액">검증 PASS</span></div>
-      <dl>
-        <dt>기간</dt><dd>2026.09.01–09.30</dd>
-        <dt>전표</dt><dd id="ds-rec"></dd>
-        <dt>상품 행</dt><dd id="ds-line"></dd>
-        <dt>원본 형식</dt><dd id="ds-prof"></dd>
-        <dt>상품 마스터</dt><dd id="ds-prod"></dd>
-        <dt>시간대</dt><dd>KST (UTC+9)</dd>
-      </dl>
-    </div>
-
-    <div class="notice"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg><span>과제용 <b>가상 데이터</b>입니다. 실제 매장의 매출이 아닙니다.</span></div>
-
     <div class="grow"></div>
-
+    <div class="sync">
+      <div class="sync-row"><span class="dot" id="sd-drive"></span><span>Google Drive</span><span id="ss-drive">미연결</span></div>
+      <div class="sync-row"><span class="dot on"></span><span>AI 분석</span><span id="ss-ai">규칙</span></div>
+    </div>
+    <div class="notice"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg><span>과제용 가상 데이터</span></div>
     <div class="me">
       <div class="avatar" aria-hidden="true">민</div>
-      <div style="min-width:0">
-        <div class="nm">민승환</div>
-        <div class="id">학번 <b>2021308</b></div>
-        <div class="role">작성자 · 디자인</div>
-      </div>
-      <button class="theme-btn" id="theme" type="button" aria-label="밝은/어두운 화면 전환" title="밝은/어두운 화면 전환"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+      <div style="min-width:0"><div class="nm">민승환</div><div class="id">학번 <b>2021308</b></div></div>
     </div>
   </aside>
 
   <!-- ===== 메인 ===== -->
-  <div class="main">
+  <div class="main nofilter" id="main">
     <header class="head">
       <div>
-        <div class="crumb"><span>카페 온담</span><i></i><span>2026년 9월</span><i></i><span id="crumb-view">매출 분석</span></div>
-        <h1 id="page-title">9월 매출 분석</h1>
+        <div class="crumb"><span>카페 온담</span><i></i><span id="crumb-period"></span></div>
+        <h1 id="page-title">한눈에 보는 9월</h1>
       </div>
-      <div class="head-r">
-        <span class="chip"><span class="dot"></span>원본&nbsp;<b>100건</b>&nbsp;→ 정제&nbsp;<b>100건</b></span>
-        <span class="chip">기준일 <b>2026-09-30</b> <span style="color:var(--muted);font-weight:500">데이터 마지막 날짜</span></span>
-      </div>
+      <div class="head-r"><div class="head-r" id="head-r"></div><button class="theme-btn" id="theme" type="button" aria-label="밝은/어두운 화면 전환" title="밝은/어두운 화면"><svg class="i" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button></div>
     </header>
 
     <div class="filters" id="filters">
       <div class="seg" role="group" aria-label="기간" id="f-period">
-        <button type="button" data-p="all" aria-pressed="true">전체 30일</button>
-        <button type="button" data-p="last14" aria-pressed="false">최근 14일</button>
-        <button type="button" data-p="last7" aria-pressed="false">최근 7일</button>
-        <button type="button" data-p="custom" aria-pressed="false">직접 지정</button>
+        <button type="button" data-p="all" aria-pressed="true">전체</button>
+        <button type="button" data-p="last14" aria-pressed="false">14일</button>
+        <button type="button" data-p="last7" aria-pressed="false">7일</button>
+        <button type="button" data-p="custom" aria-pressed="false">직접</button>
       </div>
       <div id="f-custom" hidden style="display:flex;gap:6px;align-items:center">
         <input id="f-start" type="date" aria-label="시작일"><span style="color:var(--muted)">–</span><input id="f-end" type="date" aria-label="종료일">
@@ -501,88 +511,144 @@ html.fluid .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       <label class="select"><span class="lb">카테고리</span><select id="f-cat"></select></label>
       <label class="select"><span class="lb">상품</span><select id="f-prod"></select></label>
       <label class="select"><span class="lb">결제</span><select id="f-pay"></select></label>
-      <button class="btn-ghost" id="f-reset" type="button"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>초기화</button>
+      <button class="btn-ghost" id="f-reset" type="button"><svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>초기화</button>
       <div class="spacer"></div>
       <div class="basis" id="basis"></div>
     </div>
 
     <main style="min-height:0; display:grid;">
-      <!-- 매출 분석 -->
-      <section class="view" id="v-sales" role="tabpanel" aria-labelledby="tab-sales">
-        <div class="kpis" id="kpi-sales"></div>
-        <div class="card c-daily">
-          <div class="ch">
-            <div><h2>일자별 매출 추이</h2><p id="daily-cap"></p></div>
-            <div class="legend-inline"><span><i style="background:var(--accent)"></i>일 매출</span><span><i class="line"></i>거래일 평균</span><span><i style="background:var(--surface-3);border:1px solid var(--line)"></i>주말</span></div>
+      <!-- 요약 -->
+      <section class="view" id="v-home" role="tabpanel">
+        <div class="hero" id="hero"></div>
+        <div id="finds" style="display:contents"></div>
+        <div class="card c-trend">
+          <div class="ch"><h2>일별 매출</h2><div class="legend-inline"><span><i style="background:var(--accent)"></i>매출</span><span id="trend-up-lg" hidden><i style="background:var(--good)"></i>신규 분석</span></div></div>
+          <div class="cb" id="ch-trend"></div>
+        </div>
+        <div class="card c-drop">
+          <div class="ch"><h2>전표 올리기</h2><span class="tag blue">AI 자동 분석</span></div>
+          <label class="drop" id="drop-home" tabindex="0">
+            <input type="file" accept=".pdf,.json,application/pdf,application/json" multiple hidden>
+            <span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></span>
+            <span class="t">PDF 전표를 끌어 놓기</span>
+            <span class="s">읽기 · 정제 · 분석 자동</span>
+          </label>
+          <div class="links">
+            <button class="pill" type="button" data-go="ai"><span class="dot" id="hd-drive"></span>Google Drive<span id="hs-drive">연결</span></button>
+            <button class="pill" type="button" id="btn-sample-home"><svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M6 4l13 8-13 8z"/></svg>샘플 3장<span>체험</span></button>
           </div>
-          <div class="cb" id="ch-daily"></div>
-        </div>
-        <div class="card c-ins">
-          <div class="ch" style="align-items:center"><h2>분석 노트 <span style="font-size:11.5px;font-weight:500;color:var(--muted);margin-left:6px">현재 필터의 계산 결과로 자동 작성</span></h2><span class="tag blue" id="ins-scope">전체</span></div>
-          <div class="cb"><ul class="ins" id="insights"></ul></div>
-        </div>
-        <div class="card c-top">
-          <div class="ch"><div><h2>상품 매출 TOP 5</h2><p id="top-cap"></p></div></div>
-          <div class="cb" id="ch-top"></div>
-        </div>
-        <div class="card c-cat">
-          <div class="ch"><div><h2>카테고리별 매출</h2><p id="cat-cap"></p></div></div>
-          <div class="cb" id="ch-cat"></div>
-        </div>
-        <div class="card c-pay">
-          <div class="ch"><div><h2>결제수단 사용률</h2><p id="pay-cap"></p></div></div>
-          <div class="cb" id="ch-pay"></div>
-        </div>
-        <div class="card c-hour">
-          <div class="ch"><div><h2>시간대별 매출</h2><p id="hour-cap"></p></div></div>
-          <div class="cb" id="ch-hour"></div>
         </div>
       </section>
 
+      <!-- 매출 분석 -->
+      <section class="view" id="v-sales" role="tabpanel" hidden>
+        <div class="kpis" id="kpi-sales"></div>
+        <div class="card c-daily">
+          <div class="ch"><h2>일자별 매출</h2><div class="legend-inline"><span><i style="background:var(--accent)"></i>매출</span><span><i style="background:var(--surface-3)"></i>주말</span></div></div>
+          <div class="cb" id="ch-daily"></div>
+        </div>
+        <div class="card c-hour">
+          <div class="ch"><h2>시간대별 매출</h2><span class="sub" id="hour-cap"></span></div>
+          <div class="cb" id="ch-hour"></div>
+        </div>
+        <div class="card c-top">
+          <div class="ch"><h2>상품 TOP 5</h2><span class="sub" id="top-cap"></span></div>
+          <div class="cb" id="ch-top"></div>
+        </div>
+        <div class="card c-cat">
+          <div class="ch"><h2>카테고리</h2><span class="sub">매출 · 비중</span></div>
+          <div class="cb" id="ch-cat"></div>
+        </div>
+        <div class="card c-pay">
+          <div class="ch"><h2>결제수단</h2><span class="sub" id="pay-cap"></span></div>
+          <div class="cb" id="ch-pay"></div>
+        </div>
+      </section>
+
+      <!-- 전표 조회 -->
+      <section class="view" id="v-recs" role="tabpanel" hidden>
+        <div class="card c-list">
+          <div class="ch">
+            <h2>전표 <span class="num" id="list-n" style="color:var(--muted);font-weight:600;margin-left:4px"></span></h2>
+            <div class="seg" role="group" aria-label="전표 상태">
+              <button type="button" id="ls-all" aria-pressed="true">전체</button>
+              <button type="button" id="ls-issue" aria-pressed="false">미확인</button>
+              <button type="button" id="ls-new" aria-pressed="false">신규</button>
+            </div>
+          </div>
+          <div class="cb"><div class="tbl-wrap" id="list"></div></div>
+        </div>
+        <div class="card c-paper">
+          <div class="seg" role="group" aria-label="보기">
+            <button type="button" data-pv="clean" aria-pressed="true">정제</button>
+            <button type="button" data-pv="raw" aria-pressed="false">원문</button>
+            <button type="button" data-pv="pdf" aria-pressed="false">PDF</button>
+          </div>
+          <div class="paper-wrap" id="paper"></div>
+        </div>
+        <div class="card c-info" id="info"></div>
+      </section>
+
       <!-- 정제 현황 -->
-      <section class="view" id="v-clean" role="tabpanel" aria-labelledby="tab-clean" hidden>
-        <div class="kpis five" id="kpi-clean"></div>
+      <section class="view" id="v-clean" role="tabpanel" hidden>
+        <div class="kpis" id="kpi-clean"></div>
         <div class="card c-rules">
-          <div class="ch"><div><h2>규칙별 변환 기록</h2><p>값이 바뀐 칸 수 · 영향 전표 수 · 누르면 오른쪽 이력이 걸러집니다</p></div></div>
+          <div class="ch"><h2>규칙별 변환</h2><span class="sub">칸 · 전표</span></div>
           <div class="cb"><div class="rules" id="rules"></div></div>
-          <div class="note">한 전표에 여러 규칙이 겹치므로 규칙별 건수를 <b>더해서 전표 수로 쓰지 않습니다</b>.</div>
         </div>
         <div class="c-mid">
           <div class="card">
-            <div class="ch"><div><h2>원본 형식 5종 → 표준 스키마</h2><p>같은 의미의 항목을 형식마다 다른 이름·표기로 기록 · 마지막 행이 정제 결과</p></div></div>
-            <div class="tbl-plain schema" id="flow"></div>
+            <div class="ch"><h2>원본 형식 → 표준</h2><span class="sub" id="prof-cap"></span></div>
+            <div id="flow"></div>
           </div>
           <div class="card">
-            <div class="ch"><div><h2>항목별 완전성</h2><p>정제 완료 ≠ 정보 완전 · 결측은 추정하지 않고 보존</p></div>
-              <div class="mini-legend v"><span><i style="background:var(--accent)"></i>원본 기재</span><span><i style="background:var(--good)"></i>근거 보완</span><span><i style="background:var(--warn)"></i>미기재</span></div></div>
+            <div class="ch"><h2>항목별 완전성</h2><div class="mini-legend"><span><i style="background:var(--accent)"></i>원본</span><span><i style="background:var(--good)"></i>보완</span><span><i style="background:var(--warn)"></i>미기재</span></div></div>
             <div class="cb"><div class="meters" id="meters"></div></div>
           </div>
         </div>
         <div class="card c-log">
-          <div class="ch"><div><h2>변환 이력</h2><p>cleaning_log 원문 → 정제 값 · 행을 누르면 해당 전표로 이동</p></div></div>
+          <div class="ch"><h2>변환 이력</h2><span class="sub num" id="log-cnt"></span></div>
           <div class="ctrl">
             <label class="select"><select id="log-rule" aria-label="규칙 선택"></select></label>
-            <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="log-q" type="search" placeholder="전표번호·값 검색" aria-label="이력 검색"></div>
-            <span class="cnt num" id="log-cnt"></span>
+            <div class="search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="log-q" type="search" placeholder="전표·값 검색" aria-label="이력 검색"></div>
           </div>
           <div class="cb"><div class="tbl-wrap" id="log"></div></div>
         </div>
       </section>
 
-      <!-- 전표·원본 비교 -->
-      <section class="view" id="v-recs" role="tabpanel" aria-labelledby="tab-recs" hidden>
-        <div class="card c-list">
-          <div class="ch">
-            <div><h2>전표 목록</h2><p id="list-cap"></p></div>
-            <div class="seg" role="group" aria-label="전표 상태">
-              <button type="button" id="ls-all" aria-pressed="true">전체</button>
-              <button type="button" id="ls-issue" aria-pressed="false">미확인 정보</button>
-            </div>
+      <!-- AI 분석 -->
+      <section class="view" id="v-ai" role="tabpanel" hidden>
+        <div class="c-ai-l">
+          <div class="card">
+            <div class="ch"><h2>전표 올리기</h2><button class="btn-ghost" type="button" id="btn-sample"><svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M6 4l13 8-13 8z"/></svg>샘플 3장 분석</button></div>
+            <label class="drop" id="drop-ai" tabindex="0">
+              <input type="file" accept=".pdf,.json,application/pdf,application/json" multiple hidden>
+              <span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></span>
+              <span class="t">PDF · JSON 전표</span>
+              <span class="s">끌어 놓거나 눌러서 선택</span>
+            </label>
+            <div class="steps"><span><b>1</b>읽기</span><span><b>2</b>형식 인식</span><span><b>3</b>정제·검산</span><span><b>4</b>AI 코멘트</span></div>
           </div>
-          <div class="cb"><div class="tbl-wrap" id="list"></div></div>
+          <div class="card">
+            <div class="conn">
+              <span class="lo"><svg viewBox="0 0 24 24"><path d="M8.2 3h7.6l6.2 10.8-3.8 6.6-6.3-11z" fill="#ffba00"/><path d="M2 13.8L8.2 3l3.8 6.6-6.2 10.8z" fill="#0f9d58"/><path d="M5.8 20.4L9.6 13.8H22l-3.8 6.6z" fill="#4285f4"/></svg></span>
+              <div style="min-width:0"><div class="tt">Google Drive</div><div class="ss" id="drive-ss">‘매출전표’ 폴더에 올리면 자동 분석</div></div>
+              <span class="tag plain" id="drive-tag">미연결</span>
+            </div>
+            <div class="field"><input id="drive-url" type="url" placeholder="Apps Script 웹 앱 URL" autocomplete="off"><button class="btn dark" id="drive-btn" type="button">연결</button><button class="btn" id="drive-help" type="button" aria-label="설정 방법">?</button></div>
+          </div>
+          <div class="card">
+            <div class="conn">
+              <span class="lo"><svg viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></svg></span>
+              <div style="min-width:0"><div class="tt">Claude AI</div><div class="ss" id="ai-ss">키 없음 · 규칙 기반 코멘트</div></div>
+              <span class="tag plain" id="ai-tag">선택</span>
+            </div>
+            <div class="field"><input id="ai-key" type="password" placeholder="Anthropic API 키 · 이 브라우저에만 저장" autocomplete="off"><button class="btn dark" id="ai-btn" type="button">저장</button></div>
+          </div>
         </div>
-        <div class="card c-detail">
-          <div class="detail" id="detail"></div>
+        <div class="card c-ai-r">
+          <div class="ch"><h2>분석 결과</h2><div style="display:flex;gap:8px;align-items:center"><span class="sub" id="feed-cap"></span><button class="btn-ghost" id="btn-clear" type="button">비우기</button></div></div>
+          <div class="cb"><div class="feed" id="feed"></div></div>
         </div>
       </section>
     </main>
@@ -591,16 +657,31 @@ html.fluid .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 </div>
 </div>
 <div id="tip" hidden></div>
+<div id="toast" hidden role="status"></div>
+<div id="modal" hidden><div class="box" role="dialog" aria-modal="true" aria-labelledby="m-h">
+  <h3 id="m-h">Google Drive 연결</h3>
+  <ol>
+    <li><span>Drive에 <b>매출전표</b> 폴더를 만들고 PDF 올리기</span></li>
+    <li><span><b>script.google.com</b> → 새 프로젝트 → <b>drive/Code.gs</b> 붙여넣기</span></li>
+    <li><span>배포 → <b>웹 앱</b> · 액세스 <b>모든 사용자</b></span></li>
+    <li><span>웹 앱 URL을 붙여넣고 <b>연결</b></span></li>
+  </ol>
+  <div class="ft"><button class="btn dark" type="button" id="m-close">확인</button></div>
+</div></div>
 
+<script type="text/plain" id="pdfjs-src">/*__PDFJS__*/</script>
+<script type="text/plain" id="pdfjs-worker-src">/*__PDFJS_WORKER__*/</script>
 <script>
 const D = /*__DATA__*/;
+const SAMPLES = /*__SAMPLES__*/;
 
-/* ---------- 기본 도구 ---------- */
+/* ============ 도구 ============ */
 const $ = s => document.querySelector(s);
 const fmt = n => Math.round(n).toLocaleString('ko-KR');
 const won = n => fmt(n) + '원';
 const pct = (a, b) => b ? (a / b * 100) : 0;
 const pct1 = (a, b) => pct(a, b).toFixed(1) + '%';
+const pct0 = (a, b) => Math.round(pct(a, b)) + '%';
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const sum = (arr, f) => arr.reduce((s, x) => s + f(x), 0);
 const WD = ['일', '월', '화', '수', '목', '금', '토'];
@@ -608,6 +689,7 @@ const dow = d => new Date(d + 'T00:00:00Z').getUTCDay();
 const wd = d => WD[dow(d)];
 const md = d => `${+d.slice(5, 7)}월 ${+d.slice(8, 10)}일`;
 const mdShort = d => `${d.slice(5, 7)}.${d.slice(8, 10)}`;
+const manwon = v => v === 0 ? '0' : (v >= 10000 ? (v / 10000).toLocaleString('ko-KR', { maximumFractionDigits: 1 }) + '만' : fmt(v));
 function addDays(d, n) { const t = new Date(d + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); }
 function daysBetween(a, b) { const out = []; for (let d = a; d <= b; d = addDays(d, 1)) out.push(d); return out; }
 function niceMax(v, ticks = 4) {
@@ -616,72 +698,75 @@ function niceMax(v, ticks = 4) {
   const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => s >= raw);
   return { max: step * Math.ceil(v / step), step };
 }
-const manwon = v => v === 0 ? '0' : (v >= 10000 ? (v / 10000).toLocaleString('ko-KR', { maximumFractionDigits: 1 }) + '만' : fmt(v));
-/* 위쪽 모서리만 둥근 막대 (바닥은 직각) */
-function colPath(x, y, w, h, r = 4) {
-  r = Math.min(r, w / 2, h);
-  return `M${x},${y + h}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h}Z`;
-}
+function colPath(x, y, w, h, r = 4) { if (h <= 0) return ''; r = Math.min(r, w / 2, h); return `M${x},${y + h}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h}Z`; }
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } },
+};
+const I = p => `<svg class="i" viewBox="0 0 24 24">${p}</svg>`;
 const ICON = {
-  won: '<svg viewBox="0 0 24 24"><path d="M3 7l3 10 3-8 3 8 3-8 3 8 3-10M3 11h18"/></svg>',
-  rec: '<svg viewBox="0 0 24 24"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>',
-  avg: '<svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>',
-  box: '<svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>',
-  shield: '<svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>',
-  layers: '<svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>',
-  alert: '<svg viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v4M12 17.5v.01"/></svg>',
-  swap: '<svg viewBox="0 0 24 24"><path d="M7 4L3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></svg>',
-  eq: '<svg viewBox="0 0 24 24"><path d="M5 9h14M5 15h14"/></svg>',
-  check: '<svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>',
-  ext: '<svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v6H4V6h6"/></svg>',
+  clock: I('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+  cup: I('<path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/>'),
+  card: I('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/>'),
+  cal: I('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'),
+  check: I('<path d="M5 12l5 5L20 7"/>'),
+  alert: I('<path d="M12 3l10 18H2z"/><path d="M12 10v4M12 17.5v.01"/>'),
+  arrow: I('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+  ext: I('<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v6H4V6h6"/>'),
+  spark: I('<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/>'),
+  doc: I('<path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/>'),
 };
 
-/* ---------- 데이터 연결 ---------- */
-const receipts = D.receipts, lines = D.lines;
-const recById = new Map(receipts.map(r => [r.receipt_id, r]));
-const linesByRec = new Map();
-lines.forEach(l => { if (!linesByRec.has(l.receipt_id)) linesByRec.set(l.receipt_id, []); linesByRec.get(l.receipt_id).push(l); });
+/* ============ 데이터 ============ */
+const BASE = { receipts: D.receipts, lines: D.lines, raw: D.raw, log: D.log };
 const profById = new Map(D.profiles.map(p => [p.profile_id, p]));
-const rawById = new Map(D.raw.map(x => [x.data[profById.get(x.profile_id).fields.receipt_id], x]));
-const logByRec = new Map();
-D.log.forEach(e => { if (!logByRec.has(e.receipt_id)) logByRec.set(e.receipt_id, []); logByRec.get(e.receipt_id).push(e); });
 const prodById = new Map(D.products.map(p => [p.product_id, p]));
 const CATS = ['커피', '음료', '차', '베이커리', '디저트', '식사'];
 const PAYS = ['카드', '간편결제', '현금', '미확인'];
 const PAY_COLOR = { '카드': 'var(--s-card)', '간편결제': 'var(--s-easy)', '현금': 'var(--s-cash)', '미확인': 'url(#hatch)' };
-const FIRST = receipts.reduce((m, r) => r.date < m ? r.date : m, receipts[0].date);
-const LAST = receipts.reduce((m, r) => r.date > m ? r.date : m, receipts[0].date);
-const HOURS = (() => { const hs = receipts.filter(r => r.time).map(r => +r.time.slice(0, 2)); const out = []; for (let h = Math.min(...hs); h <= Math.max(...hs); h++) out.push(h); return out; })();
 const RULE = Object.fromEntries(D.rules.map(r => [r.rule_id, r]));
 const RULE_KO = { DATE: '날짜 형식 통일', TIME: '시간 24시간제', STORE: '매장명 별칭', PRODUCT: '상품명 표준화', CATEGORY: '카테고리 표준화', CATEGORY_FILL: '카테고리 빈칸 보완', PAYMENT: '결제수단 별칭', MONEY: '금액 표기 정리', QUANTITY: '수량 표기 정리', MISSING_TIME: '시간 미기재 보존', MISSING_PAYMENT: '결제수단 미확인' };
-const FIELD_KO = { receipt_id: '전표번호', date: '거래일', time: '거래시간', store: '매장', payment_method: '결제수단', receipt_amount: '결제금액', product_name: '상품명', category: '카테고리', quantity: '수량', unit_price: '단가', discount: '할인', line_amount: '상품금액' };
+const FIELD_KO = { receipt_id: '전표번호', date: '거래일', time: '시간', store: '매장', payment_method: '결제', receipt_amount: '결제금액', product_name: '상품명', category: '카테고리', quantity: '수량', unit_price: '단가', discount: '할인', line_amount: '금액' };
 const hasIssue = r => !!r.issue_codes;
+
+/* 업로드·Drive 로 들어온 신규 전표 (이 브라우저에 저장) */
+let UP = store.get('ondam-uploads', []);
+let receipts, lines, LOG, recById, linesByRec, rawById, logByRec, upById, FIRST, LAST, HOURS, RULE_COUNTS;
+function rebuild() {
+  receipts = BASE.receipts.concat(UP.map(u => u.receipt));
+  lines = BASE.lines.concat(...UP.map(u => u.lines));
+  LOG = BASE.log.concat(...UP.map(u => u.log));
+  recById = new Map(receipts.map(r => [r.receipt_id, r]));
+  linesByRec = new Map(); lines.forEach(l => { if (!linesByRec.has(l.receipt_id)) linesByRec.set(l.receipt_id, []); linesByRec.get(l.receipt_id).push(l); });
+  rawById = new Map(BASE.raw.map(x => [x.data[profById.get(x.profile_id).fields.receipt_id], x]));
+  UP.forEach(u => rawById.set(u.receipt.receipt_id, u.raw));
+  logByRec = new Map(); LOG.forEach(e => { if (!logByRec.has(e.receipt_id)) logByRec.set(e.receipt_id, []); logByRec.get(e.receipt_id).push(e); });
+  upById = new Map(UP.map(u => [u.receipt.receipt_id, u]));
+  FIRST = receipts.reduce((m, r) => r.date < m ? r.date : m, receipts[0].date);
+  LAST = receipts.reduce((m, r) => r.date > m ? r.date : m, receipts[0].date);
+  const hs = receipts.filter(r => r.time).map(r => +r.time.slice(0, 2)); HOURS = []; for (let h = Math.min(...hs); h <= Math.max(...hs); h++) HOURS.push(h);
+  RULE_COUNTS = {};
+  LOG.forEach(e => { const o = RULE_COUNTS[e.rule_id] || (RULE_COUNTS[e.rule_id] = { n: 0, rec: new Set() }); o.n++; o.rec.add(e.receipt_id); });
+  $('#ct-rec').textContent = receipts.length;
+  $('#ct-ai').hidden = !UP.length; $('#ct-ai').textContent = UP.length; $('#ct-ai').classList.toggle('live', !!UP.length);
+}
 const rawTotal = rid => { const x = rawById.get(rid); const k = profById.get(x.profile_id).fields; return Number(String(x.data[k.total]).replace(/[^\d-]/g, '')); };
+const isNew = rid => upById.has(rid);
 
-/* 초기 검증 (인계 문서 기준값) */
+/* 인계 기준값 검증 (기본 100건) */
 (function verify() {
-  const a = sum(receipts, r => r.receipt_amount), b = sum(lines, l => l.line_amount);
-  const ok = receipts.length === 100 && lines.length === 220 && a === 1348600 && b === 1348600 && Math.round(a / receipts.length) === 13486;
-  if (!ok) { console.warn('검증 기준값과 다릅니다', { receipts: receipts.length, lines: lines.length, a, b }); document.querySelector('.pass').textContent = '검증 확인 필요'; }
+  const a = sum(BASE.receipts, r => r.receipt_amount), b = sum(BASE.lines, l => l.line_amount);
+  if (!(BASE.receipts.length === 100 && BASE.lines.length === 220 && a === 1348600 && b === 1348600 && Math.round(a / 100) === 13486)) console.warn('검증 기준값과 다릅니다', { a, b });
 })();
-$('#ds-rec').textContent = `${receipts.length}건`;
-$('#ds-line').textContent = `${lines.length}행`;
-$('#ds-prof').textContent = `${D.profiles.length}종 (POS A–E)`;
-$('#ds-prod').textContent = `${D.products.length}종`;
-$('#ct-rec').textContent = receipts.length;
-$('#ct-log').textContent = fmt(D.log.length);
 
-/* ---------- 상태 ---------- */
-const st = { view: 'sales', period: 'all', start: FIRST, end: LAST, cat: '', prod: '', pay: '', sel: null, issuesOnly: false, logRule: '', logQ: '' };
-
+/* ============ 상태 ============ */
+const st = { view: 'home', period: 'all', start: '', end: '', cat: '', prod: '', pay: '', sel: null, list: 'all', pv: 'clean', logRule: '', logQ: '' };
 function range() {
   if (st.period === 'last7') return [addDays(LAST, -6), LAST];
   if (st.period === 'last14') return [addDays(LAST, -13), LAST];
   if (st.period === 'custom') { let a = st.start || FIRST, b = st.end || LAST; if (a > b) [a, b] = [b, a]; return [a, b]; }
   return [FIRST, LAST];
 }
-
-/* 필터 계산. ignore에 넣은 차원은 무시(해당 차트가 자기 차원을 강조 표시로 보여줄 때 사용) */
 function compute(ignore = {}) {
   const [s, e] = range();
   const pay = ignore.pay ? '' : st.pay, cat = ignore.cat ? '' : st.cat, prod = ignore.prod ? '' : st.prod;
@@ -697,534 +782,675 @@ function compute(ignore = {}) {
   return { s, e, rs, ls, amt, itemFilter, revenue, tx: rs.length };
 }
 
-/* ---------- 필터 UI ---------- */
+/* ============ 필터 ============ */
 function fillSelect(el, opts, val) { el.innerHTML = opts.map(([v, t]) => `<option value="${esc(v)}"${v === val ? ' selected' : ''}>${esc(t)}</option>`).join(''); el.classList.toggle('on', !!val); }
 function syncFilters() {
   fillSelect($('#f-cat'), [['', '전체'], ...CATS.map(c => [c, c])], st.cat);
   const prods = D.products.filter(p => !st.cat || p.category === st.cat);
   if (st.prod && !prods.some(p => p.product_id === st.prod)) st.prod = '';
-  fillSelect($('#f-prod'), [['', st.cat ? `${st.cat} 전체` : '전체'], ...prods.map(p => [p.product_id, p.product_name])], st.prod);
+  fillSelect($('#f-prod'), [['', '전체'], ...prods.map(p => [p.product_id, p.product_name])], st.prod);
   fillSelect($('#f-pay'), [['', '전체'], ...PAYS.map(p => [p, p])], st.pay);
   document.querySelectorAll('#f-period button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.p === st.period)));
   $('#f-custom').hidden = st.period !== 'custom';
-  $('#f-start').value = st.start; $('#f-end').value = st.end;
+  $('#f-start').value = st.start || FIRST; $('#f-end').value = st.end || LAST;
   [$('#f-start'), $('#f-end')].forEach(i => { i.min = FIRST; i.max = LAST; });
 }
 document.querySelectorAll('#f-period button').forEach(b => b.addEventListener('click', () => { st.period = b.dataset.p; update(); }));
-$('#f-start').addEventListener('change', e => { st.start = e.target.value || FIRST; update(); });
-$('#f-end').addEventListener('change', e => { st.end = e.target.value || LAST; update(); });
+$('#f-start').addEventListener('change', e => { st.start = e.target.value; update(); });
+$('#f-end').addEventListener('change', e => { st.end = e.target.value; update(); });
 $('#f-cat').addEventListener('change', e => { st.cat = e.target.value; update(); });
 $('#f-prod').addEventListener('change', e => { st.prod = e.target.value; if (st.prod) st.cat = prodById.get(st.prod).category; update(); });
 $('#f-pay').addEventListener('change', e => { st.pay = e.target.value; update(); });
-$('#f-reset').addEventListener('click', () => { Object.assign(st, { period: 'all', start: FIRST, end: LAST, cat: '', prod: '', pay: '' }); update(); });
+$('#f-reset').addEventListener('click', () => { Object.assign(st, { period: 'all', start: '', end: '', cat: '', prod: '', pay: '' }); update(); });
 
-/* 화면 테마 (이 브라우저에만 저장) */
 (function () {
   const root = document.documentElement;
-  try { const t = localStorage.getItem('ondam-theme'); if (t) root.dataset.theme = t; } catch (e) {}
+  const t = store.get('ondam-theme', ''); if (t) root.dataset.theme = t;
   $('#theme').addEventListener('click', () => {
     const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-    root.dataset.theme = dark ? 'light' : 'dark';
-    try { localStorage.setItem('ondam-theme', root.dataset.theme); } catch (e) {}
-    render();
+    root.dataset.theme = dark ? 'light' : 'dark'; store.set('ondam-theme', root.dataset.theme); render();
   });
 })();
 
-/* 탭 */
-const VIEW_TITLE = { sales: ['매출 분석', '9월 매출 분석'], clean: ['정제 현황', '매출전표 정제 현황'], recs: ['전표·원본 비교', '전표 100건 · 원본 대조'] };
+/* ============ 탭 ============ */
+const VIEW_TITLE = { home: '', sales: '매출 분석', recs: '전표 조회', clean: '정제 현황', ai: 'AI 전표 분석' };
+const FILTER_VIEWS = new Set(['sales', 'recs']);
 document.querySelectorAll('.nav button').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+document.addEventListener('click', e => { const g = e.target.closest('[data-go]'); if (g) setView(g.dataset.go); });
 function setView(v) {
   st.view = v;
   document.querySelectorAll('.nav button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === v)));
-  $('#v-sales').hidden = v !== 'sales'; $('#v-clean').hidden = v !== 'clean'; $('#v-recs').hidden = v !== 'recs';
-  $('#filters').classList.toggle('inactive', v === 'clean');
-  $('#crumb-view').textContent = VIEW_TITLE[v][0];
-  $('#page-title').textContent = VIEW_TITLE[v][1];
+  ['home', 'sales', 'recs', 'clean', 'ai'].forEach(k => { $('#v-' + k).hidden = k !== v; });
+  $('#main').classList.toggle('nofilter', !FILTER_VIEWS.has(v));
+  $('#page-title').textContent = VIEW_TITLE[v] || `한눈에 보는 ${+LAST.slice(5, 7)}월`;
   try { history.replaceState(null, '', '#' + v); } catch (e) {}
-  render();
+  hideTip(); render();
 }
 
-/* ---------- 툴팁 ---------- */
+/* ============ 툴팁 · 토스트 ============ */
 const tip = $('#tip');
 function showTip(ev, html) { tip.innerHTML = html; tip.hidden = false; moveTip(ev); }
-function moveTip(ev) {
-  const w = tip.offsetWidth, h = tip.offsetHeight;
-  let x = ev.clientX + 14, y = ev.clientY + 14;
-  if (x + w > innerWidth - 8) x = ev.clientX - w - 14;
-  if (y + h > innerHeight - 8) y = ev.clientY - h - 14;
-  tip.style.left = x + 'px'; tip.style.top = y + 'px';
-}
+function moveTip(ev) { const w = tip.offsetWidth, h = tip.offsetHeight; let x = ev.clientX + 14, y = ev.clientY + 14; if (x + w > innerWidth - 8) x = ev.clientX - w - 14; if (y + h > innerHeight - 8) y = ev.clientY - h - 14; tip.style.left = x + 'px'; tip.style.top = y + 'px'; }
 function hideTip() { tip.hidden = true; }
-function bindTips(root) {
-  root.querySelectorAll('[data-tip]').forEach(el => {
-    el.addEventListener('mouseenter', ev => showTip(ev, el.dataset.tip));
-    el.addEventListener('mousemove', moveTip);
-    el.addEventListener('mouseleave', hideTip);
-  });
-}
+function bindTips(root) { root.querySelectorAll('[data-tip]').forEach(el => { el.addEventListener('mouseenter', ev => showTip(ev, el.dataset.tip)); el.addEventListener('mousemove', moveTip); el.addEventListener('mouseleave', hideTip); }); }
+let toastT; function toast(msg) { const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2800); }
 
-/* ---------- 매출 분석 ---------- */
-function scopeLabel() {
-  const parts = [];
-  if (st.prod) parts.push(prodById.get(st.prod).product_name);
-  else if (st.cat) parts.push(st.cat);
-  if (st.pay) parts.push(st.pay + ' 결제');
-  return parts.join(' · ');
+/* ============ 공통 헤더 ============ */
+function renderHead() {
+  $('#crumb-period').textContent = `${FIRST.replace(/-/g, '.')} – ${mdShort(LAST)}`;
+  $('#head-r').innerHTML = `<span class="chip"><span class="dot"></span><span>전표 <b>${receipts.length}</b>건</span></span>${UP.length ? `<span class="chip blue">${ICON.spark}<span>신규 <b>${UP.length}</b>건</span></span>` : ''}<span class="chip"><span>기준일 <b>${LAST}</b></span></span>`;
 }
-function rangeLabel(c) { return c.s === c.e ? md(c.s) : `${md(c.s)}–${md(c.e)}`; }
+function renderBasis(c) { $('#basis').innerHTML = `<b>${mdShort(c.s)}–${mdShort(c.e)}</b> · ${c.tx}건`; }
 
-function renderBasis(c) {
-  $('#basis').innerHTML = st.view === 'clean'
-    ? '정제 현황은 <b>필터와 무관하게 전체 100건</b> 기준'
-    : `<b>${mdShort(c.s)}–${mdShort(c.e)}</b> · 조건 일치 전표 <b>${c.tx}</b> / 100건`;
+/* ============ 요약 (두괄식) ============ */
+function allStats() {
+  const by = (arr, key, val) => { const m = new Map(); arr.forEach(x => m.set(key(x), (m.get(key(x)) || 0) + val(x))); return [...m.entries()].sort((a, b) => b[1] - a[1]); };
+  const timed = receipts.filter(r => r.time);
+  return {
+    rev: sum(receipts, r => r.receipt_amount), tx: receipts.length, lineTotal: sum(lines, l => l.line_amount),
+    cat: by(lines, l => l.category, l => l.line_amount), prod: by(lines, l => l.product_id, l => l.line_amount),
+    hour: by(timed, r => +r.time.slice(0, 2), r => r.receipt_amount), day: by(receipts, r => r.date, r => r.receipt_amount),
+    pay: by(receipts, r => r.payment_method, () => 1), ok: receipts.filter(r => !hasIssue(r)).length, timed: timed.length,
+  };
 }
-
-function kpiHtml(k) {
-  return `<div class="kpi${k.cls ? ' ' + k.cls : ''}">
-    <div><div class="kl"><span class="ki">${k.icon}</span>${k.label}</div><div class="kv num">${k.value}</div></div>
-    <div><div class="ks" title="${esc(k.subTitle || '')}">${k.sub}</div>${k.extra || ''}</div></div>`;
+const josa = (w, a, b) => { const c = w.charCodeAt(w.length - 1); return (c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28) ? a : b; };
+function renderHome() {
+  const s = allStats(), c1 = s.cat[0];
+  $('#hero').innerHTML = `
+    <div>
+      <div class="eyebrow"><i></i>${+LAST.slice(5, 7)}월 결론</div>
+      <h2>매출 <em>${manwon(s.rev)}원</em>,<br>${esc(c1[0])}${josa(c1[0], '이', '가')} <em>${pct0(c1[1], s.lineTotal)}</em>를 이끌었습니다</h2>
+      <div class="meta">전표 ${s.tx}건 · ${FIRST.replace(/-/g, '.')} – ${mdShort(LAST)}${UP.length ? ` · 신규 ${UP.length}건 포함` : ''}</div>
+    </div>
+    <div class="hero-stats">
+      <div><div class="v num">${fmt(s.tx)}<small>건</small></div><div class="l">거래</div></div>
+      <div><div class="v num">${fmt(s.rev / s.tx)}<small>원</small></div><div class="l">객단가</div></div>
+      <div><div class="v num">${pct0(s.ok, s.tx)}</div><div class="l">정보 완전 전표</div></div>
+    </div>`;
+  const p1 = prodById.get(s.prod[0][0]) || { product_name: s.prod[0][0] }, h1 = s.hour[0], d1 = s.day[0], pay1 = s.pay[0];
+  const F = [
+    { ic: ICON.cup, v: p1.product_name, l: `매출 1위 · ${manwon(s.prod[0][1])}원` },
+    { ic: ICON.clock, v: `${h1[0]}시`, l: `피크 시간대 · ${manwon(h1[1])}원` },
+    { ic: ICON.card, v: `${pay1[0]} ${pct0(pay1[1], s.tx)}`, l: '주 결제수단' },
+    { ic: ICON.cal, v: `${mdShort(d1[0])} ${wd(d1[0])}`, l: `최고 매출일 · ${manwon(d1[1])}원` },
+  ];
+  $('#finds').innerHTML = F.map(f => `<div class="card find"><span class="ic">${f.ic}</span><div style="min-width:0"><div class="v">${esc(f.v)}</div><div class="l">${f.l}</div></div></div>`).join('');
+  drawTrend(); renderSide();
 }
-
-function dailySeries(c) {
-  const days = daysBetween(c.s, c.e);
-  const by = new Map(days.map(d => [d, { v: 0, n: 0 }]));
-  c.rs.forEach(r => { const o = by.get(r.date); if (o) { o.v += c.amt.get(r.receipt_id); o.n++; } });
-  return days.map(d => ({ d, ...by.get(d) }));
-}
-
-function sparkSvg(series) {
-  const W = 200, H = 64, n = series.length;
-  if (n < 2) return '';
-  const max = Math.max(...series.map(o => o.v), 1);
-  const x = i => i / (n - 1) * W, y = v => H - 4 - v / max * (H - 12);
-  const pts = series.map((o, i) => `${x(i).toFixed(1)},${y(o.v).toFixed(1)}`);
-  const last = series[n - 1];
-  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0,${H} L${pts.join(' L')} L${W},${H} Z" fill="rgba(255,255,255,.14)"/>
-    <polyline points="${pts.join(' ')}" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
-  </svg>`;
-}
-
-function renderSales() {
-  const c = compute();
-  renderBasis(c);
-  const gross = sum(c.ls, l => l.gross_amount), disc = sum(c.ls, l => l.discount), qty = sum(c.ls, l => l.quantity);
-  const issue = c.rs.filter(hasIssue).length;
-  const mt = c.rs.filter(r => !r.time).length, mp = c.rs.filter(r => r.payment_method === '미확인').length;
-  const both = c.rs.filter(r => !r.time && r.payment_method === '미확인').length;
-  const avgLabel = c.itemFilter ? '선택 상품 기준 거래당 매출' : '평균 객단가';
-  const nProd = new Set(c.ls.map(l => l.product_id)).size;
-  const series = dailySeries(c);
-  const scope = scopeLabel();
-  $('#kpi-sales').innerHTML = [
-    { icon: ICON.won, label: c.itemFilter ? `선택 상품 매출 · ${esc(scope)}` : `총매출${st.pay ? ' · ' + esc(st.pay) : ''}`, value: `${fmt(c.revenue)}<small>원</small>`, sub: `할인 전 <b>${won(gross)}</b> · 품목 할인 <b>${won(disc)}</b>`, cls: 'hero',
-      extra: '' },
-    { icon: ICON.rec, label: '거래 수', value: `${fmt(c.tx)}<small>건</small>`, sub: c.itemFilter ? '선택 상품이 담긴 고유 전표' : '고유 전표 기준 · 상품 행 아님' },
-    { icon: ICON.avg, label: avgLabel, value: c.tx ? `${fmt(c.revenue / c.tx)}<small>원</small>` : '<span style="font-size:18px;color:var(--muted)">결과 없음</span>', sub: c.itemFilter ? '선택 상품 매출 ÷ 해당 전표 수' : '총매출 ÷ 거래 수' },
-    { icon: ICON.box, label: '판매 수량', value: `${fmt(qty)}<small>개</small>`, sub: `상품 ${nProd}종 · 상품 행 ${c.ls.length}개` },
-    { icon: ICON.shield, label: '정보 완전 전표', value: `${c.tx - issue}<small>/ ${c.tx}건</small>`, cls: issue ? 'warn' : '',
-      sub: issue ? `시간 미기재 ${mt} · 결제 미확인 ${mp}` : '미확인 정보 없음', subTitle: both ? `두 조건 모두 해당하는 전표 ${both}건은 한 번만 셉니다` : '',
-      extra: c.tx ? `<div class="meter" aria-hidden="true"><i class="ok" style="width:${pct(c.tx - issue, c.tx)}%"></i>${issue ? `<i class="no" style="width:${pct(issue, c.tx)}%"></i>` : ''}</div>` : '' },
-  ].map(kpiHtml).join('');
-  // 히어로 카드에 스파크라인 붙이기
-  const hero = $('#kpi-sales .kpi.hero');
-  hero.insertAdjacentHTML('beforeend', `<div class="spark"><span class="spark-cap">일별 추이 · ${series.length}일</span>${c.tx ? sparkSvg(series) : ''}</div>`);
-
-  $('#ins-scope').textContent = scope || '전체';
-  drawDaily(c, series);
-  drawTop();
-  drawCat();
-  drawPay();
-  drawHour(c);
-  writeInsights(c);
-}
-
-function drawDaily(c, vals) {
-  const box = $('#ch-daily');
-  const active = vals.filter(o => o.n);
-  const avg = active.length ? sum(active, o => o.v) / active.length : 0;
-  $('#daily-cap').innerHTML = `${c.itemFilter ? '선택 상품 매출' : '전표 결제금액 합계'} · 거래가 있던 날 <b>${active.length}일</b> / ${vals.length}일`;
-  if (!c.tx) { box.innerHTML = '<div class="empty">선택한 조건에 해당하는 거래가 없습니다.</div>'; return; }
-  const W = box.clientWidth, H = box.clientHeight;
-  const m = { l: 40, r: 8, t: 22, b: 24 };
-  const iw = W - m.l - m.r, ih = H - m.t - m.b;
-  const max = Math.max(...vals.map(o => o.v));
-  const { max: ymax, step } = niceMax(max);
-  const y = v => m.t + ih - v / ymax * ih;
-  const band = iw / vals.length, bw = Math.max(4, Math.min(22, band * 0.58));
-  const bestIdx = vals.findIndex(o => o.v === max);
-  let g = '';
-  // 주말 배경 띠
-  vals.forEach((o, i) => { const w = dow(o.d); if (w === 0 || w === 6) g += `<rect class="wkend" x="${m.l + band * i}" y="${m.t}" width="${band}" height="${ih}"/>`; });
-  for (let t = 0; t <= ymax + 1e-9; t += step) {
-    g += `<line class="${t === 0 ? 'base' : 'grid'}" x1="${m.l}" x2="${m.l + iw}" y1="${y(t)}" y2="${y(t)}"/>`;
-    g += `<text class="tick" x="${m.l - 8}" y="${y(t) + 4}" text-anchor="end">${manwon(t)}</text>`;
-  }
-  const every = band >= 26 ? 1 : band >= 13 ? 2 : 5;
-  vals.forEach((o, i) => {
-    const x = m.l + band * i + band / 2, h = ih * o.v / ymax;
-    const tipHtml = `<b>${md(o.d)} (${wd(o.d)})</b><br>${c.itemFilter ? '선택 상품 매출' : '매출'} ${won(o.v)}<br>거래 ${o.n}건${avg && o.v ? ` · 평균 대비 ${(o.v / avg * 100).toFixed(0)}%` : ''}`;
-    g += `<g class="col" data-tip="${esc(tipHtml)}"><rect class="hl" x="${m.l + band * i + 1}" y="${m.t}" width="${band - 2}" height="${ih}" rx="4"/><rect class="hit" x="${m.l + band * i}" y="${m.t}" width="${band}" height="${ih}"/>`;
-    if (o.v > 0) g += `<path class="bar${i === bestIdx ? '' : ''}" d="${colPath(x - bw / 2, y(o.v), bw, h)}"/>`;
-    g += `</g>`;
-    if (i % every === 0 || i === bestIdx) g += `<text class="tick${i === bestIdx ? ' strong' : ''}" x="${x}" y="${m.t + ih + 16}" text-anchor="middle">${+o.d.slice(8)}${vals.length <= 14 ? `<tspan dx="2">${wd(o.d)}</tspan>` : ''}</text>`;
-  });
-  if (avg > 0) {
-    g += `<line class="avg" x1="${m.l}" x2="${m.l + iw}" y1="${y(avg)}" y2="${y(avg)}" pointer-events="none"/>`;
-    const lab = `평균 ${manwon(Math.round(avg))}원`, lw = lab.length * 6.6 + 14;
-    g += `<g pointer-events="none"><rect class="avg-pill" x="${m.l + iw - lw}" y="${y(avg) - 9}" width="${lw}" height="18" rx="9"/><text class="avg-t" x="${m.l + iw - lw / 2}" y="${y(avg) + 3.5}" text-anchor="middle">${lab}</text></g>`;
-  }
-  const bx = m.l + band * bestIdx + band / 2;
-  g += `<text class="lbl" x="${Math.min(Math.max(bx, m.l + 36), m.l + iw - 36)}" y="${y(max) - 8}" text-anchor="middle" pointer-events="none">최고 ${won(max)}</text>`;
-  box.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="일자별 매출 막대 차트">${g}</svg>`;
-  bindTips(box);
-}
-
-function hbarsHtml(rows, opt) {
-  const max = Math.max(...rows.map(r => r.v), 1);
-  return `<div class="hbars">${rows.map((r, i) => opt.cat ? `
-    <div class="hbar cat${r.dim ? ' dim' : ''}" data-tip="${esc(r.tip)}">
-      <div class="nm">${esc(r.name)}</div>
-      <div class="track"><div class="fill" style="width:${(r.v / max * 100).toFixed(2)}%"></div></div>
-      <div class="val num">${fmt(r.v)}<em>${r.sub}</em></div>
-    </div>` : `
-    <div class="hbar${r.dim ? ' dim' : ''}" data-tip="${esc(r.tip)}">
-      <div class="rk">${i + 1}</div>
-      <div style="min-width:0"><div class="nm">${esc(r.name)}</div><div class="track"><div class="fill" style="width:${(r.v / max * 100).toFixed(2)}%"></div></div></div>
-      <div class="val num">${won(r.v)}${r.sub ? `<span>${r.sub}</span>` : ''}</div>
-    </div>`).join('')}</div>`;
-}
-
-function drawTop() {
-  const c = compute({ prod: 1 });
-  const by = new Map();
-  c.ls.forEach(l => { const o = by.get(l.product_id) || { v: 0, q: 0, rec: new Set() }; o.v += l.line_amount; o.q += l.quantity; o.rec.add(l.receipt_id); by.set(l.product_id, o); });
-  const rows = [...by.entries()].map(([id, o]) => ({ id, name: prodById.get(id).product_name, v: o.v, q: o.q, n: o.rec.size }))
-    .sort((a, b) => b.v - a.v || b.q - a.q || a.id.localeCompare(b.id));
-  const total = sum(rows, r => r.v);
-  const rankSel = st.prod ? rows.findIndex(r => r.id === st.prod) : -1;
-  const top = rows.slice(0, 5);
-  $('#top-cap').textContent = `${st.cat ? st.cat + ' 안에서 · ' : ''}할인 후 상품금액 순 · 수량·비중`;
-  if (!top.length) { $('#ch-top').innerHTML = '<div class="empty">선택한 조건에 해당하는 상품이 없습니다.</div>'; return; }
-  const tipOf = r => `<b>${esc(r.name)}</b><br>매출 ${won(r.v)} (${pct1(r.v, total)})<br>수량 ${r.q}개 · 전표 ${r.n}건`;
-  $('#ch-top').innerHTML = hbarsHtml(top.map(r => ({ name: r.name, v: r.v, sub: `${r.q}개 · ${pct1(r.v, total)}`, dim: st.prod && r.id !== st.prod, tip: tipOf(r) })), {});
-  if (st.prod && rankSel >= 5) $('#top-cap').textContent = `선택 상품 ${prodById.get(st.prod).product_name}: ${rankSel + 1}위 (${won(rows[rankSel].v)})`;
-  bindTips($('#ch-top'));
-}
-
-function drawCat() {
-  const c = compute({ cat: 1, prod: 1 });
-  const rows = CATS.map(cat => { const ls = c.ls.filter(l => l.category === cat); return { name: cat, v: sum(ls, l => l.line_amount), q: sum(ls, l => l.quantity) }; });
-  const total = sum(rows, r => r.v);
-  rows.sort((a, b) => b.v - a.v);
-  $('#cat-cap').textContent = `단위 원 · 비중은 카테고리 합계 대비`;
-  if (!total) { $('#ch-cat').innerHTML = '<div class="empty">해당 거래가 없습니다.</div>'; return; }
-  $('#ch-cat').innerHTML = hbarsHtml(rows.map(r => ({ name: r.name, v: r.v, sub: pct1(r.v, total), dim: st.cat && r.name !== st.cat, tip: `<b>${r.name}</b><br>매출 ${won(r.v)} (${pct1(r.v, total)})<br>수량 ${r.q}개` })), { cat: true });
-  bindTips($('#ch-cat'));
-}
-
-function arc(cx, cy, r0, r1, a0, a1) {
-  const p = (r, a) => [cx + r * Math.sin(a), cy - r * Math.cos(a)];
-  const large = a1 - a0 > Math.PI ? 1 : 0;
-  const [x0, y0] = p(r1, a0), [x1, y1] = p(r1, a1), [x2, y2] = p(r0, a1), [x3, y3] = p(r0, a0);
-  return `M${x0},${y0}A${r1},${r1} 0 ${large} 1 ${x1},${y1}L${x2},${y2}A${r0},${r0} 0 ${large} 0 ${x3},${y3}Z`;
-}
-function drawPay() {
-  const c = compute({ pay: 1 });
-  const n = c.tx;
-  const rows = PAYS.map(p => { const rs = c.rs.filter(r => r.payment_method === p); return { p, n: rs.length, v: sum(rs, r => c.amt.get(r.receipt_id)) }; });
-  $('#pay-cap').innerHTML = `전표 수 기준 · 분모 <b>${n}건</b> (미확인 포함)`;
-  if (!n) { $('#ch-pay').innerHTML = '<div class="empty">해당 거래가 없습니다.</div>'; return; }
-  const tipOf = r => `<b>${r.p}</b><br>${r.n}건 · ${pct1(r.n, n)}<br>금액 ${won(r.v)}`;
-  const gapA = 0.035; let a = 0, segs = '';
-  const live = rows.filter(r => r.n);
-  live.forEach(r => {
-    const span = r.n / n * Math.PI * 2;
-    const a0 = a + (live.length > 1 ? gapA / 2 : 0), a1 = a + span - (live.length > 1 ? gapA / 2 : 0);
-    segs += `<path class="seg-arc${st.pay && st.pay !== r.p ? ' dim' : ''}" d="${arc(60, 60, 42, 60, a0, Math.max(a1, a0 + 0.001))}" fill="${PAY_COLOR[r.p]}" data-tip="${esc(tipOf(r))}"/>`;
-    a += span;
-  });
-  const sel = st.pay ? rows.find(r => r.p === st.pay) : rows[0];
-  const lg = rows.map(r => `<div class="lg${st.pay && st.pay !== r.p ? ' dim' : ''}" data-tip="${esc(tipOf(r))}"><i class="${r.p === '미확인' ? 'hatch' : ''}" style="${r.p === '미확인' ? '' : `background:${PAY_COLOR[r.p]}`}"></i><span class="t">${r.p}<span class="num">${r.n}건</span></span><span class="p num">${pct1(r.n, n)}</span></div>`).join('');
-  $('#ch-pay').innerHTML = `<div class="pay">
-    <div class="donut"><svg viewBox="0 0 120 120" role="img" aria-label="결제수단 사용률 도넛 차트">
-      <defs><pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="4" fill="var(--surface-3)"/><rect width="1.5" height="4" fill="var(--s-unknown)"/></pattern></defs>${segs}</svg>
-      <div class="ctr"><div><b class="num">${pct1(sel.n, n).replace('.0%', '%')}</b><span>${sel.p}</span></div></div></div>
-    <div class="legend">${lg}</div></div>`;
-  bindTips($('#ch-pay'));
-}
-
-function drawHour(c) {
-  const box = $('#ch-hour');
-  const timed = c.rs.filter(r => r.time), excl = c.tx - timed.length;
-  $('#hour-cap').innerHTML = `시간 기재 <b>${timed.length}/${c.tx}건</b> · 미기재 ${excl}건 제외 · 커버리지 <b>${c.tx ? pct1(timed.length, c.tx) : '–'}</b>`;
-  if (!timed.length) { box.innerHTML = '<div class="empty">시간이 기록된 거래가 없습니다.</div>'; return; }
-  const by = new Map(HOURS.map(h => [h, { v: 0, n: 0 }]));
-  timed.forEach(r => { const o = by.get(+r.time.slice(0, 2)); o.v += c.amt.get(r.receipt_id); o.n++; });
-  const W = box.clientWidth, H = box.clientHeight;
-  const m = { l: 32, r: 4, t: 20, b: 22 };
-  const iw = W - m.l - m.r, ih = H - m.t - m.b;
-  const vals = HOURS.map(h => by.get(h));
-  const max = Math.max(...vals.map(o => o.v));
-  const { max: ymax, step } = niceMax(max, 3);
-  const y = v => m.t + ih - v / ymax * ih;
-  const band = iw / HOURS.length, bw = Math.max(4, Math.min(16, band * 0.62));
+function drawTrend() {
+  const box = $('#ch-trend'), days = daysBetween(FIRST, LAST);
+  const by = new Map(days.map(d => [d, { v: 0, n: 0, up: 0 }]));
+  receipts.forEach(r => { const o = by.get(r.date); o.v += r.receipt_amount; o.n++; if (isNew(r.receipt_id)) o.up += r.receipt_amount; });
+  const vals = days.map(d => ({ d, ...by.get(d) }));
+  $('#trend-up-lg').hidden = !UP.length;
+  const W = box.clientWidth, H = box.clientHeight, m = { l: 40, r: 78, t: 24, b: 24 }, iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const max = Math.max(...vals.map(o => o.v)), { max: ymax, step } = niceMax(max), y = v => m.t + ih - v / ymax * ih;
+  const band = iw / vals.length, bw = Math.max(4, Math.min(18, band * 0.5)), act = vals.filter(o => o.n), avg = sum(act, o => o.v) / act.length;
   const best = vals.findIndex(o => o.v === max);
   let g = '';
-  for (let t = 0; t <= ymax + 1e-9; t += step) {
-    g += `<line class="${t === 0 ? 'base' : 'grid'}" x1="${m.l}" x2="${m.l + iw}" y1="${y(t)}" y2="${y(t)}"/><text class="tick" x="${m.l - 6}" y="${y(t) + 4}" text-anchor="end">${manwon(t)}</text>`;
-  }
+  for (let t = 0; t <= ymax + 1e-9; t += step) g += `<line class="${t === 0 ? 'base' : 'grid'}" x1="${m.l}" x2="${m.l + iw}" y1="${y(t)}" y2="${y(t)}"/><text class="tick" x="${m.l - 8}" y="${y(t) + 4}" text-anchor="end">${manwon(t)}</text>`;
+  vals.forEach((o, i) => {
+    const x = m.l + band * i + band / 2, base = o.v - o.up;
+    g += `<g class="col" data-tip="${esc(`<b>${md(o.d)} (${wd(o.d)})</b><br>${won(o.v)} · ${o.n}건${o.up ? `<br>신규 ${won(o.up)}` : ''}`)}"><rect class="hl" x="${m.l + band * i + 1}" y="${m.t}" width="${band - 2}" height="${ih}" rx="4"/><rect class="hit" x="${m.l + band * i}" y="${m.t}" width="${band}" height="${ih}"/>`;
+    if (base > 0) g += `<path class="bar" d="${o.up ? `M${x - bw / 2},${y(0)}V${y(base)}H${x + bw / 2}V${y(0)}Z` : colPath(x - bw / 2, y(base), bw, ih * base / ymax)}"/>`;
+    if (o.up > 0) g += `<path class="bar up" d="${colPath(x - bw / 2, y(o.v), bw, ih * o.up / ymax - (base > 0 ? 2 : 0))}"/>`;
+    g += `</g>`;
+    if (i % 3 === 0 || i === best) g += `<text class="tick${i === best ? ' strong' : ''}" x="${x}" y="${m.t + ih + 16}" text-anchor="middle">${+o.d.slice(8)}</text>`;
+  });
+  const lab = `평균 ${manwon(Math.round(avg))}`, lw = lab.length * 6.6 + 12;
+  g += `<line class="avg" x1="${m.l}" x2="${m.l + iw}" y1="${y(avg)}" y2="${y(avg)}" pointer-events="none"/><g pointer-events="none"><rect class="avg-pill" x="${m.l + iw + 8}" y="${y(avg) - 9}" width="${lw}" height="18" rx="9"/><text class="avg-t" x="${m.l + iw + 8 + lw / 2}" y="${y(avg) + 3.5}" text-anchor="middle">${lab}</text></g>`;
+  const bx = m.l + band * best + band / 2;
+  g += `<text class="lbl" x="${Math.min(Math.max(bx, m.l + 36), m.l + iw - 36)}" y="${y(max) - 8}" text-anchor="middle" pointer-events="none">${manwon(max)}원</text>`;
+  box.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="일별 매출">${g}</svg>`; bindTips(box);
+}
+
+/* ============ 매출 분석 ============ */
+function scopeLabel() { const p = []; if (st.prod) p.push(prodById.get(st.prod).product_name); else if (st.cat) p.push(st.cat); if (st.pay) p.push(st.pay); return p.join(' · '); }
+function kpiHtml(k) { return `<div class="kpi${k.cls ? ' ' + k.cls : ''}"><div class="kl">${esc(k.label)}</div><div class="kv num">${k.value}</div>${k.extra || `<div class="ks">${k.sub}</div>`}</div>`; }
+function renderSales() {
+  const c = compute(); renderBasis(c);
+  const qty = sum(c.ls, l => l.quantity), issue = c.rs.filter(hasIssue).length, disc = sum(c.ls, l => l.discount);
+  $('#kpi-sales').innerHTML = [
+    { label: c.itemFilter ? `매출 · ${scopeLabel()}` : `총매출${st.pay ? ' · ' + st.pay : ''}`, value: `${fmt(c.revenue)}<small>원</small>`, sub: `할인 ${won(disc)}`, cls: 'hero-k' },
+    { label: '거래', value: `${fmt(c.tx)}<small>건</small>`, sub: '고유 전표' },
+    { label: c.itemFilter ? '거래당 선택 상품 매출' : '객단가', value: c.tx ? `${fmt(c.revenue / c.tx)}<small>원</small>` : '<span style="font-size:18px;color:var(--muted)">없음</span>', sub: '매출 ÷ 거래' },
+    { label: '판매 수량', value: `${fmt(qty)}<small>개</small>`, sub: `${new Set(c.ls.map(l => l.product_id)).size}종` },
+    { label: '정보 완전', value: `${c.tx - issue}<small>/ ${c.tx}</small>`, cls: issue ? 'warn' : '', extra: `<div class="meter" title="시간·결제 미확인 ${issue}건"><i class="ok" style="width:${pct(c.tx - issue, c.tx)}%"></i>${issue ? `<i class="no" style="width:${pct(issue, c.tx)}%"></i>` : ''}</div>` },
+  ].map(kpiHtml).join('');
+  drawDaily(c); drawHour(c); drawTop(); drawCat(); drawPay();
+}
+function drawDaily(c) {
+  const box = $('#ch-daily');
+  if (!c.tx) { box.innerHTML = '<div class="empty">해당 거래 없음</div>'; return; }
+  const days = daysBetween(c.s, c.e), by = new Map(days.map(d => [d, { v: 0, n: 0 }]));
+  c.rs.forEach(r => { const o = by.get(r.date); if (o) { o.v += c.amt.get(r.receipt_id); o.n++; } });
+  const vals = days.map(d => ({ d, ...by.get(d) })), act = vals.filter(o => o.n), avg = act.length ? sum(act, o => o.v) / act.length : 0;
+  const W = box.clientWidth, H = box.clientHeight, m = { l: 40, r: 78, t: 22, b: 24 }, iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const max = Math.max(...vals.map(o => o.v)), { max: ymax, step } = niceMax(max), y = v => m.t + ih - v / ymax * ih;
+  const band = iw / vals.length, bw = Math.max(4, Math.min(22, band * 0.58)), best = vals.findIndex(o => o.v === max);
+  let g = '';
+  vals.forEach((o, i) => { const w = dow(o.d); if (w === 0 || w === 6) g += `<rect class="wkend" x="${m.l + band * i}" y="${m.t}" width="${band}" height="${ih}"/>`; });
+  for (let t = 0; t <= ymax + 1e-9; t += step) g += `<line class="${t === 0 ? 'base' : 'grid'}" x1="${m.l}" x2="${m.l + iw}" y1="${y(t)}" y2="${y(t)}"/><text class="tick" x="${m.l - 8}" y="${y(t) + 4}" text-anchor="end">${manwon(t)}</text>`;
+  const every = band >= 26 ? 1 : band >= 13 ? 2 : 5;
+  vals.forEach((o, i) => {
+    const x = m.l + band * i + band / 2;
+    g += `<g class="col" data-tip="${esc(`<b>${md(o.d)} (${wd(o.d)})</b><br>${won(o.v)} · ${o.n}건`)}"><rect class="hl" x="${m.l + band * i + 1}" y="${m.t}" width="${band - 2}" height="${ih}" rx="4"/><rect class="hit" x="${m.l + band * i}" y="${m.t}" width="${band}" height="${ih}"/>`;
+    if (o.v > 0) g += `<path class="bar" d="${colPath(x - bw / 2, y(o.v), bw, ih * o.v / ymax)}"/>`;
+    g += `</g>`;
+    if (i % every === 0 || i === best) g += `<text class="tick${i === best ? ' strong' : ''}" x="${x}" y="${m.t + ih + 16}" text-anchor="middle">${+o.d.slice(8)}${vals.length <= 14 ? `<tspan dx="2">${wd(o.d)}</tspan>` : ''}</text>`;
+  });
+  if (avg > 0) { const lab = `평균 ${manwon(Math.round(avg))}`, lw = lab.length * 6.6 + 12; g += `<line class="avg" x1="${m.l}" x2="${m.l + iw}" y1="${y(avg)}" y2="${y(avg)}" pointer-events="none"/><g pointer-events="none"><rect class="avg-pill" x="${m.l + iw + 8}" y="${y(avg) - 9}" width="${lw}" height="18" rx="9"/><text class="avg-t" x="${m.l + iw + 8 + lw / 2}" y="${y(avg) + 3.5}" text-anchor="middle">${lab}</text></g>`; }
+  const bx = m.l + band * best + band / 2;
+  g += `<text class="lbl" x="${Math.min(Math.max(bx, m.l + 36), m.l + iw - 36)}" y="${y(max) - 8}" text-anchor="middle" pointer-events="none">${won(max)}</text>`;
+  box.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="일자별 매출">${g}</svg>`; bindTips(box);
+}
+function drawHour(c) {
+  const box = $('#ch-hour'), timed = c.rs.filter(r => r.time);
+  $('#hour-cap').innerHTML = `시간 기재 <b>${timed.length}/${c.tx}</b>`;
+  $('#hour-cap').title = `시간 미기재 ${c.tx - timed.length}건 제외 · 커버리지 ${c.tx ? pct1(timed.length, c.tx) : '–'}`;
+  if (!timed.length) { box.innerHTML = '<div class="empty">시간 기록 없음</div>'; return; }
+  const by = new Map(HOURS.map(h => [h, { v: 0, n: 0 }]));
+  timed.forEach(r => { const o = by.get(+r.time.slice(0, 2)); if (o) { o.v += c.amt.get(r.receipt_id); o.n++; } });
+  const W = box.clientWidth, H = box.clientHeight, m = { l: 32, r: 4, t: 22, b: 22 }, iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const vals = HOURS.map(h => by.get(h)), max = Math.max(...vals.map(o => o.v)), { max: ymax, step } = niceMax(max, 3), y = v => m.t + ih - v / ymax * ih;
+  const band = iw / HOURS.length, bw = Math.max(4, Math.min(16, band * 0.6)), best = vals.findIndex(o => o.v === max);
+  let g = '';
+  for (let t = 0; t <= ymax + 1e-9; t += step) g += `<line class="${t === 0 ? 'base' : 'grid'}" x1="${m.l}" x2="${m.l + iw}" y1="${y(t)}" y2="${y(t)}"/><text class="tick" x="${m.l - 6}" y="${y(t) + 4}" text-anchor="end">${manwon(t)}</text>`;
   HOURS.forEach((h, i) => {
     const o = vals[i], x = m.l + band * i + band / 2;
-    g += `<g class="col" data-tip="${esc(`<b>${h}시대</b> (${h}:00–${h}:59)<br>매출 ${won(o.v)}<br>거래 ${o.n}건`)}"><rect class="hl" x="${m.l + band * i + 1}" y="${m.t}" width="${band - 2}" height="${ih}" rx="4"/><rect class="hit" x="${m.l + band * i}" y="${m.t}" width="${band}" height="${ih}"/>`;
+    g += `<g class="col" data-tip="${esc(`<b>${h}시대</b><br>${won(o.v)} · ${o.n}건`)}"><rect class="hl" x="${m.l + band * i + 1}" y="${m.t}" width="${band - 2}" height="${ih}" rx="4"/><rect class="hit" x="${m.l + band * i}" y="${m.t}" width="${band}" height="${ih}"/>`;
     if (o.v) g += `<path class="bar" d="${colPath(x - bw / 2, y(o.v), bw, ih * o.v / ymax)}"/>`;
     g += `</g>`;
     if (i % 2 === 0 || i === best) g += `<text class="tick${i === best ? ' strong' : ''}" x="${x}" y="${m.t + ih + 15}" text-anchor="middle">${h}</text>`;
   });
   const bx = m.l + band * best + band / 2;
   g += `<text class="lbl" x="${Math.min(Math.max(bx, m.l + 30), W - 30)}" y="${y(max) - 7}" text-anchor="middle" pointer-events="none">${manwon(max)}원</text>`;
-  box.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="시간대별 매출 막대 차트">${g}</svg>`;
-  bindTips(box);
+  box.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="시간대별 매출">${g}</svg>`; bindTips(box);
+}
+function hbarsHtml(rows, cat) {
+  const max = Math.max(...rows.map(r => r.v), 1);
+  return `<div class="hbars">${rows.map((r, i) => cat
+    ? `<div class="hbar cat${r.dim ? ' dim' : ''}" data-tip="${esc(r.tip)}"><div class="nm">${esc(r.name)}</div><div class="track"><div class="fill" style="width:${(r.v / max * 100).toFixed(2)}%"></div></div><div class="val num">${fmt(r.v)}<em>${r.sub}</em></div></div>`
+    : `<div class="hbar${r.dim ? ' dim' : ''}" data-tip="${esc(r.tip)}"><div class="rk">${i + 1}</div><div style="min-width:0"><div class="nm">${esc(r.name)}</div><div class="track"><div class="fill" style="width:${(r.v / max * 100).toFixed(2)}%"></div></div></div><div class="val num">${won(r.v)}<span>${r.sub}</span></div></div>`).join('')}</div>`;
+}
+function drawTop() {
+  const c = compute({ prod: 1 }), by = new Map();
+  c.ls.forEach(l => { const o = by.get(l.product_id) || { v: 0, q: 0, name: l.product_name }; o.v += l.line_amount; o.q += l.quantity; by.set(l.product_id, o); });
+  const rows = [...by.entries()].map(([id, o]) => ({ id, ...o })).sort((a, b) => b.v - a.v || b.q - a.q || a.id.localeCompare(b.id));
+  const total = sum(rows, r => r.v);
+  $('#top-cap').textContent = st.cat || '';
+  if (!rows.length) { $('#ch-top').innerHTML = '<div class="empty">해당 상품 없음</div>'; return; }
+  $('#ch-top').innerHTML = hbarsHtml(rows.slice(0, 5).map(r => ({ name: r.name, v: r.v, sub: `${r.q}개 · ${pct1(r.v, total)}`, dim: st.prod && r.id !== st.prod, tip: `<b>${esc(r.name)}</b><br>${won(r.v)} · ${r.q}개` })));
+  bindTips($('#ch-top'));
+}
+function drawCat() {
+  const c = compute({ cat: 1, prod: 1 });
+  const rows = CATS.map(cat => { const ls = c.ls.filter(l => l.category === cat); return { name: cat, v: sum(ls, l => l.line_amount), q: sum(ls, l => l.quantity) }; }).sort((a, b) => b.v - a.v);
+  const total = sum(rows, r => r.v);
+  if (!total) { $('#ch-cat').innerHTML = '<div class="empty">해당 거래 없음</div>'; return; }
+  $('#ch-cat').innerHTML = hbarsHtml(rows.map(r => ({ name: r.name, v: r.v, sub: pct1(r.v, total), dim: st.cat && r.name !== st.cat, tip: `<b>${r.name}</b><br>${won(r.v)} · ${r.q}개` })), true);
+  bindTips($('#ch-cat'));
+}
+function arc(cx, cy, r0, r1, a0, a1) {
+  const p = (r, a) => [cx + r * Math.sin(a), cy - r * Math.cos(a)], large = a1 - a0 > Math.PI ? 1 : 0;
+  const [x0, y0] = p(r1, a0), [x1, y1] = p(r1, a1), [x2, y2] = p(r0, a1), [x3, y3] = p(r0, a0);
+  return `M${x0},${y0}A${r1},${r1} 0 ${large} 1 ${x1},${y1}L${x2},${y2}A${r0},${r0} 0 ${large} 0 ${x3},${y3}Z`;
+}
+function drawPay() {
+  const c = compute({ pay: 1 }), n = c.tx;
+  const rows = PAYS.map(p => { const rs = c.rs.filter(r => r.payment_method === p); return { p, n: rs.length, v: sum(rs, r => c.amt.get(r.receipt_id)) }; });
+  $('#pay-cap').textContent = `전표 ${n}건 기준`;
+  if (!n) { $('#ch-pay').innerHTML = '<div class="empty">해당 거래 없음</div>'; return; }
+  const tipOf = r => `<b>${r.p}</b><br>${r.n}건 · ${pct1(r.n, n)}<br>${won(r.v)}`;
+  const live = rows.filter(r => r.n), gapA = live.length > 1 ? 0.035 : 0; let a = 0, segs = '';
+  live.forEach(r => { const span = r.n / n * Math.PI * 2; segs += `<path class="seg-arc${st.pay && st.pay !== r.p ? ' dim' : ''}" d="${arc(60, 60, 42, 60, a + gapA / 2, Math.max(a + span - gapA / 2, a + gapA / 2 + 0.001))}" fill="${PAY_COLOR[r.p]}" data-tip="${esc(tipOf(r))}"/>`; a += span; });
+  const sel = st.pay ? rows.find(r => r.p === st.pay) : rows.slice().sort((x, y) => y.n - x.n)[0];
+  $('#ch-pay').innerHTML = `<div class="pay"><div class="donut"><svg viewBox="0 0 120 120" role="img" aria-label="결제수단 비율"><defs><pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="4" fill="var(--surface-3)"/><rect width="1.5" height="4" fill="var(--s-unknown)"/></pattern></defs>${segs}</svg><div class="ctr"><div><b class="num">${pct0(sel.n, n)}</b><span>${sel.p}</span></div></div></div>
+    <div class="legend">${rows.map(r => `<div class="lg${st.pay && st.pay !== r.p ? ' dim' : ''}" data-tip="${esc(tipOf(r))}"><i class="${r.p === '미확인' ? 'hatch' : ''}" style="${r.p === '미확인' ? '' : `background:${PAY_COLOR[r.p]}`}"></i><span class="t">${r.p}</span><span class="c num">${r.n}건</span><span class="p num">${pct1(r.n, n)}</span></div>`).join('')}</div></div>`;
+  bindTips($('#ch-pay'));
 }
 
-function writeInsights(c) {
-  const el = $('#insights');
-  if (!c.tx) { el.innerHTML = '<li><span>선택한 조건에 해당하는 거래가 없습니다. 기간을 넓히거나 필터를 초기화해 보세요.</span></li>'; return; }
-  const out = [];
-  const scope = scopeLabel();
-  out.push(`${rangeLabel(c)}${scope ? ` · ${esc(scope)}` : ''} 매출 <b>${won(c.revenue)}</b>, 거래 <b>${c.tx}건</b>, ${c.itemFilter ? '선택 상품 기준 거래당 매출' : '객단가'} <b>${won(c.revenue / c.tx)}</b>.`);
-  const byDay = new Map();
-  c.rs.forEach(r => byDay.set(r.date, (byDay.get(r.date) || 0) + c.amt.get(r.receipt_id)));
-  const dayRows = [...byDay.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
-  if (dayRows.length > 1) {
-    const avgDay = c.revenue / dayRows.length;
-    out.push(`일 매출 최고는 <b>${md(dayRows[0][0])}(${wd(dayRows[0][0])})</b> ${won(dayRows[0][1])}로 거래일 평균의 <b>${(dayRows[0][1] / avgDay).toFixed(1)}배</b>. 표본이 작아 요일 효과로 해석하지 않습니다.`);
+/* ============ 전표 조회 (영수증 모양) ============ */
+document.querySelectorAll('#v-recs [data-pv]').forEach(b => b.addEventListener('click', () => { st.pv = b.dataset.pv; renderPaper(); }));
+[['#ls-all', 'all'], ['#ls-issue', 'issue'], ['#ls-new', 'new']].forEach(([s, v]) => $(s).addEventListener('click', () => { st.list = v; renderRecs(); }));
+function openReceipt(rid) {
+  st.sel = rid;
+  if (!compute().rs.some(r => r.receipt_id === rid)) Object.assign(st, { period: 'all', start: '', end: '', cat: '', prod: '', pay: '' });
+  st.list = 'all'; syncFilters(); setView('recs');
+  const row = document.querySelector(`#list tr[data-rid="${rid}"]`); if (row) row.scrollIntoView({ block: 'center' });
+}
+function renderRecs() {
+  const c = compute(); renderBasis(c);
+  $('#ls-new').hidden = !UP.length; if (!UP.length && st.list === 'new') st.list = 'all';
+  [['#ls-all', 'all'], ['#ls-issue', 'issue'], ['#ls-new', 'new']].forEach(([s, v]) => $(s).setAttribute('aria-pressed', String(st.list === v)));
+  const list = c.rs.filter(r => st.list === 'issue' ? hasIssue(r) : st.list === 'new' ? isNew(r.receipt_id) : true).sort((a, b) => a.receipt_id.localeCompare(b.receipt_id));
+  $('#list-n').textContent = list.length;
+  if (!list.some(r => r.receipt_id === st.sel)) st.sel = list[0]?.receipt_id || null;
+  $('#list').innerHTML = `<table><thead><tr><th></th><th>전표</th><th>일자</th><th>결제</th><th class="r">${c.itemFilter ? '선택 상품' : '금액'}</th></tr></thead><tbody>${list.map(r => `
+    <tr class="clickable${r.receipt_id === st.sel ? ' sel' : ''}" data-rid="${r.receipt_id}" tabindex="0">
+      <td style="width:20px;padding-right:0"><span class="sdot${isNew(r.receipt_id) ? ' new' : hasIssue(r) ? ' warn' : ''}" title="${isNew(r.receipt_id) ? '신규 분석' : hasIssue(r) ? '일부 정보 미확인' : '정보 완전'}"></span></td>
+      <td><b>${r.receipt_id}</b></td><td class="num">${mdShort(r.date)} <span class="blank">${wd(r.date)}</span></td><td>${r.payment_method === '미확인' ? '<span class="blank">미확인</span>' : r.payment_method}</td><td class="r"><b>${fmt(c.amt.get(r.receipt_id))}</b></td></tr>`).join('')}
+    ${!list.length ? '<tr><td colspan="5" class="c blank" style="padding:28px">해당 전표 없음</td></tr>' : ''}</tbody></table>`;
+  $('#list').querySelectorAll('tr[data-rid]').forEach(tr => {
+    const go = () => { st.sel = tr.dataset.rid; $('#list').querySelectorAll('tr.sel').forEach(x => x.classList.remove('sel')); tr.classList.add('sel'); renderPaper(); renderInfo(); };
+    tr.addEventListener('click', go);
+    tr.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const n = e.key === 'ArrowDown' ? tr.nextElementSibling : tr.previousElementSibling; if (n && n.dataset.rid) { n.focus(); n.click(); } }
+    });
+  });
+  renderPaper(); renderInfo();
+}
+const CUP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/></svg>';
+function renderPaper() {
+  document.querySelectorAll('#v-recs [data-pv]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.pv === st.pv)));
+  const el = $('#paper');
+  if (!st.sel) { el.innerHTML = '<div class="empty">전표 없음</div>'; return; }
+  const r = recById.get(st.sel), raw = rawById.get(st.sel), k = profById.get(raw.profile_id).fields, src = raw.data, ls = linesByRec.get(st.sel), logs = logByRec.get(st.sel) || [], up = upById.get(st.sel);
+  if (st.pv === 'pdf') {
+    if (up) {
+      if (up.file && up.file.b64) { el.innerHTML = '<div class="paper-img"><canvas id="pdf-cv"></canvas></div>'; renderPdfToCanvas(up.file.b64, $('#pdf-cv')); }
+      else el.innerHTML = '<div class="empty">원본 PDF 없음</div>';
+      return;
+    }
+    el.innerHTML = `<div class="paper-img"><img src="previews/${r.receipt_id}.png" alt="${r.receipt_id} 원본 PDF" onerror="this.parentNode.outerHTML='<div class=empty>미리보기 없음</div>'"></div>`; return;
   }
-  const prodAgg = new Map(); c.ls.forEach(l => prodAgg.set(l.product_id, (prodAgg.get(l.product_id) || 0) + l.line_amount));
-  const p1 = [...prodAgg.entries()].sort((a, b) => b[1] - a[1])[0];
-  const lsTotal = sum(c.ls, l => l.line_amount);
-  if (p1 && !st.prod) {
-    const catAgg = new Map(); c.ls.forEach(l => catAgg.set(l.category, (catAgg.get(l.category) || 0) + l.line_amount));
-    const c1 = [...catAgg.entries()].sort((a, b) => b[1] - a[1])[0];
-    out.push(`상품 1위 <b>${esc(prodById.get(p1[0]).product_name)}</b> ${won(p1[1])} (${pct1(p1[1], lsTotal)})${!st.cat ? ` · 카테고리 1위 <b>${c1[0]}</b> ${pct1(c1[1], lsTotal)}` : ''}.`);
-  }
-  if (!st.pay) {
-    const pr = PAYS.map(p => [p, c.rs.filter(r => r.payment_method === p).length]).filter(x => x[1]);
-    out.push(`결제수단 ${pr.map(([p, n]) => `${p} <b>${pct1(n, c.tx)}</b>`).join(' · ')} (전표 수 기준${pr.some(x => x[0] === '미확인') ? ', 미확인 포함' : ''}).`);
-  }
-  const timed = c.rs.filter(r => r.time);
-  if (timed.length) {
-    const ha = new Map(); timed.forEach(r => { const h = +r.time.slice(0, 2); ha.set(h, (ha.get(h) || 0) + c.amt.get(r.receipt_id)); });
-    const h1 = [...ha.entries()].sort((a, b) => b[1] - a[1])[0];
-    const ex = c.tx - timed.length;
-    out.push(`시간대 1위 <b>${h1[0]}시대</b> ${won(h1[1])} (시간 기재 ${timed.length}건 기준${ex ? `, 미기재 ${ex}건 제외` : ''}).`);
-  }
-  const issue = c.rs.filter(hasIssue).length;
-  const li = out.map(s => `<li><span>${s}</span></li>`);
-  if (issue) li.push(`<li class="warn"><span>${c.tx}건 모두 정제 완료. 다만 <b>${issue}건</b>은 시간 또는 결제수단이 비어 있어 정보 완전 전표는 ${c.tx - issue}건입니다.</span></li>`);
-  el.innerHTML = li.join('');
+  const isRaw = st.pv === 'raw';
+  const chg = (f, line) => { const e = logs.filter(x => x.field === f && (x.line_no ?? null) === (line ?? null)); return e.length ? (e.some(x => x.rule_id.startsWith('MISSING') || x.rule_id === 'CATEGORY_FILL') ? 'miss' : 'chg') : ''; };
+  const mk = (txt, c) => c ? `<mark class="${c === 'miss' ? 'miss' : ''}">${txt}</mark>` : txt;
+  const rv = v => (v === '' || v == null) ? '<span style="color:#b9b7ae">(빈칸)</span>' : `<span class="mono">${esc(v)}</span>`;
+  const stamp = up ? '<span class="stamp new">NEW</span>' : hasIssue(r) ? '<span class="stamp warn">확인 필요</span>' : '<span class="stamp ok">정제 완료</span>';
+  const head = isRaw
+    ? [[k.date, rv(src[k.date])], [k.time, rv(src[k.time])], [k.payment, rv(src[k.payment])]]
+    : [['거래일', `${mk(r.date, chg('date'))} ${wd(r.date)}`], ['시간', mk(r.time || '미기재', chg('time'))], ['결제', mk(r.payment_method, chg('payment_method'))]];
+  const items = isRaw
+    ? src[k.items].map(it => `<div class="it"><div class="n">${rv(it[k.product])}</div><div class="d"><span>${rv(it[k.category])} · ${rv(it[k.quantity])} × ${rv(it[k.unit_price])}</span><b>${rv(it[k.amount])}</b></div></div>`).join('')
+    : ls.map(l => `<div class="it"><div class="n">${mk(esc(l.product_name), chg('product_name', l.line_no))}</div><div class="d"><span>${mk(l.category, chg('category', l.line_no))} · ${l.quantity} × ${fmt(l.unit_price)}${l.discount ? ` − ${fmt(l.discount)}` : ''}</span><b>${fmt(l.line_amount)}</b></div></div>`).join('');
+  el.innerHTML = `<div class="paper${isRaw ? ' raw' : ''}">${stamp}
+    <div class="pc"><div class="pl">${CUP}</div><div class="st">ONDAM</div><div class="st2">${isRaw ? rv(src[k.store]) : esc(r.store)}</div></div>
+    <hr class="dash">
+    <div class="row"><span>${isRaw ? esc(k.receipt_id) : '전표번호'}</span><span><b>${r.receipt_id}</b></span></div>
+    ${head.map(([a, b]) => `<div class="row"><span>${esc(a)}</span><span>${b}</span></div>`).join('')}
+    <hr class="dash">
+    ${items}
+    <hr class="dash">
+    ${isRaw ? '' : `<div class="row"><span>상품 합계</span><span>${fmt(r.gross_amount)}</span></div><div class="row"><span>할인</span><span>${r.discount ? '−' + fmt(r.discount) : '0'}</span></div>`}
+    <hr class="dbl">
+    <div class="tot"><span>${isRaw ? esc(k.total) : '결제 금액'}</span><span>${isRaw ? rv(src[k.total]) : won(r.receipt_amount)}</span></div>
+    <div class="bc" aria-hidden="true"></div>
+    <div class="foot">${r.receipt_id} · ${raw.ai_extracted ? 'AI 판독' : raw.profile_id.replace('_', ' ')}${isRaw ? ' · 원문' : ''}</div>
+  </div>`;
+}
+function renderInfo() {
+  const el = $('#info');
+  if (!st.sel) { el.innerHTML = '<div class="empty">전표 없음</div>'; return; }
+  const r = recById.get(st.sel), logs = logByRec.get(st.sel) || [], ls = linesByRec.get(st.sel), up = upById.get(st.sel);
+  const rt = rawTotal(r.receipt_id), lineSum = sum(ls, l => l.line_amount), ok = rt === r.receipt_amount && lineSum === r.receipt_amount;
+  const hasPdf = up ? !!(up.file && up.file.b64) : true;
+  el.innerHTML = `
+    <div class="info-head"><div class="rid">${r.receipt_id}</div><div style="display:flex;gap:6px">${up ? `<span class="tag blue">${up.file?.source === 'drive' ? 'Drive' : up.file?.source === 'sample' ? '샘플' : '업로드'}</span>` : ''}<span class="tag plain">${r.profile_id.replace('_', ' ')}</span></div></div>
+    <div class="check ${ok ? 'ok' : 'bad'}">${ok ? ICON.check : ICON.alert}<span>${ok ? `원본 = 상품 합계 = ${won(r.receipt_amount)}` : `불일치 · 원본 ${won(rt)} / 합계 ${won(lineSum)}`}</span></div>
+    ${up && up.ai ? `<div class="ai-note">${ICON.spark}<span>${esc(up.ai.comment)}</span></div>` : ''}
+    <div class="chg-h">변환 기록<span class="num">${logs.length}건</span></div>
+    <div class="chg-list">${logs.map(e => `<div class="chg" title="${esc(RULE_KO[e.rule_id] || e.rule_id)}"><span class="f">${e.line_no ? e.line_no + '행 ' : ''}${FIELD_KO[e.field] || e.field}</span><span class="a">${(e.raw_value === '' || e.raw_value == null) ? '(빈칸)' : esc(e.raw_value)}</span>${ICON.arrow}<span class="b${e.rule_id.startsWith('MISSING') || e.rule_id === 'CATEGORY_FILL' ? ' miss' : ''}">${e.rule_id === 'MISSING_TIME' ? '미기재' : esc(e.cleaned_value)}</span></div>`).join('') || '<div class="empty" style="padding:24px">변환 없음</div>'}</div>
+    <div class="info-actions">${hasPdf ? `<a class="btn dark" href="${up ? '#' : esc(r.source_file)}" target="_blank" rel="noopener" id="pdf-open">${ICON.ext}원본 PDF</a>` : ''}${up ? '<button class="btn" type="button" id="rm-up">삭제</button>' : ''}</div>`;
+  const po = $('#pdf-open'); if (po && up) po.addEventListener('click', e => { e.preventDefault(); openPdfBlob(up.file.b64); });
+  const rm = $('#rm-up'); if (rm) rm.addEventListener('click', () => removeUpload(r.receipt_id));
 }
 
-/* ---------- 정제 현황 ---------- */
+/* ============ 정제 현황 ============ */
 function renderClean() {
-  renderBasis(compute());
   const issue = receipts.filter(hasIssue).length;
-  const mt = receipts.filter(r => !r.time).length, mp = receipts.filter(r => r.payment_method === '미확인').length;
-  const both = receipts.filter(r => !r.time && r.payment_method === '미확인').length;
   const diffs = receipts.filter(r => rawTotal(r.receipt_id) !== r.receipt_amount || sum(linesByRec.get(r.receipt_id), l => l.line_amount) !== r.receipt_amount);
-  const diffAmt = sum(receipts, r => Math.abs(rawTotal(r.receipt_id) - r.receipt_amount));
-  const profCount = new Map(); receipts.forEach(r => profCount.set(r.profile_id, (profCount.get(r.profile_id) || 0) + 1));
-  const ruleIds = Object.keys(D.summary.changes_by_rule);
   $('#kpi-clean').innerHTML = [
-    { icon: ICON.layers, label: '원본 형식', value: `${D.profiles.length}<small>종</small>`, sub: [...profCount.entries()].map(([p, n]) => `${p.replace('POS_', '')} ${n}`).join(' · ') + '건' },
-    { icon: ICON.check, label: '정제 완료 전표', value: `${receipts.length}<small>건</small>`, sub: `상품 행 ${lines.length} · 상품 마스터 ${D.products.length}종 연결`,
-      extra: `<div class="meter" aria-hidden="true"><i class="ok" style="width:100%"></i></div>` },
-    { icon: ICON.alert, label: '일부 정보 미확인', value: `${issue}<small>건</small>`, sub: `시간 미기재 ${mt} · 결제 미확인 ${mp} (${both}건 중복)`, cls: 'warn',
-      extra: `<div class="meter" aria-hidden="true"><i class="ok" style="width:${100 - issue}%"></i><i class="no" style="width:${issue}%"></i></div>` },
-    { icon: ICON.swap, label: '값 변환 기록', value: `${fmt(D.log.length)}<small>건</small>`, sub: `${ruleIds.length}개 규칙 · 형변환·항목명 대응 제외` },
-    { icon: ICON.eq, label: '원본 결제금액과 차이', value: `${fmt(diffAmt)}<small>원</small>`, sub: diffs.length ? `불일치 전표 ${diffs.length}건` : `${receipts.length}건 모두 원본 = 상품 합계` },
+    { label: '원본 형식', value: `${D.profiles.length}<small>종</small>`, sub: '항목명·표기 제각각' },
+    { label: '정제 완료', value: `${receipts.length}<small>건</small>`, sub: `상품 ${lines.length}행`, cls: 'hero-k' },
+    { label: '일부 미확인', value: `${issue}<small>건</small>`, cls: 'warn', extra: `<div class="meter" title="시간 미기재 ${receipts.filter(r => !r.time).length} · 결제 미확인 ${receipts.filter(r => r.payment_method === '미확인').length}"><i class="ok" style="width:${pct(receipts.length - issue, receipts.length)}%"></i><i class="no" style="width:${pct(issue, receipts.length)}%"></i></div>` },
+    { label: '값 변환', value: `${fmt(LOG.length)}<small>건</small>`, sub: `${Object.keys(RULE_COUNTS).length}개 규칙` },
+    { label: '금액 차이', value: `${diffs.length}<small>건</small>`, sub: diffs.length ? '확인 필요' : '원본 = 상품 합계' },
   ].map(kpiHtml).join('');
-
-  /* 규칙 */
-  const rows = ruleIds.map(id => ({ id, ...D.summary.changes_by_rule[id] })).sort((a, b) => b.changed_fields - a.changed_fields);
-  const max = Math.max(...rows.map(r => r.changed_fields));
-  $('#rules').innerHTML = rows.map(r => {
-    const meta = RULE[r.id] || {};
-    const t = `<b>${RULE_KO[r.id] || r.id}</b> (${r.id})<br>${esc(meta.target || '')} · ${esc(meta.rule || '')}<br>결과: ${esc(meta.result || '')}${meta.note ? `<br>근거: ${esc(meta.note)}` : ''}`;
-    return `<button type="button" class="rule${r.id.startsWith('MISSING') ? ' missing' : ''}${st.logRule === r.id ? ' on' : ''}" data-rule="${r.id}" data-tip="${esc(t)}" aria-pressed="${st.logRule === r.id}">
-      <span class="rn">${RULE_KO[r.id] || r.id}<span>${r.id}</span></span>
-      <span class="rv">${fmt(r.changed_fields)}칸 <span>· ${r.affected_receipts}건</span></span>
-      <span class="rt"><div style="width:${Math.max(1.5, r.changed_fields / max * 100).toFixed(2)}%"></div></span></button>`;
-  }).join('');
+  const rows = Object.entries(RULE_COUNTS).map(([id, o]) => ({ id, n: o.n, r: o.rec.size })).sort((a, b) => b.n - a.n);
+  const max = Math.max(...rows.map(r => r.n));
+  $('#rules').innerHTML = rows.map(r => `<button type="button" class="rule${r.id.startsWith('MISSING') ? ' missing' : ''}${st.logRule === r.id ? ' on' : ''}" data-rule="${r.id}" data-tip="${esc(`<b>${RULE_KO[r.id] || r.id}</b><br>${esc(RULE[r.id]?.rule || '')}<br>한 전표에 여러 규칙이 겹치므로 합산하지 않음`)}" aria-pressed="${st.logRule === r.id}"><span class="rn">${RULE_KO[r.id] || r.id}</span><span class="rv">${fmt(r.n)} <span>· ${r.r}</span></span><span class="rt"><div style="width:${Math.max(1.5, r.n / max * 100).toFixed(2)}%"></div></span></button>`).join('');
   document.querySelectorAll('#rules .rule').forEach(b => b.addEventListener('click', () => { st.logRule = st.logRule === b.dataset.rule ? '' : b.dataset.rule; hideTip(); renderClean(); }));
   bindTips($('#rules'));
-
-  /* 원본 형식 흐름 */
-  $('#flow').innerHTML = `<table><thead><tr><th>형식</th><th>날짜 표기</th><th>시간 표기</th><th>상품 키</th></tr></thead><tbody>${D.profiles.map(p => `<tr><td><b>${p.profile_id.replace('_', ' ')}</b></td><td class="mono">${esc(p.date_format)}</td><td class="mono">${esc(p.time_format)}</td><td>${esc(p.fields.product)}</td></tr>`).join('')}
-    <tr class="std"><td>표준</td><td class="mono">YYYY-MM-DD</td><td class="mono">HH:mm</td><td>product_name</td></tr></tbody></table>`;
-
-  /* 완전성 */
-  const catFill = D.log.filter(e => e.rule_id === 'CATEGORY_FILL').length;
+  $('#prof-cap').textContent = `${D.profiles.length}종 × ${Math.round(BASE.receipts.length / D.profiles.length)}건`;
+  $('#flow').innerHTML = `<table class="schema"><thead><tr><th>형식</th><th>날짜</th><th>시간</th><th>상품 키</th></tr></thead><tbody>${D.profiles.map(p => `<tr><td><b>${p.profile_id.replace('_', ' ')}</b></td><td class="num">${esc(p.date_format)}</td><td class="num">${esc(p.time_format)}</td><td>${esc(p.fields.product)}</td></tr>`).join('')}<tr class="std"><td>표준</td><td>YYYY-MM-DD</td><td>HH:mm</td><td>product_name</td></tr></tbody></table>`;
+  const catFill = LOG.filter(e => e.rule_id === 'CATEGORY_FILL').length;
   const M = [
-    { n: '거래일', ok: receipts.filter(r => r.date).length, fill: 0, tot: receipts.length, unit: '건', d: '5가지 날짜 표기를 형식별 파서로 해석 (POS_B는 월/일/년)' },
-    { n: '거래시간', ok: receipts.filter(r => r.time).length, fill: 0, tot: receipts.length, unit: '건', d: `미기재 ${mt}건은 추정하지 않고 비워 둠 · 시간대 분석에서만 제외` },
-    { n: '결제수단', ok: receipts.filter(r => r.payment_method !== '미확인').length, fill: 0, tot: receipts.length, unit: '건', d: `미기재 ${mp}건은 ‘미확인’ · 매출과 사용률 분모에는 포함` },
-    { n: '카테고리', ok: lines.length - catFill, fill: catFill, tot: lines.length, unit: '행', d: `원본 빈칸 ${catFill}행은 상품 마스터 값으로 보완` },
-    { n: '결제금액', ok: receipts.length - diffs.length, fill: 0, tot: receipts.length, unit: '건', d: '원본 결제금액 = 상품금액 합계 확인' },
+    { n: '거래일', ok: receipts.length, fill: 0, tot: receipts.length },
+    { n: '시간', ok: receipts.filter(r => r.time).length, fill: 0, tot: receipts.length },
+    { n: '결제수단', ok: receipts.filter(r => r.payment_method !== '미확인').length, fill: 0, tot: receipts.length },
+    { n: '카테고리', ok: lines.length - catFill, fill: catFill, tot: lines.length },
+    { n: '결제금액', ok: receipts.length - diffs.length, fill: 0, tot: receipts.length },
   ];
-  $('#meters').innerHTML = M.map(m => {
-    const no = m.tot - m.ok - m.fill;
-    return `<div class="mrow"><div class="mn">${m.n}</div><div class="mt">${m.ok ? `<i class="ok" style="width:${pct(m.ok, m.tot)}%"></i>` : ''}${m.fill ? `<i class="fill" style="width:${pct(m.fill, m.tot)}%"></i>` : ''}${no ? `<i class="no" style="width:${pct(no, m.tot)}%"></i>` : ''}</div><div class="mv">${m.ok + m.fill}/${m.tot}${m.unit}</div><div class="md">${m.d}</div></div>`;
-  }).join('');
-
+  $('#meters').innerHTML = M.map(m => { const no = m.tot - m.ok - m.fill; return `<div class="mrow"><div class="mn">${m.n}</div><div class="mt">${m.ok ? `<i class="ok" style="width:${pct(m.ok, m.tot)}%"></i>` : ''}${m.fill ? `<i class="fill" style="width:${pct(m.fill, m.tot)}%"></i>` : ''}${no ? `<i class="no" style="width:${pct(no, m.tot)}%"></i>` : ''}</div><div class="mv">${m.ok + m.fill}/${m.tot}</div></div>`; }).join('');
   renderLog();
 }
-
 function renderLog() {
-  const ruleIds = Object.keys(D.summary.changes_by_rule);
-  fillSelect($('#log-rule'), [['', '전체 규칙'], ...ruleIds.map(r => [r, RULE_KO[r] || r])], st.logRule);
+  fillSelect($('#log-rule'), [['', '전체 규칙'], ...Object.keys(RULE_COUNTS).map(r => [r, RULE_KO[r] || r])], st.logRule);
   const q = st.logQ.trim().toLowerCase();
-  const rows = D.log.filter(e => (!st.logRule || e.rule_id === st.logRule) && (!q || [e.receipt_id, e.raw_value, e.cleaned_value, e.field, FIELD_KO[e.field]].some(v => String(v ?? '').toLowerCase().includes(q))));
-  $('#log-cnt').textContent = `${fmt(rows.length)} / ${fmt(D.log.length)}`;
-  const shown = rows.slice(0, 400);
-  const cell = v => (v === '' || v == null) ? '<span class="blank">(빈칸)</span>' : esc(v);
-  $('#log').innerHTML = `<table><thead><tr><th>전표</th><th class="c">행</th><th>항목</th><th>원문</th><th>정제</th></tr></thead><tbody>${shown.map(e => `<tr class="clickable" data-rid="${e.receipt_id}" title="${esc(RULE_KO[e.rule_id] || e.rule_id)}"><td class="mono"><b>${e.receipt_id}</b></td><td class="c">${e.line_no ?? '–'}</td><td>${FIELD_KO[e.field] || e.field}</td><td class="raw">${cell(e.raw_value)}</td><td class="${e.rule_id.startsWith('MISSING') ? 'miss' : ''}">${e.rule_id === 'MISSING_TIME' ? '미기재 (null)' : cell(e.cleaned_value)}</td></tr>`).join('')}${rows.length > shown.length ? `<tr><td colspan="5" class="c" style="color:var(--muted)">처음 ${shown.length}건 표시 · 규칙이나 검색어로 좁혀 보세요</td></tr>` : ''}${!rows.length ? '<tr><td colspan="5" class="c" style="color:var(--muted)">일치하는 기록이 없습니다</td></tr>' : ''}</tbody></table>`;
+  const rows = LOG.filter(e => (!st.logRule || e.rule_id === st.logRule) && (!q || [e.receipt_id, e.raw_value, e.cleaned_value, FIELD_KO[e.field]].some(v => String(v ?? '').toLowerCase().includes(q))));
+  $('#log-cnt').textContent = `${fmt(rows.length)} / ${fmt(LOG.length)}`;
+  const shown = rows.slice(0, 300), cell = v => (v === '' || v == null) ? '<span class="blank">(빈칸)</span>' : esc(v);
+  $('#log').innerHTML = `<table><thead><tr><th>전표</th><th>항목</th><th>원문</th><th>정제</th></tr></thead><tbody>${shown.map(e => `<tr class="clickable" data-rid="${e.receipt_id}"><td><b>${e.receipt_id}</b></td><td>${FIELD_KO[e.field] || e.field}</td><td class="blank">${cell(e.raw_value)}</td><td class="${e.rule_id.startsWith('MISSING') ? 'miss' : ''}">${e.rule_id === 'MISSING_TIME' ? '미기재' : cell(e.cleaned_value)}</td></tr>`).join('')}${rows.length > shown.length ? `<tr><td colspan="4" class="c blank">+${fmt(rows.length - shown.length)}건 · 검색으로 좁히기</td></tr>` : ''}${!rows.length ? '<tr><td colspan="4" class="c blank">없음</td></tr>' : ''}</tbody></table>`;
   $('#log').querySelectorAll('tr[data-rid]').forEach(tr => tr.addEventListener('click', () => openReceipt(tr.dataset.rid)));
 }
 $('#log-rule').addEventListener('change', e => { st.logRule = e.target.value; renderClean(); });
 $('#log-q').addEventListener('input', e => { st.logQ = e.target.value; renderLog(); });
 
-/* ---------- 전표·원본 비교 ---------- */
-function openReceipt(rid) {
-  st.sel = rid;
-  const c = compute();
-  if (!c.rs.some(r => r.receipt_id === rid)) Object.assign(st, { period: 'all', cat: '', prod: '', pay: '' });
-  st.issuesOnly = st.issuesOnly && hasIssue(recById.get(rid));
-  syncFilters();
-  setView('recs');
-  const row = document.querySelector(`#list tr[data-rid="${rid}"]`);
-  if (row) row.scrollIntoView({ block: 'center' });
-}
-$('#ls-all').addEventListener('click', () => { st.issuesOnly = false; renderRecs(); });
-$('#ls-issue').addEventListener('click', () => { st.issuesOnly = true; renderRecs(); });
-
-function statusTag(r) {
-  if (!r.issue_codes) return '<span class="tag good">완전</span>';
-  const c = r.issue_codes.split(';');
-  return `<span class="tag warn">${c.length > 1 ? '시간·결제 미확인' : c[0] === 'MISSING_TIME' ? '시간 미기재' : '결제 미확인'}</span>`;
-}
-
-function renderRecs() {
-  const c = compute();
-  renderBasis(c);
-  $('#ls-all').setAttribute('aria-pressed', String(!st.issuesOnly));
-  $('#ls-issue').setAttribute('aria-pressed', String(st.issuesOnly));
-  const list = (st.issuesOnly ? c.rs.filter(hasIssue) : c.rs).slice().sort((a, b) => a.receipt_id.localeCompare(b.receipt_id));
-  $('#list-cap').innerHTML = `필터 적용 <b>${c.tx}건</b>${st.issuesOnly ? ` 중 미확인 정보 <b>${list.length}건</b>` : ''} · 행을 누르면 원문과 비교`;
-  if (!list.some(r => r.receipt_id === st.sel)) st.sel = list[0]?.receipt_id || null;
-  $('#list').innerHTML = `<table><thead><tr><th>전표</th><th>일자</th><th>시각</th><th>결제</th><th class="r">품목</th><th class="r">${c.itemFilter ? '선택 상품' : '결제금액'}</th><th>상태</th></tr></thead><tbody>${list.map(r => `
-    <tr class="clickable${r.receipt_id === st.sel ? ' sel' : ''}" data-rid="${r.receipt_id}" tabindex="0">
-      <td class="mono"><b>${r.receipt_id}</b></td><td class="mono">${mdShort(r.date)} <span class="blank">${wd(r.date)}</span></td><td class="mono">${r.time || '<span class="blank">–</span>'}</td>
-      <td>${r.payment_method === '미확인' ? '<span class="blank">미확인</span>' : r.payment_method}</td><td class="r">${r.line_count}</td><td class="r"><b>${fmt(c.amt.get(r.receipt_id))}</b></td><td>${statusTag(r)}</td></tr>`).join('')}
-    ${!list.length ? '<tr><td colspan="7" class="c" style="color:var(--muted);padding:24px">조건에 맞는 전표가 없습니다</td></tr>' : ''}</tbody></table>`;
-  $('#list').querySelectorAll('tr[data-rid]').forEach(tr => {
-    const go = () => { st.sel = tr.dataset.rid; $('#list').querySelectorAll('tr.sel').forEach(x => x.classList.remove('sel')); tr.classList.add('sel'); renderDetail(); };
-    tr.addEventListener('click', go);
-    tr.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+/* ============================================================
+   AI 전표 분석 파이프라인
+   읽기(pdf.js) → 형식 인식(POS 프로필) → 정제·검산(정제 규칙) → 코멘트(Claude 또는 규칙)
+   ============================================================ */
+let pdfjsReady = null;
+function loadPdfjs() {
+  if (!pdfjsReady) pdfjsReady = new Promise((res, rej) => {
+    try {
+      // 워커 코드를 메인 스레드에 올려 file:// 에서도 동작 (pdf.js fake worker)
+      for (const id of ['pdfjs-src', 'pdfjs-worker-src']) { const s = document.createElement('script'); s.textContent = document.getElementById(id).textContent; document.head.appendChild(s); }
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'data:application/javascript,';
+      res(pdfjsLib);
+    } catch (e) { rej(e); }
   });
-  renderDetail();
+  return pdfjsReady;
+}
+const b64ToBytes = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+function bytesToB64(bytes) { let s = ''; for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000)); return btoa(s); }
+async function pdfDoc(bytes) { const lib = await loadPdfjs(); return lib.getDocument({ data: bytes, disableWorker: true, isEvalSupported: false }).promise; }
+async function pdfLines(bytes) {
+  const doc = await pdfDoc(bytes.slice()), items = [];
+  for (let p = 1; p <= doc.numPages; p++) { const tc = await (await doc.getPage(p)).getTextContent(); tc.items.forEach(i => { if (i.str && i.str.trim()) items.push({ y: Math.round(i.transform[5]) - p * 10000, x: i.transform[4], s: i.str.trim() }); }); }
+  items.sort((a, b) => b.y - a.y || a.x - b.x);
+  const rows = [];
+  items.forEach(it => { const last = rows[rows.length - 1]; if (last && Math.abs(last.y - it.y) <= 3) last.cells.push(it.s); else rows.push({ y: it.y, cells: [it.s] }); });
+  return rows.map(r => r.cells);
+}
+async function renderPdfToCanvas(b64, cv) {
+  try { const doc = await pdfDoc(b64ToBytes(b64)); const pg = await doc.getPage(1); const vp = pg.getViewport({ scale: 2 }); cv.width = vp.width; cv.height = vp.height; await pg.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise; }
+  catch (e) { cv.replaceWith(Object.assign(document.createElement('div'), { className: 'empty', textContent: 'PDF를 그릴 수 없음' })); }
+}
+function openPdfBlob(b64) { window.open(URL.createObjectURL(new Blob([b64ToBytes(b64)], { type: 'application/pdf' })), '_blank', 'noopener'); }
+
+/* 텍스트 줄 → 원본 구조 (source_profiles 의 항목명으로 형식 인식) */
+function linesToRaw(rows) {
+  const flat = rows.flat(), err = (code, msg) => Object.assign(new Error(msg), { code });
+  const pid = flat.find(s => /^POS_[A-Z]$/.test(s)), p = pid && profById.get(pid);
+  if (!p) throw err('PROFILE', '형식 미인식');
+  const k = p.fields, data = {}, rid = flat.find(s => /^R\d{3,}$/.test(s));
+  if (!rid) throw err('ID', '전표번호 없음');
+  const clean = v => (v == null || v === '(미기재)') ? '' : v;
+  data[k.receipt_id] = rid;
+  data[k.store] = (rows.find(r => r.includes(pid)) || []).filter(s => s !== pid)[0] || '';
+  const field = label => { const r = rows.find(r => r[0] === label); return r && r.length > 1 ? clean(r[r.length - 1]) : ''; };
+  data[k.date] = field(k.date); data[k.time] = field(k.time); data[k.payment] = field(k.payment); data[k.total] = field(k.total);
+  const items = []; let cur = null;
+  for (let i = rows.findIndex(r => r[0] === k.product) + 1; i > 0 && i < rows.length; i++) {
+    const r = rows[i];
+    if (r[0] === k.total) break;
+    const m = r[0].match(/^(\d{2})\s+(.+)$/);
+    if (m && r.length === 1 && !r[0].includes(':')) { cur = { line_no: +m[1], [k.product]: m[2] }; items.push(cur); continue; }
+    if (!cur) continue;
+    let pairs = 0;
+    r.forEach(cell => { const mm = cell.match(/^([^:]+):\s*(.*)$/); if (mm) { pairs++; const key = [k.category, k.quantity, k.unit_price, k.discount].find(x => x === mm[1].trim()); if (key) cur[key] = clean(mm[2].trim()); } });
+    if (!pairs && r.length === 1) cur[k.amount] = r[0];
+  }
+  if (!items.length || !data[k.total]) throw err('ITEMS', '상품·합계를 찾지 못함');
+  data[k.items] = items;
+  return { profile_id: pid, data };
 }
 
-function renderDetail() {
-  const el = $('#detail');
-  if (!st.sel) { el.innerHTML = '<div class="empty" style="grid-column:1/-1">선택한 조건에 해당하는 전표가 없습니다.</div>'; return; }
-  const r = recById.get(st.sel), raw = rawById.get(st.sel), p = profById.get(raw.profile_id), k = p.fields, src = raw.data;
-  const logs = logByRec.get(st.sel) || [];
-  const ruleFor = (field, line) => logs.filter(e => e.field === field && (e.line_no ?? null) === (line ?? null));
-  const cell = v => (v === '' || v == null) ? '<span class="blank">(빈칸)</span>' : esc(v);
-  const recFields = [
-    ['receipt_id', 'receipt_id', r.receipt_id],
-    ['date', 'date', r.date],
-    ['time', 'time', r.time],
-    ['store', 'store', r.store],
-    ['payment', 'payment_method', r.payment_method],
-    ['total', 'receipt_amount', r.receipt_amount],
-  ];
-  const fieldRows = recFields.map(([pk, cf, cv]) => {
-    const lg = ruleFor(cf, null);
-    const missing = lg.some(e => e.rule_id.startsWith('MISSING'));
-    const how = lg.length ? lg.map(e => RULE_KO[e.rule_id]).join(', ') : '변경 없음';
-    const cleanTxt = cf === 'time' && cv == null ? '미기재 (null)' : (typeof cv === 'number' ? fmt(cv) : cv);
-    return `<tr><td><b>${FIELD_KO[cf]}</b></td><td class="sub">${esc(k[pk])}</td><td class="raw">${cell(src[k[pk]])}</td><td class="${missing ? 'miss' : lg.length ? 'chg' : ''}">${esc(cleanTxt)}</td><td class="sub">${how}</td></tr>`;
-  }).join('');
-  const recLines = linesByRec.get(st.sel);
-  const lineRows = src[k.items].map(it => {
-    const l = recLines.find(x => x.line_no === it.line_no);
-    const chg = f => ruleFor(f, it.line_no).length ? (ruleFor(f, it.line_no).some(e => e.rule_id.startsWith('MISSING') || e.rule_id === 'CATEGORY_FILL') ? 'miss' : 'chg') : '';
-    return `<tr class="raw-row"><td rowspan="2" class="c" style="background:var(--surface);font-weight:800">${it.line_no}</td><td class="k">원문</td><td>${cell(it[k.product])}</td><td>${cell(it[k.category])}</td><td class="r">${cell(it[k.quantity])}</td><td class="r">${cell(it[k.unit_price])}</td><td class="r">${cell(it[k.discount])}</td><td class="r">${cell(it[k.amount])}</td></tr>
-      <tr class="cl-row"><td class="k">정제</td><td class="${chg('product_name')}">${esc(l.product_name)}</td><td class="${chg('category')}">${esc(l.category)}</td><td class="r ${chg('quantity')}">${l.quantity}</td><td class="r ${chg('unit_price')}">${fmt(l.unit_price)}</td><td class="r ${chg('discount')}">${fmt(l.discount)}</td><td class="r ${chg('line_amount')}">${fmt(l.line_amount)}</td></tr>`;
-  }).join('');
-  const lineSum = sum(recLines, l => l.line_amount), rt = rawTotal(r.receipt_id);
-  const okAmt = lineSum === r.receipt_amount && rt === r.receipt_amount;
-  el.innerHTML = `
-    <div class="d-main">
-      <div>
-        <div class="d-head">
-          <div class="rid">${r.receipt_id}</div>
-          <div class="amt"><div class="a num">${fmt(r.receipt_amount)}<small>원</small></div></div>
-        </div>
-        <div class="meta"><span class="tag plain">${r.profile_id.replace('_', ' ')} 형식</span><span class="tag plain">${md(r.date)} (${wd(r.date)}) · ${r.time || '시간 미기재'}</span><span class="tag plain">${r.payment_method}</span>${statusTag(r)}<span class="s">상품 ${r.line_count}행 · 수량 ${r.item_quantity}개 · 할인 ${won(r.discount)}</span></div>
-      </div>
-      <div class="check ${okAmt ? 'ok' : 'bad'}">${okAmt ? ICON.check : ICON.alert}${okAmt ? `원본 결제금액 ${won(rt)} = 상품 합계 ${won(lineSum)} = 정제값 일치` : `금액 불일치 · 원본 ${won(rt)} / 상품 합계 ${won(lineSum)}`}</div>
-      <div>
-        <p class="sub-h">전표 항목 <span>원본 항목명 · 원문 값 → 정제 값</span></p>
-        <div class="tbl-plain"><table><thead><tr><th>표준 항목</th><th>원본 항목명</th><th>원문 값</th><th>정제 값</th><th>처리</th></tr></thead><tbody>${fieldRows}</tbody></table></div>
-      </div>
-      <div>
-        <p class="sub-h">상품 행 <span>원본 키 ${esc(k.product)} / ${esc(k.category)} / ${esc(k.quantity)} / ${esc(k.unit_price)} / ${esc(k.discount)} / ${esc(k.amount)}</span></p>
-        <div class="tbl-plain"><table><thead><tr><th class="c">행</th><th>구분</th><th>상품명</th><th>카테고리</th><th class="r">수량</th><th class="r">단가</th><th class="r">할인</th><th class="r">금액</th></tr></thead><tbody>${lineRows}</tbody></table></div>
-        <div class="mini-legend"><span><i style="background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)"></i>표기 변환</span><span><i style="background:var(--warn-soft);box-shadow:inset 0 0 0 1px var(--warn)"></i>결측 처리·보완</span></div>
-      </div>
-    </div>
-    <div class="d-prev">
-      <div class="ph">원본 전표<span>${esc(r.source_file)}</span></div>
-      <div class="img"><img src="previews/${r.receipt_id}.png" alt="${r.receipt_id} 원본 전표 미리보기" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'blank',textContent:'미리보기 이미지를 찾을 수 없습니다'}))"></div>
-      <a class="btn-primary" href="${esc(r.source_file)}" target="_blank" rel="noopener">${ICON.ext}원본 PDF 열기</a>
-      <div class="cap">압축을 푼 폴더의 receipts/ 에서 열립니다</div>
-    </div>`;
+/* 정제 (source/clean_data.mjs 와 같은 규칙) */
+const MON = { Jan: 1, Feb: 2, Mar: 3, Apr: 4, May: 5, Jun: 6, Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12 };
+function num(s) { const n = Number(String(s).replace(/KRW|₩|원|개|,|\s/g, '')); if (!Number.isFinite(n) || String(s).trim() === '') throw new Error(`숫자 해석 실패: ${s}`); return n; }
+function parseDate(s, f) {
+  let y, m, d;
+  if (f === 'MM/DD/YYYY') [m, d, y] = s.split('/');
+  else if (f === 'D Sep YYYY') { const a = s.trim().split(/\s+/); d = a[0]; m = String(MON[(a[1] || '').slice(0, 3)] || ''); y = a[2]; }
+  else [y, m, d] = s.match(/\d+/g) || [];
+  const v = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(v) || isNaN(Date.parse(v)) || new Date(v + 'T00:00:00Z').toISOString().slice(0, 10) !== v) throw new Error('날짜 해석 실패');
+  return v;
+}
+function parseTime(s, f) {
+  if (!s) return null; let h, m;
+  if (f === 'hh:mm AM/PM') { const a = s.match(/(\d+):(\d+)\s*(AM|PM)/i); h = Number(a[1]) % 12 + (a[3].toUpperCase() === 'PM' ? 12 : 0); m = a[2]; }
+  else if (f === 'HHmm') { h = s.slice(0, 2); m = s.slice(2, 4); }
+  else [h, m] = s.match(/\d+/g);
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+}
+const norm = s => String(s || '').replace(/\s+/g, '').toUpperCase();
+function cleanRaw(src) {
+  const p = profById.get(src.profile_id), k = p.fields, r = src.data, id = r[k.receipt_id], log = [];
+  let seq = 0;
+  const rec = (line, field, before, after, rule) => { if (String(before ?? '') !== String(after ?? '')) log.push({ change_id: `U-${id}-${++seq}`, receipt_id: id, line_no: line, field, raw_value: before ?? '', cleaned_value: after ?? '', rule_id: rule }); };
+  const date = parseDate(r[k.date], p.date_format), time = parseTime(r[k.time], p.time_format);
+  const payment_method = Object.entries(D.value_mappings.payments).find(([, v]) => v.map(norm).includes(norm(r[k.payment])))?.[0] ?? '미확인';
+  const store = D.value_mappings.stores[r[k.store]] || '카페 온담';
+  rec(null, 'date', r[k.date], date, 'DATE'); rec(null, 'time', r[k.time], time, 'TIME'); rec(null, 'store', r[k.store], store, 'STORE');
+  rec(null, 'payment_method', r[k.payment], payment_method, r[k.payment] ? 'PAYMENT' : 'MISSING_PAYMENT');
+  if (!r[k.time]) log.push({ change_id: `U-${id}-${++seq}`, receipt_id: id, line_no: null, field: 'time', raw_value: '', cleaned_value: '', rule_id: 'MISSING_TIME' });
+  const total = num(r[k.total]); rec(null, 'receipt_amount', r[k.total], total, 'MONEY');
+  const ls = [], unknown = [];
+  for (const item of r[k.items]) {
+    const n = item.line_no, name = item[k.product];
+    let prod = D.products.find(x => x.aliases.includes(name)) || D.products.find(x => x.aliases.map(norm).includes(norm(name)));
+    if (!prod) { unknown.push(name); prod = { product_id: 'NEW-' + norm(name), product_name: name, category: Object.entries(D.value_mappings.categories).find(([, v]) => v.map(norm).includes(norm(item[k.category])))?.[0] || '음료' }; }
+    const q = num(item[k.quantity]), u = num(item[k.unit_price]), dsc = item[k.discount] ? num(item[k.discount]) : 0, amt = num(item[k.amount]);
+    rec(n, 'product_name', name, prod.product_name, 'PRODUCT'); rec(n, 'category', item[k.category], prod.category, item[k.category] ? 'CATEGORY' : 'CATEGORY_FILL');
+    rec(n, 'quantity', item[k.quantity], q, 'QUANTITY'); rec(n, 'unit_price', item[k.unit_price], u, 'MONEY'); rec(n, 'discount', item[k.discount], dsc, 'MONEY'); rec(n, 'line_amount', item[k.amount], amt, 'MONEY');
+    ls.push({ line_id: `${id}-L${String(n).padStart(2, '0')}`, receipt_id: id, line_no: n, product_id: prod.product_id, product_name: prod.product_name, category: prod.category, quantity: q, unit_price: u, gross_amount: q * u, discount: dsc, line_amount: amt });
+  }
+  const gross = sum(ls, x => x.gross_amount), discount = sum(ls, x => x.discount);
+  const lineOk = ls.every(l => l.gross_amount - l.discount === l.line_amount), totalOk = lineOk && gross - discount === total;
+  const issues = [...(!time ? ['MISSING_TIME'] : []), ...(payment_method === '미확인' ? ['MISSING_PAYMENT'] : [])];
+  const receipt = { receipt_id: id, date, time, store, payment_method, line_count: ls.length, item_quantity: sum(ls, x => x.quantity), gross_amount: gross, discount, receipt_amount: total, profile_id: p.profile_id, source_file: '', cleaning_status: issues.length ? '정제완료_일부정보미확인' : '정제완료', issue_codes: issues.join(';') };
+  return { receipt, lines: ls, log, checks: { lineOk, totalOk, unknown } };
 }
 
-/* ---------- 렌더 ---------- */
+/* 규칙 기반 코멘트 (Claude 키가 없을 때) */
+function ruleComment(res) {
+  const r = res.receipt, avg = sum(BASE.receipts, x => x.receipt_amount) / BASE.receipts.length, diff = (r.receipt_amount - avg) / avg * 100;
+  const parts = [`객단가 대비 ${diff >= 0 ? '+' : ''}${diff.toFixed(0)}%`, `${[...new Set(res.lines.map(l => l.category))].join('·')} 구성`];
+  if (r.time) parts.push(`${+r.time.slice(0, 2)}시대`);
+  if (res.checks.unknown.length) parts.push(`신규 상품 ${res.checks.unknown.length}종`);
+  if (!res.checks.totalOk) parts.push('합계 불일치');
+  return parts.join(' · ');
+}
+
+/* Claude (선택) — API 키는 이 브라우저에만 저장, 요청은 브라우저에서 바로 전송 */
+const AI_MODEL = 'claude-opus-5-5';
+async function claudeCall(content, schema, maxTokens) {
+  const key = store.get('ondam-ai-key', '');
+  if (!key) return null;
+  const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-beta': 'server-side-fallback-2026-07-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+    body: JSON.stringify({ model: AI_MODEL, max_tokens: maxTokens, fallbacks: 'default', output_config: { effort: 'low', format: { type: 'json_schema', schema } }, messages: [{ role: 'user', content }] }),
+  });
+  const data = await resp.json().catch(() => ({}));
+  if (!resp.ok) throw new Error(data?.error?.message || `HTTP ${resp.status}`);
+  if (data.stop_reason === 'refusal') throw new Error('AI가 응답하지 않았습니다');
+  if (data.stop_reason === 'max_tokens') throw new Error('AI 응답이 잘렸습니다');
+  const text = (data.content || []).find(b => b.type === 'text')?.text;
+  return text ? JSON.parse(text) : null;
+}
+async function claudeComment(res) {
+  const r = res.receipt, s = allStats();
+  const ctx = { 전표: { 번호: r.receipt_id, 일자: r.date, 시간: r.time, 결제: r.payment_method, 금액: r.receipt_amount, 상품: res.lines.map(l => `${l.product_name}(${l.category}) ${l.quantity}×${l.unit_price}${l.discount ? ' 할인' + l.discount : ''}`) }, 검산: res.checks, 기존: { 객단가: Math.round(s.rev / s.tx), 피크시간: s.hour[0][0], 매출1위: (prodById.get(s.prod[0][0]) || {}).product_name } };
+  const out = await claudeCall([{ type: 'text', text: `카페 매출전표 1건입니다. 사장에게 보여줄 한국어 코멘트를 40자 이내 한 문장으로 쓰세요. 숫자 근거를 하나 넣고, 표본이 작으니 인과관계는 단정하지 마세요.\n${JSON.stringify(ctx)}` }],
+    { type: 'object', properties: { comment: { type: 'string' } }, required: ['comment'], additionalProperties: false }, 2000);
+  return out?.comment || null;
+}
+/* 규칙으로 못 읽은 PDF 는 Claude 가 직접 읽어 구조화 */
+async function claudeExtract(b64) {
+  const k = profById.get('POS_A').fields;
+  const item = { type: 'object', additionalProperties: false, required: ['product', 'category', 'quantity', 'unit_price', 'discount', 'amount'], properties: { product: { type: 'string' }, category: { type: 'string' }, quantity: { type: 'integer' }, unit_price: { type: 'integer' }, discount: { type: 'integer' }, amount: { type: 'integer' } } };
+  const schema = { type: 'object', additionalProperties: false, required: ['receipt_id', 'date', 'time', 'store', 'payment', 'total', 'items'], properties: { receipt_id: { type: 'string' }, date: { type: 'string', description: 'YYYY-MM-DD' }, time: { type: 'string', description: 'HH:mm, 없으면 빈 문자열' }, store: { type: 'string' }, payment: { type: 'string', description: '전표에 적힌 그대로, 없으면 빈 문자열' }, total: { type: 'integer' }, items: { type: 'array', items: item } } };
+  const o = await claudeCall([{ type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: b64 } }, { type: 'text', text: '이 매출전표의 값을 읽어 JSON으로 주세요. 적혀 있지 않은 값은 빈 문자열로 두고 추정하지 마세요.' }], schema, 8000);
+  if (!o) return null;
+  return { profile_id: 'POS_A', ai_extracted: true, data: { [k.receipt_id]: o.receipt_id, [k.date]: o.date, [k.time]: o.time, [k.store]: o.store, [k.payment]: o.payment, [k.total]: String(o.total), [k.items]: o.items.map((it, i) => ({ line_no: i + 1, [k.product]: it.product, [k.category]: it.category, [k.quantity]: String(it.quantity), [k.unit_price]: String(it.unit_price), [k.discount]: String(it.discount), [k.amount]: String(it.amount) })) } };
+}
+
+let FEED = store.get('ondam-feed', []);
+function saveAll() {
+  if (!store.set('ondam-uploads', UP)) { UP.forEach(u => { if (u.file) delete u.file.b64; }); store.set('ondam-uploads', UP); }
+  FEED = FEED.slice(0, 60); store.set('ondam-feed', FEED);
+}
+async function analyzeFile({ name, bytes, type, source = 'upload' }) {
+  const isPdf = /pdf/i.test(type || '') || /\.pdf$/i.test(name);
+  const entry = { name, source, at: Date.now() };
+  try {
+    let raw, b64 = '';
+    if (isPdf) {
+      b64 = bytesToB64(bytes);
+      try { raw = linesToRaw(await pdfLines(bytes)); }
+      catch (e) {
+        raw = await claudeExtract(b64).catch(() => null);
+        if (!raw) throw new Error(e.code === 'PROFILE' ? '형식 미인식 · Claude 키를 넣으면 AI가 직접 읽습니다' : e.message);
+      }
+    } else {
+      const j = JSON.parse(new TextDecoder().decode(bytes)), arr = Array.isArray(j) ? j : [j];
+      if (arr.length > 1) { for (const one of arr) await analyzeFile({ name, bytes: new TextEncoder().encode(JSON.stringify(one)), type: 'application/json', source }); return; }
+      raw = arr[0]; if (!raw || !profById.get(raw.profile_id)) throw new Error('형식 미인식');
+    }
+    const res = cleanRaw(raw), id = res.receipt.receipt_id;
+    if (recById.has(id)) { Object.assign(entry, { status: 'dup', id }); FEED.unshift(entry); return; }
+    let comment = null, by = 'rule';
+    try { comment = await claudeComment(res); if (comment) by = 'claude'; } catch (e) { entry.aiError = e.message; }
+    if (!comment) comment = ruleComment(res);
+    UP.push({ receipt: res.receipt, lines: res.lines, log: res.log, raw, file: { name, source, b64 }, ai: { comment, by }, checks: res.checks, at: Date.now() });
+    Object.assign(entry, { status: 'ok', id, amount: res.receipt.receipt_amount, profile: raw.ai_extracted ? 'AI 판독' : raw.profile_id.replace('_', ' '), changes: res.log.length, checks: res.checks, comment, by });
+    FEED.unshift(entry);
+    rebuild();
+  } catch (e) { Object.assign(entry, { status: 'err', error: e.message || String(e) }); FEED.unshift(entry); }
+}
+async function analyzeFiles(list) {
+  const drops = document.querySelectorAll('.drop'); drops.forEach(d => d.classList.add('busy'));
+  const before = UP.length;
+  try { for (const f of list) await analyzeFile(f); }
+  finally {
+    drops.forEach(d => d.classList.remove('busy'));
+    saveAll(); renderHead(); render();
+    const added = UP.length - before, recent = FEED.slice(0, list.length), dup = recent.filter(x => x.status === 'dup').length, bad = recent.filter(x => x.status === 'err').length;
+    toast(added ? `${added}건 분석 · 대시보드 반영${dup ? ` · 중복 ${dup}` : ''}${bad ? ` · 실패 ${bad}` : ''}` : dup ? `이미 있는 전표 ${dup}건` : '반영된 전표 없음');
+  }
+}
+function removeUpload(id) { UP = UP.filter(u => u.receipt.receipt_id !== id); saveAll(); rebuild(); renderHead(); st.sel = null; render(); toast(`${id} 삭제`); }
+function bindDrop(el) {
+  const inp = el.querySelector('input');
+  const take = async files => analyzeFiles(await Promise.all([...files].map(async f => ({ name: f.name, type: f.type, bytes: new Uint8Array(await f.arrayBuffer()) }))));
+  inp.addEventListener('change', () => { if (inp.files.length) take(inp.files); inp.value = ''; });
+  el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inp.click(); } });
+  ['dragenter', 'dragover'].forEach(t => el.addEventListener(t, e => { e.preventDefault(); el.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(t => el.addEventListener(t, e => { e.preventDefault(); el.classList.remove('over'); }));
+  el.addEventListener('drop', e => { if (e.dataTransfer.files.length) take(e.dataTransfer.files); });
+}
+bindDrop($('#drop-home')); bindDrop($('#drop-ai'));
+const runSamples = () => analyzeFiles(SAMPLES.map(s => ({ name: s.name, type: 'application/pdf', bytes: b64ToBytes(s.b64), source: 'sample' })));
+$('#btn-sample').addEventListener('click', runSamples);
+$('#btn-sample-home').addEventListener('click', () => runSamples().then(() => setView('ai')));
+$('#btn-clear').addEventListener('click', () => { UP = []; FEED = []; store.set('ondam-drive-seen', {}); store.set('ondam-drive-since', 0); saveAll(); rebuild(); renderHead(); st.sel = null; render(); toast('신규 전표를 모두 비웠습니다'); });
+
+function renderAI() {
+  const key = store.get('ondam-ai-key', '');
+  if (document.activeElement !== $('#ai-key')) $('#ai-key').value = key ? '••••••••' + key.slice(-4) : '';
+  $('#ai-key').disabled = !!key;
+  $('#ai-tag').className = 'tag ' + (key ? 'good' : 'plain'); $('#ai-tag').textContent = key ? '사용 중' : '선택';
+  $('#ai-ss').textContent = key ? `${AI_MODEL} · 코멘트 · 판독` : '키 없음 · 규칙 기반 코멘트';
+  $('#ai-btn').textContent = key ? '해제' : '저장';
+  renderDriveUI();
+  const ok = FEED.filter(f => f.status === 'ok').length;
+  $('#feed-cap').textContent = FEED.length ? `반영 ${ok} / ${FEED.length}` : '';
+  $('#btn-clear').hidden = !FEED.length && !UP.length;
+  $('#feed').innerHTML = FEED.length ? FEED.map(f => {
+    if (f.status === 'err') return `<div class="res err"><div class="mini"><b style="color:var(--bad-ink)">!</b></div><div style="min-width:0"><div class="rt">${esc(f.name)}</div><div class="rc"><span class="tag bad">읽기 실패</span></div><div class="rm" style="color:var(--muted)">${esc(f.error)}</div></div><div></div></div>`;
+    if (f.status === 'dup') return `<div class="res" data-open="${f.id}"><div class="mini"><b>${f.id}</b><i></i><i></i></div><div style="min-width:0"><div class="rt">${f.id}<small>${esc(f.name)}</small></div><div class="rc"><span class="tag plain">이미 있는 전표 · 건너뜀</span></div></div><div></div></div>`;
+    const live = upById.has(f.id), src = f.source === 'drive' ? 'Drive' : f.source === 'sample' ? '샘플' : '업로드';
+    return `<div class="res" data-open="${live ? f.id : ''}"><div class="mini"><b>${f.id}</b><i></i><i></i><i></i></div>
+      <div style="min-width:0"><div class="rt">${f.id}<small>${src} · ${esc(f.name)}</small></div>
+        <div class="rc"><span class="tag blue">${esc(f.profile)} 인식</span><span class="tag plain">변환 ${f.changes}칸</span><span class="tag ${f.checks?.totalOk ? 'good' : 'warn'}">${f.checks?.totalOk ? '합계 일치' : '합계 확인'}</span>${f.checks?.unknown?.length ? `<span class="tag warn">신규 상품 ${f.checks.unknown.length}</span>` : ''}${live ? '' : '<span class="tag plain">삭제됨</span>'}</div>
+        <div class="rm">${ICON.spark}<span>${esc(f.comment)}</span><span class="tag ${f.by === 'claude' ? 'blue' : 'plain'}">${f.by === 'claude' ? 'Claude' : '규칙'}</span></div></div>
+      <div class="ra num">${fmt(f.amount)}<small>원</small></div></div>`;
+  }).join('') : `<div class="feed-empty"><span class="ic">${ICON.doc}</span><div><b style="color:var(--ink)">아직 분석한 전표가 없습니다</b><br><span style="font-size:12px">PDF를 올리거나 샘플 3장으로 체험해 보세요</span></div></div>`;
+  $('#feed').querySelectorAll('[data-open]').forEach(el => { if (el.dataset.open) el.addEventListener('click', () => openReceipt(el.dataset.open)); });
+}
+$('#ai-btn').addEventListener('click', () => {
+  if (store.get('ondam-ai-key', '')) { store.set('ondam-ai-key', ''); $('#ai-key').value = ''; toast('Claude 키를 지웠습니다'); }
+  else { const v = $('#ai-key').value.trim(); if (!/^sk-ant-/.test(v)) { toast('sk-ant- 로 시작하는 키를 넣어 주세요'); return; } store.set('ondam-ai-key', v); toast('Claude 키 저장 · 이 브라우저에만 보관'); }
+  renderAI(); renderSide();
+});
+
+/* ============ Google Drive (Apps Script 웹 앱, drive/Code.gs) ============ */
+let driveTimer = null, driveState = { ok: false, last: 0, total: 0, folder: '', busy: false, err: '' };
+function renderDriveUI() {
+  const url = store.get('ondam-drive-url', '');
+  if (document.activeElement !== $('#drive-url')) $('#drive-url').value = url;
+  $('#drive-url').disabled = !!url;
+  $('#drive-btn').textContent = url ? '해제' : '연결';
+  $('#drive-tag').className = 'tag ' + (driveState.ok ? 'good' : driveState.err ? 'bad' : 'plain');
+  $('#drive-tag').textContent = driveState.ok ? '자동 동기화' : driveState.err ? '오류' : url ? '확인 중' : '미연결';
+  $('#drive-ss').textContent = driveState.ok ? `${driveState.folder} · 파일 ${driveState.total}개 · ${new Date(driveState.last).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })} 확인` : driveState.err || '‘매출전표’ 폴더에 올리면 자동 분석';
+}
+function renderSide() {
+  $('#sd-drive').classList.toggle('on', driveState.ok); $('#ss-drive').textContent = driveState.ok ? '동기화' : '미연결';
+  $('#ss-ai').textContent = store.get('ondam-ai-key', '') ? 'Claude' : '규칙';
+  $('#hd-drive').classList.toggle('on', driveState.ok); $('#hs-drive').textContent = driveState.ok ? '동기화' : '연결';
+}
+async function driveSync(manual) {
+  const url = store.get('ondam-drive-url', '');
+  if (!url || driveState.busy) return;
+  driveState.busy = true;
+  try {
+    const since = store.get('ondam-drive-since', 0);
+    const j = await (await fetch(url + (url.includes('?') ? '&' : '?') + 'since=' + since, { redirect: 'follow' })).json();
+    if (!j || !j.ok) throw new Error('응답 형식 오류');
+    Object.assign(driveState, { ok: true, err: '', last: Date.now(), total: j.total, folder: j.folder });
+    const seen = store.get('ondam-drive-seen', {}), fresh = j.files.filter(f => seen[f.id] !== f.updated);
+    if (fresh.length) {
+      await analyzeFiles(fresh.map(f => ({ name: f.name, type: f.mimeType, bytes: b64ToBytes(f.data), source: 'drive' })));
+      fresh.forEach(f => seen[f.id] = f.updated); store.set('ondam-drive-seen', seen);
+    } else if (manual) toast('Drive 연결 · 새 전표 없음');
+    if (j.files.length) store.set('ondam-drive-since', Math.max(since, ...j.files.map(f => f.updated)));
+  } catch (e) { Object.assign(driveState, { ok: false, err: '연결 실패 · URL과 배포 권한 확인' }); }
+  finally { driveState.busy = false; renderSide(); if (st.view === 'ai') renderDriveUI(); }
+}
+function startDrive() { clearInterval(driveTimer); if (store.get('ondam-drive-url', '')) { driveSync(true); driveTimer = setInterval(() => { if (!document.hidden) driveSync(false); }, 60000); } }
+$('#drive-btn').addEventListener('click', () => {
+  if (store.get('ondam-drive-url', '')) { store.set('ondam-drive-url', ''); clearInterval(driveTimer); driveState = { ok: false, last: 0, total: 0, folder: '', busy: false, err: '' }; renderAI(); renderSide(); return; }
+  const v = $('#drive-url').value.trim();
+  if (!/^https:\/\/script\.google(usercontent)?\.com\//.test(v)) { toast('script.google.com 웹 앱 URL을 넣어 주세요'); return; }
+  store.set('ondam-drive-url', v); store.set('ondam-drive-since', 0); startDrive(); renderAI();
+});
+$('#drive-help').addEventListener('click', () => { $('#modal').hidden = false; $('#m-close').focus(); });
+$('#m-close').addEventListener('click', () => { $('#modal').hidden = true; });
+$('#modal').addEventListener('click', e => { if (e.target.id === 'modal') $('#modal').hidden = true; });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') $('#modal').hidden = true; });
+
+/* ============ 렌더 ============ */
 function render() {
-  if (st.view === 'sales') renderSales();
+  if (st.view === 'home') renderHome();
+  else if (st.view === 'sales') renderSales();
+  else if (st.view === 'recs') renderRecs();
   else if (st.view === 'clean') renderClean();
-  else renderRecs();
+  else renderAI();
 }
 function update() { syncFilters(); hideTip(); render(); }
-
-/* 16:9 맞춤 */
 const vp = $('#viewport'), stage = $('#stage');
 function fit() {
-  const vw = document.documentElement.clientWidth, vh = window.innerHeight;
-  const wide = vw >= 900;
+  const vw = document.documentElement.clientWidth, vh = window.innerHeight, wide = vw >= 900;
   document.documentElement.classList.toggle('fluid', !wide);
-  if (wide) {
-    let s = vw / 1600;
-    if (vh >= 420) s = Math.min(s, vh / 900);
-    stage.style.transform = `scale(${s})`;
-    vp.style.width = 1600 * s + 'px'; vp.style.height = 900 * s + 'px';
-  } else {
-    stage.style.transform = ''; vp.style.width = ''; vp.style.height = '';
-  }
+  if (wide) { let s = vw / 1600; if (vh >= 420) s = Math.min(s, vh / 900); stage.style.transform = `scale(${s})`; vp.style.width = 1600 * s + 'px'; vp.style.height = 900 * s + 'px'; }
+  else { stage.style.transform = ''; vp.style.width = ''; vp.style.height = ''; }
   render();
 }
 let rtm; addEventListener('resize', () => { clearTimeout(rtm); rtm = setTimeout(fit, 80); });
 document.addEventListener('scroll', hideTip, true);
 
-syncFilters();
+rebuild(); syncFilters(); renderHead(); renderSide();
 const startView = (location.hash || '').slice(1);
-if (['sales', 'clean', 'recs'].includes(startView)) { st.view = startView; }
-setView(st.view);
+setView(['home', 'sales', 'recs', 'clean', 'ai'].includes(startView) ? startView : 'home');
 fit();
+startDrive();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
 </script>
