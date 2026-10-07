@@ -2,7 +2,7 @@
 
 ## 관계
 
-`clean_receipts.receipt_id` 1건에 `clean_lines.receipt_id` 여러 행이 연결됩니다. 상품 마스터는 `product_id`로 연결합니다. 원본 조회는 전표의 `source_file` 상대경로를 사용합니다. 이름은 민승환, 학번은 미입력 상태입니다.
+`clean_receipts.receipt_id` 1건에 `clean_lines.receipt_id` 여러 행이 연결됩니다. 상품 마스터는 `product_id`로 연결합니다. 원본 조회는 전표의 `source_file` 상대경로를 사용합니다. 작성자는 민승환, 학번은 2021308입니다.
 
 ## 전표 단위: clean_receipts
 
